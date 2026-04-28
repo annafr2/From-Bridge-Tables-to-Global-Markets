@@ -1,0 +1,1440 @@
+% PBN 2.1 
+% File converted with "LinToPbnConverter" (Version 1.3)
+% (c) J.L PELISSON 2009  : pelissonjl@aol.com
+% Free for a non commercial use only 
+% 
+[Event "2019 Vanderbilt FINAL"]
+[Site "Segment 2 of 4"]
+[HomeTeam "Wolfson"]
+[VisitTeam "Nickell"]
+[Board "16"]
+[West "Katz"]
+[North "Hydes"]
+[East "Nickell"]
+[South "Crouch"]
+[Room "Open"]
+[Scoring "IMP"]
+[Vulnerable "EW"]
+[Dealer "W"]
+[Deal "W:J963.T843.Q54.Q6 Q84.K9765.T9832. AKT7.2.J7.KJ9752 52.AQJ.AK6.AT843"]
+{
+                   Nord
+                   D84
+                   R9765
+                   X9832
+                   -
+  Ouest                            Est
+  V963                             ARX7
+  X843                             2
+  D54                              V7
+  D6                               RV9752
+                   Sud
+                   52
+                   ADV
+                   AR6
+                   AX843
+}
+[Declarer "S"]
+[Contract "2D"]
+[Result "10"]
+[Score "NS 130"]
+[Auction "W"]
+Pass  Pass  1C    1NT
+Pass  2C    Pass  2D
+Pass  Pass  Pass
+[Play "W"]
+D4 DT DJ DK
+C6 D2 C7 C3
+DQ D9 D7 D6
+D5 D3 C2 DA
+H3 H5 H2 HA
+H4 H6 C5 HQ
+-  -  -  HJ
+*
+
+[Event "2019 Vanderbilt FINAL"]
+[Site "Segment 2 of 4"]
+[Board "16"]
+[West "Garner"]
+[North "Rodwell"]
+[East "Wolfson|"]
+[South "Meckstroth"]
+[Room "Closed"]
+[Scoring "IMP"]
+[Vulnerable "EW"]
+[Dealer "W"]
+[Deal "W:J963.T843.Q54.Q6 Q84.K9765.T9832. AKT7.2.J7.KJ9752 52.AQJ.AK6.AT843"]
+{
+                   Nord
+                   D84
+                   R9765
+                   X9832
+                   -
+  Ouest                            Est
+  V963                             ARX7
+  X843                             2
+  D54                              V7
+  D6                               RV9752
+                   Sud
+                   52
+                   ADV
+                   AR6
+                   AX843
+}
+[Declarer "N"]
+[Contract "4H"]
+[Result "10"]
+[Score "NS 420"]
+[Auction "W"]
+Pass  Pass  1C    X
+Pass  2H    Pass  4H
+Pass  Pass  Pass
+[Play "E"]
+SA S2 S3 S8
+CK CA C6 S4
+H2 HA H3 H5
+C2 HQ H4 H6
+C5 HJ H8 H7
+D7 DA D4 D2
+DJ DK D5 D3
+*
+
+[Event "2019 Vanderbilt FINAL"]
+[Site "Segment 2 of 4"]
+[Board "17"]
+[West "Katz"]
+[North "Hydes"]
+[East "Nickell"]
+[South "Crouch"]
+[Room "Open"]
+[Scoring "IMP"]
+[Vulnerable "None"]
+[Dealer "N"]
+[Deal "N:T98.987542.T94.Q KQ6543.A3.K.JT62 J2.K.Q8653.A9854 A7.QJT6.AJ72.K73"]
+{
+                   Nord
+                   X98
+                   987542
+                   X94
+                   D
+  Ouest                            Est
+  A7                               RD6543
+  DVX6                             A3
+  AV72                             R
+  R73                              VX62
+                   Sud
+                   V2
+                   R
+                   D8653
+                   A9854
+}
+[Declarer "E"]
+[Contract "4S"]
+[Result "12"]
+[Score "NS -480"]
+[Auction "N"]
+Pass  1S    Pass  2D
+Pass  2S  =1=    Pass  3NT =2=
+Pass  4S    Pass  Pass
+Pass
+[Note "1:!"]
+[Note "2:!"]
+[Play "S"]
+HK H6 H2 HA
+S2 SA S8 S3
+SJ S7 S9 SK
+C4 C3 ST SQ
+D3 D2 D9 DK
+C5 HT H4 H3
+D5 HJ H5 C2
+C8 HQ H7 C6
+-  DA -  -
+*
+
+[Event "2019 Vanderbilt FINAL"]
+[Site "Segment 2 of 4"]
+[Board "17"]
+[West "Garner"]
+[North "Rodwell"]
+[East "Wolfson|"]
+[South "Meckstroth"]
+[Room "Closed"]
+[Scoring "IMP"]
+[Vulnerable "None"]
+[Dealer "N"]
+[Deal "N:T98.987542.T94.Q KQ6543.A3.K.JT62 J2.K.Q8653.A9854 A7.QJT6.AJ72.K73"]
+{
+                   Nord
+                   X98
+                   987542
+                   X94
+                   D
+  Ouest                            Est
+  A7                               RD6543
+  DVX6                             A3
+  AV72                             R
+  R73                              VX62
+                   Sud
+                   V2
+                   R
+                   D8653
+                   A9854
+}
+[Declarer "E"]
+[Contract "4S"]
+[Result "12"]
+[Score "NS -480"]
+[Auction "N"]
+Pass  1S    Pass  2C
+Pass  4S    Pass  Pass
+Pass
+[Play "S"]
+HK H6 H9 HA
+S2 SA S8 S3
+SJ S7 ST SK
+D8 D2 -  SQ
+*
+
+[Event "2019 Vanderbilt FINAL"]
+[Site "Segment 2 of 4"]
+[Board "18"]
+[West "Katz"]
+[North "Hydes"]
+[East "Nickell"]
+[South "Crouch"]
+[Room "Open"]
+[Scoring "IMP"]
+[Vulnerable "NS"]
+[Dealer "E"]
+[Deal "E:K8642.AT97.J.A82 Q7.J853.AQ82.J43 T95.KQ.K76543.97 AJ3.642.T9.KQT65"]
+{
+                   Nord
+                   AV3
+                   642
+                   X9
+                   RDX65
+  Ouest                            Est
+  X95                              R8642
+  RD                               AX97
+  R76543                           V
+  97                               A82
+                   Sud
+                   D7
+                   V853
+                   AD82
+                   V43
+}
+[Declarer "E"]
+[Contract "2S"]
+[Result "9"]
+[Score "NS -140"]
+[Auction "E"]
+1S    Pass  2S    Pass
+Pass  Pass
+[Play "S"]
+H5 HK H2 H7
+H3 HQ H4 H9
+DQ D3 DT DJ
+C3 C7 CQ CA
+H8 C9 H6 HA
+C4 S5 C5 C2
+D2 D4 D9 S2
+CJ S9 C6 C8
+D8 D5 CT S4
+HJ ST SJ HT
+S7 D6 CK S6
+*
+
+[Event "2019 Vanderbilt FINAL"]
+[Site "Segment 2 of 4"]
+[Board "18"]
+[West "Garner"]
+[North "Rodwell"]
+[East "Wolfson|"]
+[South "Meckstroth"]
+[Room "Closed"]
+[Scoring "IMP"]
+[Vulnerable "NS"]
+[Dealer "E"]
+[Deal "E:K8642.AT97.J.A82 Q7.J853.AQ82.J43 T95.KQ.K76543.97 AJ3.642.T9.KQT65"]
+{
+                   Nord
+                   AV3
+                   642
+                   X9
+                   RDX65
+  Ouest                            Est
+  X95                              R8642
+  RD                               AX97
+  R76543                           V
+  97                               A82
+                   Sud
+                   D7
+                   V853
+                   AD82
+                   V43
+}
+[Declarer "E"]
+[Contract "2S"]
+[Result "8"]
+[Score "NS -110"]
+[Auction "E"]
+1S    Pass  2S    Pass
+Pass  Pass
+[Play "S"]
+H5 HQ H6 H7
+H3 HK H2 H9
+C3 C7 C5 CA
+H8 C9 H4 HA
+C4 S5 C6 C2
+DQ D3 D9 DJ
+HJ D4 DT HT
+S7 S9 SA S2
+SQ ST S3 S4
+CJ D5 CK C8
+D2 D6 CQ S8
+-  -  -  SK
+*
+
+[Event "2019 Vanderbilt FINAL"]
+[Site "Segment 2 of 4"]
+[Board "19"]
+[West "Katz"]
+[North "Hydes"]
+[East "Nickell"]
+[South "Crouch"]
+[Room "Open"]
+[Scoring "IMP"]
+[Vulnerable "EW"]
+[Dealer "S"]
+[Deal "S:T5.K4.AJ98743.52 AKQ4.Q72.T62.KJ3 8762.AJT98.K5.A6 J93.653.Q.QT9874"]
+{
+                   Nord
+                   8762
+                   AVX98
+                   R5
+                   A6
+  Ouest                            Est
+  ARD4                             V93
+  D72                              653
+  X62                              D
+  RV3                              DX9874
+                   Sud
+                   X5
+                   R4
+                   AV98743
+                   52
+}
+[Declarer "N"]
+[Contract "3H"]
+[Result "13"]
+[Score "NS 260"]
+[Auction "S"]
+2D  =1=    X     Pass  2NT
+Pass  3C    3H    Pass
+Pass  Pass
+[Note "1:!"]
+[Play "E"]
+DQ D3 DT DK
+H3 HK H2 HJ
+H5 H4 H7 HT
+*
+
+[Event "2019 Vanderbilt FINAL"]
+[Site "Segment 2 of 4"]
+[Board "19"]
+[West "Garner"]
+[North "Rodwell"]
+[East "Wolfson|"]
+[South "Meckstroth"]
+[Room "Closed"]
+[Scoring "IMP"]
+[Vulnerable "EW"]
+[Dealer "S"]
+[Deal "S:T5.K4.AJ98743.52 AKQ4.Q72.T62.KJ3 8762.AJT98.K5.A6 J93.653.Q.QT9874"]
+{
+                   Nord
+                   8762
+                   AVX98
+                   R5
+                   A6
+  Ouest                            Est
+  ARD4                             V93
+  D72                              653
+  X62                              D
+  RV3                              DX9874
+                   Sud
+                   X5
+                   R4
+                   AV98743
+                   52
+}
+[Declarer "E"]
+[Contract "4C"]
+[Result "8"]
+[Score "NS 200"]
+[Auction "S"]
+3D    X     Pass  4C
+Pass  Pass  Pass
+[Play "S"]
+ST SA S2 S9
+C5 C3 C6 CT
+C2 CK CA C4
+DA D2 DK DQ
+HK H2 H8 H3
+H4 H7 H9 H5
+-  -  HA H6
+*
+
+[Event "2019 Vanderbilt FINAL"]
+[Site "Segment 2 of 4"]
+[Board "20"]
+[West "Katz"]
+[North "Hydes"]
+[East "Nickell"]
+[South "Crouch"]
+[Room "Open"]
+[Scoring "IMP"]
+[Vulnerable "All"]
+[Dealer "W"]
+[Deal "W:KQ42.AK842.K93.8 AJT3.73.J852.J53 9865.65.76.AQ764 7.QJT9.AQT4.KT92"]
+{
+                   Nord
+                   AVX3
+                   73
+                   V852
+                   V53
+  Ouest                            Est
+  RD42                             9865
+  AR842                            65
+  R93                              76
+  8                                AD764
+                   Sud
+                   7
+                   DVX9
+                   ADX4
+                   RX92
+}
+[Declarer "N"]
+[Contract "2NT"]
+[Result "8"]
+[Score "NS 120"]
+[Auction "W"]
+2D    Pass  2S    X
+Pass  2NT   Pass  Pass
+Pass
+[Play "E"]
+S5 S7 SQ SA
+D6 DT D3 DJ
+D7 DQ DK D5
+S6 C2 S2 SJ
+H6 H9 HK H7
+H5 HT HA H3
+S8 D4 SK S3
+*
+
+[Event "2019 Vanderbilt FINAL"]
+[Site "Segment 2 of 4"]
+[Board "20"]
+[West "Garner"]
+[North "Rodwell"]
+[East "Wolfson|"]
+[South "Meckstroth"]
+[Room "Closed"]
+[Scoring "IMP"]
+[Vulnerable "All"]
+[Dealer "W"]
+[Deal "W:KQ42.AK842.K93.8 AJT3.73.J852.J53 9865.65.76.AQ764 7.QJT9.AQT4.KT92"]
+{
+                   Nord
+                   AVX3
+                   73
+                   V852
+                   V53
+  Ouest                            Est
+  RD42                             9865
+  AR842                            65
+  R93                              76
+  8                                AD764
+                   Sud
+                   7
+                   DVX9
+                   ADX4
+                   RX92
+}
+[Declarer "E"]
+[Contract "3S"]
+[Result "7"]
+[Score "NS 200"]
+[Auction "W"]
+1H    Pass  1S    X
+3S    Pass  Pass  Pass
+[Play "S"]
+S7 SK SA S5
+DT DK D2 D7
+HQ HA H3 H6
+HJ HK H7 H5
+H9 H2 C5 D6
+D4 D3 D8 S6
+DA SQ S3 S9
+HT H4 C3 S8
+C2 C8 CJ CA
+C9 S2 ST C4
+-  -  SJ -
+*
+
+[Event "2019 Vanderbilt FINAL"]
+[Site "Segment 2 of 4"]
+[Board "21"]
+[West "Katz"]
+[North "Hydes"]
+[East "Nickell"]
+[South "Crouch"]
+[Room "Open"]
+[Scoring "IMP"]
+[Vulnerable "NS"]
+[Dealer "N"]
+[Deal "N:AQ753.763.J.JT76 9864.AJ9852.A4.K JT2..KQT83.Q9843 K.KQT4.97652.A52"]
+{
+                   Nord
+                   AD753
+                   763
+                   V
+                   VX76
+  Ouest                            Est
+  R                                9864
+  RDX4                             AV9852
+  97652                            A4
+  A52                              R
+                   Sud
+                   VX2
+                   -
+                   RDX83
+                   D9843
+}
+[Declarer "W"]
+[Contract "6H"]
+[Result "11"]
+[Score "NS 50"]
+[Auction "N"]
+Pass  2D    Pass  2NT
+Pass  3C    Pass  4C
+Pass  4D    X     4H
+Pass  6H    Pass  Pass
+Pass
+[Play "N"]
+DJ DA D3 D2
+C6 CK C3 C2
+H3 H2 D8 HK
+C7 D4 C4 CA
+SA S4 S2 SK
+H6 H5 C8 HT
+S3 H8 DT D5
+S5 S6 ST H4
+H7 H9 DQ D6
+S7 S8 SJ HQ
+CT HJ DK D9
+*
+
+[Event "2019 Vanderbilt FINAL"]
+[Site "Segment 2 of 4"]
+[Board "21"]
+[West "Garner"]
+[North "Rodwell"]
+[East "Wolfson|"]
+[South "Meckstroth"]
+[Room "Closed"]
+[Scoring "IMP"]
+[Vulnerable "NS"]
+[Dealer "N"]
+[Deal "N:AQ753.763.J.JT76 9864.AJ9852.A4.K JT2..KQT83.Q9843 K.KQT4.97652.A52"]
+{
+                   Nord
+                   AD753
+                   763
+                   V
+                   VX76
+  Ouest                            Est
+  R                                9864
+  RDX4                             AV9852
+  97652                            A4
+  A52                              R
+                   Sud
+                   VX2
+                   -
+                   RDX83
+                   D9843
+}
+[Declarer "W"]
+[Contract "3NT"]
+[Result "10"]
+[Score "NS -430"]
+[Auction "N"]
+Pass  1H    Pass  3NT
+Pass  Pass  Pass
+[Play "N"]
+S5 -  -  -
+*
+
+[Event "2019 Vanderbilt FINAL"]
+[Site "Segment 2 of 4"]
+[Board "22"]
+[West "Katz"]
+[North "Hydes"]
+[East "Nickell"]
+[South "Crouch"]
+[Room "Open"]
+[Scoring "IMP"]
+[Vulnerable "EW"]
+[Dealer "E"]
+[Deal "E:T.JT862.Q54.A976 9865.K74.A73.T54 AK42.3.JT2.QJ832 QJ73.AQ95.K986.K"]
+{
+                   Nord
+                   DV73
+                   AD95
+                   R986
+                   R
+  Ouest                            Est
+  AR42                             X
+  3                                VX862
+  VX2                              D54
+  DV832                            A976
+                   Sud
+                   9865
+                   R74
+                   A73
+                   X54
+}
+[Declarer "N"]
+[Contract "2S"]
+[Result "7"]
+[Score "NS -50"]
+[Auction "E"]
+Pass  Pass  1C    X
+1H    X     Pass  1S
+2C    Pass  Pass  X
+Pass  2S    Pass  Pass
+Pass
+[Play "E"]
+ST S5 S2 SJ
+H2 H4 H3 HQ
+H8 HK S4 H5
+C7 S6 SK S3
+H6 S8 SA S7
+CA C4 CQ CK
+C9 C5 C3 D6
+C6 CT CJ SQ
+D4 D3 D2 DK
+D5 DA DT D8
+-  S9 -  -
+*
+
+[Event "2019 Vanderbilt FINAL"]
+[Site "Segment 2 of 4"]
+[Board "22"]
+[West "Garner"]
+[North "Rodwell"]
+[East "Wolfson|"]
+[South "Meckstroth"]
+[Room "Closed"]
+[Scoring "IMP"]
+[Vulnerable "EW"]
+[Dealer "E"]
+[Deal "E:T.JT862.Q54.A976 9865.K74.A73.T54 AK42.3.JT2.QJ832 QJ73.AQ95.K986.K"]
+{
+                   Nord
+                   DV73
+                   AD95
+                   R986
+                   R
+  Ouest                            Est
+  AR42                             X
+  3                                VX862
+  VX2                              D54
+  DV832                            A976
+                   Sud
+                   9865
+                   R74
+                   A73
+                   X54
+}
+[Declarer "S"]
+[Contract "3S"]
+[Result "8"]
+[Score "NS -50"]
+[Auction "E"]
+Pass  Pass  1C    X
+1H    1S    Pass  2S
+3C    Pass  Pass  3S
+Pass  Pass  Pass
+[Play "W"]
+CQ CK CA C4
+S2 SJ ST S5
+H3 HA H2 H4
+S4 H5 H6 HK
+SA S3 C6 S6
+SK SQ H8 S8
+C3 D6 C9 CT
+C2 S7 C7 C5
+D2 DK D4 D3
+DJ D8 D5 DA
+C8 D9 DQ S9
+*
+
+[Event "2019 Vanderbilt FINAL"]
+[Site "Segment 2 of 4"]
+[Board "23"]
+[West "Katz"]
+[North "Hydes"]
+[East "Nickell"]
+[South "Crouch"]
+[Room "Open"]
+[Scoring "IMP"]
+[Vulnerable "All"]
+[Dealer "S"]
+[Deal "S:75.QJT82.KQ.K842 QT2.K97.J532.765 KJ9643.A3.T64.AJ A8.654.A987.QT93"]
+{
+                   Nord
+                   RV9643
+                   A3
+                   X64
+                   AV
+  Ouest                            Est
+  DX2                              A8
+  R97                              654
+  V532                             A987
+  765                              DX93
+                   Sud
+                   75
+                   DVX82
+                   RD
+                   R842
+}
+[Declarer "S"]
+[Contract "3NT"]
+[Result "6"]
+[Score "NS -300"]
+[Auction "S"]
+1H    Pass  1S    Pass
+2C    Pass  2D    Pass
+2H    Pass  3D    Pass
+3NT   Pass  Pass  Pass
+[Play "W"]
+SQ SK SA S5
+D2 D4 D7 DQ
+H7 H3 H4 HQ
+H9 HA H5 H2
+C5 CJ CQ CK
+S2 SJ S8 S7
+C6 CA C3 C2
+D3 D6 DA DK
+C7 S4 CT C4
+-  -  C9 C8
+*
+
+[Event "2019 Vanderbilt FINAL"]
+[Site "Segment 2 of 4"]
+[Board "23"]
+[West "Garner"]
+[North "Rodwell"]
+[East "Wolfson|"]
+[South "Meckstroth"]
+[Room "Closed"]
+[Scoring "IMP"]
+[Vulnerable "All"]
+[Dealer "S"]
+[Deal "S:75.QJT82.KQ.K842 QT2.K97.J532.765 KJ9643.A3.T64.AJ A8.654.A987.QT93"]
+{
+                   Nord
+                   RV9643
+                   A3
+                   X64
+                   AV
+  Ouest                            Est
+  DX2                              A8
+  R97                              654
+  V532                             A987
+  765                              DX93
+                   Sud
+                   75
+                   DVX82
+                   RD
+                   R842
+}
+[Declarer "N"]
+[Contract "4S"]
+[Result "10"]
+[Score "NS 620"]
+[Auction "S"]
+1H    Pass  1S    Pass
+2C    Pass  2D    Pass
+2H    Pass  2S    Pass
+4S    Pass  Pass  Pass
+[Play "E"]
+CT C2 C5 CJ
+C3 C4 C6 CA
+DA DQ D5 D6
+H4 HQ HK HA
+H5 HJ H7 H3
+SA S5 S2 SK
+D7 DK D2 D4
+CQ CK C7 DT
+S8 S7 ST SJ
+*
+
+[Event "2019 Vanderbilt FINAL"]
+[Site "Segment 2 of 4"]
+[Board "24"]
+[West "Katz"]
+[North "Hydes"]
+[East "Nickell"]
+[South "Crouch"]
+[Room "Open"]
+[Scoring "IMP"]
+[Vulnerable "None"]
+[Dealer "W"]
+[Deal "W:86.AJ3.QT7.AQJ87 T32.8752.K853.64 KQ54.KQT6.A2.KT9 AJ97.94.J964.532"]
+{
+                   Nord
+                   X32
+                   8752
+                   R853
+                   64
+  Ouest                            Est
+  86                               RD54
+  AV3                              RDX6
+  DX7                              A2
+  ADV87                            RX9
+                   Sud
+                   AV97
+                   94
+                   V964
+                   532
+}
+[Declarer "W"]
+[Contract "3NT"]
+[Result "11"]
+[Score "NS -460"]
+[Auction "W"]
+1C    Pass  1H    Pass
+2H    Pass  2S    Pass
+3NT   Pass  Pass  Pass
+[Play "N"]
+C6 C9 C2 C7
+C4 CT C3 CJ
+S2 CK C5 CA
+S3 S4 D4 CQ
+ST SK SA S8
+H2 SQ SJ S6
+H5 H6 H4 HA
+H7 -  -  C8
+*
+
+[Event "2019 Vanderbilt FINAL"]
+[Site "Segment 2 of 4"]
+[Board "24"]
+[West "Garner"]
+[North "Rodwell"]
+[East "Wolfson|"]
+[South "Meckstroth"]
+[Room "Closed"]
+[Scoring "IMP"]
+[Vulnerable "None"]
+[Dealer "W"]
+[Deal "W:86.AJ3.QT7.AQJ87 T32.8752.K853.64 KQ54.KQT6.A2.KT9 AJ97.94.J964.532"]
+{
+                   Nord
+                   X32
+                   8752
+                   R853
+                   64
+  Ouest                            Est
+  86                               RD54
+  AV3                              RDX6
+  DX7                              A2
+  ADV87                            RX9
+                   Sud
+                   AV97
+                   94
+                   V964
+                   532
+}
+[Declarer "W"]
+[Contract "4NT"]
+[Result "11"]
+[Score "NS -460"]
+[Auction "W"]
+1NT   Pass  2C    Pass
+2D    Pass  4NT   Pass
+Pass  Pass
+[Play "N"]
+H2 H6 H9 HA
+S3 SK S7 S6
+H5 HT H4 HJ
+H7 HK C2 H3
+H8 HQ C3 S8
+C4 CK C5 C7
+C6 CT D4 CA
+D3 C9 S9 CQ
+S2 S4 D6 CJ
+D5 D2 D9 C8
+*
+
+[Event "2019 Vanderbilt FINAL"]
+[Site "Segment 2 of 4"]
+[Board "25"]
+[West "Katz"]
+[North "Hydes"]
+[East "Nickell"]
+[South "Crouch"]
+[Room "Open"]
+[Scoring "IMP"]
+[Vulnerable "EW"]
+[Dealer "N"]
+[Deal "N:AQJT7.943.Q654.T 853.6.AT9.987543 K6.AJ7.J873.AK62 942.KQT852.K2.QJ"]
+{
+                   Nord
+                   ADVX7
+                   943
+                   D654
+                   X
+  Ouest                            Est
+  942                              853
+  RDX852                           6
+  R2                               AX9
+  DV                               987543
+                   Sud
+                   R6
+                   AV7
+                   V873
+                   AR62
+}
+[Declarer "S"]
+[Contract "3NT"]
+[Result "10"]
+[Score "NS 430"]
+[Auction "N"]
+Pass  Pass  1NT   Pass
+2H    Pass  2S    Pass
+3C    Pass  3D  =1=    Pass
+3H    Pass  3NT   Pass
+Pass  Pass
+[Note "1:!"]
+[Play "W"]
+HK H3 H6 HA
+DK D4 D9 D7
+HQ H4 C3 H7
+D2 D5 -  -
+*
+
+[Event "2019 Vanderbilt FINAL"]
+[Site "Segment 2 of 4"]
+[Board "25"]
+[West "Garner"]
+[North "Rodwell"]
+[East "Wolfson|"]
+[South "Meckstroth"]
+[Room "Closed"]
+[Scoring "IMP"]
+[Vulnerable "EW"]
+[Dealer "N"]
+[Deal "N:AQJT7.943.Q654.T 853.6.AT9.987543 K6.AJ7.J873.AK62 942.KQT852.K2.QJ"]
+{
+                   Nord
+                   ADVX7
+                   943
+                   D654
+                   X
+  Ouest                            Est
+  942                              853
+  RDX852                           6
+  R2                               AX9
+  DV                               987543
+                   Sud
+                   R6
+                   AV7
+                   V873
+                   AR62
+}
+[Declarer "N"]
+[Contract "4S"]
+[Result "11"]
+[Score "NS 450"]
+[Auction "N"]
+2S    Pass  4S    Pass
+Pass  Pass
+[Play "E"]
+H6 HA H8 H4
+S3 SK S2 S7
+S5 S6 S4 ST
+S8 C2 S9 SQ
+C3 CA CJ CT
+C4 CK CQ H3
+DA D3 D2 DQ
+C5 C6 H2 H9
+-  D7 DK -
+*
+
+[Event "2019 Vanderbilt FINAL"]
+[Site "Segment 2 of 4"]
+[Board "26"]
+[West "Katz"]
+[North "Hydes"]
+[East "Nickell"]
+[South "Crouch"]
+[Room "Open"]
+[Scoring "IMP"]
+[Vulnerable "All"]
+[Dealer "E"]
+[Deal "E:A.AT8.AQ9863.642 KJT986.KQ9.K.A93 75432.J7.T52.T75 Q.65432.J74.KQJ8"]
+{
+                   Nord
+                   D
+                   65432
+                   V74
+                   RDV8
+  Ouest                            Est
+  75432                            A
+  V7                               AX8
+  X52                              AD9863
+  X75                              642
+                   Sud
+                   RVX986
+                   RD9
+                   R
+                   A93
+}
+[Declarer "S"]
+[Contract "4S"]
+[Result "10"]
+[Score "NS 620"]
+[Auction "E"]
+1D    1S    Pass  1NT
+2D    3S    Pass  4S
+Pass  Pass  Pass
+[Play "W"]
+DT D4 DA DK
+H7 H2 HA H9
+D2 D7 DQ S6
+S2 SQ SA S8
+HJ H3 H8 HQ
+*
+
+[Event "2019 Vanderbilt FINAL"]
+[Site "Segment 2 of 4"]
+[Board "26"]
+[West "Garner"]
+[North "Rodwell"]
+[East "Wolfson|"]
+[South "Meckstroth"]
+[Room "Closed"]
+[Scoring "IMP"]
+[Vulnerable "All"]
+[Dealer "E"]
+[Deal "E:A.AT8.AQ9863.642 KJT986.KQ9.K.A93 75432.J7.T52.T75 Q.65432.J74.KQJ8"]
+{
+                   Nord
+                   D
+                   65432
+                   V74
+                   RDV8
+  Ouest                            Est
+  75432                            A
+  V7                               AX8
+  X52                              AD9863
+  X75                              642
+                   Sud
+                   RVX986
+                   RD9
+                   R
+                   A93
+}
+[Declarer "S"]
+[Contract "4S"]
+[Result "9"]
+[Score "NS -100"]
+[Auction "E"]
+1D    1S    Pass  1NT
+2D    3D    Pass  3H
+Pass  3S    Pass  4S
+Pass  Pass  Pass
+[Play "W"]
+D2 D4 DA DK
+H7 H2 HA H9
+HJ H3 H8 HK
+S7 SQ SA S6
+S2 -  HT HQ
+*
+
+[Event "2019 Vanderbilt FINAL"]
+[Site "Segment 2 of 4"]
+[Board "27"]
+[West "Katz"]
+[North "Hydes"]
+[East "Nickell"]
+[South "Crouch"]
+[Room "Open"]
+[Scoring "IMP"]
+[Vulnerable "None"]
+[Dealer "S"]
+[Deal "S:AT953.J2.9.J6432 KJ.T63.QJ54.AT87 Q8764.AK98..KQ95 2.Q754.AKT87632."]
+{
+                   Nord
+                   D8764
+                   AR98
+                   -
+                   RD95
+  Ouest                            Est
+  RV                               2
+  X63                              D754
+  DV54                             ARX87632
+  AX87                             -
+                   Sud
+                   AX953
+                   V2
+                   9
+                   V6432
+}
+[Declarer "S"]
+[Contract "5S"]
+[Result "10"]
+[Score "NS -50"]
+[Auction "S"]
+2S    Pass  4D    5D
+Pass  Pass  5H    Pass
+5S    Pass  Pass  Pass
+[Play "W"]
+C8 CK S2 C2
+DQ S4 DK D9
+-  S6 D2 S3
+*
+
+[Event "2019 Vanderbilt FINAL"]
+[Site "Segment 2 of 4"]
+[Board "27"]
+[West "Garner"]
+[North "Rodwell"]
+[East "Wolfson|"]
+[South "Meckstroth"]
+[Room "Closed"]
+[Scoring "IMP"]
+[Vulnerable "None"]
+[Dealer "S"]
+[Deal "S:AT953.J2.9.J6432 KJ.T63.QJ54.AT87 Q8764.AK98..KQ95 2.Q754.AKT87632."]
+{
+                   Nord
+                   D8764
+                   AR98
+                   -
+                   RD95
+  Ouest                            Est
+  RV                               2
+  X63                              D754
+  DV54                             ARX87632
+  AX87                             -
+                   Sud
+                   AX953
+                   V2
+                   9
+                   V6432
+}
+[Declarer "E"]
+[Contract "6DX"]
+[Result "9"]
+[Score "NS 500"]
+[Auction "S"]
+Pass  Pass  1S    5D
+5S    6C    Pass  6D
+Pass  Pass  X     Pass
+Pass  Pass
+[Play "S"]
+HJ H3 HK H4
+H2 H6 HA H5
+D9 HT H9 H7
+SA SJ S4 S2
+*
+
+[Event "2019 Vanderbilt FINAL"]
+[Site "Segment 2 of 4"]
+[Board "28"]
+[West "Katz"]
+[North "Hydes"]
+[East "Nickell"]
+[South "Crouch"]
+[Room "Open"]
+[Scoring "IMP"]
+[Vulnerable "NS"]
+[Dealer "W"]
+[Deal "W:J85.AJ954.KQ52.3 KQ64.K.73.AKQ852 A73.86.A986.JT74 T92.QT732.JT4.96"]
+{
+                   Nord
+                   RD64
+                   R
+                   73
+                   ARD852
+  Ouest                            Est
+  V85                              A73
+  AV954                            86
+  RD52                             A986
+  3                                VX74
+                   Sud
+                   X92
+                   DX732
+                   VX4
+                   96
+}
+[Declarer "E"]
+[Contract "3D"]
+[Result "8"]
+[Score "NS 50"]
+[Auction "W"]
+1H    2C    Pass  Pass
+X     2S    3D  =1=    Pass
+Pass  Pass
+[Note "1:!"]
+[Play "S"]
+C9 C3 CQ C4
+D4 D2 D3 DA
+H2 H4 HK H8
+S9 SJ S4 S3
+S2 S5 SQ SA
+H3 H9 D7 H6
+*
+
+[Event "2019 Vanderbilt FINAL"]
+[Site "Segment 2 of 4"]
+[Board "28"]
+[West "Garner"]
+[North "Rodwell"]
+[East "Wolfson|"]
+[South "Meckstroth"]
+[Room "Closed"]
+[Scoring "IMP"]
+[Vulnerable "NS"]
+[Dealer "W"]
+[Deal "W:J85.AJ954.KQ52.3 KQ64.K.73.AKQ852 A73.86.A986.JT74 T92.QT732.JT4.96"]
+{
+                   Nord
+                   RD64
+                   R
+                   73
+                   ARD852
+  Ouest                            Est
+  V85                              A73
+  AV954                            86
+  RD52                             A986
+  3                                VX74
+                   Sud
+                   X92
+                   DX732
+                   VX4
+                   96
+}
+[Declarer "N"]
+[Contract "2CX"]
+[Result "7"]
+[Score "NS -200"]
+[Auction "W"]
+1H    X     XX    Pass
+Pass  2C    X     Pass
+Pass  Pass
+[Play "E"]
+H8 H2 HA HK
+C4 C6 C3 CA
+C7 C9 H4 CK
+CT H3 H5 CQ
+S3 ST SJ S4
+D9 D4 DK D3
+DA DT D2 D7
+*
+
+[Event "2019 Vanderbilt FINAL"]
+[Site "Segment 2 of 4"]
+[Board "29"]
+[West "Katz"]
+[North "Hydes"]
+[East "Nickell"]
+[South "Crouch"]
+[Room "Open"]
+[Scoring "IMP"]
+[Vulnerable "All"]
+[Dealer "N"]
+[Deal "N:JT75.532.AT5.983 643.76.43.QJT652 K982.AKT.Q82.AK4 AQ.QJ984.KJ976.7"]
+{
+                   Nord
+                   VX75
+                   532
+                   AX5
+                   983
+  Ouest                            Est
+  AD                               643
+  DV984                            76
+  RV976                            43
+  7                                DVX652
+                   Sud
+                   R982
+                   ARX
+                   D82
+                   AR4
+}
+[Declarer "S"]
+[Contract "4S"]
+[Result "8"]
+[Score "NS -200"]
+[Auction "N"]
+Pass  Pass  1C    1H
+X =1=      Pass  4S    Pass
+Pass  Pass
+[Note "1:!"]
+[Play "W"]
+HQ H2 H6 HA
+SQ S5 S3 S9
+H9 H3 H7 HT
+SA S7 S4 S2
+HJ H5 S6 HK
+C7 C3 CQ CK
+D6 C8 C2 CA
+H4 C9 -  C4
+*
+
+[Event "2019 Vanderbilt FINAL"]
+[Site "Segment 2 of 4"]
+[Board "29"]
+[West "Garner"]
+[North "Rodwell"]
+[East "Wolfson|"]
+[South "Meckstroth"]
+[Room "Closed"]
+[Scoring "IMP"]
+[Vulnerable "All"]
+[Dealer "N"]
+[Deal "N:JT75.532.AT5.983 643.76.43.QJT652 K982.AKT.Q82.AK4 AQ.QJ984.KJ976.7"]
+{
+                   Nord
+                   VX75
+                   532
+                   AX5
+                   983
+  Ouest                            Est
+  AD                               643
+  DV984                            76
+  RV976                            43
+  7                                DVX652
+                   Sud
+                   R982
+                   ARX
+                   D82
+                   AR4
+}
+[Declarer "S"]
+[Contract "3NT"]
+[Result "9"]
+[Score "NS 600"]
+[Auction "N"]
+Pass  Pass  1C  =1=    1H
+X     Pass  2NT   Pass
+3NT   Pass  Pass  Pass
+[Note "1:strong artificial"]
+[Play "W"]
+D6 D5 D4 D8
+SQ S5 S3 S2
+HQ H2 H6 HA
+SA S7 S4 S9
+H8 H3 H7 HT
+H4 ST S6 SK
+C7 C3 C2 CA
+H9 H5 C5 HK
+D9 SJ C6 S8
+D7 C8 CT CK
+DK DA D3 DQ
+*
+
+[Event "2019 Vanderbilt FINAL"]
+[Site "Segment 2 of 4"]
+[Board "30"]
+[West "Katz"]
+[North "Hydes"]
+[East "Nickell"]
+[South "Crouch"]
+[Room "Open"]
+[Scoring "IMP"]
+[Vulnerable "None"]
+[Dealer "E"]
+[Deal "E:A2.JT96.QT86.KJ9 J8743.K.73.QT865 KT6.AQ54.AKJ9.A4 Q95.8732.542.732"]
+{
+                   Nord
+                   D95
+                   8732
+                   542
+                   732
+  Ouest                            Est
+  RX6                              A2
+  AD54                             VX96
+  ARV9                             DX86
+  A4                               RV9
+                   Sud
+                   V8743
+                   R
+                   73
+                   DX865
+}
+[Declarer "W"]
+[Contract "6D"]
+[Result "13"]
+[Score "NS -940"]
+[Auction "E"]
+Pass  Pass  2NT   Pass
+4S    Pass  6D    Pass
+Pass  Pass
+[Play "N"]
+C2 C9 CT CA
+D2 D6 D3 DA
+D4 D8 D7 DK
+*
+
+[Event "2019 Vanderbilt FINAL"]
+[Site "Segment 2 of 4"]
+[Board "30"]
+[West "Garner"]
+[North "Rodwell"]
+[East "Wolfson|"]
+[South "Meckstroth"]
+[Room "Closed"]
+[Scoring "IMP"]
+[Vulnerable "None"]
+[Dealer "E"]
+[Deal "E:A2.JT96.QT86.KJ9 J8743.K.73.QT865 KT6.AQ54.AKJ9.A4 Q95.8732.542.732"]
+{
+                   Nord
+                   D95
+                   8732
+                   542
+                   732
+  Ouest                            Est
+  RX6                              A2
+  AD54                             VX96
+  ARV9                             DX86
+  A4                               RV9
+                   Sud
+                   V8743
+                   R
+                   73
+                   DX865
+}
+[Declarer "W"]
+[Contract "6H"]
+[Result "13"]
+[Score "NS -1010"]
+[Auction "E"]
+1D    Pass  1H    Pass
+2H    Pass  2NT =1=    Pass
+3H  =2=    Pass  4NT   Pass
+5D    Pass  6H    Pass
+Pass  Pass
+[Note "1:asking"]
+[Note "2:min with 4 hearts"]
+[Play "N"]
+C2 CJ CQ CA
+S9 SA S3 S6
+-  HJ HK HA
+*

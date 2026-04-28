@@ -1,0 +1,1582 @@
+% PBN 2.1 
+% File converted with "LinToPbnConverter" (Version 1.3)
+% (c) J.L PELISSON 2009  : pelissonjl@aol.com
+% Free for a non commercial use only 
+% 
+[Event "BBO1-2019WBTC"]
+[Site "VC-FN5"]
+[HomeTeam "CHINA"]
+[VisitTeam "SWEDEN"]
+[Board "1"]
+[West "BERTHEAU"]
+[North "YA LU"]
+[East "LARSSON"]
+[South "YAN LIU"]
+[Room "Open"]
+[Scoring "IMP"]
+[Vulnerable "None"]
+[Dealer "N"]
+[Deal "N:Q6.8542.AT843.J8 T5432.AJT97..T63 J87.K63.Q95.AK72 AK9.Q.KJ762.Q954"]
+{
+                   Nord
+                   D6
+                   8542
+                   AX843
+                   V8
+  Ouest                            Est
+  AR9                              X5432
+  D                                AVX97
+  RV762                            -
+  D954                             X63
+                   Sud
+                   V87
+                   R63
+                   D95
+                   AR72
+}
+[Declarer "E"]
+[Contract "2S"]
+[Result "9"]
+[Score "NS -140"]
+[Auction "N"]
+Pass  Pass  1D    Pass
+1H    1S    X     2H
+Pass  2S    Pass  Pass
+Pass
+[Play "S"]
+CA C4 CJ CT
+CK C5 C8 C6
+C7 C9 S6 C3
+H3 HQ H5 HA
+HK S9 H2 HJ
+S7 SA SQ S2
+S8 SK D4 S3
+C2 CQ D3 H7
+-  D2 D8 S4
+*
+
+[Event "BBO1-2019WBTC"]
+[Site "VC-FN5"]
+[Board "1"]
+[West "Q SHEN"]
+[North "C RIMSTEDT"]
+[East "WEN WANG|"]
+[South "GRONKVIST"]
+[Room "Closed"]
+[Scoring "IMP"]
+[Vulnerable "None"]
+[Dealer "N"]
+[Deal "N:Q6.8542.AT843.J8 T5432.AJT97..T63 J87.K63.Q95.AK72 AK9.Q.KJ762.Q954"]
+{
+                   Nord
+                   D6
+                   8542
+                   AX843
+                   V8
+  Ouest                            Est
+  AR9                              X5432
+  D                                AVX97
+  RV762                            -
+  D954                             X63
+                   Sud
+                   V87
+                   R63
+                   D95
+                   AR72
+}
+[Declarer "E"]
+[Contract "2S"]
+[Result "9"]
+[Score "NS -140"]
+[Auction "N"]
+Pass  Pass  1C    1D
+X     Pass  1H    X
+1S    2S    Pass  Pass
+Pass
+[Play "S"]
+S7 SA S6 S3
+H6 HQ H2 HA
+HK S9 H4 HJ
+S8 SK SQ S2
+D5 D2 D4 S4
+H3 D6 H5 HT
+C2 C4 H8 H9
+CA C5 C8 C6
+SJ D7 D3 S5
+D9 DK DA ST
+C7 DJ D8 H7
+CK C9 CJ C3
+DQ CQ DT CT
+*
+
+[Event "BBO1-2019WBTC"]
+[Site "VC-FN5"]
+[Board "2"]
+[West "BERTHEAU"]
+[North "YA LU"]
+[East "LARSSON"]
+[South "YAN LIU"]
+[Room "Open"]
+[Scoring "IMP"]
+[Vulnerable "NS"]
+[Dealer "E"]
+[Deal "E:Q42.Q93.Q8.K7632 8.AT54.AJ7642.J5 KJT753.K.53.QT94 A96.J8762.KT9.A8"]
+{
+                   Nord
+                   A96
+                   V8762
+                   RX9
+                   A8
+  Ouest                            Est
+  RVX753                           D42
+  R                                D93
+  53                               D8
+  DX94                             R7632
+                   Sud
+                   8
+                   AX54
+                   AV7642
+                   V5
+}
+[Declarer "N"]
+[Contract "5H"]
+[Result "12"]
+[Score "NS 680"]
+[Auction "E"]
+Pass  1D    3S    X
+4S    Pass  Pass  X
+Pass  4NT   Pass  5H
+Pass  Pass  Pass
+[Play "E"]
+S2 S8 ST SA
+H3 HA HK H2
+H9 HT S3 H6
+D8 D2 D3 DK
+DQ DA D5 DT
+HQ DJ S5 D9
+*
+
+[Event "BBO1-2019WBTC"]
+[Site "VC-FN5"]
+[Board "2"]
+[West "Q SHEN"]
+[North "C RIMSTEDT"]
+[East "WEN WANG|"]
+[South "GRONKVIST"]
+[Room "Closed"]
+[Scoring "IMP"]
+[Vulnerable "NS"]
+[Dealer "E"]
+[Deal "E:Q42.Q93.Q8.K7632 8.AT54.AJ7642.J5 KJT753.K.53.QT94 A96.J8762.KT9.A8"]
+{
+                   Nord
+                   A96
+                   V8762
+                   RX9
+                   A8
+  Ouest                            Est
+  RVX753                           D42
+  R                                D93
+  53                               D8
+  DX94                             R7632
+                   Sud
+                   8
+                   AX54
+                   AV7642
+                   V5
+}
+[Declarer "W"]
+[Contract "4SX"]
+[Result "8"]
+[Score "NS 300"]
+[Auction "E"]
+Pass  Pass  2S    Pass
+Pass  X     Pass  3H
+Pass  4H    Pass  Pass
+4S    X     Pass  Pass
+Pass
+[Play "N"]
+H2 H3 HA HK
+DT D8 DA D5
+DK DQ D2 D3
+CA C2 C5 C9
+D9 H9 D4 S3
+S6 S2 S8 ST
+SA S4 D6 S5
+*
+
+[Event "BBO1-2019WBTC"]
+[Site "VC-FN5"]
+[Board "3"]
+[West "BERTHEAU"]
+[North "YA LU"]
+[East "LARSSON"]
+[South "YAN LIU"]
+[Room "Open"]
+[Scoring "IMP"]
+[Vulnerable "EW"]
+[Dealer "S"]
+[Deal "S:J62.Q94.JT742.Q6 97.A865.Q6.A7432 T85.KT7.K985.K85 AKQ43.J32.A3.JT9"]
+{
+                   Nord
+                   X85
+                   RX7
+                   R985
+                   R85
+  Ouest                            Est
+  97                               ARD43
+  A865                             V32
+  D6                               A3
+  A7432                            VX9
+                   Sud
+                   V62
+                   D94
+                   VX742
+                   D6
+}
+[Declarer "E"]
+[Contract "3NT"]
+[Result "8"]
+[Score "NS 100"]
+[Auction "S"]
+Pass  Pass  Pass  1NT
+Pass  2C    Pass  2S
+Pass  3NT   Pass  Pass
+Pass
+[Play "S"]
+D4 DQ DK DA
+S6 S7 S8 SK
+S2 S9 S5 SQ
+SJ C2 ST SA
+H4 C3 D8 S3
+C6 H5 D9 S4
+CQ CA C5 CJ
+H9 C4 CK C9
+DT D6 D5 D3
+DJ H6 C8 H2
+D7 H8 H7 H3
+D2 C7 HT HJ
+HQ HA HK CT
+*
+
+[Event "BBO1-2019WBTC"]
+[Site "VC-FN5"]
+[Board "3"]
+[West "Q SHEN"]
+[North "C RIMSTEDT"]
+[East "WEN WANG|"]
+[South "GRONKVIST"]
+[Room "Closed"]
+[Scoring "IMP"]
+[Vulnerable "EW"]
+[Dealer "S"]
+[Deal "S:J62.Q94.JT742.Q6 97.A865.Q6.A7432 T85.KT7.K985.K85 AKQ43.J32.A3.JT9"]
+{
+                   Nord
+                   X85
+                   RX7
+                   R985
+                   R85
+  Ouest                            Est
+  97                               ARD43
+  A865                             V32
+  D6                               A3
+  A7432                            VX9
+                   Sud
+                   V62
+                   D94
+                   VX742
+                   D6
+}
+[Declarer "W"]
+[Contract "3NT"]
+[Result "9"]
+[Score "NS -600"]
+[Auction "S"]
+Pass  Pass  Pass  1C
+Pass  2C    Pass  2S
+Pass  2NT   Pass  3NT
+Pass  Pass  Pass
+[Play "N"]
+D8 D3 DT DQ
+C8 C9 CQ C2
+D5 DA D7 D6
+S5 SA S2 S9
+S8 SK S6 S7
+ST SQ SJ H5
+H7 S4 H4 H6
+HT S3 C6 H8
+-  CJ -  -
+*
+
+[Event "BBO1-2019WBTC"]
+[Site "VC-FN5"]
+[Board "4"]
+[West "BERTHEAU"]
+[North "YA LU"]
+[East "LARSSON"]
+[South "YAN LIU"]
+[Room "Open"]
+[Scoring "IMP"]
+[Vulnerable "All"]
+[Dealer "W"]
+[Deal "W:T63.AJ983.Q32.JT J82.52.AKJ84.543 AQ54.Q64.T5.AQ86 K97.KT7.976.K972"]
+{
+                   Nord
+                   V82
+                   52
+                   ARV84
+                   543
+  Ouest                            Est
+  X63                              AD54
+  AV983                            D64
+  D32                              X5
+  VX                               AD86
+                   Sud
+                   R97
+                   RX7
+                   976
+                   R972
+}
+[Declarer "W"]
+[Contract "2H"]
+[Result "9"]
+[Score "NS -140"]
+[Auction "W"]
+Pass  Pass  1C    Pass
+1H    Pass  1NT   Pass
+2H    Pass  Pass  Pass
+[Play "N"]
+DA D5 D6 D3
+H2 H4 H7 H8
+C3 C6 CK CJ
+H5 H6 HK HA
+C4 C8 C2 CT
+D4 HQ HT H3
+C5 CQ C7 D2
+D8 CA C9 DQ
+SJ S4 S7 ST
+DK DT D9 H9
+S2 SQ SK S3
+*
+
+[Event "BBO1-2019WBTC"]
+[Site "VC-FN5"]
+[Board "4"]
+[West "Q SHEN"]
+[North "C RIMSTEDT"]
+[East "WEN WANG|"]
+[South "GRONKVIST"]
+[Room "Closed"]
+[Scoring "IMP"]
+[Vulnerable "All"]
+[Dealer "W"]
+[Deal "W:T63.AJ983.Q32.JT J82.52.AKJ84.543 AQ54.Q64.T5.AQ86 K97.KT7.976.K972"]
+{
+                   Nord
+                   V82
+                   52
+                   ARV84
+                   543
+  Ouest                            Est
+  X63                              AD54
+  AV983                            D64
+  D32                              X5
+  VX                               AD86
+                   Sud
+                   R97
+                   RX7
+                   976
+                   R972
+}
+[Declarer "E"]
+[Contract "1NT"]
+[Result "8"]
+[Score "NS -120"]
+[Auction "W"]
+Pass  Pass  1NT   Pass
+Pass  Pass
+[Play "S"]
+C7 CJ C5 C8
+HK H3 H2 HQ
+S7 ST SJ SQ
+H7 HJ H5 H6
+HT HA S8 H4
+C2 H9 C4 D5
+D7 H8 D4 DT
+S9 S6 S2 SA
+C9 CT C3 CA
+SK S3 D8 S5
+*
+
+[Event "BBO1-2019WBTC"]
+[Site "VC-FN5"]
+[Board "5"]
+[West "BERTHEAU"]
+[North "YA LU"]
+[East "LARSSON"]
+[South "YAN LIU"]
+[Room "Open"]
+[Scoring "IMP"]
+[Vulnerable "NS"]
+[Dealer "N"]
+[Deal "N:KJ93.T94.T7.A873 86.J.Q643.QJT965 Q7542.AKQ52.A2.K AT.8763.KJ985.42"]
+{
+                   Nord
+                   RV93
+                   X94
+                   X7
+                   A873
+  Ouest                            Est
+  AX                               86
+  8763                             V
+  RV985                            D643
+  42                               DVX965
+                   Sud
+                   D7542
+                   ARD52
+                   A2
+                   R
+}
+[Declarer "N"]
+[Contract "4S"]
+[Result "11"]
+[Score "NS 650"]
+[Auction "N"]
+Pass  3C    4C    Pass
+4S    Pass  Pass  Pass
+[Play "E"]
+HJ HA H8 H4
+S6 S2 SA S3
+S8 H2 H7 H9
+CQ CK C2 C3
+C5 S4 ST SK
+*
+
+[Event "BBO1-2019WBTC"]
+[Site "VC-FN5"]
+[Board "5"]
+[West "Q SHEN"]
+[North "C RIMSTEDT"]
+[East "WEN WANG|"]
+[South "GRONKVIST"]
+[Room "Closed"]
+[Scoring "IMP"]
+[Vulnerable "NS"]
+[Dealer "N"]
+[Deal "N:KJ93.T94.T7.A873 86.J.Q643.QJT965 Q7542.AKQ52.A2.K AT.8763.KJ985.42"]
+{
+                   Nord
+                   RV93
+                   X94
+                   X7
+                   A873
+  Ouest                            Est
+  AX                               86
+  8763                             V
+  RV985                            D643
+  42                               DVX965
+                   Sud
+                   D7542
+                   ARD52
+                   A2
+                   R
+}
+[Declarer "N"]
+[Contract "4S"]
+[Result "11"]
+[Score "NS 650"]
+[Auction "N"]
+Pass  3C    4D    Pass
+4S    Pass  Pass  Pass
+[Play "E"]
+HJ HA H8 H4
+S8 S2 SA S3
+S6 H2 H7 H9
+CQ CK C4 C3
+*
+
+[Event "BBO1-2019WBTC"]
+[Site "VC-FN5"]
+[Board "6"]
+[West "BERTHEAU"]
+[North "YA LU"]
+[East "LARSSON"]
+[South "YAN LIU"]
+[Room "Open"]
+[Scoring "IMP"]
+[Vulnerable "EW"]
+[Dealer "E"]
+[Deal "E:T8752.A985.8.KT5 AKJ63.K43.QJ4.A7 Q9.T7.AT3.QJ9843 4.QJ62.K97652.62"]
+{
+                   Nord
+                   4
+                   DV62
+                   R97652
+                   62
+  Ouest                            Est
+  D9                               X8752
+  X7                               A985
+  AX3                              8
+  DV9843                           RX5
+                   Sud
+                   ARV63
+                   R43
+                   DV4
+                   A7
+}
+[Declarer "S"]
+[Contract "3NT"]
+[Result "6"]
+[Score "NS -150"]
+[Auction "E"]
+Pass  1C    Pass  1D
+Pass  1S    Pass  2D
+Pass  3D    Pass  3H
+Pass  3NT   Pass  Pass
+Pass
+[Play "W"]
+CQ C2 C5 C7
+C9 C6 CK CA
+DA D2 D8 DJ
+CJ H2 CT S3
+C8 H6 H5 S6
+C4 HJ S8 H3
+C3 HQ S7 SJ
+HT D5 HA H4
+*
+
+[Event "BBO1-2019WBTC"]
+[Site "VC-FN5"]
+[Board "6"]
+[West "Q SHEN"]
+[North "C RIMSTEDT"]
+[East "WEN WANG|"]
+[South "GRONKVIST"]
+[Room "Closed"]
+[Scoring "IMP"]
+[Vulnerable "EW"]
+[Dealer "E"]
+[Deal "E:T8752.A985.8.KT5 AKJ63.K43.QJ4.A7 Q9.T7.AT3.QJ9843 4.QJ62.K97652.62"]
+{
+                   Nord
+                   4
+                   DV62
+                   R97652
+                   62
+  Ouest                            Est
+  D9                               X8752
+  X7                               A985
+  AX3                              8
+  DV9843                           RX5
+                   Sud
+                   ARV63
+                   R43
+                   DV4
+                   A7
+}
+[Declarer "N"]
+[Contract "3NT"]
+[Result "6"]
+[Score "NS -150"]
+[Auction "E"]
+Pass  1S    Pass  1NT
+Pass  2NT   Pass  3NT
+Pass  Pass  Pass
+[Play "E"]
+S2 SA S9 S4
+H5 HK H7 H2
+D8 DQ D3 D5
+H8 DJ DT D6
+S5 D4 DA D7
+C5 CA CQ C6
+HA H4 HT HQ
+CK C7 C3 C2
+*
+
+[Event "BBO1-2019WBTC"]
+[Site "VC-FN5"]
+[Board "7"]
+[West "BERTHEAU"]
+[North "YA LU"]
+[East "LARSSON"]
+[South "YAN LIU"]
+[Room "Open"]
+[Scoring "IMP"]
+[Vulnerable "All"]
+[Dealer "S"]
+[Deal "S:KJ82.QT85.76.A87 A54.A9.KQT543.Q4 QT96.74.A9.K6532 73.KJ632.J82.JT9"]
+{
+                   Nord
+                   DX96
+                   74
+                   A9
+                   R6532
+  Ouest                            Est
+  A54                              73
+  A9                               RV632
+  RDX543                           V82
+  D4                               VX9
+                   Sud
+                   RV82
+                   DX85
+                   76
+                   A87
+}
+[Declarer "W"]
+[Contract "2H"]
+[Result "7"]
+[Score "NS 100"]
+[Auction "S"]
+Pass  1NT   Pass  2D
+Pass  2H    Pass  Pass
+Pass
+[Play "N"]
+ST S3 S8 S5
+S6 S7 SJ SA
+H4 H2 H5 HA
+H7 HJ HQ H9
+S9 H3 S2 S4
+C2 HK H8 D3
+DA D2 D7 DK
+D9 DJ D6 D4
+C6 D8 HT D5
+SQ H6 SK DT
+CK C9 C7 CQ
+C5 CT CA C4
+C3 CJ C8 DQ
+*
+
+[Event "BBO1-2019WBTC"]
+[Site "VC-FN5"]
+[Board "7"]
+[West "Q SHEN"]
+[North "C RIMSTEDT"]
+[East "WEN WANG|"]
+[South "GRONKVIST"]
+[Room "Closed"]
+[Scoring "IMP"]
+[Vulnerable "All"]
+[Dealer "S"]
+[Deal "S:KJ82.QT85.76.A87 A54.A9.KQT543.Q4 QT96.74.A9.K6532 73.KJ632.J82.JT9"]
+{
+                   Nord
+                   DX96
+                   74
+                   A9
+                   R6532
+  Ouest                            Est
+  A54                              73
+  A9                               RV632
+  RDX543                           V82
+  D4                               VX9
+                   Sud
+                   RV82
+                   DX85
+                   76
+                   A87
+}
+[Declarer "W"]
+[Contract "2H"]
+[Result "6"]
+[Score "NS 200"]
+[Auction "S"]
+Pass  1NT   Pass  2D
+Pass  2H    Pass  Pass
+Pass
+[Play "N"]
+S9 S3 S2 S4
+S6 S7 S8 SA
+H4 H2 H5 HA
+H7 HJ HQ H9
+ST H3 SJ S5
+C6 HK H8 D3
+DA D2 D6 DK
+C5 C9 CA C4
+C2 H6 HT D4
+SQ D8 SK CQ
+-  -  C7 -
+*
+
+[Event "BBO1-2019WBTC"]
+[Site "VC-FN5"]
+[Board "8"]
+[West "BERTHEAU"]
+[North "YA LU"]
+[East "LARSSON"]
+[South "YAN LIU"]
+[Room "Open"]
+[Scoring "IMP"]
+[Vulnerable "None"]
+[Dealer "W"]
+[Deal "W:T876.T752.AT92.8 AJ4.AKJ3.7.AT765 52.Q6.K8543.Q432 KQ93.984.QJ6.KJ9"]
+{
+                   Nord
+                   AV4
+                   ARV3
+                   7
+                   AX765
+  Ouest                            Est
+  X876                             52
+  X752                             D6
+  AX92                             R8543
+  8                                D432
+                   Sud
+                   RD93
+                   984
+                   DV6
+                   RV9
+}
+[Declarer "S"]
+[Contract "3NT"]
+[Result "10"]
+[Score "NS 430"]
+[Auction "W"]
+Pass  1C    Pass  1S
+Pass  2C    Pass  3C
+Pass  3H    Pass  3NT
+Pass  Pass  Pass
+[Play "W"]
+S7 SA S5 S3
+C8 C5 C2 CK
+S6 C6 CQ CJ
+DA D7 D4 DQ
+DT H3 DK D6
+D2 HJ D5 DJ
+*
+
+[Event "BBO1-2019WBTC"]
+[Site "VC-FN5"]
+[Board "8"]
+[West "Q SHEN"]
+[North "C RIMSTEDT"]
+[East "WEN WANG|"]
+[South "GRONKVIST"]
+[Room "Closed"]
+[Scoring "IMP"]
+[Vulnerable "None"]
+[Dealer "W"]
+[Deal "W:T876.T752.AT92.8 AJ4.AKJ3.7.AT765 52.Q6.K8543.Q432 KQ93.984.QJ6.KJ9"]
+{
+                   Nord
+                   AV4
+                   ARV3
+                   7
+                   AX765
+  Ouest                            Est
+  X876                             52
+  X752                             D6
+  AX92                             R8543
+  8                                D432
+                   Sud
+                   RD93
+                   984
+                   DV6
+                   RV9
+}
+[Declarer "N"]
+[Contract "4S"]
+[Result "12"]
+[Score "NS 480"]
+[Auction "W"]
+Pass  1C    Pass  1H
+Pass  2H    Pass  2NT
+Pass  3C    Pass  3D
+Pass  3S    Pass  4D
+Pass  4H    Pass  4S
+Pass  Pass  Pass
+[Play "E"]
+D3 DQ DA D7
+C2 CJ C8 C5
+S2 S3 S6 SA
+S5 S9 S7 SJ
+D5 SQ S8 S4
+D8 SK ST H3
+H6 H4 H2 HA
+C3 C9 D2 C6
+C4 CK H5 C7
+*
+
+[Event "BBO1-2019WBTC"]
+[Site "VC-FN5"]
+[Board "9"]
+[West "BERTHEAU"]
+[North "YA LU"]
+[East "LARSSON"]
+[South "YAN LIU"]
+[Room "Open"]
+[Scoring "IMP"]
+[Vulnerable "EW"]
+[Dealer "N"]
+[Deal "N:9853.QT4.JT4.AJ4 KQT6..AQ96.QT865 J74.A9732.K73.K2 A2.KJ865.852.973"]
+{
+                   Nord
+                   9853
+                   DX4
+                   VX4
+                   AV4
+  Ouest                            Est
+  A2                               RDX6
+  RV865                            -
+  852                              AD96
+  973                              DX865
+                   Sud
+                   V74
+                   A9732
+                   R73
+                   R2
+}
+[Declarer "S"]
+[Contract "2HX"]
+[Result "7"]
+[Score "NS -100"]
+[Auction "N"]
+Pass  1C    1H    Pass
+2H    X     Pass  Pass
+Pass
+[Play "W"]
+C3 CJ CQ CK
+H6 HT C6 H3
+C9 CA C5 C2
+C7 C4 CT H2
+HK H4 D6 H7
+H5 HQ S6 H9
+D8 DJ DA D7
+D5 S3 C8 HA
+D2 D4 D9 DK
+*
+
+[Event "BBO1-2019WBTC"]
+[Site "VC-FN5"]
+[Board "9"]
+[West "Q SHEN"]
+[North "C RIMSTEDT"]
+[East "WEN WANG|"]
+[South "GRONKVIST"]
+[Room "Closed"]
+[Scoring "IMP"]
+[Vulnerable "EW"]
+[Dealer "N"]
+[Deal "N:9853.QT4.JT4.AJ4 KQT6..AQ96.QT865 J74.A9732.K73.K2 A2.KJ865.852.973"]
+{
+                   Nord
+                   9853
+                   DX4
+                   VX4
+                   AV4
+  Ouest                            Est
+  A2                               RDX6
+  RV865                            -
+  852                              AD96
+  973                              DX865
+                   Sud
+                   V74
+                   A9732
+                   R73
+                   R2
+}
+[Declarer "S"]
+[Contract "2HX"]
+[Result "5"]
+[Score "NS -500"]
+[Auction "N"]
+Pass  1D    1H    Pass
+2H    X     Pass  Pass
+Pass
+[Play "W"]
+SA S3 S6 S7
+S2 S5 SK S4
+D8 S8 SQ SJ
+HJ S9 ST H9
+D5 D4 D9 DK
+HK H4 C5 H2
+D2 DT DQ D3
+C9 DJ DA D7
+C7 C4 D6 H3
+C3 CA C6 C2
+H5 CJ C8 CK
+*
+
+[Event "BBO1-2019WBTC"]
+[Site "VC-FN5"]
+[Board "10"]
+[West "BERTHEAU"]
+[North "YA LU"]
+[East "LARSSON"]
+[South "YAN LIU"]
+[Room "Open"]
+[Scoring "IMP"]
+[Vulnerable "All"]
+[Dealer "E"]
+[Deal "E:K7.Q864.J942.Q42 52.KT9.AKQT6.873 AJT963.53.85.AJ5 Q84.AJ72.73.KT96"]
+{
+                   Nord
+                   D84
+                   AV72
+                   73
+                   RX96
+  Ouest                            Est
+  AVX963                           R7
+  53                               D864
+  85                               V942
+  AV5                              D42
+                   Sud
+                   52
+                   RX9
+                   ARDX6
+                   873
+}
+[Declarer "W"]
+[Contract "2S"]
+[Result "7"]
+[Score "NS 100"]
+[Auction "E"]
+Pass  1D    2S    Pass
+Pass  Pass
+[Play "N"]
+D7 D2 DT D5
+D3 D4 DA D8
+H7 D9 DK H3
+H2 H4 HK H5
+SQ DJ DQ S9
+S4 S7 S5 S3
+S8 SK S2 S6
+CK C2 C3 CJ
+*
+
+[Event "BBO1-2019WBTC"]
+[Site "VC-FN5"]
+[Board "10"]
+[West "Q SHEN"]
+[North "C RIMSTEDT"]
+[East "WEN WANG|"]
+[South "GRONKVIST"]
+[Room "Closed"]
+[Scoring "IMP"]
+[Vulnerable "All"]
+[Dealer "E"]
+[Deal "E:K7.Q864.J942.Q42 52.KT9.AKQT6.873 AJT963.53.85.AJ5 Q84.AJ72.73.KT96"]
+{
+                   Nord
+                   D84
+                   AV72
+                   73
+                   RX96
+  Ouest                            Est
+  AVX963                           R7
+  53                               D864
+  85                               V942
+  AV5                              D42
+                   Sud
+                   52
+                   RX9
+                   ARDX6
+                   873
+}
+[Declarer "S"]
+[Contract "3D"]
+[Result "8"]
+[Score "NS -100"]
+[Auction "E"]
+Pass  1C    2S    X
+Pass  3D    Pass  Pass
+Pass
+[Play "W"]
+H5 H2 H8 HT
+D5 D3 D4 DA
+D8 D7 D2 DQ
+S3 C6 D9 DK
+H3 H7 H4 HK
+S6 C9 DJ D6
+CA CT C2 C3
+SJ S4 S7 S5
+C5 CK C4 C7
+S9 HA H6 H9
+ST HJ HQ DT
+*
+
+[Event "BBO1-2019WBTC"]
+[Site "VC-FN5"]
+[Board "11"]
+[West "BERTHEAU"]
+[North "YA LU"]
+[East "LARSSON"]
+[South "YAN LIU"]
+[Room "Open"]
+[Scoring "IMP"]
+[Vulnerable "None"]
+[Dealer "S"]
+[Deal "S:Q5.AKJ95.T4.AT74 972.3.AKQJ93.K96 A86.T872.87.J532 KJT43.Q64.652.Q8"]
+{
+                   Nord
+                   A86
+                   X872
+                   87
+                   V532
+  Ouest                            Est
+  972                              RVX43
+  3                                D64
+  ARDV93                           652
+  R96                              D8
+                   Sud
+                   D5
+                   ARV95
+                   X4
+                   AX74
+}
+[Declarer "E"]
+[Contract "4S"]
+[Result "8"]
+[Score "NS 100"]
+[Auction "S"]
+1H    2D    3H    3S
+Pass  4S    Pass  Pass
+Pass
+[Play "S"]
+HK H3 H7 H6
+C4 C6 CJ CQ
+CA C9 C2 C8
+DT DA D8 D5
+C7 CK C5 H4
+SQ S2 S6 SJ
+D4 DK D7 D6
+S5 S7 SA S3
+HA S9 H2 HQ
+-  DQ S8 D2
+*
+
+[Event "BBO1-2019WBTC"]
+[Site "VC-FN5"]
+[Board "11"]
+[West "Q SHEN"]
+[North "C RIMSTEDT"]
+[East "WEN WANG|"]
+[South "GRONKVIST"]
+[Room "Closed"]
+[Scoring "IMP"]
+[Vulnerable "None"]
+[Dealer "S"]
+[Deal "S:Q5.AKJ95.T4.AT74 972.3.AKQJ93.K96 A86.T872.87.J532 KJT43.Q64.652.Q8"]
+{
+                   Nord
+                   A86
+                   X872
+                   87
+                   V532
+  Ouest                            Est
+  972                              RVX43
+  3                                D64
+  ARDV93                           652
+  R96                              D8
+                   Sud
+                   D5
+                   ARV95
+                   X4
+                   AX74
+}
+[Declarer "E"]
+[Contract "4S"]
+[Result "9"]
+[Score "NS 50"]
+[Auction "S"]
+1H    2D    2H    2S
+3H    4S    Pass  Pass
+Pass
+[Play "S"]
+HA H3 H7 H6
+DT DA D7 D6
+SQ S9 S6 S3
+D4 DK D8 D5
+S5 S2 SA S4
+CA C6 C2 C8
+*
+
+[Event "BBO1-2019WBTC"]
+[Site "VC-FN5"]
+[Board "12"]
+[West "BERTHEAU"]
+[North "YA LU"]
+[East "LARSSON"]
+[South "YAN LIU"]
+[Room "Open"]
+[Scoring "IMP"]
+[Vulnerable "NS"]
+[Dealer "W"]
+[Deal "W:AJ2.K8653.A43.83 K8753.T42.T.AKT7 Q9.AQ.QJ975.QJ92 T64.J97.K862.654"]
+{
+                   Nord
+                   R8753
+                   X42
+                   X
+                   ARX7
+  Ouest                            Est
+  AV2                              D9
+  R8653                            AD
+  A43                              DV975
+  83                               DV92
+                   Sud
+                   X64
+                   V97
+                   R862
+                   654
+}
+[Declarer "W"]
+[Contract "3NT"]
+[Result "10"]
+[Score "NS -430"]
+[Auction "W"]
+1H    1S    X     Pass
+1NT   Pass  2S    Pass
+2NT   Pass  3NT   Pass
+Pass  Pass
+[Play "N"]
+CA C2 C5 C3
+H2 HA H7 H3
+DT DQ D2 D3
+S3 DJ D6 D4
+S5 D5 D8 DA
+C7 CQ C6 C8
+H4 HQ H9 H5
+SK SQ S4 S2
+CK C9 C4 H6
+HT D7 HJ HK
+*
+
+[Event "BBO1-2019WBTC"]
+[Site "VC-FN5"]
+[Board "12"]
+[West "Q SHEN"]
+[North "C RIMSTEDT"]
+[East "WEN WANG|"]
+[South "GRONKVIST"]
+[Room "Closed"]
+[Scoring "IMP"]
+[Vulnerable "NS"]
+[Dealer "W"]
+[Deal "W:AJ2.K8653.A43.83 K8753.T42.T.AKT7 Q9.AQ.QJ975.QJ92 T64.J97.K862.654"]
+{
+                   Nord
+                   R8753
+                   X42
+                   X
+                   ARX7
+  Ouest                            Est
+  AV2                              D9
+  R8653                            AD
+  A43                              DV975
+  83                               DV92
+                   Sud
+                   X64
+                   V97
+                   R862
+                   654
+}
+[Declarer "W"]
+[Contract "3NT"]
+[Result "11"]
+[Score "NS -460"]
+[Auction "W"]
+1H    1S    X     Pass
+1NT   Pass  3NT   Pass
+Pass  Pass
+[Play "N"]
+CA C2 C6 C8
+H2 HQ H9 H3
+DT DQ D2 D3
+S3 DJ DK DA
+C7 CQ C4 C3
+H4 HA H7 H5
+S5 SQ S6 S2
+S7 D9 D6 D4
+-  S9 S4 SA
+*
+
+[Event "BBO1-2019WBTC"]
+[Site "VC-FN5"]
+[Board "13"]
+[West "BERTHEAU"]
+[North "YA LU"]
+[East "LARSSON"]
+[South "YAN LIU"]
+[Room "Open"]
+[Scoring "IMP"]
+[Vulnerable "All"]
+[Dealer "N"]
+[Deal "N:754.QT764.KT8.J6 QT93.532.4.QT974 AK86.KJ8.J2.K832 J2.A9.AQ97653.A5"]
+{
+                   Nord
+                   754
+                   DX764
+                   RX8
+                   V6
+  Ouest                            Est
+  V2                               DX93
+  A9                               532
+  AD97653                          4
+  A5                               DX974
+                   Sud
+                   AR86
+                   RV8
+                   V2
+                   R832
+}
+[Declarer "W"]
+[Contract "3D"]
+[Result "8"]
+[Score "NS 100"]
+[Auction "N"]
+Pass  Pass  1NT   X
+2D    Pass  2H    3D
+Pass  Pass  Pass
+[Play "N"]
+CJ CQ C8 C5
+DK D4 D2 DQ
+C6 CT C2 CA
+D8 H2 DJ DA
+S4 ST SK S2
+S7 S3 SA SJ
+S5 C4 CK D5
+DT H3 S8 D7
+H4 H5 HK HA
+HT -  -  H9
+*
+
+[Event "BBO1-2019WBTC"]
+[Site "VC-FN5"]
+[Board "13"]
+[West "Q SHEN"]
+[North "C RIMSTEDT"]
+[East "WEN WANG|"]
+[South "GRONKVIST"]
+[Room "Closed"]
+[Scoring "IMP"]
+[Vulnerable "All"]
+[Dealer "N"]
+[Deal "N:754.QT764.KT8.J6 QT93.532.4.QT974 AK86.KJ8.J2.K832 J2.A9.AQ97653.A5"]
+{
+                   Nord
+                   754
+                   DX764
+                   RX8
+                   V6
+  Ouest                            Est
+  V2                               DX93
+  A9                               532
+  AD97653                          4
+  A5                               DX974
+                   Sud
+                   AR86
+                   RV8
+                   V2
+                   R832
+}
+[Declarer "W"]
+[Contract "3D"]
+[Result "7"]
+[Score "NS 200"]
+[Auction "N"]
+Pass  Pass  1NT   X
+2D    Pass  2H    3D
+Pass  Pass  Pass
+[Play "N"]
+H4 H2 HJ H9
+S7 S3 SK SJ
+S5 S9 SA S2
+H6 H5 HK HA
+D8 D4 D2 DA
+DT C4 DJ D3
+H7 H3 H8 D5
+DK C7 C2 D6
+HQ C9 C3 D7
+*
+
+[Event "BBO1-2019WBTC"]
+[Site "VC-FN5"]
+[Board "14"]
+[West "BERTHEAU"]
+[North "YA LU"]
+[East "LARSSON"]
+[South "YAN LIU"]
+[Room "Open"]
+[Scoring "IMP"]
+[Vulnerable "None"]
+[Dealer "E"]
+[Deal "E:AJ2.74.K74.AQT82 87653.A32.AQ.K76 KT9.KJT9.T63.J43 Q4.Q865.J9852.95"]
+{
+                   Nord
+                   D4
+                   D865
+                   V9852
+                   95
+  Ouest                            Est
+  RX9                              AV2
+  RVX9                             74
+  X63                              R74
+  V43                              ADX82
+                   Sud
+                   87653
+                   A32
+                   AD
+                   R76
+}
+[Declarer "E"]
+[Contract "1NT"]
+[Result "7"]
+[Score "NS -90"]
+[Auction "E"]
+1NT   Pass  Pass  Pass
+[Play "S"]
+S5 S9 SQ SA
+CK C3 C5 CQ
+S3 SK S4 S2
+C7 CJ C9 C2
+C6 C4 D5 CT
+S6 D3 H5 CA
+H2 ST D2 C8
+S8 H9 D8 SJ
+H3 HT HQ H4
+DA -  D9 DK
+*
+
+[Event "BBO1-2019WBTC"]
+[Site "VC-FN5"]
+[Board "14"]
+[West "Q SHEN"]
+[North "C RIMSTEDT"]
+[East "WEN WANG|"]
+[South "GRONKVIST"]
+[Room "Closed"]
+[Scoring "IMP"]
+[Vulnerable "None"]
+[Dealer "E"]
+[Deal "E:AJ2.74.K74.AQT82 87653.A32.AQ.K76 KT9.KJT9.T63.J43 Q4.Q865.J9852.95"]
+{
+                   Nord
+                   D4
+                   D865
+                   V9852
+                   95
+  Ouest                            Est
+  RX9                              AV2
+  RVX9                             74
+  X63                              R74
+  V43                              ADX82
+                   Sud
+                   87653
+                   A32
+                   AD
+                   R76
+}
+[Declarer "E"]
+[Contract "1NT"]
+[Result "7"]
+[Score "NS -90"]
+[Auction "E"]
+1NT   Pass  Pass  Pass
+[Play "S"]
+S3 ST SQ SA
+S5 S9 S4 S2
+CK CJ C5 C2
+S6 SK H5 SJ
+C6 C4 C9 CA
+C7 C3 D9 CQ
+H3 D3 D2 CT
+DQ D6 D5 C8
+H2 H9 HQ H4
+*
+
+[Event "BBO1-2019WBTC"]
+[Site "VC-FN5"]
+[Board "15"]
+[West "BERTHEAU"]
+[North "YA LU"]
+[East "LARSSON"]
+[South "YAN LIU"]
+[Room "Open"]
+[Scoring "IMP"]
+[Vulnerable "NS"]
+[Dealer "S"]
+[Deal "S:QT98.KJ.74.98765 632.Q762.KJ853.2 AK54.943.QT.AKQ4 J7.AT85.A962.JT3"]
+{
+                   Nord
+                   AR54
+                   943
+                   DX
+                   ARD4
+  Ouest                            Est
+  632                              V7
+  D762                             AX85
+  RV853                            A962
+  2                                VX3
+                   Sud
+                   DX98
+                   RV
+                   74
+                   98765
+}
+[Declarer "N"]
+[Contract "4S"]
+[Result "10"]
+[Score "NS 620"]
+[Auction "S"]
+Pass  Pass  1C    Pass
+1D    Pass  1NT   Pass
+2C    Pass  2S    Pass
+3S    Pass  4S    Pass
+Pass  Pass
+[Play "E"]
+CJ C5 C2 CA
+S7 S8 S6 SA
+SJ SQ S3 S4
+H5 ST S2 SK
+C3 C6 H2 CK
+CT C7 D3 CQ
+D2 C8 D5 C4
+D6 C9 H6 DT
+DA D4 D8 DQ
+H8 HJ HQ H3
+*
+
+[Event "BBO1-2019WBTC"]
+[Site "VC-FN5"]
+[Board "15"]
+[West "Q SHEN"]
+[North "C RIMSTEDT"]
+[East "WEN WANG|"]
+[South "GRONKVIST"]
+[Room "Closed"]
+[Scoring "IMP"]
+[Vulnerable "NS"]
+[Dealer "S"]
+[Deal "S:QT98.KJ.74.98765 632.Q762.KJ853.2 AK54.943.QT.AKQ4 J7.AT85.A962.JT3"]
+{
+                   Nord
+                   AR54
+                   943
+                   DX
+                   ARD4
+  Ouest                            Est
+  632                              V7
+  D762                             AX85
+  RV853                            A962
+  2                                VX3
+                   Sud
+                   DX98
+                   RV
+                   74
+                   98765
+}
+[Declarer "N"]
+[Contract "4S"]
+[Result "10"]
+[Score "NS 620"]
+[Auction "S"]
+Pass  Pass  1C    Pass
+1H    Pass  3S    Pass
+4S    Pass  Pass  Pass
+[Play "E"]
+CJ C5 C2 CQ
+S7 S8 S2 SA
+SJ S9 S3 SK
+D2 SQ S6 S4
+C3 C6 D3 CA
+CT C7 D5 CK
+H8 C9 H2 C4
+D6 C8 D8 H3
+-  D4 -  -
+*
+
+[Event "BBO1-2019WBTC"]
+[Site "VC-FN5"]
+[Board "16"]
+[West "BERTHEAU"]
+[North "YA LU"]
+[East "LARSSON"]
+[South "YAN LIU"]
+[Room "Open"]
+[Scoring "IMP"]
+[Vulnerable "EW"]
+[Dealer "W"]
+[Deal "W:A643.A976.J3.AQ6 KQJ872.QT5.T.K92 T9.J8.KQ8764.J73 5.K432.A952.T854"]
+{
+                   Nord
+                   RDV872
+                   DX5
+                   X
+                   R92
+  Ouest                            Est
+  A643                             X9
+  A976                             V8
+  V3                               RD8764
+  AD6                              V73
+                   Sud
+                   5
+                   R432
+                   A952
+                   X854
+}
+[Declarer "W"]
+[Contract "3D"]
+[Result "7"]
+[Score "NS 200"]
+[Auction "W"]
+1NT   2D    3C    Pass
+3D    Pass  Pass  Pass
+[Play "N"]
+SK S9 S5 S3
+SQ ST D2 S4
+HT H8 H3 HA
+DT D4 DA DJ
+HQ HJ H4 H6
+S7 D6 D9 S6
+CK C3 C5 C6
+S2 D7 -  -
+*
+
+[Event "BBO1-2019WBTC"]
+[Site "VC-FN5"]
+[Board "16"]
+[West "Q SHEN"]
+[North "C RIMSTEDT"]
+[East "WEN WANG|"]
+[South "GRONKVIST"]
+[Room "Closed"]
+[Scoring "IMP"]
+[Vulnerable "EW"]
+[Dealer "W"]
+[Deal "W:A643.A976.J3.AQ6 KQJ872.QT5.T.K92 T9.J8.KQ8764.J73 5.K432.A952.T854"]
+{
+                   Nord
+                   RDV872
+                   DX5
+                   X
+                   R92
+  Ouest                            Est
+  A643                             X9
+  A976                             V8
+  V3                               RD8764
+  AD6                              V73
+                   Sud
+                   5
+                   R432
+                   A952
+                   X854
+}
+[Declarer "W"]
+[Contract "3D"]
+[Result "8"]
+[Score "NS 100"]
+[Auction "W"]
+1NT   2S    3C    Pass
+3D    Pass  Pass  Pass
+[Play "N"]
+SK S9 S5 SA
+DT DK D2 D3
+S2 D4 DA DJ
+CK C3 C5 C6
+SQ ST H2 S3
+H5 H8 HK H6
+C2 C7 C4 CA
+HT HJ H4 HA
+HQ D6 H3 H7
+*
