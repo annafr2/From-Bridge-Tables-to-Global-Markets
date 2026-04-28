@@ -1,0 +1,24 @@
+Cell 0: <td align="CENTER" class="Text" style="border-right:solid 2px #0056A2;" valign="top"><a href="BoardAcross.asp?qboard=001.01..2220" target="_blank">1 </a></td>
+Cell 1: <td align="CENTER" class="Text" valign="top">2<font face="Arial, Helvetica, sans-serif">♠</font> </td>
+Cell 2: <td align="CENTER" class="Text" valign="top">E </td>
+Cell 3: <td align="CENTER" class="Text" valign="top">
+<font color="#C01616" face="Arial, Helvetica, sans-serif">♦</font>5 
+          
+          
+           </td>
+Cell 4: <td align="CENTER" class="Text" valign="top"><a href="PlayDetails.asp?qboard=001.01..2220&amp;qtournid=2220&amp;qmatchid=97024" target="_blank">9 </a></td>
+Cell 5: <td align="CENTER" class="Text" valign="top"><b> </b></td>
+Cell 6: <td align="CENTER" class="Text" style="border-right:solid 2px #0056A2;" valign="top"><b>140 </b></td>
+Cell 7: <td align="CENTER" class="Text" valign="top">3<font color="#C01616" face="Arial, Helvetica, sans-serif">♦</font> </td>
+Cell 8: <td align="CENTER" class="Text" valign="top">N </td>
+Cell 9: <td align="CENTER" class="Text" valign="top">
+<font face="Arial, Helvetica, sans-serif">♠</font>A 
+
+          
+          
+           </td>
+Cell 10: <td align="CENTER" class="Text" valign="top"><a href="PlayDetails.asp?qboard=001.01..2220&amp;qtournid=2220&amp;qmatchid=97024" target="_blank">8 </a></td>
+Cell 11: <td align="CENTER" class="Text" valign="top"><b> </b></td>
+Cell 12: <td align="CENTER" class="Text" style="border-right:solid 2px #0056A2;" valign="top"><b>50 </b></td>
+Cell 13: <td align="CENTER" class="Text" valign="top"><font color="#0056a2"><b> </b></font></td>
+Cell 14: <td align="CENTER" class="Text" valign="top"><font color="#0056a2"><b>3 </b></font></td>

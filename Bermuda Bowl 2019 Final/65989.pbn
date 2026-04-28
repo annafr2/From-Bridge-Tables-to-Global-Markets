@@ -1,0 +1,1557 @@
+% PBN 2.1 
+% File converted with "LinToPbnConverter" (Version 1.3)
+% (c) J.L PELISSON 2009  : pelissonjl@aol.com
+% Free for a non commercial use only 
+% 
+[Event "BBO8-2019WBTC"]
+[Site "SD-FN5"]
+[HomeTeam "ENGLAND"]
+[VisitTeam "DENMARK"]
+[Board "1"]
+[West "HANSEN"]
+[North "HOLLAND"]
+[East "SCHOU"]
+[South "MOULD"]
+[Room "Open"]
+[Scoring "IMP"]
+[Vulnerable "None"]
+[Dealer "N"]
+[Deal "N:Q6.8542.AT843.J8 T5432.AJT97..T63 J87.K63.Q95.AK72 AK9.Q.KJ762.Q954"]
+{
+                   Nord
+                   D6
+                   8542
+                   AX843
+                   V8
+  Ouest                            Est
+  AR9                              X5432
+  D                                AVX97
+  RV762                            -
+  D954                             X63
+                   Sud
+                   V87
+                   R63
+                   D95
+                   AR72
+}
+[Declarer "W"]
+[Contract "4S"]
+[Result "10"]
+[Score "NS -420"]
+[Auction "N"]
+Pass  Pass  1C    1NT
+Pass  2C    Pass  2D
+X     4D    Pass  4S
+Pass  Pass  Pass
+[Play "N"]
+DA S2 D5 D2
+S6 S3 S7 SA
+H5 HA H3 HQ
+H2 HJ HK S9
+*
+
+[Event "BBO8-2019WBTC"]
+[Site "SD-FN5"]
+[Board "1"]
+[West "KENDRICK"]
+[North "H NIELSEN"]
+[East "WARD|"]
+[South "BOESGAARD"]
+[Room "Closed"]
+[Scoring "IMP"]
+[Vulnerable "None"]
+[Dealer "N"]
+[Deal "N:Q6.8542.AT843.J8 T5432.AJT97..T63 J87.K63.Q95.AK72 AK9.Q.KJ762.Q954"]
+{
+                   Nord
+                   D6
+                   8542
+                   AX843
+                   V8
+  Ouest                            Est
+  AR9                              X5432
+  D                                AVX97
+  RV762                            -
+  D954                             X63
+                   Sud
+                   V87
+                   R63
+                   D95
+                   AR72
+}
+[Declarer "E"]
+[Contract "4SX"]
+[Result "10"]
+[Score "NS -590"]
+[Auction "N"]
+Pass  Pass  1C    1D
+1H    Pass  Pass  X
+1NT   2S    Pass  3C  =1=
+Pass  3S    Pass  4S
+Pass  Pass  X     Pass
+Pass  Pass
+[Note "1:."]
+[Play "S"]
+CA C4 C8 CT
+S7 SA S6 S5
+HK HQ H5 H7
+S8 SK SQ S2
+D5 D2 DA S3
+H3 C5 H2 HA
+H6 C9 H4 H9
+-  -  -  HJ
+*
+
+[Event "BBO8-2019WBTC"]
+[Site "SD-FN5"]
+[Board "2"]
+[West "HANSEN"]
+[North "HOLLAND"]
+[East "SCHOU"]
+[South "MOULD"]
+[Room "Open"]
+[Scoring "IMP"]
+[Vulnerable "NS"]
+[Dealer "E"]
+[Deal "E:Q42.Q93.Q8.K7632 8.AT54.AJ7642.J5 KJT753.K.53.QT94 A96.J8762.KT9.A8"]
+{
+                   Nord
+                   A96
+                   V8762
+                   RX9
+                   A8
+  Ouest                            Est
+  RVX753                           D42
+  R                                D93
+  53                               D8
+  DX94                             R7632
+                   Sud
+                   8
+                   AX54
+                   AV7642
+                   V5
+}
+[Declarer "N"]
+[Contract "5H"]
+[Result "12"]
+[Score "NS 680"]
+[Auction "E"]
+Pass  Pass  Pass  5H
+Pass  Pass  Pass
+[Play "E"]
+C2 -  -  -
+*
+
+[Event "BBO8-2019WBTC"]
+[Site "SD-FN5"]
+[Board "2"]
+[West "KENDRICK"]
+[North "H NIELSEN"]
+[East "WARD|"]
+[South "BOESGAARD"]
+[Room "Closed"]
+[Scoring "IMP"]
+[Vulnerable "NS"]
+[Dealer "E"]
+[Deal "E:Q42.Q93.Q8.K7632 8.AT54.AJ7642.J5 KJT753.K.53.QT94 A96.J8762.KT9.A8"]
+{
+                   Nord
+                   A96
+                   V8762
+                   RX9
+                   A8
+  Ouest                            Est
+  RVX753                           D42
+  R                                D93
+  53                               D8
+  DX94                             R7632
+                   Sud
+                   8
+                   AX54
+                   AV7642
+                   V5
+}
+[Declarer "N"]
+[Contract "5H"]
+[Result "12"]
+[Score "NS 680"]
+[Auction "E"]
+Pass  Pass  3S    Pass
+Pass  X     Pass  4H
+4S    5H    Pass  Pass
+Pass
+[Play "E"]
+S2 S8 ST SA
+H3 H4 HK HJ
+C7 C5 C4 CA
+H9 HT S3 H7
+HQ HA S5 H6
+D8 D2 D3 DK
+DQ DA D5 DT
+*
+
+[Event "BBO8-2019WBTC"]
+[Site "SD-FN5"]
+[Board "3"]
+[West "HANSEN"]
+[North "HOLLAND"]
+[East "SCHOU"]
+[South "MOULD"]
+[Room "Open"]
+[Scoring "IMP"]
+[Vulnerable "EW"]
+[Dealer "S"]
+[Deal "S:J62.Q94.JT742.Q6 97.A865.Q6.A7432 T85.KT7.K985.K85 AKQ43.J32.A3.JT9"]
+{
+                   Nord
+                   X85
+                   RX7
+                   R985
+                   R85
+  Ouest                            Est
+  97                               ARD43
+  A865                             V32
+  D6                               A3
+  A7432                            VX9
+                   Sud
+                   V62
+                   D94
+                   VX742
+                   D6
+}
+[Declarer "E"]
+[Contract "3NT"]
+[Result "8"]
+[Score "NS 100"]
+[Auction "S"]
+Pass  Pass  Pass  3NT
+Pass  Pass  Pass
+[Play "S"]
+D2 -  -  -
+*
+
+[Event "BBO8-2019WBTC"]
+[Site "SD-FN5"]
+[Board "3"]
+[West "KENDRICK"]
+[North "H NIELSEN"]
+[East "WARD|"]
+[South "BOESGAARD"]
+[Room "Closed"]
+[Scoring "IMP"]
+[Vulnerable "EW"]
+[Dealer "S"]
+[Deal "S:J62.Q94.JT742.Q6 97.A865.Q6.A7432 T85.KT7.K985.K85 AKQ43.J32.A3.JT9"]
+{
+                   Nord
+                   X85
+                   RX7
+                   R985
+                   R85
+  Ouest                            Est
+  97                               ARD43
+  A865                             V32
+  D6                               A3
+  A7432                            VX9
+                   Sud
+                   V62
+                   D94
+                   VX742
+                   D6
+}
+[Declarer "N"]
+[Contract "2H"]
+[Result "6"]
+[Score "NS -100"]
+[Auction "S"]
+Pass  Pass  1H    1S
+2H    Pass  Pass  Pass
+[Play "E"]
+SK S2 S9 ST
+SA S6 S7 S5
+SQ SJ C7 S8
+CJ CQ CA C5
+DA D2 D6 D9
+D3 DJ DQ DK
+C9 C6 C2 CK
+CT H4 C3 C8
+H3 D4 C4 D8
+S4 H9 H5 D5
+H2 HQ H6 H7
+S3 D7 H8 HK
+HJ DT HA HT
+*
+
+[Event "BBO8-2019WBTC"]
+[Site "SD-FN5"]
+[Board "4"]
+[West "HANSEN"]
+[North "HOLLAND"]
+[East "SCHOU"]
+[South "MOULD"]
+[Room "Open"]
+[Scoring "IMP"]
+[Vulnerable "All"]
+[Dealer "W"]
+[Deal "W:T63.AJ983.Q32.JT J82.52.AKJ84.543 AQ54.Q64.T5.AQ86 K97.KT7.976.K972"]
+{
+                   Nord
+                   V82
+                   52
+                   ARV84
+                   543
+  Ouest                            Est
+  X63                              AD54
+  AV983                            D64
+  D32                              X5
+  VX                               AD86
+                   Sud
+                   R97
+                   RX7
+                   976
+                   R972
+}
+[Declarer "W"]
+[Contract "1H"]
+[Result "9"]
+[Score "NS -140"]
+[Auction "W"]
+Pass  Pass  1C    Pass
+1H    Pass  Pass  Pass
+[Play "N"]
+DK D5 D6 D3
+H5 H4 HT HJ
+C3 C6 CK CT
+DJ DT D9 D2
+S2 S4 SK S3
+S8 SQ S9 S6
+-  HQ HK -
+*
+
+[Event "BBO8-2019WBTC"]
+[Site "SD-FN5"]
+[Board "4"]
+[West "KENDRICK"]
+[North "H NIELSEN"]
+[East "WARD|"]
+[South "BOESGAARD"]
+[Room "Closed"]
+[Scoring "IMP"]
+[Vulnerable "All"]
+[Dealer "W"]
+[Deal "W:T63.AJ983.Q32.JT J82.52.AKJ84.543 AQ54.Q64.T5.AQ86 K97.KT7.976.K972"]
+{
+                   Nord
+                   V82
+                   52
+                   ARV84
+                   543
+  Ouest                            Est
+  X63                              AD54
+  AV983                            D64
+  D32                              X5
+  VX                               AD86
+                   Sud
+                   R97
+                   RX7
+                   976
+                   R972
+}
+[Declarer "W"]
+[Contract "2H"]
+[Result "9"]
+[Score "NS -140"]
+[Auction "W"]
+Pass  Pass  1C    Pass
+1H    2D    2H    Pass
+Pass  Pass
+[Play "N"]
+DA D5 D9 D3
+S2 S4 SK S3
+DJ DT D7 D2
+D8 H4 D6 DQ
+H2 HQ HK HA
+H5 H6 H7 HJ
+DK C6 HT H9
+S8 SA S7 S6
+SJ SQ S9 ST
+C3 S5 C2 CT
+*
+
+[Event "BBO8-2019WBTC"]
+[Site "SD-FN5"]
+[Board "5"]
+[West "HANSEN"]
+[North "HOLLAND"]
+[East "SCHOU"]
+[South "MOULD"]
+[Room "Open"]
+[Scoring "IMP"]
+[Vulnerable "NS"]
+[Dealer "N"]
+[Deal "N:KJ93.T94.T7.A873 86.J.Q643.QJT965 Q7542.AKQ52.A2.K AT.8763.KJ985.42"]
+{
+                   Nord
+                   RV93
+                   X94
+                   X7
+                   A873
+  Ouest                            Est
+  AX                               86
+  8763                             V
+  RV985                            D643
+  42                               DVX965
+                   Sud
+                   D7542
+                   ARD52
+                   A2
+                   R
+}
+[Declarer "S"]
+[Contract "4S"]
+[Result "11"]
+[Score "NS 650"]
+[Auction "N"]
+Pass  Pass  1S    Pass
+2D    Pass  2H    Pass
+2S    Pass  4C    Pass
+4S    Pass  Pass  Pass
+[Play "W"]
+H7 H4 HJ HA
+SA S3 S6 S4
+H8 H9 S8 H2
+*
+
+[Event "BBO8-2019WBTC"]
+[Site "SD-FN5"]
+[Board "5"]
+[West "KENDRICK"]
+[North "H NIELSEN"]
+[East "WARD|"]
+[South "BOESGAARD"]
+[Room "Closed"]
+[Scoring "IMP"]
+[Vulnerable "NS"]
+[Dealer "N"]
+[Deal "N:KJ93.T94.T7.A873 86.J.Q643.QJT965 Q7542.AKQ52.A2.K AT.8763.KJ985.42"]
+{
+                   Nord
+                   RV93
+                   X94
+                   X7
+                   A873
+  Ouest                            Est
+  AX                               86
+  8763                             V
+  RV985                            D643
+  42                               DVX965
+                   Sud
+                   D7542
+                   ARD52
+                   A2
+                   R
+}
+[Declarer "S"]
+[Contract "4S"]
+[Result "11"]
+[Score "NS 650"]
+[Auction "N"]
+Pass  Pass  1S    Pass
+2C  =1=    Pass  4H    Pass
+4S    Pass  Pass  Pass
+[Note "1:,"]
+[Play "W"]
+D5 D7 DQ DA
+C4 C3 CQ CK
+SA S3 S6 S2
+DK DT D3 D2
+*
+
+[Event "BBO8-2019WBTC"]
+[Site "SD-FN5"]
+[Board "6"]
+[West "HANSEN"]
+[North "HOLLAND"]
+[East "SCHOU"]
+[South "MOULD"]
+[Room "Open"]
+[Scoring "IMP"]
+[Vulnerable "EW"]
+[Dealer "E"]
+[Deal "E:T8752.A985.8.KT5 AKJ63.K43.QJ4.A7 Q9.T7.AT3.QJ9843 4.QJ62.K97652.62"]
+{
+                   Nord
+                   4
+                   DV62
+                   R97652
+                   62
+  Ouest                            Est
+  D9                               X8752
+  X7                               A985
+  AX3                              8
+  DV9843                           RX5
+                   Sud
+                   ARV63
+                   R43
+                   DV4
+                   A7
+}
+[Declarer "N"]
+[Contract "3NT"]
+[Result "7"]
+[Score "NS -100"]
+[Auction "E"]
+Pass  1S    Pass  1NT
+Pass  2NT   Pass  3NT
+Pass  Pass  Pass
+[Play "E"]
+H9 HK H7 H2
+D8 DQ D3 D2
+H5 DJ DT D5
+H8 H3 HT HQ
+S5 SJ SQ S4
+C5 C7 C4 C2
+*
+
+[Event "BBO8-2019WBTC"]
+[Site "SD-FN5"]
+[Board "6"]
+[West "KENDRICK"]
+[North "H NIELSEN"]
+[East "WARD|"]
+[South "BOESGAARD"]
+[Room "Closed"]
+[Scoring "IMP"]
+[Vulnerable "EW"]
+[Dealer "E"]
+[Deal "E:T8752.A985.8.KT5 AKJ63.K43.QJ4.A7 Q9.T7.AT3.QJ9843 4.QJ62.K97652.62"]
+{
+                   Nord
+                   4
+                   DV62
+                   R97652
+                   62
+  Ouest                            Est
+  D9                               X8752
+  X7                               A985
+  AX3                              8
+  DV9843                           RX5
+                   Sud
+                   ARV63
+                   R43
+                   DV4
+                   A7
+}
+[Declarer "N"]
+[Contract "5D"]
+[Result "11"]
+[Score "NS 400"]
+[Auction "E"]
+Pass  1S    Pass  1NT
+Pass  2C  =1=    X     2D  =2=
+Pass  3C  =3=    Pass  3D
+Pass  4D    Pass  5D
+Pass  Pass  Pass
+[Note "1:,"]
+[Note "2:,"]
+[Note "3:,"]
+[Play "E"]
+C5 CA C8 C6
+S2 SA S9 S4
+S5 SK SQ C2
+D8 DQ D3 D2
+S7 SJ DT DK
+-  -  -  D5
+*
+
+[Event "BBO8-2019WBTC"]
+[Site "SD-FN5"]
+[Board "7"]
+[West "HANSEN"]
+[North "HOLLAND"]
+[East "SCHOU"]
+[South "MOULD"]
+[Room "Open"]
+[Scoring "IMP"]
+[Vulnerable "All"]
+[Dealer "S"]
+[Deal "S:KJ82.QT85.76.A87 A54.A9.KQT543.Q4 QT96.74.A9.K6532 73.KJ632.J82.JT9"]
+{
+                   Nord
+                   DX96
+                   74
+                   A9
+                   R6532
+  Ouest                            Est
+  A54                              73
+  A9                               RV632
+  RDX543                           V82
+  D4                               VX9
+                   Sud
+                   RV82
+                   DX85
+                   76
+                   A87
+}
+[Declarer "W"]
+[Contract "2H"]
+[Result "7"]
+[Score "NS 100"]
+[Auction "S"]
+Pass  1NT   Pass  2D
+Pass  2H    Pass  Pass
+Pass
+[Play "N"]
+ST S3 S8 S5
+S6 S7 SJ SA
+H4 H2 H5 HA
+H7 HJ HQ H9
+S9 H3 SK S4
+DA D2 D7 DK
+SQ H6 S2 C4
+C2 HK H8 D3
+D9 D8 D6 D4
+C3 -  -  -
+*
+
+[Event "BBO8-2019WBTC"]
+[Site "SD-FN5"]
+[Board "7"]
+[West "KENDRICK"]
+[North "H NIELSEN"]
+[East "WARD|"]
+[South "BOESGAARD"]
+[Room "Closed"]
+[Scoring "IMP"]
+[Vulnerable "All"]
+[Dealer "S"]
+[Deal "S:KJ82.QT85.76.A87 A54.A9.KQT543.Q4 QT96.74.A9.K6532 73.KJ632.J82.JT9"]
+{
+                   Nord
+                   DX96
+                   74
+                   A9
+                   R6532
+  Ouest                            Est
+  A54                              73
+  A9                               RV632
+  RDX543                           V82
+  D4                               VX9
+                   Sud
+                   RV82
+                   DX85
+                   76
+                   A87
+}
+[Declarer "W"]
+[Contract "2H"]
+[Result "7"]
+[Score "NS 100"]
+[Auction "S"]
+Pass  1NT   Pass  2D  =1=
+Pass  2H    Pass  Pass
+Pass
+[Note "1:,"]
+[Play "N"]
+S9 S3 SK S4
+S6 S7 S2 SA
+DA D2 D7 DK
+D9 DJ D6 D4
+H4 H2 H5 HA
+H7 HJ HQ H9
+CK C9 C7 C4
+C6 CT CA CQ
+C5 CJ C8 D3
+C2 HK H8 D5
+*
+
+[Event "BBO8-2019WBTC"]
+[Site "SD-FN5"]
+[Board "8"]
+[West "HANSEN"]
+[North "HOLLAND"]
+[East "SCHOU"]
+[South "MOULD"]
+[Room "Open"]
+[Scoring "IMP"]
+[Vulnerable "None"]
+[Dealer "W"]
+[Deal "W:T876.T752.AT92.8 AJ4.AKJ3.7.AT765 52.Q6.K8543.Q432 KQ93.984.QJ6.KJ9"]
+{
+                   Nord
+                   AV4
+                   ARV3
+                   7
+                   AX765
+  Ouest                            Est
+  X876                             52
+  X752                             D6
+  AX92                             R8543
+  8                                D432
+                   Sud
+                   RD93
+                   984
+                   DV6
+                   RV9
+}
+[Declarer "N"]
+[Contract "5C"]
+[Result "9"]
+[Score "NS -100"]
+[Auction "W"]
+Pass  1C    Pass  1S
+Pass  2H    Pass  3C
+Pass  3S    Pass  4C
+Pass  4D    Pass  4S
+Pass  4NT   Pass  5C
+Pass  Pass  Pass
+[Play "E"]
+D4 DJ DA D7
+D3 D6 DT C5
+C2 CK C8 C6
+CQ CJ S6 C7
+DK DQ D2 -
+*
+
+[Event "BBO8-2019WBTC"]
+[Site "SD-FN5"]
+[Board "8"]
+[West "KENDRICK"]
+[North "H NIELSEN"]
+[East "WARD|"]
+[South "BOESGAARD"]
+[Room "Closed"]
+[Scoring "IMP"]
+[Vulnerable "None"]
+[Dealer "W"]
+[Deal "W:T876.T752.AT92.8 AJ4.AKJ3.7.AT765 52.Q6.K8543.Q432 KQ93.984.QJ6.KJ9"]
+{
+                   Nord
+                   AV4
+                   ARV3
+                   7
+                   AX765
+  Ouest                            Est
+  X876                             52
+  X752                             D6
+  AX92                             R8543
+  8                                D432
+                   Sud
+                   RD93
+                   984
+                   DV6
+                   RV9
+}
+[Declarer "N"]
+[Contract "6C"]
+[Result "10"]
+[Score "NS -100"]
+[Auction "W"]
+Pass  1C  =1=    Pass  1S
+Pass  2H    Pass  2NT =2=
+Pass  3S    Pass  4C
+Pass  4D  =3=    Pass  4H  =4=
+Pass  4S  =5=    Pass  5C
+Pass  6C    Pass  Pass
+Pass
+[Note "1:,"]
+[Note "2:,"]
+[Note "3:,"]
+[Note "4:,"]
+[Note "5:,"]
+[Play "E"]
+D4 DQ DA D7
+D3 D6 D9 C5
+C2 C9 C8 C6
+S2 S3 S7 SA
+C3 CJ D2 C7
+C4 CK H2 CT
+S5 S9 S6 SJ
+CQ H4 S8 CA
+D5 SQ ST S4
+D8 SK DT H3
+HQ H8 H5 HJ
+DK DJ H7 HK
+H6 H9 HT HA
+*
+
+[Event "BBO8-2019WBTC"]
+[Site "SD-FN5"]
+[Board "9"]
+[West "HANSEN"]
+[North "HOLLAND"]
+[East "SCHOU"]
+[South "MOULD"]
+[Room "Open"]
+[Scoring "IMP"]
+[Vulnerable "EW"]
+[Dealer "N"]
+[Deal "N:9853.QT4.JT4.AJ4 KQT6..AQ96.QT865 J74.A9732.K73.K2 A2.KJ865.852.973"]
+{
+                   Nord
+                   9853
+                   DX4
+                   VX4
+                   AV4
+  Ouest                            Est
+  A2                               RDX6
+  RV865                            -
+  852                              AD96
+  973                              DX865
+                   Sud
+                   V74
+                   A9732
+                   R73
+                   R2
+}
+[Declarer "S"]
+[Contract "2HX"]
+[Result "6"]
+[Score "NS -300"]
+[Auction "N"]
+Pass  1C    1H    Pass
+2H    X     Pass  Pass
+Pass
+[Play "W"]
+SA S3 S6 S4
+S2 S5 SK S7
+C3 S8 SQ SJ
+D2 S9 ST D3
+D5 D4 DA D7
+D8 DT D6 DK
+HK H4 C5 H3
+C7 C4 C6 CK
+C9 CA C8 C2
+HJ CJ CQ H9
+*
+
+[Event "BBO8-2019WBTC"]
+[Site "SD-FN5"]
+[Board "9"]
+[West "KENDRICK"]
+[North "H NIELSEN"]
+[East "WARD|"]
+[South "BOESGAARD"]
+[Room "Closed"]
+[Scoring "IMP"]
+[Vulnerable "EW"]
+[Dealer "N"]
+[Deal "N:9853.QT4.JT4.AJ4 KQT6..AQ96.QT865 J74.A9732.K73.K2 A2.KJ865.852.973"]
+{
+                   Nord
+                   9853
+                   DX4
+                   VX4
+                   AV4
+  Ouest                            Est
+  A2                               RDX6
+  RV865                            -
+  852                              AD96
+  973                              DX865
+                   Sud
+                   V74
+                   A9732
+                   R73
+                   R2
+}
+[Declarer "S"]
+[Contract "2H"]
+[Result "7"]
+[Score "NS -50"]
+[Auction "N"]
+Pass  1C    1H    1NT
+2H    Pass  Pass  Pass
+[Play "W"]
+C7 CJ CQ CK
+H5 HQ C6 H2
+D2 DJ DQ DK
+C3 CA C5 C2
+C9 C4 C8 H3
+S2 S3 ST S7
+SA S5 S6 SJ
+D8 DT DA D3
+D5 D4 D9 D7
+H6 S8 SQ S4
+HK H4 D6 H7
+H8 HT CT H9
+HJ S9 SK HA
+*
+
+[Event "BBO8-2019WBTC"]
+[Site "SD-FN5"]
+[Board "10"]
+[West "HANSEN"]
+[North "HOLLAND"]
+[East "SCHOU"]
+[South "MOULD"]
+[Room "Open"]
+[Scoring "IMP"]
+[Vulnerable "All"]
+[Dealer "E"]
+[Deal "E:K7.Q864.J942.Q42 52.KT9.AKQT6.873 AJT963.53.85.AJ5 Q84.AJ72.73.KT96"]
+{
+                   Nord
+                   D84
+                   AV72
+                   73
+                   RX96
+  Ouest                            Est
+  AVX963                           R7
+  53                               D864
+  85                               V942
+  AV5                              D42
+                   Sud
+                   52
+                   RX9
+                   ARDX6
+                   873
+}
+[Declarer "S"]
+[Contract "1NT"]
+[Result "6"]
+[Score "NS -100"]
+[Auction "E"]
+Pass  1D    1S    X
+Pass  1NT   Pass  Pass
+Pass
+[Play "W"]
+SJ S4 S7 S2
+S3 S8 SK S5
+CA C6 C2 C7
+SA SQ -  -
+*
+
+[Event "BBO8-2019WBTC"]
+[Site "SD-FN5"]
+[Board "10"]
+[West "KENDRICK"]
+[North "H NIELSEN"]
+[East "WARD|"]
+[South "BOESGAARD"]
+[Room "Closed"]
+[Scoring "IMP"]
+[Vulnerable "All"]
+[Dealer "E"]
+[Deal "E:K7.Q864.J942.Q42 52.KT9.AKQT6.873 AJT963.53.85.AJ5 Q84.AJ72.73.KT96"]
+{
+                   Nord
+                   D84
+                   AV72
+                   73
+                   RX96
+  Ouest                            Est
+  AVX963                           R7
+  53                               D864
+  85                               V942
+  AV5                              D42
+                   Sud
+                   52
+                   RX9
+                   ARDX6
+                   873
+}
+[Declarer "N"]
+[Contract "2NT"]
+[Result "7"]
+[Score "NS -100"]
+[Auction "E"]
+Pass  1D    1S    X
+Pass  2D    2S    2NT
+Pass  Pass  Pass
+[Play "E"]
+SK S2 SA S4
+S7 S5 S9 S8
+H4 C3 ST SQ
+D2 DA D5 D7
+C2 C7 CA C6
+C4 C8 SJ C9
+CQ D6 S6 H2
+D4 H9 S3 H7
+*
+
+[Event "BBO8-2019WBTC"]
+[Site "SD-FN5"]
+[Board "11"]
+[West "HANSEN"]
+[North "HOLLAND"]
+[East "SCHOU"]
+[South "MOULD"]
+[Room "Open"]
+[Scoring "IMP"]
+[Vulnerable "None"]
+[Dealer "S"]
+[Deal "S:Q5.AKJ95.T4.AT74 972.3.AKQJ93.K96 A86.T872.87.J532 KJT43.Q64.652.Q8"]
+{
+                   Nord
+                   A86
+                   X872
+                   87
+                   V532
+  Ouest                            Est
+  972                              RVX43
+  3                                D64
+  ARDV93                           652
+  R96                              D8
+                   Sud
+                   D5
+                   ARV95
+                   X4
+                   AX74
+}
+[Declarer "S"]
+[Contract "3H"]
+[Result "7"]
+[Score "NS -100"]
+[Auction "S"]
+1H    2D    3H    Pass
+Pass  Pass
+[Play "W"]
+DA D7 D5 DT
+DQ D8 D6 D4
+S2 S6 SK S5
+S7 S8 S4 SQ
+H3 H2 H4 HA
+D3 H7 H6 HK
+D9 H8 HQ HJ
+S9 SA S3 C4
+*
+
+[Event "BBO8-2019WBTC"]
+[Site "SD-FN5"]
+[Board "11"]
+[West "KENDRICK"]
+[North "H NIELSEN"]
+[East "WARD|"]
+[South "BOESGAARD"]
+[Room "Closed"]
+[Scoring "IMP"]
+[Vulnerable "None"]
+[Dealer "S"]
+[Deal "S:Q5.AKJ95.T4.AT74 972.3.AKQJ93.K96 A86.T872.87.J532 KJT43.Q64.652.Q8"]
+{
+                   Nord
+                   A86
+                   X872
+                   87
+                   V532
+  Ouest                            Est
+  972                              RVX43
+  3                                D64
+  ARDV93                           652
+  R96                              D8
+                   Sud
+                   D5
+                   ARV95
+                   X4
+                   AX74
+}
+[Declarer "E"]
+[Contract "4S"]
+[Result "9"]
+[Score "NS 50"]
+[Auction "S"]
+1H    2D    2H    2S
+3H    4S    Pass  Pass
+Pass
+[Play "S"]
+HA H3 HT H6
+C4 C6 CJ CQ
+CA C9 C2 C8
+C7 CK C3 H4
+SQ S2 S6 SJ
+D4 DA D8 D6
+S5 S7 S8 SK
+*
+
+[Event "BBO8-2019WBTC"]
+[Site "SD-FN5"]
+[Board "12"]
+[West "HANSEN"]
+[North "HOLLAND"]
+[East "SCHOU"]
+[South "MOULD"]
+[Room "Open"]
+[Scoring "IMP"]
+[Vulnerable "NS"]
+[Dealer "W"]
+[Deal "W:AJ2.K8653.A43.83 K8753.T42.T.AKT7 Q9.AQ.QJ975.QJ92 T64.J97.K862.654"]
+{
+                   Nord
+                   R8753
+                   X42
+                   X
+                   ARX7
+  Ouest                            Est
+  AV2                              D9
+  R8653                            AD
+  A43                              DV975
+  83                               DV92
+                   Sud
+                   X64
+                   V97
+                   R862
+                   654
+}
+[Declarer "W"]
+[Contract "4H"]
+[Result "9"]
+[Score "NS 50"]
+[Auction "W"]
+1H    1S    2D    2S
+3D    Pass  4H    Pass
+Pass  Pass
+[Play "N"]
+CK C2 C5 C8
+CA C9 C6 C3
+DT DQ D6 D3
+H2 DJ D2 D4
+H4 HQ H7 H3
+HT HA H9 H5
+C7 CJ C4 S2
+-  CQ HJ -
+*
+
+[Event "BBO8-2019WBTC"]
+[Site "SD-FN5"]
+[Board "12"]
+[West "KENDRICK"]
+[North "H NIELSEN"]
+[East "WARD|"]
+[South "BOESGAARD"]
+[Room "Closed"]
+[Scoring "IMP"]
+[Vulnerable "NS"]
+[Dealer "W"]
+[Deal "W:AJ2.K8653.A43.83 K8753.T42.T.AKT7 Q9.AQ.QJ975.QJ92 T64.J97.K862.654"]
+{
+                   Nord
+                   R8753
+                   X42
+                   X
+                   ARX7
+  Ouest                            Est
+  AV2                              D9
+  R8653                            AD
+  A43                              DV975
+  83                               DV92
+                   Sud
+                   X64
+                   V97
+                   R862
+                   654
+}
+[Declarer "W"]
+[Contract "3NT"]
+[Result "10"]
+[Score "NS -430"]
+[Auction "W"]
+1H    1S    X     2S
+Pass  Pass  X     Pass
+3NT   Pass  Pass  Pass
+[Play "N"]
+CA C2 C6 C3
+DT DQ D2 D3
+S5 DJ D6 D4
+S3 D5 D8 DA
+C7 CQ C5 C8
+H2 HA H7 H3
+H4 HQ H9 H5
+SK SQ S4 S2
+CK C9 C4 H6
+HT -  -  -
+*
+
+[Event "BBO8-2019WBTC"]
+[Site "SD-FN5"]
+[Board "13"]
+[West "HANSEN"]
+[North "HOLLAND"]
+[East "SCHOU"]
+[South "MOULD"]
+[Room "Open"]
+[Scoring "IMP"]
+[Vulnerable "All"]
+[Dealer "N"]
+[Deal "N:754.QT764.KT8.J6 QT93.532.4.QT974 AK86.KJ8.J2.K832 J2.A9.AQ97653.A5"]
+{
+                   Nord
+                   754
+                   DX764
+                   RX8
+                   V6
+  Ouest                            Est
+  V2                               DX93
+  A9                               532
+  AD97653                          4
+  A5                               DX974
+                   Sud
+                   AR86
+                   RV8
+                   V2
+                   R832
+}
+[Declarer "W"]
+[Contract "3D"]
+[Result "8"]
+[Score "NS 100"]
+[Auction "N"]
+Pass  Pass  1NT   3D
+Pass  Pass  Pass
+[Play "N"]
+CJ CQ C2 C5
+DK D4 D2 DQ
+C6 C4 C3 CA
+D8 H2 DJ DA
+*
+
+[Event "BBO8-2019WBTC"]
+[Site "SD-FN5"]
+[Board "13"]
+[West "KENDRICK"]
+[North "H NIELSEN"]
+[East "WARD|"]
+[South "BOESGAARD"]
+[Room "Closed"]
+[Scoring "IMP"]
+[Vulnerable "All"]
+[Dealer "N"]
+[Deal "N:754.QT764.KT8.J6 QT93.532.4.QT974 AK86.KJ8.J2.K832 J2.A9.AQ97653.A5"]
+{
+                   Nord
+                   754
+                   DX764
+                   RX8
+                   V6
+  Ouest                            Est
+  V2                               DX93
+  A9                               532
+  AD97653                          4
+  A5                               DX974
+                   Sud
+                   AR86
+                   RV8
+                   V2
+                   R832
+}
+[Declarer "W"]
+[Contract "3DX"]
+[Result "8"]
+[Score "NS 200"]
+[Auction "N"]
+Pass  Pass  1NT   Pass
+2D  =1=    Pass  2H    3D
+X     Pass  Pass  Pass
+[Note "1:,"]
+[Play "N"]
+H6 H2 HK HA
+HT H3 HJ H9
+H7 H5 H8 D3
+S7 ST SK S2
+S4 S3 SA SJ
+D8 D4 D2 DA
+DT C4 DJ D5
+CJ CQ C2 C5
+*
+
+[Event "BBO8-2019WBTC"]
+[Site "SD-FN5"]
+[Board "14"]
+[West "HANSEN"]
+[North "HOLLAND"]
+[East "SCHOU"]
+[South "MOULD"]
+[Room "Open"]
+[Scoring "IMP"]
+[Vulnerable "None"]
+[Dealer "E"]
+[Deal "E:AJ2.74.K74.AQT82 87653.A32.AQ.K76 KT9.KJT9.T63.J43 Q4.Q865.J9852.95"]
+{
+                   Nord
+                   D4
+                   D865
+                   V9852
+                   95
+  Ouest                            Est
+  RX9                              AV2
+  RVX9                             74
+  X63                              R74
+  V43                              ADX82
+                   Sud
+                   87653
+                   A32
+                   AD
+                   R76
+}
+[Declarer "E"]
+[Contract "3NT"]
+[Result "6"]
+[Score "NS 150"]
+[Auction "E"]
+1NT   Pass  3NT   Pass
+Pass  Pass
+[Play "S"]
+S7 S9 SQ SA
+H3 H9 HQ H7
+DQ D3 D2 D4
+S5 ST S4 S2
+HA HT H5 H4
+S3 SK H6 SJ
+H2 HJ H8 C8
+-  HK D5 C2
+*
+
+[Event "BBO8-2019WBTC"]
+[Site "SD-FN5"]
+[Board "14"]
+[West "KENDRICK"]
+[North "H NIELSEN"]
+[East "WARD|"]
+[South "BOESGAARD"]
+[Room "Closed"]
+[Scoring "IMP"]
+[Vulnerable "None"]
+[Dealer "E"]
+[Deal "E:AJ2.74.K74.AQT82 87653.A32.AQ.K76 KT9.KJT9.T63.J43 Q4.Q865.J9852.95"]
+{
+                   Nord
+                   D4
+                   D865
+                   V9852
+                   95
+  Ouest                            Est
+  RX9                              AV2
+  RVX9                             74
+  X63                              R74
+  V43                              ADX82
+                   Sud
+                   87653
+                   A32
+                   AD
+                   R76
+}
+[Declarer "E"]
+[Contract "1NT"]
+[Result "7"]
+[Score "NS -90"]
+[Auction "E"]
+1C    Pass  1H    Pass
+1NT   Pass  Pass  Pass
+[Play "S"]
+S8 S9 SQ SA
+H3 H9 HQ H4
+DQ D3 D9 D4
+S7 SK S4 S2
+CK CJ C9 C2
+S6 ST H5 SJ
+C6 C3 C5 CA
+C7 C4 H6 CQ
+H2 D6 D5 CT
+S3 DT H8 C8
+HA HT D2 H7
+DA HJ D8 D7
+S5 HK DJ DK
+*
+
+[Event "BBO8-2019WBTC"]
+[Site "SD-FN5"]
+[Board "15"]
+[West "HANSEN"]
+[North "HOLLAND"]
+[East "SCHOU"]
+[South "MOULD"]
+[Room "Open"]
+[Scoring "IMP"]
+[Vulnerable "NS"]
+[Dealer "S"]
+[Deal "S:QT98.KJ.74.98765 632.Q762.KJ853.2 AK54.943.QT.AKQ4 J7.AT85.A962.JT3"]
+{
+                   Nord
+                   AR54
+                   943
+                   DX
+                   ARD4
+  Ouest                            Est
+  632                              V7
+  D762                             AX85
+  RV853                            A962
+  2                                VX3
+                   Sud
+                   DX98
+                   RV
+                   74
+                   98765
+}
+[Declarer "S"]
+[Contract "4S"]
+[Result "11"]
+[Score "NS 650"]
+[Auction "S"]
+Pass  Pass  1C    Pass
+1S    Pass  3S    Pass
+4S    Pass  Pass  Pass
+[Play "W"]
+C2 CA C3 C7
+S2 SA S7 S8
+S3 SK SJ S9
+S6 S4 H5 SQ
+D5 CK CT C6
+H2 CQ CJ C5
+D3 C4 D2 C8
+H6 DT D6 C9
+D8 DQ DA D4
+H7 -  H8 HK
+*
+
+[Event "BBO8-2019WBTC"]
+[Site "SD-FN5"]
+[Board "15"]
+[West "KENDRICK"]
+[North "H NIELSEN"]
+[East "WARD|"]
+[South "BOESGAARD"]
+[Room "Closed"]
+[Scoring "IMP"]
+[Vulnerable "NS"]
+[Dealer "S"]
+[Deal "S:QT98.KJ.74.98765 632.Q762.KJ853.2 AK54.943.QT.AKQ4 J7.AT85.A962.JT3"]
+{
+                   Nord
+                   AR54
+                   943
+                   DX
+                   ARD4
+  Ouest                            Est
+  632                              V7
+  D762                             AX85
+  RV853                            A962
+  2                                VX3
+                   Sud
+                   DX98
+                   RV
+                   74
+                   98765
+}
+[Declarer "S"]
+[Contract "3C"]
+[Result "9"]
+[Score "NS 110"]
+[Auction "S"]
+Pass  Pass  1NT   Pass
+Pass  2C  =1=    X     2D  =2=
+3C    Pass  Pass  Pass
+[Note "1:,"]
+[Note "2:,"]
+[Play "W"]
+S3 S4 SJ SQ
+C2 CA CT C7
+D5 CK C3 C5
+D3 CQ CJ C8
+S2 SA S7 ST
+S6 SK D9 S8
+H6 S5 H8 S9
+DK DT D2 D7
+D8 DQ DA D4
+HQ H3 H5 HJ
+H2 H4 HA HK
+*
+
+[Event "BBO8-2019WBTC"]
+[Site "SD-FN5"]
+[Board "16"]
+[West "HANSEN"]
+[North "HOLLAND"]
+[East "SCHOU"]
+[South "MOULD"]
+[Room "Open"]
+[Scoring "IMP"]
+[Vulnerable "EW"]
+[Dealer "W"]
+[Deal "W:A643.A976.J3.AQ6 KQJ872.QT5.T.K92 T9.J8.KQ8764.J73 5.K432.A952.T854"]
+{
+                   Nord
+                   RDV872
+                   DX5
+                   X
+                   R92
+  Ouest                            Est
+  A643                             X9
+  A976                             V8
+  V3                               RD8764
+  AD6                              V73
+                   Sud
+                   5
+                   R432
+                   A952
+                   X854
+}
+[Declarer "E"]
+[Contract "3D"]
+[Result "8"]
+[Score "NS 100"]
+[Auction "W"]
+1NT   2D    Pass  2S
+Pass  Pass  2NT   Pass
+3C    Pass  3D    Pass
+Pass  Pass
+[Play "S"]
+S5 SA S2 S9
+DA D3 DT DQ
+C4 C6 CK C3
+C5 S3 SK ST
+C8 S4 SQ D6
+D2 DJ S7 D4
+H2 HA H5 H8
+H3 H6 HQ HJ
+*
+
+[Event "BBO8-2019WBTC"]
+[Site "SD-FN5"]
+[Board "16"]
+[West "KENDRICK"]
+[North "H NIELSEN"]
+[East "WARD|"]
+[South "BOESGAARD"]
+[Room "Closed"]
+[Scoring "IMP"]
+[Vulnerable "EW"]
+[Dealer "W"]
+[Deal "W:A643.A976.J3.AQ6 KQJ872.QT5.T.K92 T9.J8.KQ8764.J73 5.K432.A952.T854"]
+{
+                   Nord
+                   RDV872
+                   DX5
+                   X
+                   R92
+  Ouest                            Est
+  A643                             X9
+  A976                             V8
+  V3                               RD8764
+  AD6                              V73
+                   Sud
+                   5
+                   R432
+                   A952
+                   X854
+}
+[Declarer "E"]
+[Contract "3D"]
+[Result "8"]
+[Score "NS 100"]
+[Auction "W"]
+1NT   2S    3D    Pass
+Pass  Pass
+[Play "S"]
+S5 SA S2 S9
+DA D3 DT DK
+C8 C6 CK C3
+C4 S3 SK ST
+C5 S4 SQ D8
+D2 DJ SJ D4
+H2 H6 HQ H8
+D9 S6 S8 D7
+CT CA C2 C7
+H3 HA H5 HJ
+H4 H7 HT D6
+D5 H9 S7 DQ
+HK CQ C9 CJ
+*

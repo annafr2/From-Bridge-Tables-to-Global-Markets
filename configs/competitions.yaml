@@ -1,0 +1,67 @@
+# EuroBridge Competition Registry
+# Each entry defines one championship with all its tournament categories.
+#
+# Fields:
+#   name:        Human-readable name (for file naming)
+#   microsite:   Base URL of the competition's microsite (ends without trailing slash)
+#   year:        Year of the competition
+#   tournaments: Map of category name → qtournid (integer)
+#   max_rounds:  How many rounds to attempt (we stop early if a round has no matches)
+#   boards_per_round: Typical number of boards per match in this event
+
+competitions:
+
+  - name: "EBL_Herning_2024"
+    year: 2024
+    microsite: "http://db.eurobridge.org/Repository/competitions/24Herning/microsite"
+    tournaments:
+      Open:   2410
+      Women:  2411
+      Senior: 2412
+      Mixed:  2413
+    max_rounds: 30
+    boards_per_round: 16
+
+  - name: "EBL_Madeira_2022"
+    year: 2022
+    microsite: "http://db.eurobridge.org/Repository/competitions/22Madeira/microsite"
+    tournaments:
+      Open:   2220
+      Women:  2221
+      Senior: 2222
+      Mixed:  2223
+    max_rounds: 30
+    boards_per_round: 16
+
+  - name: "EBL_Ostend_2018"
+    year: 2018
+    microsite: "http://db.eurobridge.org/Repository/competitions/18Ostend/microSite"
+    tournaments:
+      Open:   1810
+      Women:  1811
+      Senior: 1812
+      Mixed:  1813
+    max_rounds: 30
+    boards_per_round: 16
+
+  - name: "EBL_Budapest_2016"
+    year: 2016
+    microsite: "http://db.eurobridge.org/Repository/competitions/16Budapest/microSite"
+    tournaments:
+      Open:   1610
+      Women:  1611
+      Senior: 1612
+      Mixed:  1613
+    max_rounds: 30
+    boards_per_round: 16
+
+  - name: "EBL_Poznan_2025"
+    year: 2025
+    microsite: "https://db.eurobridge.org/repository/competitions/25Poznan/microsite"
+    tournaments:
+      Open:   2511
+      Women:  2514
+      Senior: 2516
+      Mixed:  2513
+    max_rounds: 30
+    boards_per_round: 16

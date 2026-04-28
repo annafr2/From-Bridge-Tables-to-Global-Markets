@@ -1,0 +1,1535 @@
+% PBN 2.1 
+% File converted with "LinToPbnConverter" (Version 1.3)
+% (c) J.L PELISSON 2009  : pelissonjl@aol.com
+% Free for a non commercial use only 
+% 
+[Event "BBO1-2019WBTC"]
+[Site "BB-FN3"]
+[HomeTeam "POLAND"]
+[VisitTeam "NETHERLANDS"]
+[Board "1"]
+[West "DE WIJS"]
+[North "NOWOSADZKI"]
+[East "B MULLER"]
+[South "KALITA"]
+[Room "Open"]
+[Scoring "IMP"]
+[Vulnerable "None"]
+[Dealer "N"]
+[Deal "N:A9.Q984.A.AKJ974 652.AT6.KT874.T8 KQJT87.J3.Q652.Q 43.K752.J93.6532"]
+{
+                   Nord
+                   A9
+                   D984
+                   A
+                   ARV974
+  Ouest                            Est
+  43                               652
+  R752                             AX6
+  V93                              RX874
+  6532                             X8
+                   Sud
+                   RDVX87
+                   V3
+                   D652
+                   D
+}
+[Declarer "S"]
+[Contract "4S"]
+[Result "11"]
+[Score "NS 450"]
+[Auction "N"]
+1C    Pass  1S    Pass
+2H    Pass  3S    Pass
+4S    Pass  Pass  Pass
+[Play "W"]
+H5 H9 HA H3
+D9 DA D7 D2
+C2 C4 C8 CQ
+D3 S9 D4 D5
+C6 CA CT HJ
+C3 CK S5 S7
+DJ SA D8 D6
+C5 CJ S6 DQ
+*
+
+[Event "BBO1-2019WBTC"]
+[Site "BB-FN3"]
+[Board "1"]
+[West "BURAS"]
+[North "VAN PROOIJ"]
+[East "NARKIEWICZ|"]
+[South "VERHEES"]
+[Room "Closed"]
+[Scoring "IMP"]
+[Vulnerable "None"]
+[Dealer "N"]
+[Deal "N:A9.Q984.A.AKJ974 652.AT6.KT874.T8 KQJT87.J3.Q652.Q 43.K752.J93.6532"]
+{
+                   Nord
+                   A9
+                   D984
+                   A
+                   ARV974
+  Ouest                            Est
+  43                               652
+  R752                             AX6
+  V93                              RX874
+  6532                             X8
+                   Sud
+                   RDVX87
+                   V3
+                   D652
+                   D
+}
+[Declarer "S"]
+[Contract "4S"]
+[Result "11"]
+[Score "NS 450"]
+[Auction "N"]
+1C    Pass  1D    Pass
+1H    Pass  1NT   Pass
+2C    Pass  2S    Pass
+2NT   Pass  3NT   Pass
+4D    Pass  4S    Pass
+Pass  Pass
+[Play "W"]
+H2 H8 HA H3
+HK H4 HT HJ
+*
+
+[Event "BBO1-2019WBTC"]
+[Site "BB-FN3"]
+[Board "2"]
+[West "DE WIJS"]
+[North "NOWOSADZKI"]
+[East "B MULLER"]
+[South "KALITA"]
+[Room "Open"]
+[Scoring "IMP"]
+[Vulnerable "NS"]
+[Dealer "E"]
+[Deal "E:T873.A.QT876.K93 A64.KQ9853.A2.A8 K52.T62.93.Q7654 QJ9.J74.KJ54.JT2"]
+{
+                   Nord
+                   DV9
+                   V74
+                   RV54
+                   VX2
+  Ouest                            Est
+  R52                              X873
+  X62                              A
+  93                               DX876
+  D7654                            R93
+                   Sud
+                   A64
+                   RD9853
+                   A2
+                   A8
+}
+[Declarer "S"]
+[Contract "4H"]
+[Result "10"]
+[Score "NS 620"]
+[Auction "E"]
+Pass  1H    Pass  2H
+X     4H    Pass  Pass
+Pass
+[Play "W"]
+D9 D4 D6 DA
+H6 H4 HA HQ
+S5 S9 S8 SA
+H2 HJ S7 H3
+HT H7 D7 HK
+-  -  -  S4
+*
+
+[Event "BBO1-2019WBTC"]
+[Site "BB-FN3"]
+[Board "2"]
+[West "BURAS"]
+[North "VAN PROOIJ"]
+[East "NARKIEWICZ|"]
+[South "VERHEES"]
+[Room "Closed"]
+[Scoring "IMP"]
+[Vulnerable "NS"]
+[Dealer "E"]
+[Deal "E:T873.A.QT876.K93 A64.KQ9853.A2.A8 K52.T62.93.Q7654 QJ9.J74.KJ54.JT2"]
+{
+                   Nord
+                   DV9
+                   V74
+                   RV54
+                   VX2
+  Ouest                            Est
+  R52                              X873
+  X62                              A
+  93                               DX876
+  D7654                            R93
+                   Sud
+                   A64
+                   RD9853
+                   A2
+                   A8
+}
+[Declarer "S"]
+[Contract "4H"]
+[Result "10"]
+[Score "NS 620"]
+[Auction "E"]
+Pass  1C    Pass  2D
+Pass  2H    Pass  3C
+Pass  4H    Pass  Pass
+Pass
+[Play "W"]
+C5 CJ CK CA
+H2 H4 HA HQ
+S5 S9 S8 SA
+H6 H7 D7 HK
+HT HJ S3 H3
+-  D4 -  -
+*
+
+[Event "BBO1-2019WBTC"]
+[Site "BB-FN3"]
+[Board "3"]
+[West "DE WIJS"]
+[North "NOWOSADZKI"]
+[East "B MULLER"]
+[South "KALITA"]
+[Room "Open"]
+[Scoring "IMP"]
+[Vulnerable "EW"]
+[Dealer "S"]
+[Deal "S:63.KJT953.6.K653 AJ872.86.KQT93.7 K54.2.AJ752.A982 QT9.AQ74.84.QJT4"]
+{
+                   Nord
+                   R54
+                   2
+                   AV752
+                   A982
+  Ouest                            Est
+  AV872                            DX9
+  86                               AD74
+  RDX93                            84
+  7                                DVX4
+                   Sud
+                   63
+                   RVX953
+                   6
+                   R653
+}
+[Declarer "W"]
+[Contract "4S"]
+[Result "8"]
+[Score "NS 200"]
+[Auction "S"]
+3H    3S    Pass  4S
+Pass  Pass  Pass
+[Play "N"]
+H2 HA HJ H6
+CA CQ C3 C7
+C9 CJ CK S2
+D2 D4 D6 DQ
+DA D8 S3 DK
+C2 H4 HK H8
+C8 H7 H9 S7
+SK S9 S6 S8
+S4 ST H3 -
+*
+
+[Event "BBO1-2019WBTC"]
+[Site "BB-FN3"]
+[Board "3"]
+[West "BURAS"]
+[North "VAN PROOIJ"]
+[East "NARKIEWICZ|"]
+[South "VERHEES"]
+[Room "Closed"]
+[Scoring "IMP"]
+[Vulnerable "EW"]
+[Dealer "S"]
+[Deal "S:63.KJT953.6.K653 AJ872.86.KQT93.7 K54.2.AJ752.A982 QT9.AQ74.84.QJT4"]
+{
+                   Nord
+                   R54
+                   2
+                   AV752
+                   A982
+  Ouest                            Est
+  AV872                            DX9
+  86                               AD74
+  RDX93                            84
+  7                                DVX4
+                   Sud
+                   63
+                   RVX953
+                   6
+                   R653
+}
+[Declarer "S"]
+[Contract "3H"]
+[Result "8"]
+[Score "NS -50"]
+[Auction "S"]
+3H    Pass  Pass  Pass
+[Play "W"]
+DK DA D4 D6
+H6 H2 H4 HJ
+H8 C2 HA HK
+C7 C8 CQ CK
+DT S4 HQ H9
+S2 SK ST S3
+D3 D2 D8 H3
+S8 S5 H7 HT
+S7 CA C4 C3
+*
+
+[Event "BBO1-2019WBTC"]
+[Site "BB-FN3"]
+[Board "4"]
+[West "DE WIJS"]
+[North "NOWOSADZKI"]
+[East "B MULLER"]
+[South "KALITA"]
+[Room "Open"]
+[Scoring "IMP"]
+[Vulnerable "All"]
+[Dealer "W"]
+[Deal "W:92.A987.95.KJ543 J876.K5.AJT86.Q2 AT5.JT42.KQ3.AT7 KQ43.Q63.742.986"]
+{
+                   Nord
+                   V876
+                   R5
+                   AVX86
+                   D2
+  Ouest                            Est
+  92                               AX5
+  A987                             VX42
+  95                               RD3
+  RV543                            AX7
+                   Sud
+                   RD43
+                   D63
+                   742
+                   986
+}
+[Declarer "W"]
+[Contract "3C"]
+[Result "10"]
+[Score "NS -130"]
+[Auction "W"]
+Pass  1D    X     1S
+X     2S    Pass  Pass
+3C    Pass  Pass  Pass
+[Play "N"]
+S6 S5 SK S9
+S7 ST S3 S2
+C2 C7 C8 CK
+CQ CA C6 C3
+D6 CT C9 C4
+HK HJ H6 H7
+S8 SA S4 D5
+H5 HT H3 H8
+D8 H2 HQ HA
+DA D3 D2 D9
+*
+
+[Event "BBO1-2019WBTC"]
+[Site "BB-FN3"]
+[Board "4"]
+[West "BURAS"]
+[North "VAN PROOIJ"]
+[East "NARKIEWICZ|"]
+[South "VERHEES"]
+[Room "Closed"]
+[Scoring "IMP"]
+[Vulnerable "All"]
+[Dealer "W"]
+[Deal "W:92.A987.95.KJ543 J876.K5.AJT86.Q2 AT5.JT42.KQ3.AT7 KQ43.Q63.742.986"]
+{
+                   Nord
+                   V876
+                   R5
+                   AVX86
+                   D2
+  Ouest                            Est
+  92                               AX5
+  A987                             VX42
+  95                               RD3
+  RV543                            AX7
+                   Sud
+                   RD43
+                   D63
+                   742
+                   986
+}
+[Declarer "E"]
+[Contract "4H"]
+[Result "9"]
+[Score "NS 100"]
+[Auction "W"]
+Pass  1D    X     1H
+X     2S    3H    Pass
+4H    Pass  Pass  Pass
+[Play "S"]
+SK S2 S6 SA
+SQ S9 S8 ST
+D2 D5 DA D3
+D4 D9 DJ DK
+H3 H7 HK HJ
+D7 C3 D8 DQ
+H6 HA H5 H2
+*
+
+[Event "BBO1-2019WBTC"]
+[Site "BB-FN3"]
+[Board "5"]
+[West "DE WIJS"]
+[North "NOWOSADZKI"]
+[East "B MULLER"]
+[South "KALITA"]
+[Room "Open"]
+[Scoring "IMP"]
+[Vulnerable "NS"]
+[Dealer "N"]
+[Deal "N:KQ974.AJT.7.AJT5 AT8.7.QT983.K743 653.Q54.K542.962 J2.K98632.AJ6.Q8"]
+{
+                   Nord
+                   RD974
+                   AVX
+                   7
+                   AVX5
+  Ouest                            Est
+  V2                               AX8
+  R98632                           7
+  AV6                              DX983
+  D8                               R743
+                   Sud
+                   653
+                   D54
+                   R542
+                   962
+}
+[Declarer "W"]
+[Contract "2H"]
+[Result "7"]
+[Score "NS 50"]
+[Auction "N"]
+1S    Pass  1NT   2H
+Pass  Pass  Pass
+[Play "N"]
+SK SA S6 S2
+HA H7 H5 HK
+SQ S8 S5 SJ
+CA C3 C9 C8
+D7 D3 D2 DJ
+HT C4 H4 H3
+CJ CK C2 CQ
+S7 ST S3 D6
+HJ D8 D4 DA
+CT C7 C6 H2
+-  -  -  H6
+*
+
+[Event "BBO1-2019WBTC"]
+[Site "BB-FN3"]
+[Board "5"]
+[West "BURAS"]
+[North "VAN PROOIJ"]
+[East "NARKIEWICZ|"]
+[South "VERHEES"]
+[Room "Closed"]
+[Scoring "IMP"]
+[Vulnerable "NS"]
+[Dealer "N"]
+[Deal "N:KQ974.AJT.7.AJT5 AT8.7.QT983.K743 653.Q54.K542.962 J2.K98632.AJ6.Q8"]
+{
+                   Nord
+                   RD974
+                   AVX
+                   7
+                   AVX5
+  Ouest                            Est
+  V2                               AX8
+  R98632                           7
+  AV6                              DX983
+  D8                               R743
+                   Sud
+                   653
+                   D54
+                   R542
+                   962
+}
+[Declarer "N"]
+[Contract "2S"]
+[Result "7"]
+[Score "NS -100"]
+[Auction "N"]
+1C    Pass  1D    2H
+2S    Pass  Pass  Pass
+[Play "E"]
+H7 HQ H6 HT
+CK C2 C8 CJ
+C7 C9 CQ CA
+SA S3 S2 SQ
+C4 C6 SJ C5
+S8 H5 H9 HJ
+D3 DK DA D7
+ST H4 H2 HA
+*
+
+[Event "BBO1-2019WBTC"]
+[Site "BB-FN3"]
+[Board "6"]
+[West "DE WIJS"]
+[North "NOWOSADZKI"]
+[East "B MULLER"]
+[South "KALITA"]
+[Room "Open"]
+[Scoring "IMP"]
+[Vulnerable "EW"]
+[Dealer "E"]
+[Deal "E:T975.JT42.T97.T2 AJ643.A5.J853.43 .Q9876.AK642.987 KQ82.K3.Q.AKQJ65"]
+{
+                   Nord
+                   RD82
+                   R3
+                   D
+                   ARDV65
+  Ouest                            Est
+  -                                 X975
+  D9876                            VX42
+  AR642                            X97
+  987                              X2
+                   Sud
+                   AV643
+                   A5
+                   V853
+                   43
+}
+[Declarer "S"]
+[Contract "6S"]
+[Result "12"]
+[Score "NS 980"]
+[Auction "E"]
+Pass  Pass  1H    X
+Pass  4S    Pass  4NT
+Pass  5H    Pass  6S
+Pass  Pass  Pass
+[Play "W"]
+DK DQ D7 D3
+C7 CA C2 C3
+*
+
+[Event "BBO1-2019WBTC"]
+[Site "BB-FN3"]
+[Board "6"]
+[West "BURAS"]
+[North "VAN PROOIJ"]
+[East "NARKIEWICZ|"]
+[South "VERHEES"]
+[Room "Closed"]
+[Scoring "IMP"]
+[Vulnerable "EW"]
+[Dealer "E"]
+[Deal "E:T975.JT42.T97.T2 AJ643.A5.J853.43 .Q9876.AK642.987 KQ82.K3.Q.AKQJ65"]
+{
+                   Nord
+                   RD82
+                   R3
+                   D
+                   ARDV65
+  Ouest                            Est
+  -                                 X975
+  D9876                            VX42
+  AR642                            X97
+  987                              X2
+                   Sud
+                   AV643
+                   A5
+                   V853
+                   43
+}
+[Declarer "S"]
+[Contract "6S"]
+[Result "12"]
+[Score "NS 980"]
+[Auction "E"]
+Pass  1S    Pass  1NT
+Pass  2D    Pass  2H
+Pass  3C    Pass  3D
+Pass  3NT   Pass  4C
+Pass  4H    Pass  6S
+Pass  Pass  Pass
+[Play "W"]
+DA DQ D9 D3
+D2 S8 D7 D5
+*
+
+[Event "BBO1-2019WBTC"]
+[Site "BB-FN3"]
+[Board "7"]
+[West "DE WIJS"]
+[North "NOWOSADZKI"]
+[East "B MULLER"]
+[South "KALITA"]
+[Room "Open"]
+[Scoring "IMP"]
+[Vulnerable "All"]
+[Dealer "S"]
+[Deal "S:97.J4.98.QJ87653 JT64.A2.KQT63.K2 AKQ852.T76.72.AT 3.KQ9853.AJ54.94"]
+{
+                   Nord
+                   ARD852
+                   X76
+                   72
+                   AX
+  Ouest                            Est
+  VX64                             3
+  A2                               RD9853
+  RDX63                            AV54
+  R2                               94
+                   Sud
+                   97
+                   V4
+                   98
+                   DV87653
+}
+[Declarer "W"]
+[Contract "3H"]
+[Result "12"]
+[Score "NS -230"]
+[Auction "S"]
+Pass  1D    1S    2D
+Pass  2H    2S    3H
+Pass  Pass  Pass
+[Play "N"]
+SA S3 S7 S6
+S2 C4 S9 SJ
+H6 H3 H4 HA
+H7 HK HJ H2
+*
+
+[Event "BBO1-2019WBTC"]
+[Site "BB-FN3"]
+[Board "7"]
+[West "BURAS"]
+[North "VAN PROOIJ"]
+[East "NARKIEWICZ|"]
+[South "VERHEES"]
+[Room "Closed"]
+[Scoring "IMP"]
+[Vulnerable "All"]
+[Dealer "S"]
+[Deal "S:97.J4.98.QJ87653 JT64.A2.KQT63.K2 AKQ852.T76.72.AT 3.KQ9853.AJ54.94"]
+{
+                   Nord
+                   ARD852
+                   X76
+                   72
+                   AX
+  Ouest                            Est
+  VX64                             3
+  A2                               RD9853
+  RDX63                            AV54
+  R2                               94
+                   Sud
+                   97
+                   V4
+                   98
+                   DV87653
+}
+[Declarer "W"]
+[Contract "5D"]
+[Result "11"]
+[Score "NS -600"]
+[Auction "S"]
+Pass  1D    1S    2H
+Pass  Pass  2S    3S
+Pass  5D    Pass  Pass
+Pass
+[Play "N"]
+CA C4 C3 C2
+SA S3 S7 S4
+CT C9 CQ CK
+D2 D4 D8 DK
+S8 D5 S9 S6
+D7 DJ D9 DQ
+*
+
+[Event "BBO1-2019WBTC"]
+[Site "BB-FN3"]
+[Board "8"]
+[West "DE WIJS"]
+[North "NOWOSADZKI"]
+[East "B MULLER"]
+[South "KALITA"]
+[Room "Open"]
+[Scoring "IMP"]
+[Vulnerable "None"]
+[Dealer "W"]
+[Deal "W:KQJ82.76.964.762 43.KJT.K32.T9854 A95.A982.QT5.AKJ T76.Q543.AJ87.Q3"]
+{
+                   Nord
+                   43
+                   RVX
+                   R32
+                   X9854
+  Ouest                            Est
+  RDV82                            A95
+  76                               A982
+  964                              DX5
+  762                              ARV
+                   Sud
+                   X76
+                   D543
+                   AV87
+                   D3
+}
+[Declarer "W"]
+[Contract "4S"]
+[Result "8"]
+[Score "NS 100"]
+[Auction "W"]
+2S    Pass  4S    Pass
+Pass  Pass
+[Play "N"]
+C9 CJ CQ C6
+DK D5 D7 D4
+D3 DT DJ D6
+D2 DQ DA D9
+*
+
+[Event "BBO1-2019WBTC"]
+[Site "BB-FN3"]
+[Board "8"]
+[West "BURAS"]
+[North "VAN PROOIJ"]
+[East "NARKIEWICZ|"]
+[South "VERHEES"]
+[Room "Closed"]
+[Scoring "IMP"]
+[Vulnerable "None"]
+[Dealer "W"]
+[Deal "W:KQJ82.76.964.762 43.KJT.K32.T9854 A95.A982.QT5.AKJ T76.Q543.AJ87.Q3"]
+{
+                   Nord
+                   43
+                   RVX
+                   R32
+                   X9854
+  Ouest                            Est
+  RDV82                            A95
+  76                               A982
+  964                              DX5
+  762                              ARV
+                   Sud
+                   X76
+                   D543
+                   AV87
+                   D3
+}
+[Declarer "E"]
+[Contract "3NT"]
+[Result "8"]
+[Score "NS 50"]
+[Auction "W"]
+Pass  Pass  1C    Pass
+1D    Pass  1NT   Pass
+2H    Pass  2S    Pass
+2NT   Pass  3NT   Pass
+Pass  Pass
+[Play "S"]
+H3 H6 HK HA
+C3 C2 CT CK
+ST SK S3 S9
+S6 S2 S4 SA
+S7 SQ D2 S5
+D8 SJ D3 D5
+H5 S8 C4 DT
+CQ C6 C5 CJ
+HQ H7 HT H2
+H4 C7 HJ H8
+DA D4 DK DQ
+DJ D6 C8 H9
+D7 D9 C9 CA
+*
+
+[Event "BBO1-2019WBTC"]
+[Site "BB-FN3"]
+[Board "9"]
+[West "DE WIJS"]
+[North "NOWOSADZKI"]
+[East "B MULLER"]
+[South "KALITA"]
+[Room "Open"]
+[Scoring "IMP"]
+[Vulnerable "EW"]
+[Dealer "N"]
+[Deal "N:8743.2.K75.QJ753 96.KJ98.98643.K6 AT5.AQT764.J2.A4 KQJ2.53.AQT.T982"]
+{
+                   Nord
+                   8743
+                   2
+                   R75
+                   DV753
+  Ouest                            Est
+  RDV2                             96
+  53                               RV98
+  ADX                              98643
+  X982                             R6
+                   Sud
+                   AX5
+                   ADX764
+                   V2
+                   A4
+}
+[Declarer "S"]
+[Contract "2H"]
+[Result "7"]
+[Score "NS -50"]
+[Auction "N"]
+Pass  Pass  1H    X
+Pass  1NT   2H    Pass
+Pass  Pass
+[Play "W"]
+SK S3 S6 S5
+DQ DK D6 D2
+H5 H2 H8 HQ
+H3 C3 H9 HA
+C2 C5 HJ H7
+C8 D5 HK H4
+S2 S4 S9 SA
+C9 D7 D3 HT
+CT S7 D8 H6
+-  -  -  CA
+*
+
+[Event "BBO1-2019WBTC"]
+[Site "BB-FN3"]
+[Board "9"]
+[West "BURAS"]
+[North "VAN PROOIJ"]
+[East "NARKIEWICZ|"]
+[South "VERHEES"]
+[Room "Closed"]
+[Scoring "IMP"]
+[Vulnerable "EW"]
+[Dealer "N"]
+[Deal "N:8743.2.K75.QJ753 96.KJ98.98643.K6 AT5.AQT764.J2.A4 KQJ2.53.AQT.T982"]
+{
+                   Nord
+                   8743
+                   2
+                   R75
+                   DV753
+  Ouest                            Est
+  RDV2                             96
+  53                               RV98
+  ADX                              98643
+  X982                             R6
+                   Sud
+                   AX5
+                   ADX764
+                   V2
+                   A4
+}
+[Declarer "S"]
+[Contract "2H"]
+[Result "8"]
+[Score "NS 110"]
+[Auction "N"]
+Pass  Pass  1H    X
+Pass  1NT   2H    Pass
+Pass  Pass
+[Play "W"]
+SK S3 S6 S5
+DQ DK D9 D2
+C2 CQ CK CA
+C8 CJ C6 C4
+H3 H2 H8 HQ
+H5 S4 H9 HA
+*
+
+[Event "BBO1-2019WBTC"]
+[Site "BB-FN3"]
+[Board "10"]
+[West "DE WIJS"]
+[North "NOWOSADZKI"]
+[East "B MULLER"]
+[South "KALITA"]
+[Room "Open"]
+[Scoring "IMP"]
+[Vulnerable "All"]
+[Dealer "E"]
+[Deal "E:JT76.AT92.5.KQ43 A82.K5.AJ73.AJ76 KQ43.QJ64.Q2.T85 95.873.KT9864.92"]
+{
+                   Nord
+                   95
+                   873
+                   RX9864
+                   92
+  Ouest                            Est
+  RD43                             VX76
+  DV64                             AX92
+  D2                               5
+  X85                              RD43
+                   Sud
+                   A82
+                   R5
+                   AV73
+                   AV76
+}
+[Declarer "W"]
+[Contract "3S"]
+[Result "8"]
+[Score "NS 100"]
+[Auction "E"]
+2D    2NT   3S    Pass
+Pass  Pass
+[Play "N"]
+C2 CK CA C5
+S5 S6 S2 S3
+D4 D5 DA D2
+S9 S7 SA S4
+D6 ST S8 SK
+H8 H2 HK HQ
+DK SJ D3 DQ
+H7 HA H5 H4
+H3 H9 C6 H6
+DT HT D7 HJ
+-  -  -  SQ
+*
+
+[Event "BBO1-2019WBTC"]
+[Site "BB-FN3"]
+[Board "10"]
+[West "BURAS"]
+[North "VAN PROOIJ"]
+[East "NARKIEWICZ|"]
+[South "VERHEES"]
+[Room "Closed"]
+[Scoring "IMP"]
+[Vulnerable "All"]
+[Dealer "E"]
+[Deal "E:JT76.AT92.5.KQ43 A82.K5.AJ73.AJ76 KQ43.QJ64.Q2.T85 95.873.KT9864.92"]
+{
+                   Nord
+                   95
+                   873
+                   RX9864
+                   92
+  Ouest                            Est
+  RD43                             VX76
+  DV64                             AX92
+  D2                               5
+  X85                              RD43
+                   Sud
+                   A82
+                   R5
+                   AV73
+                   AV76
+}
+[Declarer "N"]
+[Contract "3D"]
+[Result "11"]
+[Score "NS 150"]
+[Auction "E"]
+Pass  1C    Pass  1D
+Pass  1NT   Pass  3C
+X     3D    Pass  Pass
+Pass
+[Play "E"]
+CK CA CT C2
+D5 DA D2 D4
+H2 D3 DQ DK
+CQ C6 C5 C9
+*
+
+[Event "BBO1-2019WBTC"]
+[Site "BB-FN3"]
+[Board "11"]
+[West "DE WIJS"]
+[North "NOWOSADZKI"]
+[East "B MULLER"]
+[South "KALITA"]
+[Room "Open"]
+[Scoring "IMP"]
+[Vulnerable "None"]
+[Dealer "S"]
+[Deal "S:4.AQ54.7432.AT94 T63.J732.865.K82 AQ875.986.9.QJ76 KJ92.KT.AKQJT.53"]
+{
+                   Nord
+                   AD875
+                   986
+                   9
+                   DV76
+  Ouest                            Est
+  X63                              RV92
+  V732                             RX
+  865                              ARDVX
+  R82                              53
+                   Sud
+                   4
+                   AD54
+                   7432
+                   AX94
+}
+[Declarer "N"]
+[Contract "3C"]
+[Result "7"]
+[Score "NS -100"]
+[Auction "S"]
+Pass  Pass  1S    1NT
+X     Pass  2C    2D
+3C    Pass  Pass  Pass
+[Play "E"]
+DA D2 D8 D9
+C3 C9 CK C6
+C5 CT C2 C7
+S2 S4 S6 SA
+S9 CA S3 S8
+DJ C4 C8 CJ
+SJ D3 ST S5
+DK D4 D6 H6
+DQ D7 D5 CQ
+HT HQ H2 H8
+HK HA H3 H9
+*
+
+[Event "BBO1-2019WBTC"]
+[Site "BB-FN3"]
+[Board "11"]
+[West "BURAS"]
+[North "VAN PROOIJ"]
+[East "NARKIEWICZ|"]
+[South "VERHEES"]
+[Room "Closed"]
+[Scoring "IMP"]
+[Vulnerable "None"]
+[Dealer "S"]
+[Deal "S:4.AQ54.7432.AT94 T63.J732.865.K82 AQ875.986.9.QJ76 KJ92.KT.AKQJT.53"]
+{
+                   Nord
+                   AD875
+                   986
+                   9
+                   DV76
+  Ouest                            Est
+  X63                              RV92
+  V732                             RX
+  865                              ARDVX
+  R82                              53
+                   Sud
+                   4
+                   AD54
+                   7432
+                   AX94
+}
+[Declarer "E"]
+[Contract "1NT"]
+[Result "8"]
+[Score "NS -120"]
+[Auction "S"]
+Pass  Pass  1S    1NT
+Pass  Pass  Pass
+[Play "S"]
+D4 D5 D9 DA
+HA H2 H8 HK
+C4 C2 CJ C3
+H5 H3 H9 HT
+D2 D6 S5 DK
+D3 D8 S8 DT
+D7 S3 C6 DJ
+C9 S6 S7 DQ
+CT CK C7 C5
+S4 ST SA S2
+HQ H7 H6 S9
+CA C8 CQ SJ
+H4 HJ SQ SK
+*
+
+[Event "BBO1-2019WBTC"]
+[Site "BB-FN3"]
+[Board "12"]
+[West "DE WIJS"]
+[North "NOWOSADZKI"]
+[East "B MULLER"]
+[South "KALITA"]
+[Room "Open"]
+[Scoring "IMP"]
+[Vulnerable "NS"]
+[Dealer "W"]
+[Deal "W:J643.A95.Q852.96 A52.KT3.AJ96.K32 KQ.QJ6.T74.QJT74 T987.8742.K3.A85"]
+{
+                   Nord
+                   A52
+                   RX3
+                   AV96
+                   R32
+  Ouest                            Est
+  V643                             RD
+  A95                              DV6
+  D852                             X74
+  96                               DVX74
+                   Sud
+                   X987
+                   8742
+                   R3
+                   A85
+}
+[Declarer "N"]
+[Contract "2S"]
+[Result "8"]
+[Score "NS 110"]
+[Auction "W"]
+Pass  1NT   Pass  2C
+Pass  2D    Pass  2H
+Pass  2S    Pass  Pass
+Pass
+[Play "E"]
+CQ CA C6 C3
+D7 DK D2 D6
+D4 D3 D8 DA
+DT S7 D5 D9
+C7 C5 C9 CK
+HQ S8 DQ DJ
+H6 H2 H5 HK
+CT C8 H9 C2
+SK S9 S3 S2
+SQ ST S4 SA
+*
+
+[Event "BBO1-2019WBTC"]
+[Site "BB-FN3"]
+[Board "12"]
+[West "BURAS"]
+[North "VAN PROOIJ"]
+[East "NARKIEWICZ|"]
+[South "VERHEES"]
+[Room "Closed"]
+[Scoring "IMP"]
+[Vulnerable "NS"]
+[Dealer "W"]
+[Deal "W:J643.A95.Q852.96 A52.KT3.AJ96.K32 KQ.QJ6.T74.QJT74 T987.8742.K3.A85"]
+{
+                   Nord
+                   A52
+                   RX3
+                   AV96
+                   R32
+  Ouest                            Est
+  V643                             RD
+  A95                              DV6
+  D852                             X74
+  96                               DVX74
+                   Sud
+                   X987
+                   8742
+                   R3
+                   A85
+}
+[Declarer "N"]
+[Contract "1NT"]
+[Result "8"]
+[Score "NS 120"]
+[Auction "W"]
+Pass  1NT   Pass  Pass
+Pass
+[Play "E"]
+CQ C5 C6 C2
+CJ CA C9 C3
+SK ST S3 S2
+CT C8 H5 CK
+D4 DK D2 D6
+D7 D3 D5 DJ
+DT H2 D8 DA
+SQ S7 S4 SA
+H6 S9 SJ S5
+HQ H4 H9 HK
+*
+
+[Event "BBO1-2019WBTC"]
+[Site "BB-FN3"]
+[Board "13"]
+[West "DE WIJS"]
+[North "NOWOSADZKI"]
+[East "B MULLER"]
+[South "KALITA"]
+[Room "Open"]
+[Scoring "IMP"]
+[Vulnerable "All"]
+[Dealer "N"]
+[Deal "N:K96.A2.863.QT852 J75.943.T742.A97 AQ84.K75.AQ9.643 T32.QJT86.KJ5.KJ"]
+{
+                   Nord
+                   R96
+                   A2
+                   863
+                   DX852
+  Ouest                            Est
+  X32                              V75
+  DVX86                            943
+  RV5                              X742
+  RV                               A97
+                   Sud
+                   AD84
+                   R75
+                   AD9
+                   643
+}
+[Declarer "S"]
+[Contract "3NT"]
+[Result "8"]
+[Score "NS -100"]
+[Auction "N"]
+Pass  Pass  1NT   Pass
+3C    Pass  3D    Pass
+3NT   Pass  Pass  Pass
+[Play "W"]
+HQ HA H9 H5
+S3 S6 S5 SA
+CJ CQ CA C3
+H8 H2 H4 H7
+HJ D3 H3 HK
+CK C2 C7 C4
+HT D6 D2 S4
+*
+
+[Event "BBO1-2019WBTC"]
+[Site "BB-FN3"]
+[Board "13"]
+[West "BURAS"]
+[North "VAN PROOIJ"]
+[East "NARKIEWICZ|"]
+[South "VERHEES"]
+[Room "Closed"]
+[Scoring "IMP"]
+[Vulnerable "All"]
+[Dealer "N"]
+[Deal "N:K96.A2.863.QT852 J75.943.T742.A97 AQ84.K75.AQ9.643 T32.QJT86.KJ5.KJ"]
+{
+                   Nord
+                   R96
+                   A2
+                   863
+                   DX852
+  Ouest                            Est
+  X32                              V75
+  DVX86                            943
+  RV5                              X742
+  RV                               A97
+                   Sud
+                   AD84
+                   R75
+                   AD9
+                   643
+}
+[Declarer "S"]
+[Contract "3NT"]
+[Result "8"]
+[Score "NS -100"]
+[Auction "N"]
+Pass  Pass  1NT   Pass
+2S    Pass  3C    Pass
+3NT   Pass  Pass  Pass
+[Play "W"]
+HQ H2 H9 H5
+H6 HA H4 H7
+S3 S9 S5 SA
+CJ CQ CA C4
+H8 D3 H3 HK
+CK C2 C7 C3
+*
+
+[Event "BBO1-2019WBTC"]
+[Site "BB-FN3"]
+[Board "14"]
+[West "DE WIJS"]
+[North "NOWOSADZKI"]
+[East "B MULLER"]
+[South "KALITA"]
+[Room "Open"]
+[Scoring "IMP"]
+[Vulnerable "None"]
+[Dealer "E"]
+[Deal "E:.A73.K862.AK6532 J876.QJT.JT.J974 KT4.K654.753.QT8 AQ9532.982.AQ94."]
+{
+                   Nord
+                   AD9532
+                   982
+                   AD94
+                   -
+  Ouest                            Est
+  RX4                              -
+  R654                             A73
+  753                              R862
+  DX8                              AR6532
+                   Sud
+                   V876
+                   DVX
+                   VX
+                   V974
+}
+[Declarer "N"]
+[Contract "4S"]
+[Result "11"]
+[Score "NS 450"]
+[Auction "E"]
+2C    Pass  3C    3S
+4D    4S    Pass  Pass
+Pass
+[Play "E"]
+CA C4 C8 S2
+H7 HT HK H9
+C3 C7 CT S3
+D2 DT D3 D4
+C2 S6 ST SQ
+HA HJ H4 H8
+*
+
+[Event "BBO1-2019WBTC"]
+[Site "BB-FN3"]
+[Board "14"]
+[West "BURAS"]
+[North "VAN PROOIJ"]
+[East "NARKIEWICZ|"]
+[South "VERHEES"]
+[Room "Closed"]
+[Scoring "IMP"]
+[Vulnerable "None"]
+[Dealer "E"]
+[Deal "E:.A73.K862.AK6532 J876.QJT.JT.J974 KT4.K654.753.QT8 AQ9532.982.AQ94."]
+{
+                   Nord
+                   AD9532
+                   982
+                   AD94
+                   -
+  Ouest                            Est
+  RX4                              -
+  R654                             A73
+  753                              R862
+  DX8                              AR6532
+                   Sud
+                   V876
+                   DVX
+                   VX
+                   V974
+}
+[Declarer "N"]
+[Contract "4SX"]
+[Result "9"]
+[Score "NS -100"]
+[Auction "E"]
+1C    Pass  1H    1S
+X     3S    Pass  4S
+X     Pass  Pass  Pass
+[Play "E"]
+CA C4 CT S2
+H7 HT HK H2
+C2 C7 C8 S3
+HA HJ H4 H8
+C3 C9 CQ S5
+H3 HQ H5 H9
+DK DT D3 D4
+CK CJ D5 S9
+D2 DJ D7 D9
+*
+
+[Event "BBO1-2019WBTC"]
+[Site "BB-FN3"]
+[Board "15"]
+[West "DE WIJS"]
+[North "NOWOSADZKI"]
+[East "B MULLER"]
+[South "KALITA"]
+[Room "Open"]
+[Scoring "IMP"]
+[Vulnerable "NS"]
+[Dealer "S"]
+[Deal "S:Q.653.K7654.A843 AKJ6.8742.AQJ.Q2 874.AKQ.32.KJT96 T9532.JT9.T98.75"]
+{
+                   Nord
+                   874
+                   ARD
+                   32
+                   RVX96
+  Ouest                            Est
+  ARV6                             X9532
+  8742                             VX9
+  ADV                              X98
+  D2                               75
+                   Sud
+                   D
+                   653
+                   R7654
+                   A843
+}
+[Declarer "W"]
+[Contract "3S"]
+[Result "9"]
+[Score "NS -140"]
+[Auction "S"]
+Pass  1C    Pass  1D
+Pass  1NT   Pass  2H
+Pass  2NT   Pass  3H
+Pass  3S    Pass  Pass
+Pass
+[Play "N"]
+HA H9 H6 H4
+HQ HT H5 H2
+HK HJ H3 H7
+D2 D8 D7 DQ
+S4 S2 SQ SA
+S7 S3 D4 SK
+S8 S5 C3 SJ
+CJ C5 C4 H8
+CK C7 C8 CQ
+D3 D9 -  -
+*
+
+[Event "BBO1-2019WBTC"]
+[Site "BB-FN3"]
+[Board "15"]
+[West "BURAS"]
+[North "VAN PROOIJ"]
+[East "NARKIEWICZ|"]
+[South "VERHEES"]
+[Room "Closed"]
+[Scoring "IMP"]
+[Vulnerable "NS"]
+[Dealer "S"]
+[Deal "S:Q.653.K7654.A843 AKJ6.8742.AQJ.Q2 874.AKQ.32.KJT96 T9532.JT9.T98.75"]
+{
+                   Nord
+                   874
+                   ARD
+                   32
+                   RVX96
+  Ouest                            Est
+  ARV6                             X9532
+  8742                             VX9
+  ADV                              X98
+  D2                               75
+                   Sud
+                   D
+                   653
+                   R7654
+                   A843
+}
+[Declarer "W"]
+[Contract "3S"]
+[Result "8"]
+[Score "NS 50"]
+[Auction "S"]
+Pass  1C    Pass  1D
+Pass  1NT   Pass  2H
+Pass  3S    Pass  Pass
+Pass
+[Play "N"]
+HK H9 H6 H4
+HQ HT H5 H7
+D2 D8 DK DA
+S4 S2 SQ SA
+S7 S3 D4 SK
+S8 S5 C3 SJ
+HA HJ H3 H2
+CJ C7 CA C2
+CK C5 C4 CQ
+*
+
+[Event "BBO1-2019WBTC"]
+[Site "BB-FN3"]
+[Board "16"]
+[West "DE WIJS"]
+[North "NOWOSADZKI"]
+[East "B MULLER"]
+[South "KALITA"]
+[Room "Open"]
+[Scoring "IMP"]
+[Vulnerable "EW"]
+[Dealer "W"]
+[Deal "W:AQ97632.K6.AT.Q4 8.AQT732.K64.532 54.J95.J873.AJ87 KJT.84.Q952.KT96"]
+{
+                   Nord
+                   8
+                   ADX732
+                   R64
+                   532
+  Ouest                            Est
+  AD97632                          54
+  R6                               V95
+  AX                               V873
+  D4                               AV87
+                   Sud
+                   RVX
+                   84
+                   D952
+                   RX96
+}
+[Declarer "W"]
+[Contract "4S"]
+[Result "9"]
+[Score "NS 100"]
+[Auction "W"]
+1C    3H    X     Pass
+3S    Pass  4S    Pass
+Pass  Pass
+[Play "N"]
+C3 C7 CK C4
+HQ H5 H4 H6
+HA H9 H8 HK
+H7 HJ SK DT
+C5 C8 C6 CQ
+S8 S4 ST SA
+-  -  -  SQ
+*
+
+[Event "BBO1-2019WBTC"]
+[Site "BB-FN3"]
+[Board "16"]
+[West "BURAS"]
+[North "VAN PROOIJ"]
+[East "NARKIEWICZ|"]
+[South "VERHEES"]
+[Room "Closed"]
+[Scoring "IMP"]
+[Vulnerable "EW"]
+[Dealer "W"]
+[Deal "W:AQ97632.K6.AT.Q4 8.AQT732.K64.532 54.J95.J873.AJ87 KJT.84.Q952.KT96"]
+{
+                   Nord
+                   8
+                   ADX732
+                   R64
+                   532
+  Ouest                            Est
+  AD97632                          54
+  R6                               V95
+  AX                               V873
+  D4                               AV87
+                   Sud
+                   RVX
+                   84
+                   D952
+                   RX96
+}
+[Declarer "W"]
+[Contract "2S"]
+[Result "9"]
+[Score "NS -140"]
+[Auction "W"]
+1S    2H    Pass  Pass
+2S    Pass  Pass  Pass
+[Play "N"]
+C2 C7 C9 CQ
+S8 S5 ST SA
+C5 CA C6 C4
+H2 S4 SJ SQ
+H3 D3 SK S7
+HQ H5 H8 H6
+HA H9 H4 HK
+*
