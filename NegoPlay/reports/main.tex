@@ -1,0 +1,638 @@
+% =====================================================================
+% NegoPlay - Preliminary Report
+% Author: Anna Ben-Shushan
+% Supervisor: Dr. Yoram Segal
+% Course: AI Development Expert
+% =====================================================================
+\documentclass[11pt, a4paper, oneside]{report}
+
+% ----- Encoding & Fonts -----
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+
+% ----- Page geometry -----
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{setspace}
+\onehalfspacing
+
+% ----- Tables & Figures -----
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{colortbl}
+\usepackage[table]{xcolor}
+\usepackage{float}
+
+% ----- Math & Symbols -----
+\usepackage{amsmath, amssymb}
+
+% ----- Lists -----
+\usepackage{enumitem}
+
+% ----- Hyperlinks -----
+\usepackage[hidelinks, colorlinks=true, linkcolor=black, citecolor=blue, urlcolor=blue]{hyperref}
+
+% ----- Bibliography -----
+\usepackage[round, authoryear]{natbib}
+\bibliographystyle{plainnat}
+
+% ----- Header / Footer -----
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{NegoPlay -- Preliminary Report}
+\fancyhead[R]{\leftmark}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% ----- Custom colors for the WP/Gantt table -----
+\definecolor{wpdone}{HTML}{8FCB9B}
+\definecolor{wpplan}{HTML}{F8C471}
+\definecolor{wpcrit}{HTML}{E74C3C}
+\definecolor{wplight}{HTML}{D6EAF8}
+\definecolor{headbg}{HTML}{2C3E50}
+
+% ----- Chapter style -----
+\usepackage{titlesec}
+\titleformat{\chapter}[hang]
+  {\normalfont\Huge\bfseries}{\thechapter}{20pt}{\Huge}
+
+% =====================================================================
+% DOCUMENT START
+% =====================================================================
+\begin{document}
+
+% ---------------- Cover Page ----------------
+\begin{titlepage}
+\centering
+\vspace*{1.5cm}
+
+{\Large\bfseries AI Development Expert -- Final Project\par}
+\vspace{0.4cm}
+{\large Preliminary Report\par}
+\vspace{2.0cm}
+
+\rule{\textwidth}{1.5pt}\\[0.6cm]
+{\Huge\bfseries NegoPlay\par}
+\vspace{0.5cm}
+{\Large\itshape Strategic Profiles from Bridge to Business:\\[0.2cm]
+An Empirical Investigation of Decision-Making Styles\\[0.2cm] using LLM Agents\par}
+\rule{\textwidth}{1.5pt}\\[1.5cm]
+
+\vfill
+
+{\large
+\begin{tabular}{rl}
+\textbf{Student:}      & Anna Ben-Shushan \\[0.25cm]
+\textbf{Supervisor:}   & Dr. Yoram Segal  \\[0.25cm]
+\textbf{Course:}       & AI Development Expert \\[0.25cm]
+\textbf{Document:}     & Preliminary Project Report \\[0.25cm]
+\textbf{Version:}      & 1.0 \\[0.25cm]
+\textbf{Date:}         & \today \\
+\end{tabular}
+}
+
+\vspace{1.5cm}
+\end{titlepage}
+
+% ---------------- Dedication / Acknowledgements ----------------
+\thispagestyle{empty}
+\vspace*{4cm}
+\begin{center}
+{\Large\bfseries Acknowledgements}
+\end{center}
+\vspace{1cm}
+\noindent
+I would like to thank \textbf{Dr.\ Yoram Segal}, my project supervisor, for his structured methodology framework -- in particular the requirement of clearly identified anchor papers, single-SDK architecture, and explicit baseline comparisons. These principles shaped this project from the first day.
+
+\vspace{0.6cm}
+\noindent
+This project is also the empirical baseline for my PhD research at LUT University (Finland), under the supervision of \textbf{Prof.\ Jari H\"am\"al\"ainen}, and benefits from ongoing discussions with my advisor \textbf{Nezer} on risk-taking behavior in elite bridge play.
+
+\vspace{0.6cm}
+\noindent
+The 149{,}208-row dataset used in this work was collected from the public EuroBridge database (European Bridge League, 2016--2025) and processed using a custom Python pipeline developed during the first weeks of 2026.
+
+\clearpage
+
+% ---------------- TOC, LoF, LoT ----------------
+\tableofcontents
+\clearpage
+\listoffigures
+\listoftables
+\clearpage
+
+% =====================================================================
+% CHAPTER 1 -- INTRODUCTION
+% =====================================================================
+\chapter{Introduction}
+\label{ch:intro}
+
+\section{Background and Motivation}
+
+Decision making under incomplete information is one of the hardest problems in artificial intelligence. While modern AI has reached super-human performance in fully observable games such as chess \citep{silver2017alphazero}, Go, and Atari \citep{schrittwieser2019muzero}, real-world strategic environments -- business negotiation in particular -- are characterized by hidden information, partial communication, and a mix of cooperation and competition that is hard to model directly.
+
+\textbf{Bridge} is a unique testbed for these challenges. Each of the four players sees only 13 of the 52 cards, must cooperate with a partner while competing against two opponents, and communicates through a highly structured bidding language with approximately $10^{47}$ possible sequences. Bridge bidding is, formally, a multi-agent negotiation under imperfect information with measurable outcomes. \citet{rong2019competitive} showed that a deep learning system splitting bidding into estimation (ENN) and policy (PNN) networks can beat the world-leading rule-based engine Wbridge5; \citet{brown2019pluribus} demonstrated that imperfect-information AI can defeat elite humans in multi-player poker.
+
+\textbf{NegoPlay} asks a more applied question: \emph{can we extract decision-making profiles from a large dataset of elite bridge play, and reuse those profiles to predict and simulate behavior in business negotiation scenarios?}
+
+\section{Why this matters}
+
+Business negotiation suffers from a fundamental data scarcity problem. Real negotiation transcripts are proprietary, outcomes are rarely measurable in standardized form, and no public datasets allow training of behavioral models. Bridge, in contrast, offers a clean laboratory:
+
+\begin{itemize}[leftmargin=*]
+    \item More than 149{,}000 structured decision points with measurable outcomes.
+    \item Clear win/loss signals (contract success, IMP scores, VP conversion).
+    \item Tournament-grade decisions by expert players, with explicit player identity per seat.
+\end{itemize}
+
+If profiles discovered in this clean environment transfer measurably to the noisier domain of negotiation, this opens a methodological path for studying business strategy without proprietary negotiation data.
+
+\section{Literature Review and Positioning}
+\label{sec:litreview}
+
+This section grounds NegoPlay in the wider research conversation. Following \citet{lockett2007evolving}, we treat an unknown counterpart as a mixture of \emph{cardinal strategies} that can be discovered and re-used. We organize the literature into five themes.
+
+\subsection*{Theme 1: Player-style clustering from gameplay sequences}
+
+Our methodological anchor is \citet{talwadker2022cognitionnet}, who introduced \textbf{CognitionNet}. Using a sequence-to-sequence interpreter coupled to a classifier, they discovered behavioral profiles directly from raw Rummy telemetry. NegoPlay replaces ``Rummy telemetry'' with ``bridge bidding sequences'' but keeps the same logic: \emph{styles emerge from sequences of actions, without predefined rules.} \citet{sztyber2023bridgehand} provide an alternative path -- learning a continuous 8-dimensional embedding of bridge hands -- that we may incorporate in a second iteration.
+
+\subsection*{Theme 2: Inference + decision split (theory of mind)}
+
+Our second anchor is \citet{rong2019competitive}, whose ENN/PNN architecture separates the inference of partner's hidden cards from the action policy. \citet{wang2024inference} extend this with a conditional GAN inference module. NegoPlay applies the same split at the LLM level: the cluster profile is the \emph{inference} (``what kind of agent am I facing?''), and the system prompt is the \emph{policy} (``how do I act?''). This theory-of-mind-before-action structure is now standard in published bridge AI.
+
+\subsection*{Theme 3: Opponent as mixture of cardinal styles}
+
+\citet{lockett2007evolving} is the theoretical foundation for the entire project. Their result -- that explicit mixture coefficients over a small set of cardinal opponent types outperform monolithic networks -- justifies the central NegoPlay premise: every negotiation counterpart can be treated as a weighted mixture of the few profiles discovered in the bridge data.
+
+\subsection*{Theme 4: Bridging structured games and natural-language negotiation}
+
+\citet{james2021attitude} encode both actions and ``cheap talk'' messages into unified attitude vectors, then cluster them. This is the conceptual glue between the bridge stage (structured signals) and the negotiation stage (free-form text), and it is the paper we cite when defending the transfer claim.
+
+\subsection*{Theme 5: Existing bridge AI engines as benchmarks}
+
+\citet{yeh2018automatic} and \citet{kita2024simple} train deep RL bidders that beat Wbridge5; the open-source BEN engine \citep{lorserker_ben} provides a neural-network-based, scriptable opponent that we can use to ground LLM-vs-LLM games against an objective player. \citet{jarosz2022review} provides a clean survey of the field.
+
+\subsection*{What others did, and what NegoPlay does differently}
+
+\begin{table}[H]
+\centering\small
+\caption{NegoPlay positioning against representative prior work.}
+\label{tab:positioning}
+\begin{tabularx}{\textwidth}{p{3.2cm} X X}
+\toprule
+\textbf{Reference} & \textbf{What they did} & \textbf{What NegoPlay does differently} \\
+\midrule
+\citet{talwadker2022cognitionnet} & Clustered Rummy players from telemetry sequences. & Cluster bridge \emph{bidding} sequences; then \emph{reuse} the profiles in a second, different domain (negotiation). \\
+\citet{rong2019competitive} & Built a deep ENN/PNN bidding system that beats Wbridge5. & Replace the deep networks with \emph{LLM agents} prompted by the discovered profile; trade peak strength for explainability and cross-domain reuse. \\
+\citet{lockett2007evolving} & Evolved explicit opponent models using NEAT. & Replace the evolved cardinal set with a \emph{data-driven, statistically validated} cardinal set (K-means + HDBSCAN). \\
+\citet{james2021attitude} & Clustered attitudes from actions + cheap talk in toy games. & Apply the same logic to a real, large-scale, expert dataset -- and explicitly test transfer between two domains. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+% =====================================================================
+% CHAPTER 2 -- RESEARCH QUESTION & OBJECTIVES
+% =====================================================================
+\chapter{Research Question and Objectives}
+\label{ch:rq}
+
+\section{Primary Research Question}
+
+\begin{quote}
+\itshape Can LLM agents built from automatically-discovered bridge decision-making profiles exhibit behavioral consistency (\emph{Spearman} $\rho \geq 0.7$) between winning in bridge bidding simulations and winning in parallel business negotiation simulations?
+\end{quote}
+
+\section{Hypotheses}
+
+\begin{description}[leftmargin=2cm]
+    \item[H1 -- Statistical:] K-means clustering on five behavioral features will produce 3--5 stable profiles with Silhouette score $\geq 0.4$ and $p < 0.05$ against random clustering.
+    \item[H2 -- Behavioral:] LLM agents instantiated with these profiles will exhibit measurably different behaviors in bridge bidding (per-profile win-rate variance $> 15\%$).
+    \item[H3 -- Transfer (main):] The win-rate ranking across profiles will correlate $\rho \geq 0.7$ (Spearman) between the bridge and negotiation domains.
+    \item[Null:] No correlation $> 0.5$ between domains. This too is a valid research finding.
+\end{description}
+
+\section{Objectives}
+
+The project has four operational objectives:
+
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Statistical:} discover 3--5 stable decision profiles from $\approx$\,1{,}500 elite players.
+    \item \textbf{Linguistic:} translate each profile into a 5--7 trait skill description using an LLM.
+    \item \textbf{Engineering:} build four LLM agents (one per profile) with verifiable, structured output.
+    \item \textbf{Empirical:} run dual simulations (bridge + negotiation) and measure cross-domain alignment.
+\end{enumerate}
+
+\section{Anchor papers}
+
+Following Dr.\ Yoram Segal's methodology framework, every project declares its anchor papers explicitly:
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Anchor 1 (Stage 1 -- clustering):} \citet{talwadker2022cognitionnet}.
+    \item \textbf{Anchor 2 (Stage 3 -- inference/decision split):} \citet{rong2019competitive}.
+    \item \textbf{Theoretical foundation:} \citet{lockett2007evolving}.
+\end{itemize}
+
+% =====================================================================
+% CHAPTER 3 -- METHODOLOGY
+% =====================================================================
+\chapter{Methodology}
+\label{ch:method}
+
+\section{Overview}
+
+NegoPlay is a four-stage hybrid pipeline that combines classical machine learning with large language models (see Figure~\ref{fig:pipeline}).
+
+\begin{figure}[H]
+\centering
+\fbox{\parbox{0.92\textwidth}{
+\centering
+\vspace{0.4cm}
+\textbf{Stage 1} -- Profile Discovery (K-Means + HDBSCAN on player features)\\
+$\downarrow$\\
+\textbf{Stage 2} -- Skill Extraction (Gemini Flash 2.0 names each profile)\\
+$\downarrow$\\
+\textbf{Stage 3} -- Agent Construction (4 LLM agents, profile-conditioned prompts)\\
+$\downarrow$\\
+\textbf{Stage 4} -- Dual Simulation + Cross-Domain Alignment\\
+\vspace{0.2cm}
+}}
+\caption{The four-stage NegoPlay pipeline. Stages 1 and 4 produce the empirical evidence; stages 2 and 3 produce the agents.}
+\label{fig:pipeline}
+\end{figure}
+
+\section{Dataset}
+
+The dataset was collected by the author from the public EuroBridge database between January and May 2026, using a custom Python scraping pipeline.
+
+\begin{table}[H]
+\centering\small
+\caption{NegoPlay dataset summary.}
+\label{tab:dataset}
+\begin{tabular}{lr}
+\toprule
+\textbf{Metric} & \textbf{Value} \\
+\midrule
+Total rows (board $\times$ room) & 149{,}208 \\
+European Championships covered & 5 (2016--2025) \\
+Unique players (by name)        & $\approx$ 2{,}500 \\
+Players with $\geq 20$ declared boards & 1{,}572 \\
+Player-name coverage (N/S/E/W $\times$ open/closed) & 99.9\,\% \\
+Card-holding coverage (52 cards)                    & 54\,\% \\
+Bidding-sequence coverage                            & 31\,\% (100\,\% on Herning 2024 + Poznan 2025) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Stage 1 -- Profile Discovery (ML)}
+
+Five behavioural features are computed per player from declarations made by that player:
+
+\begin{itemize}[leftmargin=*]
+    \item \texttt{slam\_rate} -- percentage of declarations at slam level (6 or 7).
+    \item \texttt{success\_rate} -- percentage of contracts made.
+    \item \texttt{preempt\_rate} -- percentage of opening bids at level 2 or higher.
+    \item \texttt{double\_rate} -- percentage of double calls (penalty + takeout).
+    \item \texttt{avg\_risk\_score} -- composite risk index in $[0,10]$.
+\end{itemize}
+
+Features are standardized via \texttt{StandardScaler}. K-Means is run for $k \in \{2,3,4,5,6\}$ and the best $k$ is chosen by Silhouette. HDBSCAN is used as an independent validator -- both clusterings must agree to within $\pm 1$ cluster.
+
+\section{Stage 2 -- Skill Extraction (LLM)}
+
+For each cluster, 5--10 chunks of 20--30 representative games are sent to \textbf{Gemini Flash 2.0} with a strict JSON schema. The LLM is instructed to return 5--7 characteristic skills. Skills appearing in $\geq 3$ chunks are kept. The author then assigns a human-readable profile name to each cluster (e.g.\ \emph{Slam Hunter, Insurance Player, Bluffer, Doubler}).
+
+\section{Stage 3 -- Agent Construction}
+
+Each profile becomes an LLM agent through a structured system prompt that contains: identity (profile name), 5--7 traits, domain context (bridge \textit{or} negotiation), output schema (JSON), and 1--2 few-shot examples. Two agent classes are implemented:
+
+\begin{itemize}[leftmargin=*]
+    \item \texttt{BridgeAgent.make\_bid(hand, auction)} -- returns a valid bridge bid.
+    \item \texttt{NegotiationAgent.respond\_to\_offer(scenario, history, offer)} -- returns a counter-offer plus reasoning.
+\end{itemize}
+
+\section{Stage 4 -- Dual Simulation and Alignment}
+
+\textbf{4a Bridge:} 50 randomly generated hands are played by combinations of profile agents; results are scored in IMPs. As a non-LLM benchmark, profile agents can also play one side of a board against the open-source BEN engine \citep{lorserker_ben} sitting on the other side.
+
+\textbf{4b Negotiation:} four scenarios (M\&A, JV equity split, B2B SaaS pricing, government tender) are run for each pair of agents, with up to 10 rounds and an explicit walk-away condition.
+
+\textbf{4c Alignment:} per-profile win rates are computed for both domains; the cross-domain alignment is measured by \emph{Spearman} correlation. A scatter plot is produced; significance is tested via a two-sided permutation test.
+
+\section{Tools and Stack}
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Language:} Python 3.11 in a virtual environment.
+    \item \textbf{IDE:} Google Antigravity (agent-first), with VS Code as fallback.
+    \item \textbf{ML libraries:} \texttt{scikit-learn}, \texttt{gensim}, \texttt{shap}.
+    \item \textbf{LLM (default):} Google Gemini Flash 2.0 -- cost \$0.30 / M output tokens.
+    \item \textbf{LLM (cross-validation):} Anthropic Claude and OpenAI GPT, routed through a single \texttt{llm\_client.py} wrapper. This strengthens the claim that findings are not a single-provider artifact.
+    \item \textbf{Source control:} Git + GitHub, public repository.
+    \item \textbf{Experiment tracking:} JSON-Lines logs in \texttt{results/llm\_logs/}, with provider, model, tokens, latency, and cost per call.
+\end{itemize}
+
+% =====================================================================
+% CHAPTER 4 -- SCHEDULE
+% =====================================================================
+\chapter{Schedule}
+\label{ch:schedule}
+
+The project runs for five weeks (ten sessions, two per week). Each week corresponds to a sprint with one major deliverable.
+
+\begin{table}[H]
+\centering\small
+\caption{Five-week sprint plan.}
+\label{tab:sprints}
+\begin{tabularx}{\textwidth}{c c X l}
+\toprule
+\textbf{Sprint} & \textbf{Week} & \textbf{Theme} & \textbf{Deliverable} \\
+\midrule
+1 & 1 & Research \& Setup        & PRD, literature review, repo skeleton \\
+2 & 2 & Stage 1 + Stage 2        & Validated clusters, named profiles \\
+3 & 3 & Stage 3                  & Four working LLM agents \\
+4 & 4 & Stage 4                  & Bridge + negotiation simulations + alignment \\
+5 & 5 & Polish \& Defense        & Final report, presentation, demo video \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+% =====================================================================
+% CHAPTER 5 -- WORK PACKAGES
+% =====================================================================
+\chapter{Work Packages}
+\label{ch:wp}
+
+The project is decomposed into seven work packages (WP). Each WP groups related tasks across one or more sessions.
+
+\section*{WP1 -- Research foundation}
+\textbf{Sessions:} 1--2.\quad \textbf{Deliverables:} PRD v1.0, literature review (17 papers + 9 PhD-context), repository structure, two anchor papers identified.\\
+\textbf{Tasks:} (T1.1) project scope alignment with supervisor; (T1.2) PRD draft and freeze; (T1.3) literature search and anchor selection; (T1.4) GitHub repository scaffold; (T1.5) Antigravity + Gemini setup; (T1.6) related-work survey of eight bridge-AI repositories.
+
+\section*{WP2 -- Data pipeline (already in place at project start)}
+\textbf{Sessions:} pre-project (Jan--May 2026).\quad \textbf{Deliverable:} \texttt{all\_matches\_full.csv} -- 149{,}208 rows.\\
+\textbf{Tasks:} EuroBridge HTML scraping; card backfill via BoardAcross; player-name backfill (99.9\,\% coverage). \emph{This WP is closed; the report documents it but no further work is required for NegoPlay.}
+
+\section*{WP3 -- Stage 1: clustering}
+\textbf{Sessions:} 3--4.\quad \textbf{Deliverables:} \texttt{player\_features.csv}, \texttt{player\_clusters.csv}, silhouette plot, validation report.\\
+\textbf{Tasks:} (T3.1) \texttt{shared/data\_loader.py}; (T3.2) \texttt{stage1\_clustering/features.py}; (T3.3) \texttt{stage1\_clustering/clustering.py} (K-Means + HDBSCAN); (T3.4) \texttt{stage1\_clustering/validation.py} (Silhouette, Davies-Bouldin, permutation $p$-value); (T3.5) exploratory notebook with PCA / t-SNE plots.
+
+\section*{WP4 -- Stage 2: skill extraction}
+\textbf{Sessions:} 4.\quad \textbf{Deliverables:} \texttt{skill\_profiles.json}, \texttt{docs/profile\_descriptions.md}.\\
+\textbf{Tasks:} (T4.1) \texttt{shared/llm\_client.py} (unified Gemini/Claude/OpenAI wrapper); (T4.2) game chunker; (T4.3) Gemini-based skill extractor with strict JSON schema; (T4.4) cross-chunk aggregator; (T4.5) manual profile naming by the author.
+
+\section*{WP5 -- Stage 3: agents}
+\textbf{Sessions:} 5--6.\quad \textbf{Deliverables:} \texttt{BridgeAgent}, \texttt{NegotiationAgent}, full prompt book.\\
+\textbf{Tasks:} (T5.1) \texttt{BaseAgent} abstract class; (T5.2) \texttt{BridgeAgent.make\_bid}; (T5.3) \texttt{NegotiationAgent.respond}; (T5.4) prompt library in \texttt{shared/prompts.py}; (T5.5) manual sanity tests confirming behavioral variance $> 30\,\%$.
+
+\section*{WP6 -- Stage 4: simulation and alignment}
+\textbf{Sessions:} 7--8.\quad \textbf{Deliverables:} 50 bridge games, 48 negotiation sessions, alignment report (\emph{the key result}).\\
+\textbf{Tasks:} (T6.1) \texttt{bridge\_game.py} runner; (T6.2) \texttt{negotiation.py} runner; (T6.3) outcome scoring; (T6.4) optional BEN-engine adapter; (T6.5) \texttt{alignment.py} -- Spearman correlation + permutation test; (T6.6) final scatter plot.
+
+\section*{WP7 -- Polish and defense}
+\textbf{Sessions:} 9--10.\quad \textbf{Deliverables:} business-plan section, slide deck, promo video, defense rehearsal.\\
+\textbf{Tasks:} (T7.1) business-plan section (TAM/SAM/SOM, token economics); (T7.2) 12--15 slide deck; (T7.3) 60--90 second promo video; (T7.4) README polish; (T7.5) Q\&A document.
+
+% =====================================================================
+% CHAPTER 6 -- GANTT
+% =====================================================================
+\chapter{Gantt Chart and Dependencies}
+\label{ch:gantt}
+
+\section{WP $\times$ Session matrix}
+
+Following the structure recommended by Dr.\ Yoram Segal, Table~\ref{tab:wpmatrix} maps every work-package task onto the ten project sessions. Coloured cells indicate the session in which a given task is active. Critical (blocking) tasks are coloured in dark orange; non-blocking tasks in light blue.
+
+\begin{table}[H]
+\centering\scriptsize
+\caption{Work-package matrix. Each row is one task; columns are the ten project sessions. Dark orange = critical / blocking. Light blue = non-blocking.}
+\label{tab:wpmatrix}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{|p{4.0cm}|c|c|c|c|c|c|c|c|c|c|}
+\hline
+\rowcolor{headbg!90}\textcolor{white}{\textbf{Task}}
+ & \textcolor{white}{\textbf{S1}} & \textcolor{white}{\textbf{S2}} & \textcolor{white}{\textbf{S3}} & \textcolor{white}{\textbf{S4}}
+ & \textcolor{white}{\textbf{S5}} & \textcolor{white}{\textbf{S6}} & \textcolor{white}{\textbf{S7}} & \textcolor{white}{\textbf{S8}}
+ & \textcolor{white}{\textbf{S9}} & \textcolor{white}{\textbf{S10}} \\
+\hline
+\multicolumn{11}{|l|}{\textbf{WP1 -- Research foundation}} \\
+\hline
+T1.1 Scope alignment            & \cellcolor{wpcrit} &                    &                    &                    &                    &                    &                    &                    &                    &                    \\
+T1.2 PRD freeze                 & \cellcolor{wpcrit} & \cellcolor{wpcrit} &                    &                    &                    &                    &                    &                    &                    &                    \\
+T1.3 Literature review          & \cellcolor{wplight}& \cellcolor{wplight}&                    &                    &                    &                    &                    &                    &                    &                    \\
+T1.4 Repo scaffold              & \cellcolor{wpcrit} &                    &                    &                    &                    &                    &                    &                    &                    &                    \\
+T1.5 Antigravity + Gemini setup & \cellcolor{wpcrit} &                    &                    &                    &                    &                    &                    &                    &                    &                    \\
+T1.6 Related-work survey        & \cellcolor{wplight}& \cellcolor{wplight}&                    &                    &                    &                    &                    &                    &                    &                    \\
+\hline
+\multicolumn{11}{|l|}{\textbf{WP3 -- Stage 1: clustering}} \\
+\hline
+T3.1 Data loader                &                    &                    & \cellcolor{wpcrit} &                    &                    &                    &                    &                    &                    &                    \\
+T3.2 Player features            &                    &                    & \cellcolor{wpcrit} &                    &                    &                    &                    &                    &                    &                    \\
+T3.3 K-Means + HDBSCAN          &                    &                    & \cellcolor{wpcrit} & \cellcolor{wpcrit} &                    &                    &                    &                    &                    &                    \\
+T3.4 Validation \& significance &                    &                    &                    & \cellcolor{wpcrit} &                    &                    &                    &                    &                    &                    \\
+T3.5 EDA notebook (PCA/t-SNE)   &                    &                    &                    & \cellcolor{wplight}&                    &                    &                    &                    &                    &                    \\
+\hline
+\multicolumn{11}{|l|}{\textbf{WP4 -- Stage 2: skills}} \\
+\hline
+T4.1 Unified LLM client         &                    &                    &                    & \cellcolor{wpcrit} &                    &                    &                    &                    &                    &                    \\
+T4.2 Game chunker               &                    &                    &                    & \cellcolor{wpcrit} &                    &                    &                    &                    &                    &                    \\
+T4.3 Skill extractor (Gemini)   &                    &                    &                    & \cellcolor{wpcrit} &                    &                    &                    &                    &                    &                    \\
+T4.4 Aggregator                 &                    &                    &                    & \cellcolor{wpcrit} &                    &                    &                    &                    &                    &                    \\
+T4.5 Profile naming             &                    &                    &                    & \cellcolor{wplight}&                    &                    &                    &                    &                    &                    \\
+\hline
+\multicolumn{11}{|l|}{\textbf{WP5 -- Stage 3: agents}} \\
+\hline
+T5.1 BaseAgent                  &                    &                    &                    &                    & \cellcolor{wpcrit} &                    &                    &                    &                    &                    \\
+T5.2 BridgeAgent                &                    &                    &                    &                    & \cellcolor{wpcrit} & \cellcolor{wpcrit} &                    &                    &                    &                    \\
+T5.3 NegotiationAgent           &                    &                    &                    &                    & \cellcolor{wpcrit} & \cellcolor{wpcrit} &                    &                    &                    &                    \\
+T5.4 Prompt library             &                    &                    &                    &                    & \cellcolor{wpcrit} & \cellcolor{wpcrit} &                    &                    &                    &                    \\
+T5.5 Sanity tests               &                    &                    &                    &                    &                    & \cellcolor{wplight}&                    &                    &                    &                    \\
+\hline
+\multicolumn{11}{|l|}{\textbf{WP6 -- Stage 4: simulation}} \\
+\hline
+T6.1 Bridge runner              &                    &                    &                    &                    &                    &                    & \cellcolor{wpcrit} &                    &                    &                    \\
+T6.2 Negotiation runner         &                    &                    &                    &                    &                    &                    & \cellcolor{wpcrit} & \cellcolor{wpcrit} &                    &                    \\
+T6.3 Outcome scoring            &                    &                    &                    &                    &                    &                    & \cellcolor{wpcrit} &                    &                    &                    \\
+T6.4 BEN adapter (optional)     &                    &                    &                    &                    &                    &                    & \cellcolor{wplight}&                    &                    &                    \\
+T6.5 Alignment + significance   &                    &                    &                    &                    &                    &                    &                    & \cellcolor{wpcrit} &                    &                    \\
+T6.6 Final scatter plot         &                    &                    &                    &                    &                    &                    &                    & \cellcolor{wpcrit} &                    &                    \\
+\hline
+\multicolumn{11}{|l|}{\textbf{WP7 -- Polish \& defense}} \\
+\hline
+T7.1 Business-plan section      &                    &                    &                    &                    &                    &                    &                    &                    & \cellcolor{wplight}&                    \\
+T7.2 Slide deck                 &                    &                    &                    &                    &                    &                    &                    &                    & \cellcolor{wpcrit} & \cellcolor{wpcrit} \\
+T7.3 Promo video                &                    &                    &                    &                    &                    &                    &                    &                    & \cellcolor{wplight}&                    \\
+T7.4 README polish              &                    &                    &                    &                    &                    &                    &                    &                    & \cellcolor{wplight}&                    \\
+T7.5 Q\&A rehearsal             &                    &                    &                    &                    &                    &                    &                    &                    &                    & \cellcolor{wpcrit} \\
+\hline
+\end{tabular}
+\end{table}
+
+\section{Dependencies and the critical path}
+
+The critical path is sequential: \textbf{WP1 $\rightarrow$ WP3 $\rightarrow$ WP4 $\rightarrow$ WP5 $\rightarrow$ WP6 $\rightarrow$ WP7}. Each downstream WP depends on the output artefact of the previous one:
+
+\begin{itemize}[leftmargin=*]
+    \item WP3 cannot start before WP1 freezes the PRD (the feature set must be aligned with the research question).
+    \item WP4 needs the clusters from WP3 to chunk games per profile.
+    \item WP5 needs the named profiles from WP4 to build prompts.
+    \item WP6 needs the agents from WP5 to run simulations.
+    \item WP7 needs the alignment result from WP6 to write the conclusions.
+\end{itemize}
+
+\noindent
+\textbf{Non-blocking (parallelisable) tasks} are coloured in light blue in Table~\ref{tab:wpmatrix}. These include the exploratory notebook (T3.5), the BEN-engine adapter (T6.4), the README polish (T7.4) and the promo video (T7.3). They can slip a session without delaying the critical path.
+
+\section{High-level Gantt}
+
+\begin{table}[H]
+\centering\small
+\caption{High-level Gantt by sprint.}
+\label{tab:hlgantt}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{|p{3.5cm}|c|c|c|c|c|}
+\hline
+\rowcolor{headbg!90}\textcolor{white}{\textbf{Work Package}}
+ & \textcolor{white}{\textbf{Wk 1}} & \textcolor{white}{\textbf{Wk 2}} & \textcolor{white}{\textbf{Wk 3}} & \textcolor{white}{\textbf{Wk 4}} & \textcolor{white}{\textbf{Wk 5}} \\
+\hline
+WP1 Research foundation & \cellcolor{wpcrit}  &                    &                    &                    &                    \\
+WP3 Clustering          &                     & \cellcolor{wpcrit} &                    &                    &                    \\
+WP4 Skills              &                     & \cellcolor{wpcrit} &                    &                    &                    \\
+WP5 Agents              &                     &                    & \cellcolor{wpcrit} &                    &                    \\
+WP6 Simulation          &                     &                    &                    & \cellcolor{wpcrit} &                    \\
+WP7 Polish \& defense   &                     &                    &                    &                    & \cellcolor{wpcrit} \\
+\hline
+\end{tabular}
+\end{table}
+
+% =====================================================================
+% CHAPTER 7 -- DELIVERABLES & SUCCESS CRITERIA
+% =====================================================================
+\chapter{Deliverables and Success Criteria}
+\label{ch:deliv}
+
+\section{How will we know we succeeded?}
+
+The success of NegoPlay is defined by three concrete numbers (Table~\ref{tab:kpi}). All three come from the same code base and from runs that are logged with random seeds for full reproducibility.
+
+\begin{table}[H]
+\centering\small
+\caption{Research key performance indicators.}
+\label{tab:kpi}
+\begin{tabularx}{\textwidth}{l c X}
+\toprule
+\textbf{Metric} & \textbf{Target} & \textbf{How measured} \\
+\midrule
+Silhouette score (Stage 1) & $\geq 0.4$ & Computed on the chosen $k$; visualized in \texttt{results/stage1\_silhouette.png}. \\
+Per-profile behavioral variance (Stage 3) & $> 15\,\%$ & Variance of bridge win-rate across the four agents in identical 50-game tournament. \\
+Cross-domain Spearman alignment (Stage 4c) & $\geq 0.70$ & Correlation of per-profile win-rate ranks between bridge and negotiation. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Deliverables}
+
+\subsection*{Software}
+\begin{itemize}[leftmargin=*]
+    \item A public GitHub repository \texttt{NegoPlay/} with a single SDK entry point (\texttt{src/sdk.py}).
+    \item Four reusable modules: \texttt{stage1\_clustering}, \texttt{stage2\_skills}, \texttt{stage3\_agents}, \texttt{stage4\_simulate}.
+    \item A unified LLM wrapper (\texttt{shared/llm\_client.py}) supporting Gemini, Claude and OpenAI.
+\end{itemize}
+
+\subsection*{Data artefacts}
+\begin{itemize}[leftmargin=*]
+    \item \texttt{data/processed/player\_features.csv} (1{,}572 rows $\times$ 5 features).
+    \item \texttt{data/processed/player\_clusters.csv} (with cluster labels and centroids).
+    \item \texttt{data/processed/skill\_profiles.json} (4 named profiles, 5--7 skills each).
+\end{itemize}
+
+\subsection*{Reports and figures}
+\begin{itemize}[leftmargin=*]
+    \item \texttt{results/stage1\_silhouette.png} -- the cluster validity plot.
+    \item \texttt{results/bridge\_winrates.csv} and \texttt{results/negotiation\_winrates.csv}.
+    \item \texttt{results/alignment\_analysis.png} -- the \emph{headline} scatter plot.
+    \item \texttt{results/alignment\_report.md} -- the final research answer.
+\end{itemize}
+
+\subsection*{Course deliverables}
+\begin{itemize}[leftmargin=*]
+    \item This preliminary report (PDF, LaTeX source).
+    \item Slide deck (12--15 slides).
+    \item Promotional video (60--90 seconds).
+    \item Business-plan section (TAM/SAM/SOM + token economics).
+\end{itemize}
+
+\section{Engineering quality gates}
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Test coverage:} $\geq 80\,\%$ on Stage 1 (statistics must be reproducible); $\geq 60\,\%$ overall.
+    \item \textbf{Cost cap:} hard cap of \$50 across all LLM providers, alert at \$20, target $< \$15$.
+    \item \textbf{Reproducibility:} the full pipeline must run end-to-end on a clean clone with one command.
+    \item \textbf{Logging:} every LLM call writes provider, model, tokens, latency and cost to \texttt{results/llm\_logs/}.
+\end{itemize}
+
+% =====================================================================
+% CHAPTER 8 -- RISK MANAGEMENT
+% =====================================================================
+\chapter{Risk Management}
+\label{ch:risks}
+
+\section{Risk register}
+
+\begin{table}[H]
+\centering\small
+\caption{Top project risks and mitigations.}
+\label{tab:risks}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabularx}{\textwidth}{p{0.5cm} X c c X}
+\toprule
+\textbf{\#} & \textbf{Risk} & \textbf{Lik.} & \textbf{Imp.} & \textbf{Mitigation} \\
+\midrule
+R1 & Gemini Flash 2.0 produces inconsistent JSON or weak reasoning for agents. & Med & High & Lower temperature to 0.3; enforce \texttt{response\_mime\_type=application/json}; if still poor, route the affected stage to Claude / GPT through \texttt{llm\_client.py}. \\
+R2 & Clusters are not statistically separable (Silhouette $< 0.4$). & Low & High & Pre-screen features in EDA; try alternative feature sets including BridgeHand2Vec embeddings \citep{sztyber2023bridgehand}; fall back to fewer clusters ($k=3$). \\
+R3 & Cross-domain alignment falls below the 0.7 target. & Med & Med & Frame any $\rho < 0.5$ as a valid null result; report partial-support discussion if $0.5 \leq \rho < 0.7$; bridge $\rightarrow$ negotiation transfer is still an empirical contribution either way. \\
+R4 & LLM agents produce illegal bridge bids or invalid negotiation moves. & Med & High & Add a validator before each action; on rejection, re-prompt with the error in the next turn; cap retries at 3 to avoid infinite loops. \\
+R5 & Gemini API rate-limits (15 req/min on free tier) block Stage 4. & Med & Med & Add exponential backoff via \texttt{tenacity}; pre-batch calls; upgrade to paid tier ($\sim$\$5) if needed. \\
+R6 & Cumulative LLM cost exceeds the \$50 hard cap. & Low & High & Per-call cost log in \texttt{results/llm\_logs/}; alert at \$20; pause and review prompts before exceeding the cap. \\
+R7 & The 5-week timeline is too tight (course + simultaneous PhD work). & High & High & Strict scope discipline: drop LSTM stretch goal first, then promo-video polish; keep critical path intact. \\
+R8 & Antigravity IDE bugs (preview, agents) cause work loss. & Low & Med & Commit on every session close; mirror to local VS Code; keep a backup branch tagged at the end of each WP. \\
+R9 & Player-name mismatches across competitions distort cluster sizes. & Low & Med & Use fuzzy matching in \texttt{shared/data\_loader.py}; document any merges in \texttt{data/processed/player\_name\_map.csv}. \\
+R10 & Negotiation scenarios are perceived as toy / unrealistic. & High & Med & Frame the report explicitly as a ``proof of concept in simulated environment''; cite this as future work for the PhD; ensure scenarios are based on textbook negotiation structures (M\&A, JV, SaaS, tender). \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Risk monitoring}
+
+A short \textbf{risk review} is held at the end of every sprint (i.e.\ every two sessions). The risk register is updated in version control, and any new risk that emerges mid-sprint is added immediately. Risks R7 (timeline) and R3 (alignment outcome) are monitored continuously, since both can change project framing late in the schedule.
+
+% =====================================================================
+% CHAPTER 9 -- SUMMARY
+% =====================================================================
+\chapter{Summary}
+\label{ch:summary}
+
+\section{What this report covers}
+
+This preliminary report defines NegoPlay -- a five-week project to discover decision-making profiles from 149{,}208 elite bridge tournament hands and to test, via LLM agents, whether the same profiles predict behavior in business negotiation simulations. It anchors the work in two published papers (\citealp{talwadker2022cognitionnet} for clustering; \citealp{rong2019competitive} for the inference/decision split) and a theoretical foundation (\citealp{lockett2007evolving}). It specifies the dataset, the four-stage methodology, the seven work packages, the WP\,$\times$\,session matrix, the critical path, the deliverables, and ten concrete project risks with mitigations.
+
+\section{Expected contribution}
+
+If the cross-domain alignment hypothesis is supported ($\rho \geq 0.7$), NegoPlay will be the first publicly reproducible demonstration that strategic profiles discovered in a clean game-theoretic environment (bridge) measurably predict behavior in a different, less structured domain (business negotiation). This contributes to the long-running PhD research thread \emph{From Bridge Tables to Global Markets} at LUT University.
+
+If the hypothesis is not supported, the project still contributes: (i) a validated set of bridge decision profiles, useful in its own right for bridge analytics and coaching; (ii) a unified, provider-neutral LLM client; and (iii) a clean methodological template for cross-domain behavioral transfer studies.
+
+\section{Beyond the course: link to the PhD}
+
+NegoPlay is the empirical baseline for Paper 1 of the author's PhD thesis. The four discovered profiles, the prompt library and the alignment methodology are designed to be reused in PhD Year 2 with: a larger dataset (BBO Vugraph adds millions of deals), a deeper model (the ENN+PNN+PPO stack described by \citealp{rong2019competitive} and \citealp{kita2024simple}), and real negotiation transcripts (Year 2--3). This continuity between the course project and the PhD is intentional: the same single-SDK code base will carry the work forward.
+
+% =====================================================================
+% BIBLIOGRAPHY
+% =====================================================================
+\bibliography{references}
+
+\end{document}

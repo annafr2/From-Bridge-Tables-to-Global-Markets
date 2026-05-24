@@ -90,10 +90,13 @@ def backfill_competition(comp: dict, category: str, tournament_id: int,
     else:
         already_done = set()
 
-    # Add player columns if missing
+    # Add player columns if missing, and force them to string dtype.
+    # Without astype(str), columns that were saved as all-NaN get read back
+    # as float64, causing "Invalid value 'NAME' for dtype float64" on assignment.
     for col in PLAYER_COLS:
         if col not in df.columns:
             df[col] = ""
+        df[col] = df[col].fillna("").astype(str).replace("nan", "")
 
     # Get unique match_ids that still need player data
     all_match_ids = df["match_id"].unique()

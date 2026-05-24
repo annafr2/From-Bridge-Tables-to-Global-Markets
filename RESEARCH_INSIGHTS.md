@@ -1,13 +1,35 @@
 # RESEARCH_INSIGHTS.md — Empirical Questions We Can Now Answer
 
-**Last updated:** April 2026
-**Status of data:** ~78K rows, 5 EBL competitions, bidding + cards + **individual player names per position**
+**Last updated:** May 2026
+**Status of data:** **149,208 rows** × 48 columns, 5 EBL competitions (2016–2025), individual player names per position
 
 This file is a living research notebook. Each section = one empirically testable question,
 with: the exact analysis → the expected finding → which paper/chapter it contributes to.
 
 > **Rule:** Every insight here must be answerable from the current dataset.
 > If it needs future data (BBO, negotiation transcripts), label it clearly.
+
+### Current Data Quality Summary
+
+| Metric | Coverage | Notes |
+|--------|----------|-------|
+| Total rows | 149,208 | 5 competitions × 3–4 categories each |
+| Player names (N/S/E/W per room) | **99.9%** | All 5 competitions |
+| Card holdings (52 cards) | **54%** | Available where EuroBridge published BoardAcross data |
+| Bidding sequences | **31%** | Herning 2024 + Poznan 2025 only (100%); older competitions: 0% (server limitation — no tooltips, PlayDetails returns HTTP 500) |
+| Unique players (by name) | **~2,500+** | Across all positions and rooms |
+
+### Per-Competition Breakdown
+
+| Competition | Rows | Names | Cards | Bidding |
+|-------------|------|-------|-------|---------|
+| Budapest 2016 | 38,240 | 100% | 56% | 0% |
+| Ostend 2018 | 32,384 | 100% | 53% | 0% |
+| Madeira 2022 | 32,256 | 100% | 51% | 0% |
+| Herning 2024 | 34,048 | 100% | 56% | 100% |
+| Poznan 2025 | 12,280 | 100% | 51% | 100% |
+
+**Implication for research:** Questions requiring bidding analysis (Q1.3 preempt/double detection, Q5.1 bid attribution) are limited to ~46K rows (Herning + Poznan). Questions based on contract/declarer/tricks/cards (Q1.1 risk profiles, Q2.1 score-dependent risk, Q3.1 partnership chemistry, Q4.1 category differences) use the **full 149K rows**.
 
 ---
 
@@ -78,28 +100,36 @@ Maps to: **RQ1 (decision-making styles)**, **RQ4 (coopetition)**
 5. Does her risk profile change when her team is losing vs. winning?
 
 **The Research Story:**
-> "Among 847 elite European players in our dataset, we identified 3 distinct risk profiles:
-> Conservative Experts (high success, low risk), Calculated Risk-Takers (high risk, high success),
-> and Overextenders (high risk, low success). BRINK Sjoert exemplifies the Calculated Risk-Taker
-> profile with a slam attempt rate of X% and success rate of Y%."
+> "Among ~2,500 elite European players across 5 championships (2016–2025) in our 149K-row dataset,
+> we identified 3 distinct risk profiles: Conservative Experts (high success, low risk),
+> Calculated Risk-Takers (high risk, high success), and Overextenders (high risk, low success).
+> BRINK Sjoert exemplifies the Calculated Risk-Taker profile with a slam attempt rate of X%
+> and success rate of Y%."
+
+**New with 149K rows:** Players now appear across multiple tournaments (2016–2025),
+enabling longitudinal analysis: does a player's risk profile change over 8 years?
 
 ---
 
 ### Q1.3 — Risk Style Taxonomy (the actual classification)
 
-**Three observable risk behaviors:**
+**Four observable risk behaviors:**
 
-| Label | Definition | How to detect in data |
-|-------|-----------|----------------------|
-| **Slam Hunter** | Frequently bids 6/7 level | `contract LIKE '6%' OR contract LIKE '7%'` |
-| **Preemptor** | Frequently opens at 2/3/4 level | First bid in sequence ≥ 2 level |
-| **Doubler** | Frequently doubles opponent's contracts | `Dbl` appears in bidding |
-| **Insurance Player** | Stops short of game despite strength | Stops at 4m/3NT when game available |
+| Label | Definition | How to detect in data | Data needed |
+|-------|-----------|----------------------|-------------|
+| **Slam Hunter** | Frequently bids 6/7 level | `contract LIKE '6%' OR contract LIKE '7%'` | All 149K rows ✅ |
+| **Preemptor** | Frequently opens at 2/3/4 level | First bid in sequence ≥ 2 level | Bidding column (46K rows — Herning + Poznan) |
+| **Doubler** | Frequently doubles opponent's contracts | `Dbl` appears in bidding | Bidding column (46K rows) |
+| **Insurance Player** | Stops short of game despite strength | Stops at 4m/3NT when game available | Bidding + cards (requires both) |
 
 **Method:**
 - Build a feature vector per player: (slam_rate, preempt_rate, double_rate, success_rate)
 - Cluster using K-means or HDBSCAN (3–5 clusters)
 - Label clusters qualitatively → the taxonomy
+
+**Data note:** Slam Hunter detection works on all 149K rows (only needs `contract` column).
+Preemptor and Doubler detection require the `bidding` column → limited to Herning + Poznan (~46K rows).
+However, 46K rows with ~1,000 unique players is still statistically strong for clustering.
 
 ---
 
@@ -214,6 +244,10 @@ potentially better outcomes on borderline contracts.
 
 **Paper contribution:** First quantification of "partnership chemistry" at elite level.
 
+**Data strength (May 2026):** With 149K rows across 5 championships (2016–2025),
+the same national pairs (e.g., Netherlands Open) likely appear in 3–5 competitions.
+This gives 100+ boards per established pair — enough for statistical significance.
+
 ---
 
 ### Q3.2 — Partner agreement rate
@@ -282,10 +316,49 @@ def find_decisive_bid(bidding_str, room, match_row):
     # Find who made each key action...
 ```
 
-**This enables:**
+**Data availability:** Requires `bidding` column → limited to Herning 2024 + Poznan 2025 (~46K rows).
+However, **basic declarer attribution** (who played the hand) works on ALL 149K rows:
+`declarer=N` + `open_north=PLAYER_NAME` → we know who declared without parsing bidding.
+
+**This enables (on 46K rows with bidding):**
 - "BRINK Sjoert made 47 slam attempts across the dataset — 38 succeeded (81%)"
 - "The most common opener in Women's category is..." 
 - "Players who double most frequently: TOP 10..."
+
+**This enables (on all 149K rows without bidding):**
+- "BRINK Sjoert declared 312 boards. Of those, 78 were slams, 63 succeeded (81%)."
+- "Top 20 most active declarers across all 5 championships"
+- "Declarer success rate by category: Open vs. Women vs. Senior"
+
+### Q5.2 — Cross-Tournament Player Tracking (NEW — enabled by 149K rows)
+
+**The question:** Do the same players appear in multiple championships? How does
+their performance evolve over 8 years (2016–2025)?
+
+```python
+# Find players appearing in multiple competitions
+df["declarer_name"] = ...  # derive from declarer + room + player columns
+player_comps = df.groupby("declarer_name")["competition"].nunique()
+returning_players = player_comps[player_comps >= 2]
+print(f"Players in 2+ competitions: {len(returning_players)}")
+# Expected: 200-400 players (elite players return to championships)
+
+# For each returning player: track slam rate across years
+for player in top_returning_players:
+    yearly_stats = df[df["declarer_name"]==player].groupby("year").agg(
+        slam_rate=("is_slam", "mean"),
+        success_rate=("made_contract", "mean"),
+    )
+    # → Does this player become more conservative with age?
+    # → Does their success rate improve with experience?
+```
+
+**Research insight:** This is only possible because we have 5 competitions spanning 2016–2025.
+The original 78K dataset (3 competitions) had limited cross-year overlap.
+149K rows from 5 championships make longitudinal player tracking viable.
+
+**Potential paper title:**
+*"The Evolution of Risk-Taking in Elite Bridge: A 9-Year Longitudinal Study"*
 
 ---
 
@@ -326,21 +399,43 @@ No business data needed — argue by structural analogy, supported by bridge emp
 
 ---
 
-## WHAT WE HAVE TODAY (April 2026) THAT ENABLES ALL OF THE ABOVE
+## WHAT WE HAVE TODAY (May 2026) THAT ENABLES ALL OF THE ABOVE
 
-| Capability | Status |
-|-----------|--------|
-| 78K board-room records | ✅ |
-| Full bidding sequences | ✅ ~60% of rows |
-| Card holdings (52 cards) | ✅ ~50% of rows |
-| **Individual player names per position** | ✅ **NEW — April 2026** |
-| Player IDs (stable across tournaments) | ⚠️ Name-based (not numeric) |
-| Running match score per board | 🔲 To build (1 day) |
-| Risk metrics per board | 🔲 To build (1 day) |
-| Tournament standings per round | 🔲 To build (1 day) |
-| Player demographics (age, gender) | ❌ Not in EuroBridge |
-| Trick-by-trick play | ❌ Not collected |
+| Capability | Status | Coverage |
+|-----------|--------|----------|
+| Board-room records | ✅ | **149,208 rows** (nearly 2× the April count) |
+| Competitions scraped | ✅ | **5 championships** (Budapest 2016, Ostend 2018, Madeira 2022, Herning 2024, Poznan 2025) |
+| Individual player names per position | ✅ | **99.9%** of rows — all 5 competitions |
+| Card holdings (52 cards) | ✅ | **54%** of rows (up from ~30% after fixing boards 17-32 bug) |
+| Full bidding sequences | ⚠️ | **31%** — Herning + Poznan only (46K rows). Older sites lack tooltip format; PlayDetails pages return HTTP 500 |
+| Player IDs (stable across tournaments) | ⚠️ | Name-based (not numeric). May need fuzzy matching for spelling variants |
+| Running match score per board | 🔲 | To build in `src/features/running_score.py` |
+| Risk metrics per board | 🔲 | To build in `src/features/risk_metrics.py` |
+| Tournament standings per round | 🔲 | To build in `src/features/tournament_standings.py` |
+| Player demographics (age, gender) | ❌ | Not in EuroBridge — need WBF external data |
+| Trick-by-trick play | ❌ | Not collected — available in BBO (Year 2) |
 
-**Adding player names was the critical unlock.**
-Without names: "SCOTLAND bid 3NT"
-With names: "McGOWAN Elizabeth bid 3NT, took the risk, made it."
+### Key Milestones (Data Collection)
+
+| Date | Milestone |
+|------|-----------|
+| March 2026 | First scraper working, Herning 2024 scraped |
+| April 2026 | Player names backfill, Poznan 2025 scraped, RESEARCH_INSIGHTS created |
+| May 2026 | **Fixed Ostend 2018 + Budapest 2016 tournament IDs** (were wrong → 0 results). Fixed cards scraper for boards 17-32. Fixed player name extraction for old href format (`/people/person.asp`). Dataset grew from 78K → **149K rows**. |
+
+### What Cannot Be Fixed (Known Limitations)
+
+1. **Bidding for old competitions (0%):** EuroBridge microsites before ~2023 do not embed bidding
+   in tooltips. The separate PlayDetails.asp pages return HTTP 500 server errors.
+   **Workaround:** Use contract + declarer + tricks for risk analysis (works on 149K rows).
+   Full bidding analysis limited to Herning + Poznan (46K rows).
+
+2. **Card holdings (~54%):** BoardAcross pages are only published for some boards.
+   This is an EuroBridge publishing decision, not a scraper bug.
+
+3. **No Mixed Teams for 2016/2018:** The Mixed Teams category was introduced in EBL after 2018.
+   Budapest 2016 and Ostend 2018 have only Open, Women, Senior (3 categories, not 4).
+
+**The 149K-row dataset with player names is sufficient for Paper 1 (risk taxonomy)
+and Paper 2 (VP scale test). Paper 3 (partnership chemistry) benefits from the larger
+player pool but may want BBO data for more partnership diversity.**

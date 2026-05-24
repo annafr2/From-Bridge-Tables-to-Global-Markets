@@ -115,6 +115,24 @@ def get_existing_rounds(matches_file: Path) -> list[int]:
     return rounds
 
 
+def get_boards_per_round(matches_file: Path) -> dict[int, list[int]]:
+    """
+    Read matches.csv and return {round_num: [board_numbers]} for all rounds.
+
+    Many tournaments use board numbers 17-32 for even rounds (or second
+    segments). The old code hardcoded boards 1-16, missing half the data.
+    """
+    if not matches_file.exists():
+        return {}
+    df = pd.read_csv(matches_file, usecols=["round", "board"])
+    result = {}
+    for round_num, group in df.groupby("round"):
+        result[int(round_num)] = sorted(
+            group["board"].dropna().unique().astype(int).tolist()
+        )
+    return result
+
+
 def run(competition_filter=None, category_filter=None,
         delay: float = 0.8, max_rounds: int = None):
     """
@@ -148,11 +166,15 @@ def run(competition_filter=None, category_filter=None,
             cards_file = out_dir / "cards.csv"
             matches_file = out_dir / "matches.csv"
 
-            # Find which rounds already have match data
+            # Find which rounds + boards already have match data
             existing_rounds = get_existing_rounds(matches_file)
             if not existing_rounds:
                 log.info(f"    No matches.csv found — skipping (run bulk scraper first)")
                 continue
+
+            # Get the actual board numbers per round from matches.csv
+            # (instead of hardcoding 1-16 — many rounds use 17-32!)
+            boards_map = get_boards_per_round(matches_file)
 
             log.info(f"    Found {len(existing_rounds)} rounds with match data: {existing_rounds}")
 
@@ -164,9 +186,12 @@ def run(competition_filter=None, category_filter=None,
             category_rows = []
 
             for round_num in rounds_to_process:
-                log.info(f"    Round {round_num}: fetching {boards_per_round} boards...")
+                actual_boards = boards_map.get(round_num,
+                                               list(range(1, boards_per_round + 1)))
+                log.info(f"    Round {round_num}: fetching {len(actual_boards)} boards "
+                         f"({min(actual_boards)}-{max(actual_boards)})...")
 
-                for board_num in range(1, boards_per_round + 1):
+                for board_num in actual_boards:
 
                     # Skip if already fetched
                     if already_fetched(name, category, round_num, board_num, CARDS_LOG):

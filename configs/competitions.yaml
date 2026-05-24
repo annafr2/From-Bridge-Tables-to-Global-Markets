@@ -37,22 +37,22 @@ competitions:
     year: 2018
     microsite: "http://db.eurobridge.org/Repository/competitions/18Ostend/microSite"
     tournaments:
-      Open:   1810
-      Women:  1811
-      Senior: 1812
-      Mixed:  1813
-    max_rounds: 30
+      # No Mixed Teams in 2018 — Mixed was introduced in EBL after 2018
+      Open:   1500
+      Women:  1501
+      Senior: 1502
+    max_rounds: 40
     boards_per_round: 16
 
   - name: "EBL_Budapest_2016"
     year: 2016
     microsite: "http://db.eurobridge.org/Repository/competitions/16Budapest/microSite"
     tournaments:
-      Open:   1610
-      Women:  1611
-      Senior: 1612
-      Mixed:  1613
-    max_rounds: 30
+      # No Mixed Teams in 2016 — Mixed was introduced in EBL after 2018
+      Open:   1210
+      Women:  1211
+      Senior: 1212
+    max_rounds: 40
     boards_per_round: 16
 
   - name: "EBL_Poznan_2025"
