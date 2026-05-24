@@ -244,11 +244,13 @@ def _player_name_from_cell(cell) -> str:
     """
     Extract a player name from a table cell.
 
-    The cell contains an <a href="http://www.eurobridge.org/person?qryid=..."> link.
-    Inside that link: an <img alt="NAME"> followed by a text node with the name.
-    We read the text node (get_text strips the img tag automatically).
+    Two href patterns exist across EuroBridge generations:
+      - New (Herning 2024, Poznan 2025):  http://www.eurobridge.org/person?qryid=XXXX
+      - Old (Ostend 2018, Budapest 2016, Madeira 2022): /people/person.asp?qryid=XXXX
+
+    Both patterns appear in the same 4-row seating table layout.
     """
-    a = cell.find("a", href=re.compile(r"eurobridge\.org/person", re.IGNORECASE))
+    a = cell.find("a", href=re.compile(r"(eurobridge\.org/person|/people/person\.asp)", re.IGNORECASE))
     if a:
         return clean_text(a.get_text())
     return ""

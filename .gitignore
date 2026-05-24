@@ -13,6 +13,14 @@ env/
 .aider*
 scratch_*.py
 
+# Secrets & API keys
+.env
+**/.env
+*.key
+
+# LaTeX test files
+**/reports/test.*
+
 # Data and Logs
 data/raw/
 data/processed/
@@ -21,4 +29,17 @@ data/models/
 logs/
 *.parquet
 *.csv
+*.xlsx
 *.log
+
+# LaTeX build artifacts
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.out
+*.synctex.gz
+*.toc
+*.lof
+*.lot
