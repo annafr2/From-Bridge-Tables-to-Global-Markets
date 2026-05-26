@@ -1,0 +1,12 @@
+[project]
+name = "negoplay"
+version = "0.1.0"
+description = "Strategic Profiles from Bridge to Business — LLM Agent Research"
+requires-python = ">=3.11"
+
+[tool.ruff]
+line-length = 100
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--cov=src --cov-report=term-missing"
