@@ -1,0 +1,47 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Environment — NEVER commit API keys
+.env
+*.env
+
+# Test / Coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# LLM logs (may contain sensitive data + large files)
+results/llm_logs/
+
+# Data (large files — keep processed CSVs out of git)
+data/processed/*.csv
+data/processed/*.parquet
+
+# IDE
+.vscode/
+.idea/
+.antigravity/
+*.suo
+*.user
+
+# LaTeX build artifacts
+reports/*.aux
+reports/*.log
+reports/*.synctex.gz
+reports/*.out
+reports/*.toc
+reports/*.lof
+reports/*.lot
+reports/*.bbl
+reports/*.blg
+reports/*.fls
+reports/*.fdb_latexmk
+
+# OS
+.DS_Store
+Thumbs.db

@@ -21,8 +21,8 @@
 
 | Sprint | Sessions | Dates (approximate) | Theme | Status |
 |--------|----------|---------------------|-------|--------|
-| Sprint 1 | 1-2 | Week of May 19 | Research & Setup | 🟡 WIP |
-| Sprint 2 | 3-4 | Week of May 26 | ML Clustering + Skills | 🔲 |
+| Sprint 1 | 1-2 | Week of May 19 | Research & Setup | ✅ DONE |
+| Sprint 2 | 3-4 | Week of May 26 | ML Clustering + Skills | 🟡 WIP |
 | Sprint 3 | 5-6 | Week of Jun 2 | Agent Construction | 🔲 |
 | Sprint 4 | 7-8 | Week of Jun 9 | Dual Simulation | 🔲 |
 | Sprint 5 | 9-10 | Week of Jun 16 | Polish & Defense | 🔲 |
@@ -76,104 +76,54 @@
 
 ### Tasks
 
-- [ ] 🔲 **Confirm project scope with Dr. Rami**
-  - Present NegoPlay overview
-  - Validate research question
-  - Get approval to proceed
-  - **Deliverable:** Sign-off to start
+- [x] ✅ **Confirm project scope with Dr. Yoram Segal**
+  - Presented NegoPlay overview in meeting (May 26, 2026)
+  - Research question validated
+  - PRD reviewed and approved
+  - **Deliverable:** Sign-off ✅
 
-- [ ] 🔲 **Initialize repo structure**
-  ```bash
-  # (Make sure you are inside the NegoPlay folder)
-  mkdir -p src/{stage1_clustering,stage2_skills,stage3_agents,stage4_simulate,shared}
-  mkdir -p notebooks tests results docs data/processed
-  touch src/__init__.py src/sdk.py
-  touch src/stage1_clustering/__init__.py
-  touch src/stage2_skills/__init__.py
-  touch src/stage3_agents/__init__.py
-  touch src/stage4_simulate/__init__.py
-  touch src/shared/__init__.py
-  ```
-  - **Deliverable:** Full folder skeleton
+- [x] ✅ **Initialize repo structure**
+  - src/{stage1_clustering,stage2_skills,stage3_agents,stage4_simulate,shared}
+  - notebooks/, tests/, results/llm_logs/, data/processed/
+  - src/__init__.py, src/sdk.py, all sub-package __init__.py files
+  - **Deliverable:** Full folder skeleton ✅
 
-- [ ] 🔲 **Create `.gitignore`**
-  ```
-  .venv/
-  .env
-  __pycache__/
-  *.pyc
-  .pytest_cache/
-  .coverage
-  results/llm_logs/
-  data/processed/*.csv
-  .vscode/
-  .antigravity/
-  ```
+- [x] ✅ **Create `.gitignore`**
+  - Covers: .env, .venv, __pycache__, .pytest_cache, LaTeX build artifacts, data/processed CSVs
+  - **Deliverable:** .gitignore committed ✅
 
-- [ ] 🔲 **Create `.env.example`**
-  ```
-  # Google Gemini API key (default provider — required)
-  GOOGLE_API_KEY=your_key_here
+- [x] ✅ **Create `.env.example`**
+  - Template with GOOGLE_API_KEY, ANTHROPIC_API_KEY, OPENAI_API_KEY, BUDGET_CAP_USD
+  - **Deliverable:** .env.example committed ✅ (.env itself is gitignored ✅)
 
-  # Anthropic Claude API key (optional — cross-model validation)
-  ANTHROPIC_API_KEY=your_key_here
-
-  # OpenAI API key (optional — cross-model validation)
-  OPENAI_API_KEY=your_key_here
-
-  # Logging level
-  LOG_LEVEL=INFO
-
-  # Hard budget cap across ALL providers combined (USD)
-  BUDGET_CAP_USD=50
-  ```
-
-- [ ] 🔲 **Create `requirements.txt`**
-  ```
-  pandas>=2.0
-  numpy>=1.24
-  scikit-learn>=1.3
-  gensim>=4.3
-  shap>=0.43
-  # LLM providers — Gemini required, others optional
-  google-generativeai>=0.8
-  anthropic>=0.25
-  openai>=1.30
-  python-dotenv>=1.0
-  pydantic>=2.0
-  tqdm>=4.66
-  tenacity>=8.2      # exponential backoff for all providers
-  pytest>=7.4
-  pytest-cov>=4.1
-  ruff>=0.1
-  ```
+- [x] ✅ **Create `requirements.txt`**
+  - pandas, numpy, scikit-learn, gensim, shap, google-generativeai, anthropic, openai, pytest, ruff...
+  - **Deliverable:** requirements.txt committed ✅
 
 - [ ] 🔲 **Set up venv & install**
   ```bash
-  python3.11 -m venv .venv
-  source .venv/bin/activate
+  python -m venv .venv
+  .venv\Scripts\activate   # Windows
   pip install -r requirements.txt
   ```
+  - **Deliverable:** Working venv (local only, not committed)
 
-- [ ] 🔲 **Test Gemini connection**
-  - Create `tests/test_connection.py` with one minimal Gemini call
-  - Run to confirm API key works
-  - **Deliverable:** Green test
+- [x] ✅ **Test Gemini connection**
+  - `tests/test_connection.py` created with API key check + minimal Gemini call
+  - **Deliverable:** test_connection.py committed ✅ (run manually to verify)
 
-- [ ] 🔲 **First commit**
-  ```bash
-  git add .
-  git commit -m "feat(negoplay): initial project scaffolding"
-  git push
-  ```
+- [x] ✅ **First commit + push**
+  - Multiple commits pushed to https://github.com/annafr2/From-Bridge-Tables-to-Global-Markets
+  - **Deliverable:** Live GitHub repo ✅
 
 ### End-of-Session Deliverables
 
-- ✅ Approved scope (Dr. Rami)
-- ✅ GitHub repo with full structure
-- ✅ Working venv with all dependencies
-- ✅ Gemini API tested and working
-- ✅ First commit pushed
+- ✅ Approved scope (Dr. Yoram Segal — May 26, 2026)
+- ✅ GitHub repo with full folder structure
+- ✅ .gitignore, .env.example, requirements.txt
+- ✅ tests/test_connection.py ready
+- ✅ Commits pushed
+- 🔲 venv install (do locally — not tracked in git)
 
 ---
 
