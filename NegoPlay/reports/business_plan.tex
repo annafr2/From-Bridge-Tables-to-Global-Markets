@@ -1,0 +1,684 @@
+% =====================================================================
+% NegoPlay — Business Plan
+% Author: Anna Ben-Shushan
+% Supervisor: Dr. Yoram Segal
+% Course: AI Development Expert
+% =====================================================================
+\documentclass[11pt, a4paper, oneside]{report}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{setspace}
+\onehalfspacing
+
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{colortbl}
+\usepackage[table]{xcolor}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{enumitem}
+\usepackage[hidelinks, colorlinks=true, linkcolor=black,
+            citecolor=blue, urlcolor=blue]{hyperref}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+
+% ----- Colors -----
+\definecolor{headbg}{HTML}{2C3E50}
+\definecolor{accentblue}{HTML}{2980B9}
+\definecolor{accentgreen}{HTML}{27AE60}
+\definecolor{accentorange}{HTML}{E67E22}
+\definecolor{lightgray}{HTML}{F2F3F4}
+\definecolor{darkgray}{HTML}{566573}
+
+% ----- Header / Footer -----
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{NegoPlay -- Business Plan}
+\fancyhead[R]{\leftmark}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% ----- Chapter style -----
+\titleformat{\chapter}[hang]
+  {\normalfont\Huge\bfseries}{\thechapter}{20pt}{\Huge}
+
+% ----- Helper: highlight box -----
+\usepackage{tcolorbox}
+\tcbuselibrary{skins}
+\newtcolorbox{keybox}[1][]{
+  colback=accentblue!8, colframe=accentblue,
+  fonttitle=\bfseries, title=#1, boxrule=0.8pt
+}
+\newtcolorbox{metricbox}{
+  colback=accentgreen!10, colframe=accentgreen,
+  boxrule=0.8pt, fontupper=\bfseries\large\centering
+}
+
+% =====================================================================
+\begin{document}
+
+% -------------------- Cover Page --------------------
+\begin{titlepage}
+\centering
+\vspace*{1.5cm}
+{\Large\bfseries AI Development Expert -- Final Project\par}
+\vspace{0.4cm}
+{\large Business Plan\par}
+\vspace{2cm}
+
+\rule{\textwidth}{1.5pt}\\[0.6cm]
+{\Huge\bfseries NegoPlay\par}
+\vspace{0.4cm}
+{\Large\itshape Strategic Profiles from Bridge to Business:\\[0.2cm]
+A B2B AI-Powered Negotiation Intelligence Platform\par}
+\rule{\textwidth}{1.5pt}\\[1.5cm]
+
+\begin{tcolorbox}[colback=accentblue!10, colframe=accentblue, boxrule=1pt]
+\centering\large
+\textbf{Tagline:} \emph{``Know your counterpart before you walk into the room.''}
+\end{tcolorbox}
+
+\vfill
+
+{\large
+\begin{tabular}{rl}
+\textbf{Founder:}     & Anna Ben-Shushan \\[0.25cm]
+\textbf{Supervisor:}  & Dr.\ Yoram Segal \\[0.25cm]
+\textbf{Course:}      & AI Development Expert \\[0.25cm]
+\textbf{Document:}    & Business Plan v1.0 \\[0.25cm]
+\textbf{Date:}        & \today \\
+\end{tabular}
+}
+\vspace{1.5cm}
+\end{titlepage}
+
+% -------------------- TOC --------------------
+\tableofcontents
+\clearpage
+
+% =====================================================================
+% CHAPTER 1 — EXECUTIVE SUMMARY
+% =====================================================================
+\chapter{Executive Summary}
+\label{ch:exec}
+
+\begin{keybox}[The Business in Three Sentences]
+\textbf{NegoPlay} is a B2B SaaS platform that automatically discovers
+decision-making profiles from elite competitive data and deploys them as
+AI agents to help professionals prepare for, simulate, and win business
+negotiations.
+
+The core insight: 149{,}208 expert bridge hands reveal stable
+behavioral archetypes (``Slam Hunter'', ``Insurance Player'', etc.)
+that transfer measurably to negotiation behavior. We turn this empirical
+finding into a subscription API for sales teams, procurement departments,
+and M\&A advisors.
+
+\textbf{Target revenue in Year~3:} \$480K ARR.
+\textbf{Total budget for MVP:} under \$15 (LLM costs only, excluding developer time).
+\end{keybox}
+
+\vspace{0.6cm}
+
+\begin{table}[H]
+\centering\small
+\caption{Business plan summary.}
+\begin{tabular}{ll}
+\toprule
+\textbf{Category} & \textbf{Value} \\
+\midrule
+Market (TAM)      & \$4.2B (negotiation intelligence + sales AI) \\
+Market (SAM)      & \$420M (mid-market + enterprise, English-speaking) \\
+Market (SOM Y3)   & \$480K ARR (realistic 5-year ramp) \\
+Business model    & B2B SaaS subscription + usage-based API \\
+Primary customer  & Sales directors, procurement managers, M\&A teams \\
+Pricing (entry)   & \$49 / month per seat \\
+Competitive moat  & Empirically validated profiles from real expert data \\
+Technology stack  & Python, Gemini Flash 2.0, scikit-learn, GitHub \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% =====================================================================
+% CHAPTER 2 — THE PROBLEM
+% =====================================================================
+\chapter{The Problem}
+\label{ch:problem}
+
+\section{Negotiations fail because we do not know our counterpart}
+
+Every business negotiation involves incomplete information. We know our
+own BATNA (Best Alternative to a Negotiated Agreement) but rarely know
+the other side's risk tolerance, decision style, or likely concession
+pattern. The result:
+
+\begin{itemize}[leftmargin=*]
+    \item Deals are left on the table when one side concedes too quickly.
+    \item Deals collapse when one side misjudges the other's walk-away point.
+    \item Sales cycles are prolonged because reps cannot adapt their style
+          to the buyer's decision profile.
+\end{itemize}
+
+\section{The data gap}
+
+Business negotiation lacks the clean feedback loops that make other
+domains trainable:
+
+\begin{itemize}[leftmargin=*]
+    \item Real negotiation transcripts are proprietary.
+    \item Outcomes (``who won?'') are rarely measurable in standardized form.
+    \item No public dataset allows training behavioral models on real expert
+          negotiation decisions.
+\end{itemize}
+
+Existing tools (Gong, Chorus, Clari) analyze \emph{what was said} after
+the fact. No tool predicts \emph{how the counterpart will behave} before
+the conversation starts.
+
+\begin{keybox}[The gap we fill]
+NegoPlay is the first platform to build behavioral profiles from a large,
+public, measurable expert decision dataset -- bridge tournament records --
+and transfer those profiles to negotiation preparation.
+\end{keybox}
+
+% =====================================================================
+% CHAPTER 3 — THE SOLUTION
+% =====================================================================
+\chapter{The Solution}
+\label{ch:solution}
+
+\section{What NegoPlay does}
+
+NegoPlay discovers four to five decision-making archetypes from 149{,}208
+elite bridge tournament hands. Each archetype is translated into a
+named profile with five to seven behavioral traits. The profiles are then
+deployed as AI agents that can:
+
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Profile your counterpart} -- given publicly available
+          information about the person or company, classify them into the
+          nearest archetype.
+    \item \textbf{Simulate the negotiation} -- run a multi-round
+          AI-vs-AI simulation of the upcoming deal so the user can see
+          likely concession patterns before the real meeting.
+    \item \textbf{Advise in real time} -- via API integration with CRM
+          tools (HubSpot, Salesforce), push profile-based suggestions
+          during a live call.
+\end{enumerate}
+
+\section{The four profiles (hypothesis -- confirmed by Stage 1)}
+
+\begin{table}[H]
+\centering\small
+\caption{Expected decision profiles discovered from bridge data.}
+\begin{tabularx}{\textwidth}{l X X}
+\toprule
+\textbf{Profile} & \textbf{Core traits} & \textbf{In negotiation} \\
+\midrule
+Slam Hunter    & Aggressive, high risk tolerance, calculated upside bets
+               & Opens high, concedes little, walks away fast if value is low \\
+Insurance Player & Risk-averse, consistent, values certainty over upside
+               & Prefers small guaranteed gains, long close cycles, many contingencies \\
+Bluffer        & Aggressive opening but inconsistent follow-through
+               & Signals high value but folds under pressure \\
+Doubler        & Defensive-aggressive, challenges opponents' claims
+               & Rejects initial offers almost always, uses anchoring counter-offers \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Why bridge data works}
+
+Bridge is one of the only public, large-scale, measurable records of
+expert decision-making under incomplete information with four-player
+dynamics (two cooperating, two competing -- exactly like a business
+negotiation involving two companies each with internal stakeholders).
+The IMP scoring system provides a clean, standardized outcome signal.
+No comparable dataset exists for business negotiation.
+
+% =====================================================================
+% CHAPTER 4 — MARKET ANALYSIS
+% =====================================================================
+\chapter{Market Analysis}
+\label{ch:market}
+
+\section{Total Addressable Market (TAM)}
+
+The global sales intelligence software market was valued at approximately
+\$3.4B in 2023 and is growing at 11\,\% CAGR. Adjacent markets include
+procurement analytics (\$1.2B) and M\&A advisory tools (\$0.6B). We
+define NegoPlay's TAM as the intersection of these segments:
+
+\begin{table}[H]
+\centering\small
+\caption{TAM breakdown.}
+\begin{tabular}{lrr}
+\toprule
+\textbf{Segment} & \textbf{Market size (2024)} & \textbf{CAGR} \\
+\midrule
+Sales intelligence (enterprise)    & \$2.8B & 11\,\% \\
+Procurement AI tools               & \$0.9B & 15\,\% \\
+M\&A deal intelligence             & \$0.5B & 9\,\%  \\
+\midrule
+\textbf{Total TAM}                 & \textbf{\$4.2B} & \textbf{11\,\%} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Serviceable Addressable Market (SAM)}
+
+NegoPlay targets mid-market and enterprise companies in English-speaking
+markets (US, UK, Australia, Canada) that: (a) use a CRM, (b) have
+active outbound sales or procurement teams, and (c) have an existing AI
+software budget. This narrows the addressable market to approximately
+10\,\% of the TAM.
+
+\begin{table}[H]
+\centering\small
+\caption{SAM calculation.}
+\begin{tabular}{lr}
+\toprule
+\textbf{Parameter}                 & \textbf{Value} \\
+\midrule
+TAM                                & \$4.2B \\
+English-speaking market share      & $\times$ 40\,\% \\
+Mid-market + enterprise filter     & $\times$ 60\,\% \\
+AI-ready companies                 & $\times$ 45\,\% \\
+\midrule
+\textbf{SAM}                       & \textbf{$\approx$ \$450M} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Serviceable Obtainable Market (SOM)}
+
+In the first three years, NegoPlay targets 0.1\,\% of the SAM through
+direct sales to early adopters (academic networks, bridge-community
+connections, AI-forward SMEs).
+
+\begin{table}[H]
+\centering\small
+\caption{SOM projection over three years.}
+\begin{tabular}{lrrr}
+\toprule
+\textbf{Metric}               & \textbf{Year 1} & \textbf{Year 2} & \textbf{Year 3} \\
+\midrule
+Paying customers (seats)      & 20              & 120             & 800 \\
+Average revenue per seat/month & \$49           & \$55            & \$50 \\
+Monthly Recurring Revenue     & \$980           & \$6{,}600       & \$40{,}000 \\
+Annual Recurring Revenue (ARR) & \$11{,}760     & \$79{,}200      & \$480{,}000 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% =====================================================================
+% CHAPTER 5 — BUSINESS MODEL AND PRICING
+% =====================================================================
+\chapter{Business Model and Pricing}
+\label{ch:bizmodel}
+
+\section{Revenue model}
+
+NegoPlay uses a \textbf{freemium-to-subscription} model with an optional
+usage-based API tier for enterprise integrations.
+
+\begin{table}[H]
+\centering\small
+\caption{Pricing tiers.}
+\begin{tabularx}{\textwidth}{l l X r}
+\toprule
+\textbf{Tier} & \textbf{Audience} & \textbf{Includes} & \textbf{Price} \\
+\midrule
+Free          & Individual / researcher
+              & 10 profile analyses/month, no simulation
+              & \$0 \\
+Pro           & Sales rep / procurement officer
+              & 200 analyses + unlimited simulations + email support
+              & \$49/seat/month \\
+Team          & SME sales team (up to 20 seats)
+              & Unlimited analyses, CRM webhook, team dashboard
+              & \$199/month flat \\
+Enterprise    & Large enterprise / API integration
+              & Unlimited, SLA, SSO, Salesforce / HubSpot connector
+              & Custom (est.\ \$2{,}000--\$10{,}000/month) \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Unit economics}
+
+The core cost driver is LLM token consumption. Each negotiation profile
+analysis consumes approximately 5{,}000 tokens using Gemini Flash 2.0.
+
+\begin{table}[H]
+\centering\small
+\caption{Unit economics per profile analysis.}
+\begin{tabular}{lr}
+\toprule
+\textbf{Item}                        & \textbf{Cost} \\
+\midrule
+Gemini Flash 2.0 output tokens (5K)  & \$0.0015 \\
+Gemini Flash 2.0 input tokens (3K)   & \$0.0002 \\
+Infrastructure (hosting, storage)     & \$0.005  \\
+\midrule
+\textbf{Total cost per analysis}      & \textbf{\$0.007} \\
+\textbf{Revenue per analysis (Pro)}   & \textbf{\$0.245} (200 calls / \$49) \\
+\textbf{Gross margin per analysis}    & \textbf{97\,\%} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Token economics summary}
+
+\begin{table}[H]
+\centering\small
+\caption{Token economics across the four pipeline stages.}
+\begin{tabularx}{\textwidth}{l r r X}
+\toprule
+\textbf{Stage} & \textbf{Tokens/call} & \textbf{Cost/call} & \textbf{Notes} \\
+\midrule
+Stage 2 -- Skill extraction   & $\sim$8{,}000 & \$0.003  & One-time per cluster (amortized) \\
+Stage 3 -- Agent prompt       & $\sim$2{,}000 & \$0.0006 & System prompt cached \\
+Stage 4 -- Bridge simulation  & $\sim$3{,}000 & \$0.001  & Per bid turn \\
+Stage 4 -- Negotiation sim    & $\sim$5{,}000 & \$0.0015 & Per negotiation round \\
+\midrule
+\textbf{Full pipeline (one user analysis)} & \textbf{$\sim$18{,}000} & \textbf{\$0.006} & End-to-end \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{keybox}[Cost advantage of Gemini Flash 2.0]
+At \$0.30 per million output tokens, Gemini Flash 2.0 is approximately
+10$\times$ cheaper than GPT-4o for equivalent throughput. The entire
+NegoPlay MVP (development + testing) runs for under \$15 in LLM costs.
+Claude (Anthropic) and GPT are used selectively for cross-model
+validation runs to strengthen publishability, not for production traffic.
+\end{keybox}
+
+% =====================================================================
+% CHAPTER 6 — COMPETITIVE LANDSCAPE
+% =====================================================================
+\chapter{Competitive Landscape}
+\label{ch:competition}
+
+\section{Direct and indirect competitors}
+
+\begin{table}[H]
+\centering\small
+\caption{Competitive landscape.}
+\begin{tabularx}{\textwidth}{l X X c}
+\toprule
+\textbf{Competitor} & \textbf{What they do} & \textbf{Gap vs NegoPlay} & \textbf{Threat} \\
+\midrule
+\textbf{Gong.io}
+  & Analyzes past sales calls (voice + transcript) to coach reps.
+  & Post-hoc only; no pre-meeting counterpart profiling; no game-theory basis.
+  & Medium \\
+\textbf{Pactum AI}
+  & Autonomous negotiation bot for procurement (IKEA, Walmart).
+  & Fully automated (no human in the loop); no behavioral profiling of individuals.
+  & Low--Medium \\
+\textbf{Chorus.ai}
+  & Records and transcribes sales calls; CI insights for managers.
+  & Same as Gong; reactive, not predictive.
+  & Low \\
+\textbf{Clari}
+  & Revenue forecasting + deal risk scoring.
+  & Forecasting only; no behavioral simulation.
+  & Low \\
+\textbf{Crystal Knows}
+  & DISC personality profiling from LinkedIn data.
+  & Not empirically validated on expert decision data; no simulation.
+  & Medium \\
+\midrule
+\textbf{NegoPlay}
+  & Profiles + simulates counterpart from empirically validated archetypes.
+  & \emph{Only platform with an empirical game-theoretic foundation.}
+  & -- \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Our competitive moat}
+
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Empirical foundation:} Profiles are derived from 149{,}208 expert
+          decisions with measurable outcomes -- not from personality questionnaires
+          or self-reported surveys. This is defensible in peer-reviewed literature.
+    \item \textbf{Cross-domain validation:} The alignment finding (Spearman
+          $\rho \geq 0.7$ between bridge and negotiation behavior) can be
+          published -- creating an academic moat.
+    \item \textbf{Provider-neutral architecture:} The unified \texttt{llm\_client.py}
+          wrapper means NegoPlay is not locked to any single LLM provider.
+    \item \textbf{Data accumulation:} Every new customer interaction refines the
+          profiles -- a classic data flywheel.
+\end{enumerate}
+
+% =====================================================================
+% CHAPTER 7 — GO-TO-MARKET STRATEGY
+% =====================================================================
+\chapter{Go-to-Market Strategy}
+\label{ch:gtm}
+
+\section{Phases}
+
+\subsection*{Phase 1 -- Academic validation (Months 1--6, free)}
+\begin{itemize}[leftmargin=*]
+    \item Publish the alignment finding as a conference paper (AAMAS or IJCAI).
+    \item Open-source the profile discovery code on GitHub to build credibility.
+    \item Target bridge clubs, negotiation researchers, and MBA programs as
+          early adopters and free validators.
+    \item \textbf{Goal:} 100 registered free users, 1 academic citation.
+\end{itemize}
+
+\subsection*{Phase 2 -- Paid early access (Months 7--18)}
+\begin{itemize}[leftmargin=*]
+    \item Launch Pro tier (\$49/seat/month) via Product Hunt and LinkedIn.
+    \item Leverage the author's networks at Sami Shamoon College and LUT University.
+    \item Offer a 3-month pilot to 3--5 mid-market sales teams at cost.
+    \item \textbf{Goal:} 20 paying customers, \$11{,}760 ARR.
+\end{itemize}
+
+\subsection*{Phase 3 -- Enterprise and API (Months 19--36)}
+\begin{itemize}[leftmargin=*]
+    \item Build HubSpot and Salesforce connectors.
+    \item Pursue enterprise deals with procurement departments (indirect sales
+          via consultancies).
+    \item Explore white-labeling for negotiation training companies.
+    \item \textbf{Goal:} 800 seats, \$480K ARR.
+\end{itemize}
+
+\section{Customer acquisition cost estimate}
+
+Given that Phase 1 is entirely inbound (open source + academic press),
+early customer acquisition cost (CAC) is near zero. In Phase 2, assuming
+\$2{,}000/month in LinkedIn advertising and content marketing:
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{CAC (Phase 2):} \$2{,}000 / 20 customers $=$ \$100 per customer.
+    \item \textbf{LTV (Pro, 12-month retention):} \$49 $\times$ 12 $=$ \$588.
+    \item \textbf{LTV/CAC ratio:} 5.9 $\rightarrow$ healthy (target $>$ 3).
+\end{itemize}
+
+% =====================================================================
+% CHAPTER 8 — ROADMAP AND MILESTONES
+% =====================================================================
+\chapter{Roadmap and Milestones}
+\label{ch:roadmap}
+
+\begin{table}[H]
+\centering\small
+\caption{18-month product and business roadmap.}
+\begin{tabularx}{\textwidth}{c X l}
+\toprule
+\textbf{Month} & \textbf{Milestone} & \textbf{Type} \\
+\midrule
+1--5   & Complete NegoPlay MVP (4-stage pipeline, 4 agents, alignment result)
+        & Technical \\
+5      & Submit alignment paper to AAMAS / AAAI workshop
+        & Academic \\
+6      & Open-source profile-discovery code on GitHub
+        & Marketing \\
+7      & Launch Pro tier on Product Hunt
+        & Commercial \\
+9      & 20 paying customers; first case study published
+        & Commercial \\
+12     & HubSpot webhook integration (beta)
+        & Technical \\
+15     & First enterprise pilot (procurement team)
+        & Commercial \\
+18     & \$79K ARR; Salesforce connector GA
+        & Commercial \\
+24     & Series A readiness assessment or academic spin-off decision
+        & Strategic \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+% =====================================================================
+% CHAPTER 9 — FINANCIAL PROJECTIONS
+% =====================================================================
+\chapter{Financial Projections}
+\label{ch:finance}
+
+\section{Three-year revenue projection}
+
+\begin{table}[H]
+\centering\small
+\caption{Three-year revenue, cost, and margin projection.}
+\begin{tabularx}{\textwidth}{X r r r}
+\toprule
+\textbf{Item}                    & \textbf{Year 1} & \textbf{Year 2} & \textbf{Year 3} \\
+\midrule
+\multicolumn{4}{l}{\textit{Revenue}} \\
+Pro seats (avg)                  & 20              & 120             & 600 \\
+Pro revenue                      & \$11{,}760      & \$79{,}200      & \$352{,}800 \\
+Enterprise / API revenue         & ---             & ---             & \$127{,}200 \\
+\textbf{Total ARR}               & \$11{,}760      & \$79{,}200      & \$480{,}000 \\
+\midrule
+\multicolumn{4}{l}{\textit{Costs}} \\
+LLM API costs (Gemini, 97\,\% GM) & \$353         & \$2{,}376       & \$14{,}400 \\
+Infrastructure (cloud hosting)   & \$1{,}200       & \$3{,}600       & \$12{,}000 \\
+Marketing (LinkedIn, content)    & \$0             & \$24{,}000      & \$60{,}000 \\
+\textbf{Total COGS + OpEx}       & \$1{,}553       & \$29{,}976      & \$86{,}400 \\
+\midrule
+\textbf{Gross Profit}            & \$10{,}207      & \$49{,}224      & \$393{,}600 \\
+\textbf{Gross Margin}            & 87\,\%          & 62\,\%          & 82\,\% \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Funding requirement}
+
+Phase 1 requires \textbf{zero external capital} (developer is the founder;
+LLM costs are under \$15 for the full MVP). Phase 2 marketing costs
+(\$24K/year) can be bootstrapped from Phase 1 revenue. A seed round
+(\$200K--\$500K) would be sought in Year 2 to fund enterprise sales and
+engineering headcount.
+
+% =====================================================================
+% CHAPTER 10 — RISKS
+% =====================================================================
+\chapter{Business Risks}
+\label{ch:bizrisks}
+
+\begin{table}[H]
+\centering\small
+\caption{Commercial risk register.}
+\begin{tabularx}{\textwidth}{p{0.5cm} X c c X}
+\toprule
+\textbf{\#} & \textbf{Risk} & \textbf{Lik.} & \textbf{Imp.} & \textbf{Mitigation} \\
+\midrule
+BR1 & Research finding not supported ($\rho < 0.5$).
+    & Med & High
+    & Null result is publishable; pivot to ``bridge coaching AI'' (profile
+      analytics without negotiation transfer claim). \\
+BR2 & Gong or Salesforce launches a competing feature.
+    & Med & High
+    & Academic moat (peer-reviewed publication) + niche positioning
+      (empirical game-theory basis) differentiates us. \\
+BR3 & LLM providers raise prices significantly.
+    & Low & Med
+    & Provider-neutral \texttt{llm\_client.py} lets us switch to the
+      cheapest provider per task within days. \\
+BR4 & Data privacy regulations block use of player name data.
+    & Low & Med
+    & Player data is public (tournament websites); we profile
+      \emph{negotiation counterparts}, not users. \\
+BR5 & The bridge-to-negotiation transfer claim is rejected by peer reviewers.
+    & Med & Med
+    & Frame as ``proof of concept in simulated environment'' from the start;
+      null result is reported honestly. \\
+BR6 & Slow enterprise sales cycle (\textgreater 9 months).
+    & High & Med
+    & Focus on SME Pro tier first; enterprise is a Year 2+ play. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+% =====================================================================
+% CHAPTER 11 — TEAM
+% =====================================================================
+\chapter{Team}
+\label{ch:team}
+
+\begin{keybox}[Founder Profile: Anna Ben-Shushan]
+\begin{itemize}[leftmargin=*,noitemsep]
+    \item \textbf{Current role:} Lecturer at Sami Shamoon College of Engineering;
+          PhD candidate at LUT University (Finland).
+    \item \textbf{Academic:} M.Sc. Software Engineering; AI Development Expert
+          course (current).
+    \item \textbf{Industry:} Full-stack developer; AI consultant.
+    \item \textbf{PhD topic:} ``From Bridge Tables to Global Markets:
+          AI and Optimization Models of Cooperation, Competition, and
+          Negotiation on Digital Platforms.''
+    \item \textbf{Unique advantage:} Domain expert in both the data source
+          (bridge) and the application domain (business negotiation),
+          with the academic credibility to publish the alignment finding.
+\end{itemize}
+\end{keybox}
+
+\section{Hiring plan (if funded)}
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Month 9:} Part-time front-end developer (student, paid project).
+    \item \textbf{Month 15:} Full-time ML engineer (seed-funded).
+    \item \textbf{Month 18:} Business development manager for enterprise sales.
+\end{itemize}
+
+% =====================================================================
+% CHAPTER 12 — CONCLUSION
+% =====================================================================
+\chapter{Conclusion}
+\label{ch:conclusion}
+
+NegoPlay sits at the intersection of three trends: the rapid adoption of
+AI in enterprise software, the growing demand for data-driven negotiation
+tools, and the academic maturation of multi-agent LLM systems.
+
+Its core differentiator is an \textbf{empirically grounded behavioral
+model} -- profiles discovered from 149{,}208 expert decisions rather than
+assembled from questionnaires. This gives NegoPlay both a commercial moat
+and an academic story that can be defended in peer review.
+
+The financial model is attractive: 97\,\% gross margins on LLM calls,
+near-zero CAC in Phase 1, and a clear path to \$480K ARR by Year 3
+without external capital for the first 18 months.
+
+\begin{keybox}[The single most important number]
+\centering\large
+\textbf{Spearman $\rho \geq 0.7$} \\[0.3cm]
+\normalsize
+If the cross-domain alignment exceeds this threshold, NegoPlay has a
+publishable result, a defensible product claim, and a credible reason
+for enterprise customers to pay. Everything else follows from this number.
+\end{keybox}
+
+\end{document}
