@@ -19,12 +19,16 @@ from sklearn.preprocessing import StandardScaler
 logger = logging.getLogger(__name__)
 
 # Features used for clustering (must match features.py output columns)
+# 8 features → richer style separation → 4 distinct profiles
 FEATURE_COLS: list[str] = [
-    "slam_rate",
-    "success_rate",
-    "double_rate",
-    "avg_level",
-    "risk_score",
+    "slam_rate",       # risk-seeker signal (Slam Hunter)
+    "success_rate",    # execution quality
+    "double_rate",     # aggression / Doubler signal
+    "avg_level",       # overall bidding height
+    "nt_rate",         # NT-preference (NT Specialist)
+    "partscore_rate",  # conservative / Insurance Player signal
+    "game_rate",       # reaches game without slamming
+    "risk_score",      # composite
 ]
 
 RANDOM_STATE: int = 42
