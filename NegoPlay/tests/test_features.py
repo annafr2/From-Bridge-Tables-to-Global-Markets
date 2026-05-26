@@ -11,7 +11,10 @@ from src.stage1_clustering.features import (
     MIN_BOARDS,
     _get_declarer_name,
     _is_doubled,
+    _is_game,
     _is_made,
+    _is_nt,
+    _is_partscore,
     _parse_contract_level,
     compute_player_features,
 )
@@ -74,6 +77,64 @@ class TestIsDoubled:
 
     def test_none(self):
         assert _is_doubled(None) is False
+
+
+class TestIsNT:
+    def test_nt_contract(self):
+        assert _is_nt("3NT") is True
+
+    def test_nt_slam(self):
+        assert _is_nt("6NT*") is True
+
+    def test_suit_contract(self):
+        assert _is_nt("4H") is False
+
+    def test_none(self):
+        assert _is_nt(None) is False
+
+
+class TestIsPartscore:
+    def test_level_1(self):
+        assert _is_partscore("1C") is True
+
+    def test_level_2(self):
+        assert _is_partscore("2H") is True
+
+    def test_level_3_suit(self):
+        assert _is_partscore("3H") is True     # below game
+
+    def test_level_3_nt(self):
+        assert _is_partscore("3NT") is True    # level=3, partscore by level def
+
+    def test_level_4(self):
+        assert _is_partscore("4S") is False
+
+    def test_slam(self):
+        assert _is_partscore("6H") is False
+
+
+class TestIsGame:
+    def test_3nt_is_game(self):
+        # level=3 + NT → game (3NT is the classic game contract)
+        assert _is_game("3NT") is True
+
+    def test_3h_is_partscore(self):
+        assert _is_game("3H") is False
+
+    def test_4h_is_game(self):
+        assert _is_game("4H") is True
+
+    def test_4s_is_game(self):
+        assert _is_game("4S") is True
+
+    def test_5c_is_game(self):
+        assert _is_game("5C") is True
+
+    def test_6h_is_slam_not_game(self):
+        assert _is_game("6H") is False
+
+    def test_1c_is_not_game(self):
+        assert _is_game("1C") is False
 
 
 class TestGetDeclarerName:

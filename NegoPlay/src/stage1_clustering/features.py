@@ -3,17 +3,21 @@ src/stage1_clustering/features.py
 ==================================
 Compute per-player behavioural features from the bridge dataset.
 
-Each row in the output represents one player (by name) with 5 features
-derived from their declared contracts:
+Each row in the output represents one player (by name) with 8 features
+derived from their declared contracts (all from the 'contract' column —
+no external data needed):
 
     slam_rate       — % of declarations at slam level (6 or 7)
     success_rate    — % of contracts made
     double_rate     — % of contracts that were doubled (opponent's double)
     avg_level       — average contract level (1–7), proxy for risk appetite
+    nt_rate         — % of contracts in NoTrump  → identifies NT specialists
+    partscore_rate  — % of contracts at level 1/2/3 → identifies cautious players
+    game_rate       — % of contracts at game level (3NT/4H/4S/5m exactly)
     risk_score      — composite risk index in [0, 10]
 
-Features are computed only from rows where the player is the declarer.
-This uses the full 149K dataset (no bidding sequence required).
+All features come directly from the 'contract' column in the 149K dataset.
+No new data is needed — we only parse what is already there.
 """
 
 import logging
@@ -79,10 +83,54 @@ def _is_doubled(contract: str) -> bool:
     """Return True if the contract string contains a double marker (* or X).
 
     EuroBridge uses '*' for doubled and '**' for redoubled.
+    Some records use 'x' suffix instead.
     """
     if not isinstance(contract, str):
         return False
-    return "*" in contract or contract.upper().endswith("X")
+    return "*" in contract or contract.lower().endswith("x")
+
+
+def _is_nt(contract: str) -> bool:
+    """Return True if the contract is in NoTrump (e.g. '3NT', '6NT*').
+
+    Identifies players who prefer NT over suit contracts.
+    Data source: 'contract' column, no new data needed.
+    """
+    if not isinstance(contract, str):
+        return False
+    return "NT" in contract.upper()
+
+
+def _is_partscore(contract: str) -> bool:
+    """Return True if the contract is a partscore (level 1, 2, or 3).
+
+    Identifies cautious / insurance players who stop below game.
+    Data source: 'contract' column, no new data needed.
+    """
+    level = _parse_contract_level(contract)
+    return level is not None and level <= 3
+
+
+def _is_game(contract: str) -> bool:
+    """Return True if the contract is at game level (not slam, not partscore).
+
+    Game = level 3 (3NT only), 4 (majors), or 5 (minors).
+    Excludes slam (6/7) and partscore (1/2 and 3 non-NT).
+
+    Data source: 'contract' column, no new data needed.
+    """
+    level = _parse_contract_level(contract)
+    if level is None:
+        return False
+    if level >= 6:   # slam — not game
+        return False
+    if level <= 2:   # partscore — not game
+        return False
+    # level 3: game only if NoTrump (3NT), otherwise partscore
+    if level == 3:
+        return _is_nt(contract)
+    # level 4 or 5: always game
+    return True
 
 
 def _get_declarer_name(row: pd.Series) -> str | None:
@@ -141,7 +189,10 @@ def compute_player_features(
     work["_is_made"] = work.apply(
         lambda row: _is_made(row["contract"], row["tricks"]), axis=1
     )
-    work["_is_doubled"] = work["contract"].apply(_is_doubled)
+    work["_is_doubled"]    = work["contract"].apply(_is_doubled)
+    work["_is_nt"]         = work["contract"].apply(_is_nt)
+    work["_is_partscore"]  = work["contract"].apply(_is_partscore)
+    work["_is_game"]       = work["contract"].apply(_is_game)
     work["_declarer_name"] = work.apply(_get_declarer_name, axis=1)
 
     # ── Step 2: Keep only rows where a player declared ──────────────────────
@@ -158,6 +209,9 @@ def compute_player_features(
             success_rate=("_is_made", "mean"),
             double_rate=("_is_doubled", "mean"),
             avg_level=("_level", "mean"),
+            nt_rate=("_is_nt", "mean"),
+            partscore_rate=("_is_partscore", "mean"),
+            game_rate=("_is_game", "mean"),
         )
         .reset_index()
         .rename(columns={"_declarer_name": "player_name"})
@@ -184,7 +238,8 @@ def compute_player_features(
     agg = agg.drop(columns=["_avg_level_norm"])
 
     # Round for readability
-    for col in ["slam_rate", "success_rate", "double_rate", "avg_level"]:
+    for col in ["slam_rate", "success_rate", "double_rate",
+                "avg_level", "nt_rate", "partscore_rate", "game_rate"]:
         agg[col] = agg[col].round(4)
 
     agg = agg.sort_values("n_declared", ascending=False).reset_index(drop=True)
