@@ -42,14 +42,14 @@ against real negotiation data.
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│  STAGE 1: PROFILE DISCOVERY (Machine Learning)              │
-│  • Feature engineering on 149K bridge boards                │
-│  • K-Means + HDBSCAN clustering → 3-5 profiles              │
-│  • Validation: Silhouette ≥ 0.4, p < 0.05                   │
+│  STAGE 1: PROFILE DISCOVERY (Machine Learning)  ✅ DONE     │
+│  • 15 features per player (8 outcome + 5 bidding-process)   │
+│  • Extreme-percentile profiling → 5 profiles                │
+│  • Finding: elite players form a continuum, not clusters    │
 └─────────────────────────────────────────────────────────────┘
                             ↓
 ┌─────────────────────────────────────────────────────────────┐
-│  STAGE 2: SKILL EXTRACTION (LLM)                            │
+│  STAGE 2: SKILL EXTRACTION (LLM)  ← NEXT                   │
 │  • Send chunks of 20-30 games per profile to Gemini Flash   │
 │  • LLM identifies 5-7 characteristic skills                 │
 │  • Output: skill_profiles.json                              │
@@ -57,17 +57,53 @@ against real negotiation data.
                             ↓
 ┌─────────────────────────────────────────────────────────────┐
 │  STAGE 3: AGENT CONSTRUCTION                                │
-│  • 4 LLM-based agents, each with profile-specific prompts   │
+│  • 5 LLM-based agents, each with profile-specific prompts   │
 │  • Methods: make_bid(), respond_to_offer()                  │
 └─────────────────────────────────────────────────────────────┘
                             ↓
 ┌─────────────────────────────────────────────────────────────┐
 │  STAGE 4: DUAL SIMULATION + ALIGNMENT                       │
-│  • 50-100 bridge bidding simulations                        │
-│  • 50-100 business negotiation simulations                  │
-│  • Correlation analysis: bridge_winner == nego_winner?      │
+│  • 50 bridge bidding simulations                            │
+│  • 48 business negotiation simulations (4 scenarios)        │
+│  • Spearman ρ: bridge win rate vs negotiation win rate      │
 └─────────────────────────────────────────────────────────────┘
 ```
+
+---
+
+## 📊 Stage 1 Results — Player Profiles (May 2026)
+
+After building 15 behavioural features per player from 149K boards, we identified **5 player profiles** using an extreme-percentile method on **807 qualifying players**:
+
+| Profile | n (%) | Defining feature | Key ratio |
+|---------|-------|-----------------|-----------|
+| 🎯 Slam Hunter | 64 (8%) | slam_rate = 0.116 | **2.8×** Insurance Player |
+| 🛡️ Insurance Player | 60 (7%) | partscore_rate = 0.693 | highest partscore |
+| 💥 Fighter | 66 (8%) | penalty_double_rate = 0.134 | **1.6×** average |
+| ♠️ NT Specialist | 53 (7%) | nt_rate = 0.408 | **1.5×** average |
+| 👥 Generalist | 564 (70%) | — | baseline control |
+
+**Key finding:** Elite players do not form discrete clusters — they form a statistical continuum (K-Means silhouette ≤ 0.15). The extreme-percentile approach identifies the behavioural tails of this continuum.
+
+### Visualizations
+
+**PCA — Players in 2D Behaviour Space**
+
+![PCA scatter](docs/images/pca_scatter.png)
+
+Simple caption: This picture shows players as dots on a flat map. Dots that are close together are players who play in similar ways, like putting similar toys next to each other.
+
+**Behavioural Fingerprints (Radar)**
+
+![Radar chart](docs/images/radar_profiles.png)
+
+Simple caption: This star-shaped chart shows a player's strengths. Each spoke is one skill and longer lines mean the player is stronger there, like a superhero power meter.
+
+**Feature Comparison (Bar)**
+
+![Feature bars](docs/images/feature_bars.png)
+
+Simple caption: This picture shows bars of different heights for different features. Taller bars mean more of that trait, like taller blocks showing more of something.
 
 ---
 

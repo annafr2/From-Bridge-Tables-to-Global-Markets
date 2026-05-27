@@ -421,7 +421,75 @@ No business data needed — argue by structural analogy, supported by bridge emp
 |------|-----------|
 | March 2026 | First scraper working, Herning 2024 scraped |
 | April 2026 | Player names backfill, Poznan 2025 scraped, RESEARCH_INSIGHTS created |
-| May 2026 | **Fixed Ostend 2018 + Budapest 2016 tournament IDs** (were wrong → 0 results). Fixed cards scraper for boards 17-32. Fixed player name extraction for old href format (`/people/person.asp`). Dataset grew from 78K → **149K rows**. |
+| May 2026 | Fixed Ostend 2018 + Budapest 2016 tournament IDs. Fixed cards scraper for boards 17-32. Dataset grew from 78K → **149K rows**. |
+| May 2026 | **NegoPlay Stage 1 complete** — player profile pipeline built and validated (see below). |
+
+---
+
+## PART 7 — NegoPlay Empirical Findings (Stage 1, May 2026)
+
+> This section documents the key methodological finding from building the NegoPlay pipeline.
+> It is directly relevant to **RQ1** and informs the strategy for all subsequent ML work.
+
+### Q7.1 — Do elite bridge players form discrete clusters?
+
+**What we did:**
+Built a full feature-engineering pipeline on 149,208 rows producing 15 features per player
+(8 outcome features from the `contract` column + 5 process features parsed from 46,230 bidding sequences).
+Tested K-Means (k=2..6), GMM with BIC selection, and HDBSCAN on 807 qualifying players.
+
+**The finding — a continuum, not clusters:**
+
+| Method | Result | Interpretation |
+|--------|--------|----------------|
+| K-Means (k=2..6) | Silhouette ≤ 0.15 | No natural groupings |
+| GMM + BIC | Selects k=2, both centroids nearly identical | No meaningful separation |
+| HDBSCAN | 0 clusters, all 807 players classified as noise | Confirms: pure continuum |
+| PCA (3 components) | Explains 56.8% of variance | Structure exists, but smooth |
+
+**Why:** Elite European Championship players are all near-optimal performers. Top-level expertise
+research consistently shows convergence toward optimal play — variation is real but continuous.
+
+**Published claim for Paper 1:**
+> *"Contrary to the assumption that elite players exhibit discrete strategic types, our analysis of
+> 807 European championship players shows a statistical continuum (silhouette ≤ 0.15, HDBSCAN
+> detecting zero natural clusters). This mirrors findings in expertise research where top performers
+> converge toward near-optimal play."*
+
+### Q7.2 — The Extreme Profiles Solution
+
+**What we built instead:**
+Identified the top 10% on each of 4 behavioural axes, assigning each player to the axis
+where their z-score is both above the 90th percentile AND their personal maximum.
+
+**Results (807 players, May 2026):**
+
+| Profile | n (%) | Defining feature | Mean value | vs. average |
+|---------|-------|-----------------|------------|-------------|
+| Slam Hunter | 64 (7.9%) | slam_rate | 0.116 | **2.8×** Insurance Player |
+| Insurance Player | 60 (7.4%) | partscore_rate | 0.693 | highest partscore |
+| Fighter | 66 (8.2%) | penalty_double_rate | 0.134 | **1.6×** average |
+| NT Specialist | 53 (6.6%) | nt_rate | 0.408 | **1.5×** average |
+| Generalist | 564 (69.9%) | — | — | baseline |
+
+**Top player per profile:**
+- Slam Hunter: SZAREK Roger (17.4% slams, z=3.95)
+- Insurance Player: ROSSARD Martine (84.4% partscore, z=4.03)
+- Fighter: KANDEMIR Ismail (17.5% doubles, z=3.56)
+- NT Specialist: BEYNON Sharon (57.7% NT, z=4.52)
+
+**Methodological notes for reviewers:**
+1. The 10% cutoff is explicit and testable — sensitivity analysis at 5%/15%/20% is straightforward.
+2. The 70% Generalist group is NOT discarded — it serves as the baseline/control agent in Stage 4.
+3. External validation comes from Stage 4 alignment: if agents built from these profiles show
+   Spearman ρ ≥ 0.70 between bridge and negotiation behaviour, the profiles are validated empirically.
+4. The continuum finding itself is a research contribution, not a failure.
+
+**Outputs saved:**
+- `NegoPlay/data/processed/player_profiles.csv` — 807 players with profile assignments
+- `NegoPlay/docs/images/pca_scatter.png` — 2D PCA, coloured by profile
+- `NegoPlay/docs/images/radar_profiles.png` — behavioural fingerprints per profile
+- `NegoPlay/docs/images/feature_bars.png` — key feature comparison across profiles
 
 ### What Cannot Be Fixed (Known Limitations)
 

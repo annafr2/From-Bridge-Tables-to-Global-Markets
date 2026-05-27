@@ -18,17 +18,23 @@ from sklearn.preprocessing import StandardScaler
 
 logger = logging.getLogger(__name__)
 
-# Features used for clustering (must match features.py output columns)
-# 8 features → richer style separation → 4 distinct profiles
+# Features used for clustering — split into 2 groups:
+#  • OUTCOME features (from contract column): what they ended up bidding
+#  • PROCESS features (from bidding column):  how they got there
+# Combined → stylistic separation, not just skill separation.
 FEATURE_COLS: list[str] = [
-    "slam_rate",       # risk-seeker signal (Slam Hunter)
-    "success_rate",    # execution quality
-    "double_rate",     # aggression / Doubler signal
-    "avg_level",       # overall bidding height
-    "nt_rate",         # NT-preference (NT Specialist)
-    "partscore_rate",  # conservative / Insurance Player signal
-    "game_rate",       # reaches game without slamming
-    "risk_score",      # composite
+    # — Outcome features (declarer only) —
+    "slam_rate",            # Slam Hunter signal
+    "double_rate",          # how often opponents doubled them
+    "avg_level",            # overall declared contract height
+    "nt_rate",              # NT Specialist signal
+    "partscore_rate",       # Insurance Player signal
+    # — Process features (any seat, from full bidding) —
+    "opening_rate",         # how often they open the auction
+    "preempt_rate",         # weak preemptive openings (level 2+)
+    "intervention_rate",    # bidding into opponents' auction
+    "penalty_double_rate",  # making doubles (aggressive defense)
+    "avg_bids_per_board",   # overall bidding activity
 ]
 
 RANDOM_STATE: int = 42

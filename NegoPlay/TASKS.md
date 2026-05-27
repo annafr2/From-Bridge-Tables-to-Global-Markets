@@ -22,7 +22,7 @@
 | Sprint | Sessions | Dates (approximate) | Theme | Status |
 |--------|----------|---------------------|-------|--------|
 | Sprint 1 | 1-2 | Week of May 19 | Research & Setup | ✅ DONE |
-| Sprint 2 | 3-4 | Week of May 26 | ML Clustering + Skills | 🟡 WIP |
+| Sprint 2 | 3-4 | Week of May 26 | ML Clustering + Skills | ✅ Stage 1 DONE / Stage 2 NEXT |
 | Sprint 3 | 5-6 | Week of Jun 2 | Agent Construction | 🔲 |
 | Sprint 4 | 7-8 | Week of Jun 9 | Dual Simulation | 🔲 |
 | Sprint 5 | 9-10 | Week of Jun 16 | Polish & Defense | 🔲 |
@@ -100,7 +100,7 @@
   - pandas, numpy, scikit-learn, gensim, shap, google-generativeai, anthropic, openai, pytest, ruff...
   - **Deliverable:** requirements.txt committed ✅
 
-- [ ] 🔲 **Set up venv & install**
+- [x] 🔲 **Set up venv & install**
   ```bash
   python -m venv .venv
   .venv\Scripts\activate   # Windows
@@ -128,123 +128,68 @@
 ---
 
 # 📅 SESSION 2 — PRD Finalization & Architecture
-**Date:** _[fill in — likely May 21 or 22]_
+**Date:** May 26, 2026
 **Duration:** ~2 hours
-**Goal:** Complete technical specification, start literature review.
+**Goal:** Complete technical specification, start literature review. ✅ COMPLETE
 
 ### Tasks
 
-- [ ] 🔲 **Finalize PRD.md**
-  - Review current PRD draft
-  - Update success metrics with Dr. Rami's input
-  - **Deliverable:** Locked PRD v1.0
-
-- [ ] 🔲 **Architecture diagram**
-  - Create visual diagram (mermaid or draw.io)
-  - Show 4 stages with data flow
-  - **Deliverable:** `docs/architecture.md` (with mermaid embedded)
-
-- [ ] 🔲 **Literature review session 1**
-  - Use Antigravity's browser agent for parallel search:
-    - Agent 1: "AI in Bridge" (DeepStack, AlphaBridge papers)
-    - Agent 2: "Multi-Agent LLM Debate" (Du et al. 2023)
-    - Agent 3: "LLM negotiation simulation"
-  - Find 8 academic papers
-  - **Deliverable:** `docs/literature_review.md` v1
-
-- [ ] 🔲 **GitHub project survey**
-  - Use Antigravity browser to search GitHub
-  - Topics: "bridge AI", "multi-agent simulation", "LLM negotiation"
-  - Rank by stars + recency
-  - **Deliverable:** `docs/related_projects.md`
-
-- [ ] 🔲 **Write `pyproject.toml`**
-  ```toml
-  [project]
-  name = "negoplay"
-  version = "0.1.0"
-  description = "Strategic Profiles from Bridge to Business"
-  requires-python = ">=3.11"
-
-  [tool.ruff]
-  line-length = 100
-
-  [tool.pytest.ini_options]
-  testpaths = ["tests"]
-  addopts = "--cov=src --cov-report=term-missing"
-  ```
-
-- [ ] 🔲 **Create LICENSE file**
-  - Standard MIT License
-  - Add Anna Ben-Shushan, 2026
+- [x] ✅ **Finalize PRD.md** — locked v1.0
+- [x] ✅ **Architecture diagram** — `docs/architecture.md` with Mermaid flowchart (4-stage pipeline)
+- [x] ✅ **Literature review** — `docs/literature.md` with 17+ papers, 2 anchors (Talwadker 2022, Rong 2019)
+- [x] ✅ **Related projects** — `RELATED_WORK_AND_PLAN.md` with 8 GitHub repos analyzed
+- [x] ✅ **`pyproject.toml`** — ruff, pytest, coverage config
+- [x] ✅ **Preliminary report** — `reports/main.tex` (LaTeX, 9 chapters, pdflatex compiles)
+- [x] ✅ **Business plan** — `reports/business_plan.tex` (TAM $4.2B, B2B SaaS model)
+- [x] ✅ **`references.bib`** — 28 BibTeX entries
 
 ### End-of-Session Deliverables
 
 - ✅ PRD.md locked
-- ✅ Architecture diagram in markdown
-- ✅ 8 papers identified and summarized
-- ✅ 5+ related GitHub projects documented
-- ✅ Modern Python project config (`pyproject.toml`)
+- ✅ Architecture diagram in docs/
+- ✅ Literature review with anchor papers
+- ✅ LaTeX reports (preliminary + business plan)
+- ✅ pyproject.toml with ruff + pytest config
 
 ---
 
 # 📅 SESSION 3 — Stage 1: Feature Engineering & Clustering
-**Date:** _[fill in]_
-**Duration:** ~3 hours (longer — heavy code)
-**Goal:** First analytical results: clusters discovered.
+**Date:** May 27, 2026
+**Duration:** ~4 hours
+**Goal:** Player profiles discovered. ✅ COMPLETE
 
 ### Tasks
 
-- [ ] 🔲 **`src/shared/data_loader.py`**
-  - Function: `load_matches(path) → pd.DataFrame`
-  - Validation: schema check, encoding (`utf-8-sig`), NaN handling
-  - **Tests:** `tests/test_data_loader.py`
+- [x] ✅ **`src/shared/data_loader.py`** — loads + validates 149K CSV, schema check, utf-8-sig
+- [x] ✅ **`src/stage1_clustering/bidding_parser.py`** *(added beyond plan)* — parses 46K bidding sequences into per-player process features
+- [x] ✅ **`src/stage1_clustering/features.py`** — 15 features per player (8 outcome + 5 bidding-process), filter ≥20 boards + ≥20 bidding boards → 807 players
+- [x] ✅ **`src/stage1_clustering/clustering.py`** — K-Means k=2..6 + HDBSCAN; finding: silhouette ≤ 0.15, continuum not clusters
+- [x] ✅ **`src/stage1_clustering/extreme_profiles.py`** *(replaces clustering as primary)* — top 10% per axis → 5 profiles
+- [x] ✅ **`src/stage1_clustering/profiles_compare.py`** — PCA + GMM + extreme profiles comparison
+- [x] ✅ **`src/sdk.py`** — `build_profiles()` SDK entry point
+- [x] ✅ **`tests/test_features.py`** + **`tests/test_extreme_profiles.py`** — 52 tests passing
+- [x] ✅ **`notebooks/visualize_profiles.py`** — 3 visualizations saved to `docs/images/`
+- [x] ✅ **`סיכום_פרויקט.txt`** — plain-language Hebrew summary
 
-- [ ] 🔲 **`src/stage1_clustering/features.py`**
-  - Function: `compute_player_features(df) → pd.DataFrame`
-  - Compute: `slam_rate`, `success_rate`, `preempt_rate`, `double_rate`,
-    `avg_risk_score`
-  - Filter to players with ≥20 boards
-  - **Tests:** Verify exact values for known player (e.g., McGOWAN Elizabeth)
+### Deliverables Produced
 
-- [ ] 🔲 **`src/stage1_clustering/clustering.py`**
-  - Function: `cluster_players(features, k_range=(2,6))`
-  - Implement K-Means with multiple k values
-  - Implement HDBSCAN with default params
-  - Return: cluster labels + silhouette scores per k
-  - **Tests:** Deterministic with `random_state=42`
+- ✅ `data/processed/player_profiles.csv` — 807 players, 5 profiles
+- ✅ `docs/images/pca_scatter.png` — PCA scatter coloured by profile
+- ✅ `docs/images/radar_profiles.png` — behavioural fingerprints
+- ✅ `docs/images/feature_bars.png` — feature comparison bars
+- ✅ 52 tests passing
 
-- [ ] 🔲 **`src/stage1_clustering/validation.py`**
-  - Function: `validate_clusters(features, labels) → dict`
-  - Compute: silhouette, Davies-Bouldin, p-values vs random
-  - Output: structured validation report
-  - **Tests:** Sanity check with known synthetic data
+### Key Research Finding
 
-- [ ] 🔲 **`notebooks/01_clustering_exploration.ipynb`**
-  - EDA on features
-  - Visualize cluster separation (PCA, t-SNE)
-  - Compare K-Means vs HDBSCAN results
-  - Document chosen k and reasoning
-
-### End-of-Session Deliverables
-
-- ✅ `data/processed/player_features.csv` (1,421 rows × 5 features)
-- ✅ `data/processed/player_clusters.csv` (with cluster labels)
-- ✅ `results/stage1_silhouette.png`
-- ✅ `results/stage1_validation.md`
-- ✅ Test coverage ≥ 80% for Stage 1 code
-
-### Acceptance Criteria
-
-- [ ] Silhouette ≥ 0.4 for chosen k
-- [ ] HDBSCAN finds same k ± 1
-- [ ] All tests pass
-- [ ] Notebook runnable end-to-end
+> Elite bridge players form a statistical **continuum**, not discrete clusters.
+> K-Means silhouette ≤ 0.15; HDBSCAN finds 0 natural clusters.
+> Solution: extreme-percentile profiling (top 10% per axis).
+> Documented in `collectBridgeData/RESEARCH_INSIGHTS.md` Part 7.
 
 ---
 
-# 📅 SESSION 4 — Stage 2: LLM Skill Extraction
-**Date:** _[fill in]_
+# 📅 SESSION 4 — Stage 2: LLM Skill Extraction  ← YOU ARE HERE
+**Date:** _[fill in — next session]_
 **Duration:** ~3 hours
 **Goal:** 4 named profiles with 5-7 skills each.
 
@@ -655,14 +600,14 @@ Items that came up but aren't actionable now.
 
 | Sprint | Sessions | Status | % Complete | Notes |
 |--------|----------|--------|------------|-------|
-| Sprint 1 | 1-2 | 🟡 WIP | 0% | Starting today (May 19) |
-| Sprint 2 | 3-4 | 🔲 TODO | 0% | — |
+| Sprint 1 | 1-2 | ✅ DONE | 100% | Repo, setup, PRD, LaTeX reports |
+| Sprint 2 | 3-4 | 🟡 WIP | 50% | Session 3 ✅ — Session 4 next |
 | Sprint 3 | 5-6 | 🔲 TODO | 0% | — |
 | Sprint 4 | 7-8 | 🔲 TODO | 0% | — |
 | Sprint 5 | 9-10 | 🔲 TODO | 0% | — |
 
-**Last updated:** May 19, 2026 (project kickoff)
-**Next checkpoint:** End of Session 1 (today)
+**Last updated:** May 27, 2026
+**Next checkpoint:** Session 4 — Stage 2 Skill Extraction (Gemini Flash 2.0)
 
 ---
 

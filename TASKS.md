@@ -48,7 +48,7 @@ Goal by end of Year 1: A clean dataset of ≥200K labelled deals, feature-engine
 
 ---
 
-## PHASE 3 — Fix Remaining Data Gaps + Risk Research Data  ← **YOU ARE HERE**
+## PHASE 3 — Fix Remaining Data Gaps + Risk Research Data  ✅ LARGELY COMPLETE
 
 > **RQ:** all — we need clean, complete data before any modelling
 
@@ -63,17 +63,15 @@ Goal by end of Year 1: A clean dataset of ≥200K labelled deals, feature-engine
 ### T3.2 — Finish remaining competitions
 ```
 [x] Run bulk scraper for Poznan 2025
-[ ] Run bulk scraper for Ostend 2018
-[ ] Run bulk scraper for Budapest 2016
-[ ] Target: ~150K board-room rows across all 5 competitions
+[x] Run bulk scraper for Ostend 2018
+[x] Run bulk scraper for Budapest 2016
+[x] Target: ~150K board-room rows — ACHIEVED: 149,208 rows
 ```
 
-### T3.2b — Run Ostend 2018 + Budapest 2016 (PARALLEL with T3.3)
+### T3.2b — Run Ostend 2018 + Budapest 2016
 ```
-[ ] python src/downloaders/eurobridge_bulk_scraper.py --competitions EBL_Ostend_2018 --delay 0.8
-[ ] python src/downloaders/eurobridge_bulk_scraper.py --competitions EBL_Budapest_2016 --delay 0.8
-[ ] python src/downloaders/eurobridge_cards_scraper.py --competitions EBL_Ostend_2018 EBL_Budapest_2016 --delay 0.8
-[ ] Re-run pipeline → target >140K rows
+[x] All 5 competitions scraped and in master dataset
+[x] Dataset: 149,208 rows × 48 columns
 ```
 > **RQ:** all — volume needed for statistical power
 
@@ -142,18 +140,11 @@ Goal by end of Year 1: A clean dataset of ≥200K labelled deals, feature-engine
 
 ### T3.5e — Parse individual bid attributions from bidding string
 ```
-[ ] The bidding column already contains position info: "W:- N:1NT E:Pass S:2H | ..."
-[ ] Write parser: src/features/bid_parser.py
-[ ] For each board, produce a list of dicts:
-    [
-      {"turn": 1, "position": "W", "bid": "Pass", "is_opening": True},
-      {"turn": 2, "position": "N", "bid": "1NT",  "is_opening": False},
-      ...
-    ]
-[ ] Derive: who made the first aggressive bid? Who initiated slam?
-[ ] Add column: opening_position  (who opened: N/S/E/W)
-[ ] Add column: first_slam_bid_position  (who first bid slam level)
-[ ] Add column: double_position  (who doubled)
+[x] The bidding column already contains position info: "W:- N:1NT E:Pass S:2H | ..."
+[x] Written: NegoPlay/src/stage1_clustering/bidding_parser.py
+[x] Parses: opening bid, preempt, intervention, double, redouble per player per board
+[x] Integrated into NegoPlay features pipeline (produces 5 process features per player)
+[x] Covers 46,230 boards (Herning 2024 + Poznan 2025)
 ```
 > **This is FREE data** — it's already in the bidding column. No new scraping.
 
@@ -370,6 +361,53 @@ Goal by end of Year 1: A clean dataset of ≥200K labelled deals, feature-engine
 [ ] Metric: top-k accuracy for card ownership
 [ ] Compare to simple baseline (uniform random + obvious bid inferences)
 [ ] Publish loss curves to MLflow
+```
+
+---
+
+---
+
+## PHASE 3.6 — NegoPlay MVP (Course Project + PhD Paper 1 Baseline)  ← **YOU ARE HERE**
+
+> **Repo:** `collectBridgeData/NegoPlay/`
+> **Goal:** Can LLM agents built from bridge profiles show ≥70% behavioural alignment between bridge and negotiation simulations?
+
+### Stage 1 — Profile Discovery  ✅ COMPLETE
+```
+[x] src/shared/data_loader.py          — loads + validates 149K CSV
+[x] src/stage1_clustering/bidding_parser.py  — parses bidding sequences
+[x] src/stage1_clustering/features.py  — 15 features per player (8 outcome + 5 process)
+[x] src/stage1_clustering/extreme_profiles.py — 5 profiles via top-10% method
+[x] src/sdk.py                          — SDK entry point: build_profiles()
+[x] tests/ (52 tests passing)
+[x] data/processed/player_profiles.csv — 807 players, 5 profiles
+[x] docs/images/pca_scatter.png         — visualization
+[x] docs/images/radar_profiles.png      — visualization
+[x] docs/images/feature_bars.png        — visualization
+[x] Key finding: elite players form a continuum; extreme profiles is the right approach
+```
+
+### Stage 2 — Skill Extraction (LLM)  ← NEXT
+```
+[ ] src/stage2_skills/chunker.py        — sample 20-30 games per profile
+[ ] src/stage2_skills/extractor.py      — Gemini Flash 2.0: extract 5-7 skills per profile
+[ ] src/stage2_skills/aggregator.py     — aggregate skills across chunks
+[ ] data/processed/skill_profiles.json  — output: {profile: [skill1, skill2, ...]}
+```
+
+### Stage 3 — Agent Construction
+```
+[ ] src/stage3_agents/base_agent.py     — BaseAgent ABC
+[ ] src/stage3_agents/bridge_agent.py   — make_bid() method
+[ ] src/stage3_agents/nego_agent.py     — respond_to_offer() method
+```
+
+### Stage 4 — Simulation + Alignment
+```
+[ ] src/stage4_simulate/bridge_game.py  — 50 bridge auction simulations
+[ ] src/stage4_simulate/negotiation.py  — 48 negotiation sessions (4 scenarios × 12 pairs)
+[ ] src/stage4_simulate/alignment.py    — Spearman ρ: bridge win rate vs negotiation win rate
+[ ] results/alignment_report.md         — FINAL OUTPUT: ρ ≥ 0.7?
 ```
 
 ---
