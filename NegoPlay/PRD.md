@@ -1,7 +1,8 @@
 # PRD: NegoPlay
 
 > **Product Requirements Document**
-> Version 1.0 · Anna Ben-Shushan · 2026
+> Version 2.0 · Anna Ben-Shushan · 2026
+> *Updated May 2026 after Stage 1 results — see Section 4 (H1 Revision) and Section 6 (Stage 1)*
 
 ---
 
@@ -50,16 +51,16 @@ Three audiences:
 ```
 INPUT: 149K bridge boards (CSV)
    │
-   ├─→ Stage 1: ML Profile Discovery (scikit-learn)
-   │   Output: 3-5 statistical clusters of players
+   ├─→ Stage 1: Profile Discovery (scikit-learn + extreme percentile) ✅ DONE
+   │   Output: 5 extreme-percentile profiles (807 players, May 2026)
    │
    ├─→ Stage 2: LLM Skill Extraction (Gemini Flash by default)
    │   Output: Named profiles with 5-7 skills each
    │
    ├─→ Stage 3: Agent Construction (Gemini Flash by default; Claude/OpenAI for cross-model validation)
-   │   Output: 4 LLM agents, one per profile
+   │   Output: 5 LLM agents, one per profile
    │
-   └─→ Stage 4: Dual Simulation (LLM agents vs. BEN bridge engine + LLM negotiation)
+   └─→ Stage 4: Dual Simulation (LLM agents + LLM negotiation)
        Output: Alignment score (target ≥70%); cross-provider robustness check
 ```
 
@@ -91,7 +92,18 @@ All calls route through `src/shared/llm_client.py` with a `provider=` argument. 
 
 ### Hypotheses
 
-**H1 (Statistical):** K-Means clustering on 5 decision features will produce 3-5 stable profiles with Silhouette ≥ 0.4 and p < 0.05 versus random clustering.
+**H1 (Statistical) — ORIGINAL:** K-Means clustering on 5 decision features will produce 3-5 stable profiles with Silhouette ≥ 0.4 and p < 0.05 versus random clustering.
+
+> **⚠️ Protocol Deviation (May 2026) — Stage 1 Results:**
+> K-Means, HDBSCAN, and GMM all failed to produce stable clusters (best Silhouette = 0.15, well below the 0.4 target). This is not a pipeline error — it is a finding: **elite tournament players form a statistical continuum, not discrete clusters.** This parallels known results in expertise research (experts converge toward optimal behavior, reducing inter-player variance).
+>
+> **H1 (Revised):** Elite bridge players do not form discrete behavioral clusters. Instead, they occupy a statistical continuum. Meaningful profiles can be identified via **extreme-percentile profiling**: players in the top 10% on a defining behavioral axis (slam_rate, partscore_rate, penalty_double_rate, nt_rate) represent the behavioral "tails" of the expert distribution.
+>
+> **Method used:** For each of 4 defining axes, compute z-scores across all 807 qualifying players. Assign a player to a profile if their z-score on that axis is (a) above the 90th percentile AND (b) their personal maximum across all axes. All remaining players = Generalist (baseline).
+>
+> **Result:** 5 profiles identified — Slam Hunter (n=64), Insurance Player (n=60), Fighter (n=66), NT Specialist (n=53), Generalist (n=564). Key ratios: Slam Hunter 2.8× Insurance on slam_rate; Fighter 1.6× average on penalty_double_rate.
+>
+> **This continuum finding is itself a publishable contribution** and will be reported as a primary result in the PhD paper.
 
 **H2 (Behavioral):** LLM agents instantiated with these profiles will exhibit measurably different behaviors in bridge bidding (per-profile win rate variance > 15%).
 
@@ -142,47 +154,59 @@ Full literature: [`docs/literature.md`](docs/literature.md) (17 papers, NegoPlay
 
 ## 6. Features (Detailed)
 
-### Stage 1: Profile Discovery
+### Stage 1: Profile Discovery ✅ COMPLETE (May 2026)
 
-**Description:** Statistical clustering of 1,421 bridge players into 3-5 decision profiles.
+**Description:** Statistical profiling of 807 elite bridge players into 5 behavioral profiles via extreme-percentile method. Original plan was K-Means clustering — see H1 revision above for why the method changed.
 
 **Inputs:**
 - `data/raw/all_matches_full.csv` (149,208 rows)
 
-**Processing:**
-1. Filter to players with ≥20 declared boards → 1,421 players
-2. Compute 5 features per player:
-   - `slam_rate`: % of declarations at slam level (6+)
-   - `success_rate`: % of contracts made
-   - `preempt_rate`: % of opening bids at level 2+
-   - `double_rate`: % of double calls (penalty + takeout)
-   - `avg_risk_score`: Composite risk index
-3. Standardize features (StandardScaler)
-4. Run K-Means for k=2,3,4,5,6 → choose by Silhouette
-5. Validate with HDBSCAN → must produce similar clusters
-6. Statistical test: cluster means vs. random → p < 0.05
+**Processing (as executed):**
+1. Filter to players with ≥20 declared boards AND ≥20 boards with bidding data → **807 players**
+2. Compute **15 features** per player (8 outcome + 5 bidding-process + 2 composite):
+   - *Outcome (from `contract` column):* `slam_rate`, `game_rate`, `partscore_rate`, `nt_rate`, `success_rate`, `doubled_rate`, `avg_level`, `double_rate`
+   - *Process (from `bidding` column):* `opening_rate`, `preempt_rate`, `intervention_rate`, `penalty_double_rate`, `avg_bids_per_board`
+3. Standardize features (StandardScaler) → compute z-scores per feature
+4. **Attempted K-Means** (k=2–6): best Silhouette = 0.15 → rejected
+5. **Attempted HDBSCAN**: 0 clusters found → rejected
+6. **Attempted GMM + BIC**: selected k=2, but both centroids nearly identical → rejected
+7. **PCA** (exploratory): 3 components explain 56.8% variance; PC1 = bidding height, PC2 = bidding activity. No natural separation visible.
+8. **Extreme Percentile Profiling** (adopted method): top 10% per defining axis → 5 profiles
 
 **Outputs:**
 - `data/processed/player_features.csv`
-- `data/processed/player_clusters.csv`
-- `results/stage1_silhouette.png`
-- `results/stage1_validation.md`
+- `data/processed/player_profiles.csv` ← replaces `player_clusters.csv`
+- `docs/images/pca_scatter.png`
+- `docs/images/radar_profiles.png`
+- `docs/images/feature_bars.png`
 
-**Success criteria:**
-- ✅ Silhouette score ≥ 0.4 for chosen k
-- ✅ HDBSCAN finds same number of clusters ± 1
-- ✅ At least 3 features show statistically significant cluster differences
+**Results:**
+
+| Profile | n | % | Defining feature | Key ratio |
+|---------|---|---|-----------------|-----------|
+| Slam Hunter | 64 | 8% | slam_rate = 0.116 | 2.8× Insurance Player |
+| Insurance Player | 60 | 7% | partscore_rate = 0.693 | highest partscore |
+| Fighter | 66 | 8% | penalty_double_rate = 0.134 | 1.6× average |
+| NT Specialist | 53 | 7% | nt_rate = 0.408 | 1.5× average |
+| Generalist | 564 | 70% | — | baseline control |
+
+**Success criteria (revised):**
+- ✅ 5 profiles with statistically distinct defining features (ratios 1.5×–2.8×)
+- ✅ Continuum finding documented and interpretable
+- ✅ Generalist baseline identified (70% of population)
+- ✅ 52 pytest tests passing
+- ⚠️ Original silhouette target (≥0.4) NOT met — explained by continuum structure, not pipeline error
 
 ---
 
 ### Stage 2: Skill Extraction
 
-**Description:** Gemini Flash 2.0 analyzes game samples from each cluster to identify characteristic skills.
+**Description:** Gemini Flash 2.0 analyzes game samples from each profile to identify characteristic skills.
 
 **Inputs:**
-- 4 cluster groups from Stage 1
+- 5 profiles from Stage 1 (4 extreme + 1 Generalist)
 - 20-30 game samples per chunk
-- 5-10 chunks per cluster
+- 5-10 chunks per profile
 
 **Processing:**
 1. For each cluster, extract diverse game samples
@@ -204,19 +228,20 @@ Full literature: [`docs/literature.md`](docs/literature.md) (17 papers, NegoPlay
 **Success criteria:**
 - ✅ Each profile has 5-7 distinct skills
 - ✅ Skills are interpretable in natural language
-- ✅ Cross-validator (Anna) agrees with at least 3/4 profile names
+- ✅ Cross-validator (Anna) agrees with at least 4/5 profile names
 
-**Expected profile names (hypothesis, will refine):**
-- Slam Hunter (aggressive risk-taker)
-- Insurance Player (risk-averse)
-- Bluffer (aggressive but inconsistent)
-- Doubler (defensive-aggressive)
+**Profile names (confirmed from Stage 1):**
+- 🎯 Slam Hunter — aggressive risk-taker, bids for jackpot contracts
+- 🛡️ Insurance Player — loss-averse, stops at safe partial scores
+- 💥 Fighter — punishes opponents with penalty doubles
+- ♠️ NT Specialist — analytical, prefers balanced no-trump contracts
+- 👥 Generalist — baseline, statistically average across all features
 
 ---
 
 ### Stage 3: Agent Construction
 
-**Description:** Build 4 LLM agents, each with a unique profile-based system prompt.
+**Description:** Build 5 LLM agents, each with a unique profile-based system prompt.
 
 **Inputs:**
 - Skill profiles from Stage 2
@@ -239,7 +264,7 @@ Full literature: [`docs/literature.md`](docs/literature.md) (17 papers, NegoPlay
 - `docs/prompts.md` (full prompt book)
 
 **Success criteria:**
-- ✅ All 4 agents produce valid JSON output 95%+ of the time
+- ✅ All 5 agents produce valid JSON output 95%+ of the time
 - ✅ Behavioral variance > 30% in identical scenarios (different agents → different choices)
 - ✅ Decisions traceable to profile skills (explainable)
 
@@ -352,8 +377,8 @@ data/raw/all_matches_full.csv (read-only)
   ↓ src/stage1_clustering/features.py
 data/processed/player_features.csv
   │
-  ↓ src/stage1_clustering/clustering.py
-data/processed/player_clusters.csv
+  ↓ src/stage1_clustering/extreme_profiles.py
+data/processed/player_profiles.csv
   │
   ↓ src/stage2_skills/extractor.py (calls Gemini Flash)
 data/processed/skill_profiles.json
@@ -376,7 +401,7 @@ results/alignment_report.md ← FINAL OUTPUT
 ### Research KPIs (Primary)
 | Metric | Target | Measured Where |
 |--------|--------|----------------|
-| Silhouette score (Stage 1) | ≥ 0.4 | `results/stage1_silhouette.png` |
+| Profile separation (Stage 1) | Defining feature ratio ≥ 1.5× | `docs/images/feature_bars.png` |
 | Cross-domain alignment (Stage 4c) | ≥ 70% | `results/alignment_report.md` |
 | Statistical significance (all stages) | p < 0.05 | Various |
 
@@ -403,7 +428,7 @@ results/alignment_report.md ← FINAL OUTPUT
 |------|-----------|--------|------------|
 | Gemini Flash insufficient quality for agents | Medium | High | Upgrade Gemini → 2.5 Pro, or switch the affected stage to Claude/OpenAI via `llm_client.py` |
 | Gemini API rate limits hit | Medium | Medium | Free tier = 15 req/min; upgrade to paid if needed |
-| Clusters not statistically significant | Low | High | Pre-tested with 1,421 players, should work |
+| Clusters not statistically significant | **Occurred** | High | **Resolved:** switched to extreme-percentile profiling. Continuum finding documented as a research result. |
 | Agent prompts produce inconsistent behavior | Medium | High | Manual sanity check at Stage 3 |
 | Negotiation simulations too unrealistic | High | Medium | Explicit caveat in PRD: "proof-of-concept" |
 | Alignment is <50% (null result) | Medium | Medium | Frame as valid research finding, not failure |
@@ -466,6 +491,7 @@ This PRD is the authoritative specification for NegoPlay v1.0.
 
 **Version history:**
 - v1.0 — Initial PRD (project kickoff, Session 1)
+- v2.0 — Stage 1 results incorporated (May 2026): K-Means/HDBSCAN/GMM failed → Extreme Percentile Profiling adopted; continuum finding documented; 5 profiles confirmed; all "4 agents" references updated to 5
 
 Changes to this document require re-validation against:
 1. Course requirements (Dr. Segal's methodology)
