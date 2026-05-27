@@ -3,7 +3,7 @@
 **Researcher:** Anna Ben Shushan
 **PhD Program:** LUT University, Finland
 **Thesis:** "From Bridge Tables to Global Markets: AI and Optimization Models of Cooperation, Competition, and Negotiation on Digital Platforms"
-**Last Updated:** April 2026
+**Last Updated:** May 2026
 
 ---
 
@@ -217,13 +217,17 @@ See `RESEARCH_INSIGHTS.md` for the full list. Three examples:
 
 ## Next Steps
 
-1. ✅ ~~Finish data collection~~ — Herning, Madeira, Poznan done; Ostend + Budapest running
-2. ✅ ~~Combine all CSVs~~ — `data/processed/all_matches.parquet` (78K rows)
-3. ✅ ~~Add card holdings~~ — N/S/E/W cards in ~50% of rows
+1. ✅ ~~Finish data collection~~ — all 5 competitions scraped: **149,208 rows**
+2. ✅ ~~Combine all CSVs~~ — `data/processed/all_matches_full.csv`
+3. ✅ ~~Add card holdings~~ — N/S/E/W cards in ~54% of rows
 4. ✅ ~~Add individual player names~~ — 8 player columns added (April 2026)
-5. 🔲 **Build risk metrics** — `src/features/risk_metrics.py`
-6. 🔲 **Compute running match scores** — `src/features/running_score.py`
-7. 🔲 **First analysis notebook** — VP scale test, risk profiles
+5. ✅ ~~Parse bidding sequences~~ — `NegoPlay/src/stage1_clustering/bidding_parser.py`
+6. ✅ ~~Build player profiles~~ — 5 profiles, 807 players, `player_profiles.csv` (May 2026)
+7. 🔲 **Stage 2: Skill extraction** — send profile game samples to Gemini, get 5-7 skills per profile
+8. 🔲 **Build risk metrics** — `src/features/risk_metrics.py` (VP scale test, RQ4)
+9. 🔲 **Compute running match scores** — `src/features/running_score.py` (game-state driven risk)
+
+---
 
 ---
 

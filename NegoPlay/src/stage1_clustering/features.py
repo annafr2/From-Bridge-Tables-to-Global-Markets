@@ -26,6 +26,8 @@ import re
 import numpy as np
 import pandas as pd
 
+from src.stage1_clustering.bidding_parser import player_bidding_features
+
 logger = logging.getLogger(__name__)
 
 # Minimum number of declared boards for a player to be included
@@ -160,11 +162,77 @@ def _get_declarer_name(row: pd.Series) -> str | None:
     return name.strip()
 
 
+def compute_bidding_features(df: pd.DataFrame) -> pd.DataFrame:
+    """For each player, compute aggregate bidding-PROCESS features.
+
+    Process features (from `bidding` column, 46K rows / 31% of data):
+        opening_rate        — % of boards where this player opened the auction
+        preempt_rate        — % of openings at level 2+ (weak/preemptive style)
+        intervention_rate   — % of boards where they bid into opp's auction
+        penalty_double_rate — % of boards where they made a double
+        avg_bids_per_board  — mean number of real bids made per board
+        n_bidding_boards    — count of boards with bidding info
+
+    All four seats (N/S/E/W) per board contribute one record per room.
+    """
+    bid_df = df[df["has_bidding"] == True].copy()  # noqa: E712
+    logger.info("Extracting bidding features from %d boards ...", len(bid_df))
+
+    rows: list[dict] = []
+    for tup in bid_df.itertuples(index=False):
+        bidding = getattr(tup, "bidding", None)
+        room = getattr(tup, "room", None)
+        if not isinstance(bidding, str) or not isinstance(room, str):
+            continue
+        prefix = "open" if room.strip().lower() == "open" else "closed"
+        for pos in ("N", "S", "E", "W"):
+            name_col = f"{prefix}_{POSITION_MAP[pos]}"
+            name = getattr(tup, name_col, None)
+            if not isinstance(name, str) or not name.strip():
+                continue
+            feats = player_bidding_features(bidding, pos)
+            feats["player_name"] = name.strip()
+            rows.append(feats)
+
+    if not rows:
+        logger.warning("No bidding records extracted — returning empty DataFrame.")
+        return pd.DataFrame(columns=[
+            "player_name", "n_bidding_boards", "opening_rate",
+            "preempt_rate", "intervention_rate",
+            "penalty_double_rate", "avg_bids_per_board",
+        ])
+
+    long_df = pd.DataFrame(rows)
+    logger.info("Aggregating bidding features over %d player-board records ...",
+                len(long_df))
+
+    agg = (
+        long_df.groupby("player_name")
+        .agg(
+            n_bidding_boards=("opened", "count"),
+            opening_rate=("opened", "mean"),
+            preempt_rate=("is_preempt", "mean"),
+            intervention_rate=("intervened", "mean"),
+            penalty_double_rate=("made_double", "mean"),
+            avg_bids_per_board=("n_bids", "mean"),
+        )
+        .reset_index()
+    )
+
+    # Round for readability
+    for col in ["opening_rate", "preempt_rate", "intervention_rate",
+                "penalty_double_rate", "avg_bids_per_board"]:
+        agg[col] = agg[col].round(4)
+
+    return agg
+
+
 # ── Public API ───────────────────────────────────────────────────────────────
 
 def compute_player_features(
     df: pd.DataFrame,
     min_boards: int = MIN_BOARDS,
+    min_bidding_boards: int = 20,
 ) -> pd.DataFrame:
     """Compute behavioural features for every player with enough declarations.
 
@@ -243,6 +311,38 @@ def compute_player_features(
         agg[col] = agg[col].round(4)
 
     agg = agg.sort_values("n_declared", ascending=False).reset_index(drop=True)
+
+    # ── Step 6: Merge bidding-PROCESS features (from `bidding` column) ──────
+    # These give us stylistic decision-process signals: who opens, preempts,
+    # intervenes, doubles. Only ~31% of boards have bidding, so missing values
+    # are filled with 0.
+    if "bidding" in df.columns and "has_bidding" in df.columns:
+        bid_feats = compute_bidding_features(df)
+        agg = agg.merge(bid_feats, on="player_name", how="left")
+
+        # Fill NaN for players who have no bidding data with 0
+        for col in ["opening_rate", "preempt_rate", "intervention_rate",
+                    "penalty_double_rate", "avg_bids_per_board"]:
+            if col in agg.columns:
+                agg[col] = agg[col].fillna(0.0)
+        if "n_bidding_boards" in agg.columns:
+            agg["n_bidding_boards"] = agg["n_bidding_boards"].fillna(0).astype(int)
+
+        logger.info(
+            "Merged bidding features for %d / %d players",
+            (agg["n_bidding_boards"] > 0).sum(),
+            len(agg),
+        )
+
+        # Filter: keep only players with enough bidding boards to trust their
+        # process features (zeros would otherwise form a spurious cluster)
+        if min_bidding_boards > 0 and "n_bidding_boards" in agg.columns:
+            before = len(agg)
+            agg = agg[agg["n_bidding_boards"] >= min_bidding_boards].copy()
+            logger.info(
+                "Players with >= %d bidding boards: %d / %d",
+                min_bidding_boards, len(agg), before,
+            )
 
     logger.info(
         "Feature matrix ready: %d players × %d features",
