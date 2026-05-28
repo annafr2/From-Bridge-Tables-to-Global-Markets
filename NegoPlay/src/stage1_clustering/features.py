@@ -31,7 +31,7 @@ from src.stage1_clustering.bidding_parser import player_bidding_features
 logger = logging.getLogger(__name__)
 
 # Minimum number of declared boards for a player to be included
-MIN_BOARDS: int = 20
+MIN_BOARDS: int = 50  # Raised from 20 (May 2026) — see PRD Stage 1 sample-size analysis
 
 # Weights for the composite risk_score (must sum to 10)
 RISK_WEIGHTS: dict[str, float] = {
@@ -232,7 +232,7 @@ def compute_bidding_features(df: pd.DataFrame) -> pd.DataFrame:
 def compute_player_features(
     df: pd.DataFrame,
     min_boards: int = MIN_BOARDS,
-    min_bidding_boards: int = 20,
+    min_bidding_boards: int = 50,  # Raised from 20 (May 2026) — sample-size robustness
 ) -> pd.DataFrame:
     """Compute behavioural features for every player with enough declarations.
 
