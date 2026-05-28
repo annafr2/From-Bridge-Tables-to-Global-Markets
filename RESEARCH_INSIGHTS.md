@@ -462,7 +462,7 @@ research consistently shows convergence toward optimal play — variation is rea
 Identified the top 10% on each of 4 behavioural axes, assigning each player to the axis
 where their z-score is both above the 90th percentile AND their personal maximum.
 
-**Results (807 players, May 2026):**
+**Results v2.0 (807 players, initial — May 2026):**
 
 | Profile | n (%) | Defining feature | Mean value | vs. average |
 |---------|-------|-----------------|------------|-------------|
@@ -472,21 +472,52 @@ where their z-score is both above the 90th percentile AND their personal maximum
 | NT Specialist | 53 (6.6%) | nt_rate | 0.408 | **1.5×** average |
 | Generalist | 564 (69.9%) | — | — | baseline |
 
-**Top player per profile:**
-- Slam Hunter: SZAREK Roger (17.4% slams, z=3.95)
-- Insurance Player: ROSSARD Martine (84.4% partscore, z=4.03)
-- Fighter: KANDEMIR Ismail (17.5% doubles, z=3.56)
-- NT Specialist: BEYNON Sharon (57.7% NT, z=4.52)
+### Q7.3 — Sample-Size Correction (Nezer's Review, May 2026)
+
+**The problem (caught by PhD supervisor Nezer, an expert bridge player):**
+The v2.0 pipeline used `min_boards=20`. But for rare events like slam (≈4% baseline rate),
+20 declared boards is far too few. A player with 20 boards and 2 slams has:
+- Empirical slam_rate = 10% (top 10% → classified as Slam Hunter!)
+- 95% confidence interval = **[1.2%, 31.7%]** — overlapping the baseline
+- Indistinguishable from luck
+
+In the v2.0 cohort, 41% of "Slam Hunters" had < 30 declared boards and 56% had < 50.
+Many were almost certainly false positives driven by small samples.
+
+**The fix (v2.1):**
+1. Raised minimum to **≥50 declared boards AND ≥50 bidding boards**
+2. Added a **one-sided binomial test** at p < 0.05 against the population baseline:
+   a player is only assigned to a profile if their observed rate is statistically
+   distinguishable from the average
+
+**Results v2.1 (563 players, robust):**
+
+| Profile | n (%) | Defining feature | Profile mean | Generalist mean | Ratio | Median n_declared |
+|---------|-------|-----------------|--------------|----------------|-------|-------------------|
+| Slam Hunter | 20 (3.6%) | slam_rate | 0.101 | 0.055 | **1.84×** | 216 |
+| Insurance Player | 21 (3.7%) | partscore_rate | 0.684 | 0.570 | **1.20×** | 97 |
+| Fighter | 37 (6.6%) | penalty_double_rate | 0.131 | 0.085 | **1.55×** | 153 |
+| NT Specialist | 17 (3.0%) | nt_rate | 0.385 | 0.282 | **1.36×** | 114 |
+| Generalist | 468 (83.1%) | — | — | — | baseline | 117 |
+
+**What v2.1 gives up — and what it gains:**
+- Smaller cohorts per profile (e.g., 20 Slam Hunters instead of 64)
+- Stronger ratios are more conservative (1.84× instead of 2.8×) — but they are real
+- Every assignment now passes p < 0.05 — defensible in front of any reviewer
+- Median sample size per Slam Hunter jumps from 42 boards to **216 boards**
 
 **Methodological notes for reviewers:**
 1. The 10% cutoff is explicit and testable — sensitivity analysis at 5%/15%/20% is straightforward.
-2. The 70% Generalist group is NOT discarded — it serves as the baseline/control agent in Stage 4.
-3. External validation comes from Stage 4 alignment: if agents built from these profiles show
+2. The Generalist group (83% of population) is NOT discarded — it serves as the baseline/control agent in Stage 4.
+3. The binomial significance test is a published, standard tool (`scipy.stats.binomtest`).
+4. External validation comes from Stage 4 alignment: if agents built from these profiles show
    Spearman ρ ≥ 0.70 between bridge and negotiation behaviour, the profiles are validated empirically.
-4. The continuum finding itself is a research contribution, not a failure.
+5. The continuum finding itself is a research contribution, not a failure.
+6. The v2.0 → v2.1 revision after expert review is documented openly — protocol deviations
+   strengthen, rather than weaken, the eventual paper.
 
-**Outputs saved:**
-- `NegoPlay/data/processed/player_profiles.csv` — 807 players with profile assignments
+**Outputs saved (v2.1):**
+- `NegoPlay/data/processed/player_profiles.csv` — 563 players with profile assignments + p-values
 - `NegoPlay/docs/images/pca_scatter.png` — 2D PCA, coloured by profile
 - `NegoPlay/docs/images/radar_profiles.png` — behavioural fingerprints per profile
 - `NegoPlay/docs/images/feature_bars.png` — key feature comparison across profiles

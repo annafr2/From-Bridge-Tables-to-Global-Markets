@@ -23,24 +23,32 @@ from src.stage1_clustering.features import compute_player_features
 
 def build_profiles(
     data_path: str | Path,
-    min_boards: int = 20,
-    min_bidding_boards: int = 20,
+    min_boards: int = 50,
+    min_bidding_boards: int = 50,
     extreme_pct: float = DEFAULT_EXTREME_PCT,
+    alpha: float = 0.05,
+    require_significance: bool = True,
 ) -> pd.DataFrame:
     """End-to-end Stage 1: raw CSV → per-player profile assignments.
 
     Args:
         data_path: path to all_matches_full.csv (149K rows).
-        min_boards: minimum declared boards required per player.
-        min_bidding_boards: minimum boards with full bidding required.
+        min_boards: minimum declared boards required per player (default 50,
+            raised from 20 in May 2026 after sample-size review).
+        min_bidding_boards: minimum boards with full bidding required (default 50).
         extreme_pct: top-percentile threshold defining "extreme" (0.10 = top 10%).
+        alpha: significance threshold for the binomial test (default 0.05).
+        require_significance: if True (default), a player must be both in the
+            top extreme_pct AND statistically distinguishable from the
+            baseline at p < alpha to be assigned to a profile.
 
     Returns:
         DataFrame, one row per player, with all features plus:
-            profile        — one of {Slam Hunter, Insurance Player,
-                             Fighter, NT Specialist, Generalist}
-            profile_axis   — the feature that defined the profile
-            profile_z      — z-score on that axis
+            profile         — one of {Slam Hunter, Insurance Player,
+                              Fighter, NT Specialist, Generalist}
+            profile_axis    — the feature that defined the profile
+            profile_z       — z-score on that axis
+            profile_pvalue  — binomial p-value (lower = stronger evidence)
     """
     df = load_matches(data_path)
     features = compute_player_features(
@@ -48,7 +56,12 @@ def build_profiles(
         min_boards=min_boards,
         min_bidding_boards=min_bidding_boards,
     )
-    profiles = assign_extreme_profiles(features, extreme_pct=extreme_pct)
+    profiles = assign_extreme_profiles(
+        features,
+        extreme_pct=extreme_pct,
+        alpha=alpha,
+        require_significance=require_significance,
+    )
     return profiles
 
 

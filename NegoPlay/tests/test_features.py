@@ -166,12 +166,23 @@ class TestGetDeclarerName:
 
 @pytest.fixture
 def minimal_df():
-    """Minimal synthetic DataFrame mimicking the real dataset."""
+    """Minimal synthetic DataFrame mimicking the real dataset.
+
+    SMITH John declares 60 boards (above MIN_BOARDS=50). Mix:
+      - 12 slams (6H), all made → 12/60 slam_rate = 0.20
+      - 36 partials (4H), made → 36/60 = 0.60
+      - 12 partials (4H), down → 12/60 = 0.20
+      → overall success_rate = (12 + 36) / 60 = 0.80
+    JONES Mary declares only 5 boards (below MIN_BOARDS — filtered out).
+    """
     rows = []
-    # Player "SMITH John" declares 25 boards, mix of slams and partials
-    for i in range(25):
-        contract = "6H" if i < 5 else "4H"   # 5 slams, 20 partials
-        tricks = 12 if i < 5 else (10 if i < 20 else 9)  # some down
+    for i in range(60):
+        if i < 12:
+            contract, tricks = "6H", 12   # slam made
+        elif i < 48:
+            contract, tricks = "4H", 10   # partial made (4H needs 10)
+        else:
+            contract, tricks = "4H", 9    # partial down
         rows.append({
             "match_id": 1, "round": 1, "board": i + 1,
             "room": "Open", "contract": contract,
@@ -188,7 +199,7 @@ def minimal_df():
     # Player "JONES Mary" only 5 boards (below MIN_BOARDS — should be filtered)
     for i in range(5):
         rows.append({
-            "match_id": 1, "round": 1, "board": i + 26,
+            "match_id": 1, "round": 1, "board": i + 61,
             "room": "Open", "contract": "3NT",
             "declarer": "S", "tricks": 9,
             "ns_score": 400, "ew_score": 0,

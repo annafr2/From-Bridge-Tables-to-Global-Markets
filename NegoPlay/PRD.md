@@ -180,21 +180,36 @@ Full literature: [`docs/literature.md`](docs/literature.md) (17 papers, NegoPlay
 - `docs/images/radar_profiles.png`
 - `docs/images/feature_bars.png`
 
-**Results:**
+**Results (v2.1 — after expert review by Nezer, May 2026):**
 
-| Profile | n | % | Defining feature | Key ratio |
-|---------|---|---|-----------------|-----------|
-| Slam Hunter | 64 | 8% | slam_rate = 0.116 | 2.8× Insurance Player |
-| Insurance Player | 60 | 7% | partscore_rate = 0.693 | highest partscore |
-| Fighter | 66 | 8% | penalty_double_rate = 0.134 | 1.6× average |
-| NT Specialist | 53 | 7% | nt_rate = 0.408 | 1.5× average |
-| Generalist | 564 | 70% | — | baseline control |
+| Profile | n | % | Defining feature | Profile mean | Generalist mean | Ratio |
+|---------|---|---|-----------------|--------------|----------------|-------|
+| Slam Hunter | 20 | 3.6% | slam_rate | 0.101 | 0.055 | 1.84× |
+| Insurance Player | 21 | 3.7% | partscore_rate | 0.684 | 0.570 | 1.20× |
+| Fighter | 37 | 6.6% | penalty_double_rate | 0.131 | 0.085 | 1.55× |
+| NT Specialist | 17 | 3.0% | nt_rate | 0.385 | 0.282 | 1.36× |
+| Generalist | 468 | 83.1% | — | — | — | baseline |
 
-**Success criteria (revised):**
-- ✅ 5 profiles with statistically distinct defining features (ratios 1.5×–2.8×)
+> **⚠️ Sample-size revision (May 2026):** The v2.0 pipeline used `min_boards=20`
+> and reported 64 Slam Hunters with a 2.8× ratio. PhD supervisor Nezer (an
+> expert bridge player) noted that 20 declared boards is too few to estimate
+> rare-event rates like slam: a player with 20 boards and 2 slams has
+> slam_rate = 10% with 95% CI [1.2%, 31.7%] — overlapping the baseline.
+>
+> The revised pipeline (v2.1) requires:
+> - `min_boards ≥ 50` AND `min_bidding_boards ≥ 50`
+> - One-sided binomial test against the population baseline at p < 0.05
+>
+> The Slam Hunter cohort fell from 64 to 20 players, but those 20 are
+> statistically robust: median `n_declared` = 216, minimum = 69, all
+> p-values < 0.05. This is a healthier basis for Stages 2-4.
+
+**Success criteria (revised v2.1):**
+- ✅ 5 profiles with statistically distinct defining features (ratios 1.20×–1.84×)
+- ✅ Binomial significance test confirms every assignment (p < 0.05)
 - ✅ Continuum finding documented and interpretable
-- ✅ Generalist baseline identified (70% of population)
-- ✅ 52 pytest tests passing
+- ✅ Generalist baseline identified (83% of population)
+- ✅ 56 pytest tests passing (was 52 before adding sample-size tests)
 - ⚠️ Original silhouette target (≥0.4) NOT met — explained by continuum structure, not pipeline error
 
 ---
@@ -492,6 +507,7 @@ This PRD is the authoritative specification for NegoPlay v1.0.
 **Version history:**
 - v1.0 — Initial PRD (project kickoff, Session 1)
 - v2.0 — Stage 1 results incorporated (May 2026): K-Means/HDBSCAN/GMM failed → Extreme Percentile Profiling adopted; continuum finding documented; 5 profiles confirmed; all "4 agents" references updated to 5
+- v2.1 — Sample-size revision (May 2026, after Nezer review): raised min_boards 20→50, added binomial significance test (p < 0.05). Slam Hunters: 64 → 20 (each statistically robust). Tests: 52 → 56.
 
 Changes to this document require re-validation against:
 1. Course requirements (Dr. Segal's methodology)

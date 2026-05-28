@@ -71,19 +71,28 @@ against real negotiation data.
 
 ---
 
-## 📊 Stage 1 Results — Player Profiles (May 2026)
+## 📊 Stage 1 Results — Player Profiles (May 2026, revised after expert review)
 
-After building 15 behavioural features per player from 149K boards, we identified **5 player profiles** using an extreme-percentile method on **807 qualifying players**:
+After building 15 behavioural features per player from 149K boards, we identified **5 player profiles** using an extreme-percentile method **plus a binomial significance test** on **563 qualifying players** (≥50 declared boards AND ≥50 boards with bidding data):
 
-| Profile | n (%) | Defining feature | Key ratio |
-|---------|-------|-----------------|-----------|
-| 🎯 Slam Hunter | 64 (8%) | slam_rate = 0.116 | **2.8×** Insurance Player |
-| 🛡️ Insurance Player | 60 (7%) | partscore_rate = 0.693 | highest partscore |
-| 💥 Fighter | 66 (8%) | penalty_double_rate = 0.134 | **1.6×** average |
-| ♠️ NT Specialist | 53 (7%) | nt_rate = 0.408 | **1.5×** average |
-| 👥 Generalist | 564 (70%) | — | baseline control |
+| Profile | n (%) | Defining feature | Profile mean | Generalist mean | Ratio |
+|---------|-------|-----------------|--------------|----------------|-------|
+| 🎯 Slam Hunter | 20 (3.6%) | slam_rate | 0.101 | 0.055 | **1.84×** |
+| 🛡️ Insurance Player | 21 (3.7%) | partscore_rate | 0.684 | 0.570 | **1.20×** |
+| 💥 Fighter | 37 (6.6%) | penalty_double_rate | 0.131 | 0.085 | **1.55×** |
+| ♠️ NT Specialist | 17 (3.0%) | nt_rate | 0.385 | 0.282 | **1.36×** |
+| 👥 Generalist | 468 (83.1%) | — | — | — | baseline control |
 
-**Key finding:** Elite players do not form discrete clusters — they form a statistical continuum (K-Means silhouette ≤ 0.15). The extreme-percentile approach identifies the behavioural tails of this continuum.
+**Two key findings:**
+
+1. **Continuum, not clusters.** K-Means, HDBSCAN, and GMM all failed (best silhouette = 0.15). Elite players form a statistical continuum, not discrete groups. The extreme-percentile approach identifies the behavioural tails of this continuum.
+
+2. **Sample size matters (added May 2026 after expert review).** An earlier version of this pipeline used `min_boards=20` and reported 64 Slam Hunters with a 2.8× ratio. Expert bridge advisor Nezer (PhD supervisor) noted that 20 declared boards is too few to estimate rare-event rates like slam (≈4% baseline) — small samples produce false positives. The revised pipeline:
+   - Raises minimum to **≥50 declared boards AND ≥50 bidding boards**
+   - Adds a one-sided binomial test at **p < 0.05** vs population baseline
+   - Result: 20 Slam Hunters instead of 64, but each is statistically robust
+   - Slam Hunter median `n_declared`: **216 boards** (was 42); minimum: **69** (was 20)
+   - All assignments pass the significance test
 
 ### Visualizations
 
