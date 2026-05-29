@@ -1,0 +1,2175 @@
+{
+  "n_players": 20,
+  "n_profiles": 4,
+  "total_cost_usd": 0.072929,
+  "profile_signatures": [
+    {
+      "profile": "Slam Hunter",
+      "n_players": 5,
+      "skills": [
+        {
+          "name": "Active Competitive Overcaller",
+          "description": "Consistently enters the bidding with overcalls, even with moderate hands, to compete for the partial or game.",
+          "n_mentions": 2,
+          "confidence_avg": 1.0,
+          "aliases": []
+        },
+        {
+          "name": "Aggressive Competitive Bidding",
+          "description": "The player frequently makes competitive game bids or overcalls at high levels, even with marginal hands or against strong opposition.",
+          "n_mentions": 2,
+          "confidence_avg": 1.0,
+          "aliases": []
+        }
+      ]
+    },
+    {
+      "profile": "Insurance Player",
+      "n_players": 5,
+      "skills": [
+        {
+          "name": "Aggressive Competitive Bidding",
+          "description": "The player frequently enters competitive auctions with overcalls, takeout doubles, or direct game bids, often with strong hands or to disrupt opponents.",
+          "n_mentions": 5,
+          "confidence_avg": 1.0,
+          "aliases": []
+        },
+        {
+          "name": "Active Competitive Bidding",
+          "description": "The player frequently enters the auction with overcalls, doubles, or game bids in competitive situations, demonstrating a willingness to fight for the contract.",
+          "n_mentions": 2,
+          "confidence_avg": 1.0,
+          "aliases": []
+        },
+        {
+          "name": "Standard System Adherence",
+          "description": "Consistently employs common conventions like Stayman and transfers, and a strong club system, demonstrating solid partnership understanding.",
+          "n_mentions": 2,
+          "confidence_avg": 1.0,
+          "aliases": []
+        }
+      ]
+    },
+    {
+      "profile": "Fighter",
+      "n_players": 5,
+      "skills": [
+        {
+          "name": "Aggressive Competitive Bidding",
+          "description": "The player consistently enters the auction with competitive bids, including overcalls and raises, often at higher levels, to interfere with opponents' auctions and support partner.",
+          "n_mentions": 4,
+          "confidence_avg": 1.0,
+          "aliases": []
+        },
+        {
+          "name": "Active Competitive Bidding",
+          "description": "The player frequently enters competitive auctions with overcalls, raises, and doubles, aiming to secure their contract or disrupt opponents.",
+          "n_mentions": 2,
+          "confidence_avg": 1.0,
+          "aliases": []
+        },
+        {
+          "name": "Proactive Competitive Bidding",
+          "description": "Consistently enters competitive auctions, pushing for game or making strong overcalls and raises to challenge opponents for the contract.",
+          "n_mentions": 2,
+          "confidence_avg": 1.0,
+          "aliases": []
+        }
+      ]
+    },
+    {
+      "profile": "NT Specialist",
+      "n_players": 5,
+      "skills": [
+        {
+          "name": "Aggressive Competitive Bidding",
+          "description": "The player frequently enters the auction with preemptive bids, overcalls, and competitive raises, often with distributional hands or to disrupt opponents.",
+          "n_mentions": 4,
+          "confidence_avg": 1.0,
+          "aliases": []
+        },
+        {
+          "name": "Active Competitive Bidding",
+          "description": "The player frequently enters competitive auctions with overcalls and takeout doubles, demonstrating a willingness to fight for the contract.",
+          "n_mentions": 2,
+          "confidence_avg": 1.0,
+          "aliases": []
+        }
+      ]
+    }
+  ],
+  "player_profiles": [
+    {
+      "player_name": "AUKEN Sabine",
+      "profile": "Slam Hunter",
+      "n_chunks": 2,
+      "n_boards_total": 50,
+      "summary": "AUKEN Sabine exhibits an aggressive and highly competitive bidding style, consistently pushing for game and slam contracts. This player is not afraid to take risks, often making optimistic bids or employing preempts to disrupt opponents' auctions. However, there are instances of unconventional or misapplied system bids that suggest potential partnership misunderstandings or a unique approach to standard conventions.",
+      "total_cost_usd": 0.003766,
+      "skills": [
+        {
+          "name": "Active Competitive Overcaller",
+          "description": "Consistently enters the bidding with overcalls, even with moderate hands, to compete for the partial or game.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            2,
+            16,
+            26,
+            27
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Aggressive Competitive Bidding",
+          "description": "The player frequently makes competitive game bids or overcalls at high levels, even with marginal hands or against strong opposition.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            3,
+            5,
+            15,
+            25
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Aggressive Penalty Doubling",
+          "description": "Frequently employs penalty doubles against opponents' high-level contracts, indicating confidence in defensive strength.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            1,
+            5
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Explores Game and Slam Contracts",
+          "description": "Utilizes various bidding sequences, including reverses and game tries, to thoroughly investigate potential game and slam contracts.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            8,
+            10,
+            11,
+            16
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Strong Slam Seeking Tendencies",
+          "description": "The player actively explores slam, using control bids or invitational sequences, sometimes with unconventional bids.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            9,
+            14,
+            16
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Systemic and Conventional Bidding",
+          "description": "Adheres to standard bidding conventions and system agreements, such as takeout doubles, transfers, and reverses, to accurately describe hand strength and distribution.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            1,
+            8,
+            11,
+            12
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Proactive Preemptive Bidding",
+          "description": "The player utilizes preemptive bids to disrupt opponents' bidding, even with minimum values.",
+          "n_mentions": 1,
+          "confidence_avg": 0.5,
+          "evidence_boards": [
+            1,
+            16
+          ],
+          "aliases": []
+        },
+        {
+          "name": "System Misapplication or Unconventional Bidding",
+          "description": "The player occasionally misapplies standard conventions or makes bids that deviate from common system agreements, potentially leading to misunderstandings.",
+          "n_mentions": 1,
+          "confidence_avg": 0.5,
+          "evidence_boards": [
+            3,
+            5,
+            12,
+            16
+          ],
+          "aliases": []
+        }
+      ],
+      "errors": []
+    },
+    {
+      "player_name": "SZABO Csaba",
+      "profile": "Slam Hunter",
+      "n_chunks": 2,
+      "n_boards_total": 50,
+      "summary": "SZABO Csaba is an active and aggressive player, consistently engaging in competitive bidding. They show a strong tendency to penalize opponents with well-judged doubles and proactively seek game contracts when holding suitable hands. This player is not afraid to compete at higher levels, often employing overcalls and sometimes making sacrifice bids.",
+      "total_cost_usd": 0.003649,
+      "skills": [
+        {
+          "name": "Active Competitive Overcaller",
+          "description": "Frequently enters the bidding with overcalls to compete for part-score or game, showing suit length.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            3,
+            4,
+            14
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Aggressive Penalty Doubler",
+          "description": "Consistently makes penalty doubles against opponents' contracts, often leading to significant scores.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            3,
+            8,
+            27
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Aggressive Slam/Game Investigation",
+          "description": "The player actively uses conventional bids, such as splinters, to explore slam or strong game contracts with partner.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            18,
+            28
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Proactive Competitive Bidding",
+          "description": "The player frequently enters the auction with overcalls, doubles, or raises, often with light values, to compete for the contract.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            4,
+            7,
+            9,
+            12,
+            29
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Proactive Game Seeker",
+          "description": "Actively bids towards game contracts when holding strong hands, particularly in major suits.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            1,
+            11,
+            17,
+            20
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Aggressive Preemptive Bidding",
+          "description": "The player employs high-level preemptive bids to obstruct opponents' bidding, even with weak hands and long suits.",
+          "n_mentions": 1,
+          "confidence_avg": 0.5,
+          "evidence_boards": [
+            17
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Direct Game-Seeking",
+          "description": "The player bids directly to game with strong hands, often bypassing intermediate steps when confident of the contract.",
+          "n_mentions": 1,
+          "confidence_avg": 0.5,
+          "evidence_boards": [
+            7,
+            10
+          ],
+          "aliases": []
+        },
+        {
+          "name": "High-Level Competitor",
+          "description": "Demonstrates a readiness to compete at higher levels, including making sacrifice bids and preemptive actions.",
+          "n_mentions": 1,
+          "confidence_avg": 0.5,
+          "evidence_boards": [
+            13,
+            21,
+            27
+          ],
+          "aliases": []
+        }
+      ],
+      "errors": []
+    },
+    {
+      "player_name": "ZAMIR Ami",
+      "profile": "Slam Hunter",
+      "n_chunks": 2,
+      "n_boards_total": 50,
+      "summary": "ZAMIR Ami demonstrates a dynamic and competitive bidding style, frequently pushing for game and employing preemptive tactics to disrupt opponents. They are also willing to use penalty-oriented redoubles when holding strong hands. Despite these aggressive tendencies, the player maintains a solid foundation in standard bidding conventions.",
+      "total_cost_usd": 0.003489,
+      "skills": [
+        {
+          "name": "Aggressive Game Seeking",
+          "description": "Player actively bids to game in competitive auctions, often pushing beyond opponents' preempts or overcalls.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            1,
+            9,
+            12
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Aggressive Two-Suited Overcalls",
+          "description": "Uses two-suited overcalls (e.g., sandwich) aggressively to compete for the contract, even with moderate strength.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            8
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Competitive Game Bidding",
+          "description": "Readily bids game in competitive auctions, especially after partner's weak opening, to secure a favorable score.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            13
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Consistent Standard Bidding",
+          "description": "Player adheres to standard bidding conventions and sequences in uncontested or constructive auctions.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            3,
+            7,
+            11
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Disruptive Preemptive Tactics",
+          "description": "Player employs preemptive openings and sacrifice bids to obstruct opponents' constructive bidding.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            3,
+            7
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Flexible Hand Representation",
+          "description": "Adapts bidding conventions or makes flexible interpretations to keep the auction alive or reach a perceived optimal contract.",
+          "n_mentions": 1,
+          "confidence_avg": 0.5,
+          "evidence_boards": [
+            8
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Penalty-Focused Redoubling",
+          "description": "Player utilizes redoubles to indicate a strong hand and a clear intention to penalize opponents' contracts.",
+          "n_mentions": 1,
+          "confidence_avg": 0.5,
+          "evidence_boards": [
+            16
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Willingness to Penalty Double",
+          "description": "Frequently makes penalty doubles in competitive auctions, even with marginal defensive values.",
+          "n_mentions": 1,
+          "confidence_avg": 0.5,
+          "evidence_boards": [
+            12
+          ],
+          "aliases": []
+        }
+      ],
+      "errors": []
+    },
+    {
+      "player_name": "BILDE Dennis",
+      "profile": "Slam Hunter",
+      "n_chunks": 2,
+      "n_boards_total": 50,
+      "summary": "Dennis BILDE demonstrates a highly proactive and competitive bidding style, consistently seeking out game and slam opportunities. He is adept at using advanced conventions like cue-bids and Blackwood for slam investigation, and frequently employs aggressive overcalls and doubles to challenge opponents. This player prefers direct game declarations when confident in their hand, indicating a decisive approach to contract bidding.",
+      "total_cost_usd": 0.003565,
+      "skills": [
+        {
+          "name": "Active Competitive Intervention",
+          "description": "Player frequently enters competitive auctions with takeout doubles, suit bids, and raises to disrupt opponents or find their own fit.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            4,
+            9,
+            11,
+            13
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Aggressive Competitive Bidding",
+          "description": "The player frequently makes competitive overcalls, doubles, and direct game bids to challenge opponents.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            4,
+            5,
+            9,
+            11,
+            13,
+            15,
+            16,
+            28
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Aggressive Slam Exploration",
+          "description": "Player consistently uses strong bidding sequences and control bids to explore for slams with partner.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            5,
+            20,
+            22,
+            30
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Constructive System Adherence",
+          "description": "Player generally adheres to standard bidding conventions, making logical bids to describe hand strength and distribution.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            11,
+            12,
+            16,
+            19
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Proactive Slam Investigation",
+          "description": "The player consistently employs advanced bidding tools like cue-bids and Blackwood to explore slam possibilities.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            4,
+            7,
+            16
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Systemic Use of Doubles",
+          "description": "The player effectively utilizes both takeout and competitive/penalty doubles to describe their hand and challenge opponents.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            9,
+            11,
+            13,
+            16
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Direct Game Declaration",
+          "description": "The player often bids directly to game when holding sufficient values and fit, rather than using invitational sequences.",
+          "n_mentions": 1,
+          "confidence_avg": 0.5,
+          "evidence_boards": [
+            8,
+            9,
+            11,
+            28
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Strategic Sacrifice Bidding",
+          "description": "Player is willing to bid high to sacrifice against likely opponent's game or slam contracts.",
+          "n_mentions": 1,
+          "confidence_avg": 0.5,
+          "evidence_boards": [
+            2,
+            5
+          ],
+          "aliases": []
+        }
+      ],
+      "errors": []
+    },
+    {
+      "player_name": "MIKKELSEN Arne",
+      "profile": "Slam Hunter",
+      "n_chunks": 2,
+      "n_boards_total": 50,
+      "summary": "Arne Mikkelsen demonstrates a highly competitive and aggressive bidding style, frequently entering auctions at high levels and showing a willingness to push for game or even slam. They employ systematic conventions like Jacoby 2NT and cue bids to explore for optimal contracts. Additionally, the player is adept at describing two-suited hands through their bidding sequences, both in uncontested and competitive auctions.",
+      "total_cost_usd": 0.003393,
+      "skills": [
+        {
+          "name": "Active Competitive Bidding",
+          "description": "Player frequently enters the auction with overcalls, takeout doubles, and redoubles to compete for contracts and show hand strength.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            2,
+            8,
+            11,
+            13
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Aggressive Competitive Overcaller",
+          "description": "The player frequently enters the auction with competitive overcalls, often at a high level, to challenge opponents or secure their own contract.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            8,
+            9,
+            11,
+            13,
+            14
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Aggressive Slam Seeking",
+          "description": "Player actively pushes for slam contracts, demonstrating willingness to bid high with strong distributional hands or after partner shows slam interest.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            2,
+            7
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Descriptive Two-Suited Bidding",
+          "description": "The player utilizes sequences to clearly show two-suited hands, especially in competitive or game-seeking auctions.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            7,
+            11,
+            12
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Persistent Game Pursuit",
+          "description": "Player demonstrates persistence in reaching game contracts, often re-bidding their suit or making direct game bids even in competitive auctions.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            8,
+            10
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Systematic Slam Explorer",
+          "description": "The player actively uses conventional bids and sequences, such as Jacoby 2NT and cue bids, to explore for game and slam contracts.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            7,
+            16
+          ],
+          "aliases": []
+        }
+      ],
+      "errors": []
+    },
+    {
+      "player_name": "ORAS Maarja",
+      "profile": "Insurance Player",
+      "n_chunks": 2,
+      "n_boards_total": 50,
+      "summary": "ORAS Maarja demonstrates a blend of aggressive competitive bidding and disciplined game/slam seeking when holding strong hands. The player consistently applies standard bidding conventions, indicating a solid grasp of partnership agreements. However, in defensive situations, Maarja tends to adopt a more conservative approach, often passing with moderate hands rather than entering competitive auctions.",
+      "total_cost_usd": 0.003663,
+      "skills": [
+        {
+          "name": "Aggressive Competitive Bidding",
+          "description": "The player frequently engages in competitive auctions, using overcalls, doubles, and raises to contest contracts or push opponents to higher levels.",
+          "n_mentions": 2,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            3,
+            4,
+            5,
+            8,
+            10,
+            11,
+            13,
+            16,
+            18,
+            22,
+            24,
+            31
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Accepts Doubled Contracts",
+          "description": "Consistently passes when opponents double their side's contract, indicating a willingness to play for penalties or bonus.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            8,
+            22,
+            23,
+            31
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Conservative Defensive Passing",
+          "description": "The player tends to pass rather than enter competitive auctions when holding hands with moderate values, especially in defensive positions.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            8,
+            10,
+            11,
+            13,
+            17,
+            29
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Disciplined Game/Slam Seeking",
+          "description": "When holding strong hands with good fits, the player uses standard conventions and bidding sequences to accurately reach optimal game or slam contracts.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            4,
+            17,
+            27
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Standard System Adherence",
+          "description": "The player demonstrates a solid understanding and consistent application of common bidding conventions and opening bids.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            4,
+            5,
+            6,
+            8,
+            27
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Advanced Slam Bidding",
+          "description": "Employs sophisticated slam-seeking conventions like cuebids and control bids to explore high-level contracts.",
+          "n_mentions": 1,
+          "confidence_avg": 0.5,
+          "evidence_boards": [
+            16
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Light Opening Bids",
+          "description": "Initiates the bidding with hands that are often below standard opening point requirements or in short suits.",
+          "n_mentions": 1,
+          "confidence_avg": 0.5,
+          "evidence_boards": [
+            12,
+            13
+          ],
+          "aliases": []
+        }
+      ],
+      "errors": []
+    },
+    {
+      "player_name": "BOZEMPERGK Kostas",
+      "profile": "Insurance Player",
+      "n_chunks": 2,
+      "n_boards_total": 50,
+      "summary": "Kostas BOZEMPERGK demonstrates a proactive and systematic bidding style. He is willing to open 1NT with hands slightly below standard strength and actively engages in competitive auctions, often with doubles or overcalls. His bidding sequences reflect a clear understanding of standard conventions, consistently exploring game contracts even with minimum values.",
+      "total_cost_usd": 0.003771,
+      "skills": [
+        {
+          "name": "Aggressive 1NT Openings",
+          "description": "Consistently opens 1NT with hands below the standard 15-17 HCP range, indicating a willingness to stretch opening requirements.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            6,
+            12
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Aggressive Competitive Bidding",
+          "description": "The player frequently enters competitive auctions with overcalls, takeout doubles, or direct game bids, often with strong hands or to disrupt opponents.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            1,
+            2,
+            3,
+            5,
+            7,
+            11
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Competitive Auction Engagement",
+          "description": "Actively enters auctions with overcalls and doubles, especially when holding good shape or values, demonstrating a proactive approach to competition.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            5,
+            6,
+            8,
+            13
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Strong Game and Slam Seeking",
+          "description": "The player demonstrates a clear intent to reach game or slam contracts through strong responses, control bids, and Blackwood conventions.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            1,
+            8,
+            15
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Systematic Game Exploration",
+          "description": "Employs standard conventions and bidding sequences to thoroughly explore game contracts, particularly with strong balanced hands.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            7,
+            16
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Conservative Passing in Competitive Auctions",
+          "description": "The player occasionally opts to pass in competitive auctions despite holding hands with potential competitive value or support for partner.",
+          "n_mentions": 1,
+          "confidence_avg": 0.5,
+          "evidence_boards": [
+            1,
+            2,
+            13,
+            16
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Game-Seeking with Minimums",
+          "description": "Shows a tendency to push for game contracts even when holding minimum values for their bidding role, relying on partner's strength or favorable distribution.",
+          "n_mentions": 1,
+          "confidence_avg": 0.5,
+          "evidence_boards": [
+            4,
+            8,
+            14
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Preemptive and Disruptive Bidding",
+          "description": "The player utilizes preemptive bids to disrupt opponents' bidding space, making it difficult for them to find their fit.",
+          "n_mentions": 1,
+          "confidence_avg": 0.5,
+          "evidence_boards": [
+            8
+          ],
+          "aliases": []
+        }
+      ],
+      "errors": []
+    },
+    {
+      "player_name": "BLAT Marek",
+      "profile": "Insurance Player",
+      "n_chunks": 2,
+      "n_boards_total": 50,
+      "summary": "Marek BLAT demonstrates a strong understanding of conventional bidding, consistently employing transfers and quantitative slam bids, and generally bids standard game contracts effectively. While often engaging in aggressive competitive bidding, including penalty doubles, the player also exhibits selective passivity with strong hands in certain competitive auctions. A notable inconsistency in weak two opening bids suggests either a flexible system or occasional misapplication of partnership agreements.",
+      "total_cost_usd": 0.003847,
+      "skills": [
+        {
+          "name": "Aggressive Competitive Bidding",
+          "description": "Frequently makes competitive overcalls or raises with marginal hands to disrupt opponents or find a fit.",
+          "n_mentions": 2,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            3,
+            4,
+            6,
+            9,
+            10,
+            14,
+            16
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Constructive Slam Investigation",
+          "description": "Engages in advanced, systematic bidding sequences to explore and reach slam contracts with partner.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            8
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Inconsistent Weak Two Application",
+          "description": "The player demonstrates inconsistent application of weak two opening bids for similar hand types, specifically with a 6-card diamond suit.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            10
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Standard Game Bidding",
+          "description": "The player consistently bids and makes standard game contracts when holding appropriate strength and distribution.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            2,
+            6,
+            10,
+            14
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Standard System Adherence",
+          "description": "Consistently employs common conventions like Stayman and transfers, and a strong club system, demonstrating solid partnership understanding.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            5,
+            6,
+            8,
+            10,
+            12
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Systemic Convention Usage",
+          "description": "The player consistently employs and trusts standard conventions and partnership agreements, such as transfers and slam-invitational bids.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            3,
+            4,
+            6,
+            7,
+            12
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Game-Oriented Declarer",
+          "description": "Actively seeks game contracts, sometimes with slightly less than full values, demonstrating a willingness to push for optimal scores.",
+          "n_mentions": 1,
+          "confidence_avg": 0.5,
+          "evidence_boards": [
+            3,
+            5,
+            9,
+            10
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Selective Passivity with Strong Hands",
+          "description": "Despite holding strong hands, the player sometimes chooses to pass in competitive auctions rather than making a takeout double or overcall.",
+          "n_mentions": 1,
+          "confidence_avg": 0.5,
+          "evidence_boards": [
+            8,
+            12,
+            13,
+            15
+          ],
+          "aliases": []
+        }
+      ],
+      "errors": []
+    },
+    {
+      "player_name": "GOSSCHALK Willem",
+      "profile": "Insurance Player",
+      "n_chunks": 2,
+      "n_boards_total": 50,
+      "summary": "GOSSCHALK Willem exhibits a dynamic bidding style, actively engaging in competitive auctions with doubles and suit bids to challenge opponents. This player also demonstrates a strong grasp of advanced conventions, employing systematic slam exploration techniques with partners. However, there is a noticeable tendency towards conservatism when valuing game contracts, sometimes opting for lower contracts despite holding strong hands.",
+      "total_cost_usd": 0.003394,
+      "skills": [
+        {
+          "name": "Active Competitive Bidding",
+          "description": "Player frequently enters or raises the bidding in competitive auctions, using doubles and natural bids to show values or a fit.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            7,
+            9
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Aggressive Competitive Bidding",
+          "description": "Frequently enters the auction with preemptive bids, overcalls, and responsive doubles, often with distributional but light hands.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            3,
+            7,
+            14,
+            16
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Proactive Penalty Doubling",
+          "description": "Actively doubles opponents' contracts for penalty, particularly at higher levels or when holding strong defensive values.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            3,
+            12,
+            16
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Systematic Slam Exploration",
+          "description": "Player demonstrates good partnership understanding and uses conventional bids like RKCB and control bids to explore slam possibilities.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            7,
+            10
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Conservative Game Valuation",
+          "description": "Player tends to underbid game contracts, preferring to sign off in part-scores or lower games even with strong hands.",
+          "n_mentions": 1,
+          "confidence_avg": 0.5,
+          "evidence_boards": [
+            14
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Direct Game Seeking",
+          "description": "Tends to bid game directly with strong, distributional hands, bypassing slower, invitational sequences.",
+          "n_mentions": 1,
+          "confidence_avg": 0.5,
+          "evidence_boards": [
+            2,
+            10
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Disciplined Partnership Play",
+          "description": "Shows discipline by passing after partner's penalty or takeout doubles, trusting partner's judgment.",
+          "n_mentions": 1,
+          "confidence_avg": 0.5,
+          "evidence_boards": [
+            4,
+            12,
+            15
+          ],
+          "aliases": []
+        }
+      ],
+      "errors": []
+    },
+    {
+      "player_name": "ADAMSEN Klaus",
+      "profile": "Insurance Player",
+      "n_chunks": 2,
+      "n_boards_total": 50,
+      "summary": "Klaus Adamsen is an active and competitive player who is not afraid to enter the auction with overcalls, doubles, and game bids, especially when holding a good suit or fit. They demonstrate a solid understanding of partnership bidding systems, frequently employing artificial bids like transfers, Stayman, and strong 2C openings. While competitive in many scenarios, Adamsen also exhibits a cautious side, often passing with marginal hands in defensive positions rather than risking an ill-advised intervention.",
+      "total_cost_usd": 0.003948,
+      "skills": [
+        {
+          "name": "Active Competitive Bidding",
+          "description": "The player frequently enters the auction with overcalls, doubles, or game bids in competitive situations, demonstrating a willingness to fight for the contract.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            1,
+            4,
+            8,
+            11,
+            13,
+            15
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Aggressive Competitive Bidding",
+          "description": "Player frequently enters competitive auctions with overcalls or takeout doubles, even with moderate hands, aiming to disrupt opponents.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            1,
+            3,
+            8,
+            11,
+            15,
+            16
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Cautious Defensive Interference",
+          "description": "The player tends to pass with marginal hands in defensive positions, even with distributional suits, preferring not to interfere unless holding significant values or a clear tactical advantage.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Systematic Conventional Responses",
+          "description": "Player consistently employs common conventions such as transfers and Stayman in response to partner's no-trump openings.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            5,
+            7,
+            8,
+            12,
+            15
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Utilizes Systemic Bids",
+          "description": "The player employs conventional bids such as strong artificial openings, transfers, and Stayman, indicating a solid grasp of partnership agreements.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            6,
+            7,
+            9,
+            10
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Conservative Game-Level Decisions",
+          "description": "Player shows a tendency to stop at part-score or game with minimum values, even when partner shows invitational strength.",
+          "n_mentions": 1,
+          "confidence_avg": 0.5,
+          "evidence_boards": [
+            2,
+            16
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Preemptive Opening Bids",
+          "description": "The player initiates the bidding with preemptive bids to obstruct opponents, demonstrating an understanding of their tactical value.",
+          "n_mentions": 1,
+          "confidence_avg": 0.5,
+          "evidence_boards": [
+            16
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Proactive Slam Investigation",
+          "description": "Player actively uses control bids and other slam-seeking conventions when holding strong, fitting hands to explore high contracts.",
+          "n_mentions": 1,
+          "confidence_avg": 0.5,
+          "evidence_boards": [
+            8
+          ],
+          "aliases": []
+        }
+      ],
+      "errors": []
+    },
+    {
+      "player_name": "TOLEDANO Oren",
+      "profile": "Fighter",
+      "n_chunks": 2,
+      "n_boards_total": 50,
+      "summary": "TOLEDANO Oren is an active and competitive player who consistently seeks to challenge opponents through aggressive overcalls and penalty doubles. They demonstrate a sophisticated understanding of conventional bidding, using precise tools like splinters and Stayman to accurately describe their hand and probe for optimal contracts. This approach suggests a player who is not afraid to push for the best result, even in contested auctions.",
+      "total_cost_usd": 0.003447,
+      "skills": [
+        {
+          "name": "Aggressive Competitive Actions",
+          "description": "Frequently enters the auction with doubles, redoubles, and competitive raises to challenge opponents or find a fit.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            3,
+            5,
+            6,
+            8,
+            11,
+            12
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Aggressive Competitive Bidding",
+          "description": "This player frequently enters the auction with overcalls or doubles, aiming to compete for the contract or penalize opponents.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            4,
+            7,
+            8,
+            10,
+            12,
+            14,
+            16
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Disciplined Standard Bidding",
+          "description": "Adheres to standard bidding conventions and partnership agreements for opening bids, responses, and rebids.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            1,
+            7,
+            8,
+            11,
+            14
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Probing for Optimal Contracts",
+          "description": "This player demonstrates a willingness to explore game and slam possibilities through strong raises, control bids, or seeking the best fit.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            1,
+            3,
+            5,
+            14
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Proficient Conventional Bidding",
+          "description": "This player utilizes specific conventions and doubles, such as Stayman, splinters, and strong artificial openings, to convey detailed hand information.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            1,
+            4,
+            11,
+            12,
+            16
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Strategic Preemptive Openings",
+          "description": "Employs preemptive bids to disrupt opponents' auctions, showing a long suit and limited high card points.",
+          "n_mentions": 1,
+          "confidence_avg": 0.5,
+          "evidence_boards": [
+            13
+          ],
+          "aliases": []
+        }
+      ],
+      "errors": []
+    },
+    {
+      "player_name": "GOMEZ Ramon",
+      "profile": "Fighter",
+      "n_chunks": 2,
+      "n_boards_total": 50,
+      "summary": "Ramon GOMEZ exhibits a 'Fighter' profile, characterized by aggressive competitive bidding and a proactive approach to penalty doubles. He is also a keen slam seeker, consistently pushing for optimal contracts when holding strong hands. This aggressive style is balanced by a solid understanding and application of standard bidding conventions in constructive sequences.",
+      "total_cost_usd": 0.003625,
+      "skills": [
+        {
+          "name": "Aggressive Competitive Bidding",
+          "description": "The player frequently enters competitive auctions with overcalls or competitive bids on marginal hands, aiming to disrupt opponents' bidding.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            5,
+            15
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Aggressive Slam Seeking",
+          "description": "The player actively pursues slam contracts, often making aggressive bids to reach optimal games or slams when holding strong distributional hands.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            1,
+            8
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Aggressive Takeout Doubling",
+          "description": "Frequently employs takeout doubles to enter auctions forcefully, especially with strong hands or against preempts, aiming to find a fit or show values.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            8,
+            10,
+            14
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Proactive Competitive Bidding",
+          "description": "Consistently enters competitive auctions, pushing for game or making strong overcalls and raises to challenge opponents for the contract.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            4,
+            6,
+            9,
+            11,
+            12,
+            14
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Proactive Penalty Doubling",
+          "description": "The player is quick to make penalty doubles against opponents' contracts, indicating confidence in defensive strength and a belief the contract will fail.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            5,
+            13
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Standard System Application",
+          "description": "The player consistently applies standard bidding conventions and system agreements in uncontested or constructive auctions.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            6,
+            11,
+            16
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Confident Suit Declaration",
+          "description": "Demonstrates strong confidence in declaring their own long suits, often pushing to game or accepting doubles in their own contract.",
+          "n_mentions": 1,
+          "confidence_avg": 0.5,
+          "evidence_boards": [
+            6,
+            9,
+            14
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Preemptive Opening Strategy",
+          "description": "Utilizes preemptive opening bids like weak twos to disrupt opponents' bidding space with long, weak suits.",
+          "n_mentions": 1,
+          "confidence_avg": 0.25,
+          "evidence_boards": [
+            9
+          ],
+          "aliases": []
+        }
+      ],
+      "errors": []
+    },
+    {
+      "player_name": "SKRZYPCZAK Jerzy",
+      "profile": "Fighter",
+      "n_chunks": 2,
+      "n_boards_total": 50,
+      "summary": "The player, SKRZYPCZAK Jerzy, exhibits a 'Fighter' profile, characterized by aggressive and competitive bidding, frequently entering the auction at higher levels to challenge opponents. They are proactive in seeking game contracts, sometimes with aggressive bids, and demonstrate a solid understanding of systemic conventions like takeout doubles and cue-bids. This style indicates a preference for potential gain and disruption over conservative safety.",
+      "total_cost_usd": 0.00379,
+      "skills": [
+        {
+          "name": "Active Competitive Bidding",
+          "description": "Actively competes in auctions, pushing to higher levels or showing support for partner's suit in contested situations.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            5,
+            7,
+            13
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Aggressive Competitive Bidding",
+          "description": "The player consistently enters the auction with competitive bids, including overcalls and raises, often at higher levels, to interfere with opponents' auctions and support partner.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            1,
+            3,
+            6,
+            7,
+            9,
+            13,
+            15
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Aggressive Preemptive Overcalls",
+          "description": "Frequently makes aggressive preemptive overcalls with long suits and weak hands to obstruct opponents' bidding space.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            3,
+            5
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Employs Advanced Bidding Conventions",
+          "description": "Utilizes specific bidding conventions like strong 2C openings, RKCB, and unusual Notrump overcalls, indicating a well-defined partnership system.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            4,
+            5,
+            10
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Proactive Game Seeking",
+          "description": "The player demonstrates a strong inclination to bid game contracts, often with aggressive or borderline hands, to maximize scoring potential.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            5,
+            8,
+            9,
+            11,
+            14
+          ],
+          "aliases": []
+        },
+        {
+          "name": "High-Level Preemptive Interference",
+          "description": "The player frequently uses high-level preemptive bids to disrupt opponents' bidding space and make it difficult for them to find their fit.",
+          "n_mentions": 1,
+          "confidence_avg": 0.5,
+          "evidence_boards": [
+            1,
+            6,
+            14
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Systemic Bidding Application",
+          "description": "The player effectively employs specific bidding conventions, such as takeout doubles and cue-bids/splinters, to convey precise hand information to partner.",
+          "n_mentions": 1,
+          "confidence_avg": 0.5,
+          "evidence_boards": [
+            5,
+            9
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Willingness to Penalty Double",
+          "description": "Demonstrates a readiness to make penalty doubles when holding defensive strength against opponent's contracts.",
+          "n_mentions": 1,
+          "confidence_avg": 0.5,
+          "evidence_boards": [
+            9
+          ],
+          "aliases": []
+        }
+      ],
+      "errors": []
+    },
+    {
+      "player_name": "KANLIKILIC Ferda",
+      "profile": "Fighter",
+      "n_chunks": 2,
+      "n_boards_total": 50,
+      "summary": "This player demonstrates a disciplined approach to bidding, consistently adhering to standard system agreements. They are proactive in competitive auctions, often making overcalls to describe their hand and compete for partscores. Furthermore, they show a clear intent to explore and reach game contracts when holding strong hands or good fits with their partner.",
+      "total_cost_usd": 0.003542,
+      "skills": [
+        {
+          "name": "Aggressive Penalty Doubling",
+          "description": "Player frequently makes penalty doubles in competitive auctions, indicating a strong desire to penalize opponents.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            4,
+            18,
+            23
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Constructive Game Exploration",
+          "description": "The player makes clear, constructive bids to explore and reach game contracts when holding strong hands or good fits with partner.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            12,
+            15,
+            22,
+            24,
+            29
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Precise Slam Investigation",
+          "description": "Player effectively uses advanced conventions like Stayman, cue bids, and RKCB to accurately bid and reach optimal slam contracts.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            3,
+            10
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Proactive Competitive Bidding",
+          "description": "Player actively enters the bidding with overcalls and raises, demonstrating a willingness to compete for part-scores or games.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            4,
+            9,
+            14,
+            25
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Proactive Competitive Overcalls",
+          "description": "The player frequently enters the bidding with overcalls, sometimes with hands at the lighter end of the range, to describe their suit and compete for the partscore.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            7,
+            13
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Standard System Adherence",
+          "description": "The player consistently employs common conventions and bidding sequences such as Stayman, transfers, strong 2C openings, and takeout doubles.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            6,
+            7,
+            11,
+            22,
+            24,
+            29
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Disruptive Preemptive Openings",
+          "description": "Player employs preemptive opening bids to obstruct opponents' bidding space, sometimes with unconventional suit choices.",
+          "n_mentions": 1,
+          "confidence_avg": 0.5,
+          "evidence_boards": [
+            4,
+            16
+          ],
+          "aliases": []
+        }
+      ],
+      "errors": []
+    },
+    {
+      "player_name": "PASKE Thomas",
+      "profile": "Fighter",
+      "n_chunks": 2,
+      "n_boards_total": 50,
+      "summary": "This player demonstrates a competitive and proactive bidding style, often entering auctions with overcalls and preemptive bids to disrupt opponents. They are also willing to make aggressive penalty doubles when holding strong defensive values, while consistently describing their hand shape and suit quality. This indicates a player who is not afraid to challenge opponents and trusts their hand evaluation.",
+      "total_cost_usd": 0.003687,
+      "skills": [
+        {
+          "name": "Active Competitive Bidding",
+          "description": "The player frequently enters competitive auctions with overcalls, raises, and doubles, aiming to secure their contract or disrupt opponents.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            7,
+            8,
+            12,
+            16,
+            23,
+            24,
+            26
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Aggressive Competitive Bidding",
+          "description": "Demonstrates a willingness to enter the auction at higher levels and make competitive bids to challenge opponents.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            1,
+            13,
+            17
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Clear Suit-Oriented Hand Description",
+          "description": "The player's bidding clearly communicates their primary suit and distribution, especially when showing two-suited hands or re-bidding a long suit.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            9,
+            24,
+            27,
+            29
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Preemptive Action with Long Suits",
+          "description": "The player uses preemptive bids at the two and three-level to obstruct opponents, especially when holding long, strong suits.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            12,
+            16
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Aggressive Defensive Doubles",
+          "description": "The player makes penalty doubles against opponent's game contracts, indicating strong defensive values and a willingness to penalize.",
+          "n_mentions": 1,
+          "confidence_avg": 0.5,
+          "evidence_boards": [
+            1
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Ambitious Slam Exploration",
+          "description": "Actively pursues slam contracts with strong hands, employing cue bids and other advanced bidding conventions.",
+          "n_mentions": 1,
+          "confidence_avg": 0.5,
+          "evidence_boards": [
+            12
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Proactive Takeout Doubling",
+          "description": "Utilizes takeout doubles to enter the auction and describe shape, even with moderate hands.",
+          "n_mentions": 1,
+          "confidence_avg": 0.5,
+          "evidence_boards": [
+            6,
+            26
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Strong Opening and Game Bidding",
+          "description": "Opens with strong suit bids and makes clear rebids or jumps to game to define hand strength and suit length.",
+          "n_mentions": 1,
+          "confidence_avg": 0.5,
+          "evidence_boards": [
+            17,
+            29
+          ],
+          "aliases": []
+        }
+      ],
+      "errors": []
+    },
+    {
+      "player_name": "JONES Gary",
+      "profile": "NT Specialist",
+      "n_chunks": 2,
+      "n_boards_total": 50,
+      "summary": "JONES Gary displays an active and often aggressive bidding style, frequently employing preemptive openings and competitive actions like doubles and overcalls to disrupt opponents. They show confidence in bidding directly to No Trump game when holding balanced hands with stoppers, and exhibit some flexibility in their 1NT opening range.",
+      "total_cost_usd": 0.00367,
+      "skills": [
+        {
+          "name": "Active Competitive Bidding",
+          "description": "Frequently enters auctions with preempts, overcalls, and competitive raises to challenge opponents.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            1,
+            4,
+            5,
+            8,
+            12,
+            13,
+            14
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Aggressive Competitive Bidding",
+          "description": "Player frequently enters auctions with doubles or overcalls, aiming to compete for partscores or penalties, often with strong hands.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            4,
+            8,
+            9,
+            11
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Game-Seeking and Exploratory",
+          "description": "Actively explores for game contracts, using strong rebids, control bids, and conventional sequences to find the optimal final resting place.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            2,
+            5,
+            7,
+            15
+          ],
+          "aliases": []
+        },
+        {
+          "name": "No Trump Contract Seeking",
+          "description": "Demonstrates a clear preference for No Trump contracts when holding balanced hands or when partner indicates a suitable fit.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            6,
+            8,
+            10,
+            15
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Preemptive and Disruptive Openings",
+          "description": "Player utilizes preemptive openings and penalty doubles to obstruct opponents' bidding space and gain an advantage.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            3,
+            5,
+            8
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Systemic Convention Usage",
+          "description": "Employs specific conventions like takeout doubles, 1NT overcalls, Stayman, and control bids to precisely describe hand features.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            2,
+            8,
+            13,
+            14,
+            15
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Direct No Trump Game Bidding",
+          "description": "Player shows a tendency to bid directly to 3NT when holding a balanced hand with stoppers, especially over opponent's preempts or strong openings.",
+          "n_mentions": 1,
+          "confidence_avg": 0.5,
+          "evidence_boards": [
+            1,
+            10,
+            14
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Flexible 1NT Opening Range",
+          "description": "Player demonstrates a willingness to open 1NT with hands slightly below the standard 15-17 HCP range.",
+          "n_mentions": 1,
+          "confidence_avg": 0.5,
+          "evidence_boards": [
+            16
+          ],
+          "aliases": []
+        }
+      ],
+      "errors": []
+    },
+    {
+      "player_name": "ROSADO Alexandra",
+      "profile": "NT Specialist",
+      "n_chunks": 2,
+      "n_boards_total": 50,
+      "summary": "Alexandra ROSADO exhibits a generally competitive and proactive bidding style, frequently engaging in competitive raises and takeout doubles to challenge opponents. While demonstrating solid understanding of No Trump bidding conventions, there are occasional instances where her suit preferences or interpretation of partner's bids appear inconsistent, potentially leading to missed game opportunities or less optimal contracts.",
+      "total_cost_usd": 0.003747,
+      "skills": [
+        {
+          "name": "Advanced Slam Exploration",
+          "description": "Demonstrates proficiency in using strong opening bids and advanced conventions to accurately describe powerful hands and reach optimal slams.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            1,
+            23
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Aggressive Competitive Bidding",
+          "description": "Frequently enters auctions with overcalls, doubles, and raises to compete for partials or disrupt opponents.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            1,
+            3,
+            8,
+            16,
+            24,
+            32
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Aggressive Competitive Raises",
+          "description": "Player frequently makes competitive raises of partner's suit to push opponents or reach game.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            3,
+            4,
+            9,
+            11
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Precise System Application",
+          "description": "Consistently applies standard bidding conventions and rebids to accurately describe hand strength and distribution.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            1,
+            3,
+            11,
+            23
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Proactive Takeout Doubling",
+          "description": "Player uses takeout doubles effectively to enter the auction with strong hands and show support for unbid suits.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            9,
+            29
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Standard No Trump Bidding",
+          "description": "Player demonstrates standard opening and responding bids in No Trump, indicating balanced hands and appropriate strength.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            9,
+            10,
+            15,
+            23
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Occasional Bidding Inconsistencies",
+          "description": "Player sometimes makes bids that are non-standard or misinterpret partner's calls, potentially leading to suboptimal contracts or missed opportunities.",
+          "n_mentions": 1,
+          "confidence_avg": 0.5,
+          "evidence_boards": [
+            1,
+            8,
+            25
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Penalty Doubling for Defense",
+          "description": "Player is willing to make penalty doubles when holding strong defensive values against opponent's contracts.",
+          "n_mentions": 1,
+          "confidence_avg": 0.5,
+          "evidence_boards": [
+            23
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Preemptive Opening Strategy",
+          "description": "Utilizes weak two bids to obstruct opponents and make it difficult for them to find their fit.",
+          "n_mentions": 1,
+          "confidence_avg": 0.5,
+          "evidence_boards": [
+            19,
+            31
+          ],
+          "aliases": []
+        }
+      ],
+      "errors": []
+    },
+    {
+      "player_name": "PERCARIO Giacomo",
+      "profile": "NT Specialist",
+      "n_chunks": 2,
+      "n_boards_total": 50,
+      "summary": "PERCARIO Giacomo exhibits a highly competitive and aggressive bidding style, frequently entering auctions at high levels to disrupt opponents or secure their own contracts. This player demonstrates a willingness to take calculated risks, often making aggressive overcalls or preemptive bids, and is not shy about employing penalty doubles. This approach, while sometimes leading to marginal contracts, often yields positive results by pushing opponents too high or making their own contracts.",
+      "total_cost_usd": 0.003848,
+      "skills": [
+        {
+          "name": "Aggressive Competitive Bidding",
+          "description": "The player frequently enters the auction with preemptive bids, overcalls, and competitive raises, often with distributional hands or to disrupt opponents.",
+          "n_mentions": 2,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            1,
+            3,
+            5,
+            6,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            15
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Aggressive Defensive Doubles",
+          "description": "The player is willing to make penalty or takeout doubles of opponent's contracts in competitive auctions.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            5,
+            16
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Aggressive Overcalling/Preempting",
+          "description": "The player makes aggressive overcalls or preemptive bids, occasionally outside standard point ranges or balance requirements, to disrupt opponents' bidding space.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            1,
+            9,
+            13
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Systemic 1NT Responses",
+          "description": "The player employs conventional responses to 1NT openings, specifically demonstrating the use of transfers to a minor suit.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            13
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Willingness to Sacrifice/Push",
+          "description": "The player demonstrates a readiness to bid game or higher in competitive auctions, sometimes with marginal hands, to achieve a favorable score or push opponents.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            3,
+            6,
+            9
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Disciplined Strong Opening Bids",
+          "description": "The player uses strong artificial opening bids (e.g., 2C, 2D) and follows up with disciplined, natural bidding, trusting partner to describe their hand.",
+          "n_mentions": 1,
+          "confidence_avg": 0.5,
+          "evidence_boards": [
+            9,
+            14
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Employs Penalty Doubles",
+          "description": "The player uses penalty doubles against opponents' contracts, indicating a belief that the contract will fail.",
+          "n_mentions": 1,
+          "confidence_avg": 0.5,
+          "evidence_boards": [
+            6,
+            8
+          ],
+          "aliases": []
+        }
+      ],
+      "errors": []
+    },
+    {
+      "player_name": "HOPFENHEIT Guido",
+      "profile": "NT Specialist",
+      "n_chunks": 2,
+      "n_boards_total": 50,
+      "summary": "Guido HOPFENHEIT demonstrates a dynamic and competitive bidding style, actively seeking slam opportunities and engaging frequently in competitive auctions. While often proactive with light openings and penalty doubles, the player also exhibits a selective conservatism, particularly when considering direct overcalls on marginal hands. This approach suggests a nuanced understanding of risk and reward in various bidding scenarios.",
+      "total_cost_usd": 0.003532,
+      "skills": [
+        {
+          "name": "Active Competitive Engagement",
+          "description": "Frequently enters competitive auctions with light openings, descriptive bids, and strong penalty doubles.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            5,
+            6,
+            7,
+            8,
+            11
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Aggressive Competitive Bidding",
+          "description": "The player frequently engages in high-level competitive bidding, including penalty doubles and redoubles, to challenge opponents or push for game/slam.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            7,
+            11,
+            16
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Aggressive Slam Seeking",
+          "description": "Actively employs advanced bidding techniques, such as splinter bids, to explore and reach slam contracts.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            13,
+            15
+          ],
+          "aliases": []
+        },
+        {
+          "name": "NT Contract Preference",
+          "description": "The player consistently steers towards Notrump contracts when holding balanced hands or when partner indicates NT interest, even when a major suit fit might exist.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            3,
+            4,
+            14,
+            16
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Conservative Direct Overcalls",
+          "description": "Tends to pass on marginal direct overcalls, preferring to enter the auction later or with stronger hands/suits.",
+          "n_mentions": 1,
+          "confidence_avg": 0.5,
+          "evidence_boards": [
+            1,
+            5,
+            7,
+            13
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Constructive Slam Investigation",
+          "description": "The player uses specific bids, such as feature bids, to explore slam possibilities with partner.",
+          "n_mentions": 1,
+          "confidence_avg": 0.5,
+          "evidence_boards": [
+            16
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Prioritizes No-Trump Game",
+          "description": "Shows a tendency to direct bidding towards No-Trump contracts when holding balanced hands with stoppers, even when a major suit fit exists.",
+          "n_mentions": 1,
+          "confidence_avg": 0.5,
+          "evidence_boards": [
+            5,
+            6,
+            11,
+            13
+          ],
+          "aliases": []
+        }
+      ],
+      "errors": []
+    },
+    {
+      "player_name": "KUREK BEAULIEU Margaux",
+      "profile": "NT Specialist",
+      "n_chunks": 2,
+      "n_boards_total": 50,
+      "summary": "Margaux Kurek Beaulieu demonstrates a robust understanding of standard no-trump bidding, consistently applying conventions for opening and responding. She is an active competitor, frequently making overcalls and raises to contest auctions and push for game in her side's preferred suit. However, when opponents reach game contracts, she tends to adopt a more conservative approach, preferring to defend rather than making sacrifice bids.",
+      "total_cost_usd": 0.003555,
+      "skills": [
+        {
+          "name": "Active Competitive Bidding",
+          "description": "The player frequently enters competitive auctions with overcalls and takeout doubles, demonstrating a willingness to fight for the contract.",
+          "n_mentions": 2,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            5,
+            9,
+            13,
+            16,
+            20,
+            25,
+            28,
+            30
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Constructive Game/Slam Exploration",
+          "description": "The player utilizes advanced bidding techniques such as reverses and fourth suit forcing to thoroughly explore game and slam possibilities with partner.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            3,
+            5
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Standard NT System Adherence",
+          "description": "The player consistently applies standard Notrump opening and response conventions, indicating a solid understanding of basic system agreements.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            1,
+            5,
+            11,
+            19
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Standard No-Trump System Application",
+          "description": "The player demonstrates a solid understanding and consistent application of standard no-trump opening bids and responses.",
+          "n_mentions": 1,
+          "confidence_avg": 1.0,
+          "evidence_boards": [
+            7,
+            9,
+            11,
+            13
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Clear Suit Communication",
+          "description": "The player clearly communicates suit lengths and preferences through re-bids and responses, aiding partner in contract selection.",
+          "n_mentions": 1,
+          "confidence_avg": 0.5,
+          "evidence_boards": [
+            2,
+            3,
+            5
+          ],
+          "aliases": []
+        },
+        {
+          "name": "Conservative Defensive Declarations",
+          "description": "The player tends to pass when opponents reach game contracts, opting to defend rather than making a sacrifice bid.",
+          "n_mentions": 1,
+          "confidence_avg": 0.5,
+          "evidence_boards": [
+            7,
+            16,
+            20
+          ],
+          "aliases": []
+        }
+      ],
+      "errors": []
+    }
+  ]
+}
