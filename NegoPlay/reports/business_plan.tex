@@ -213,26 +213,43 @@ deployed as AI agents that can:
           during a live call.
 \end{enumerate}
 
-\section{The four profiles (hypothesis -- confirmed by Stage 1)}
+\section{The four profiles (confirmed by Stage 1)}
 
 \begin{table}[H]
 \centering\small
-\caption{Expected decision profiles discovered from bridge data.}
-\begin{tabularx}{\textwidth}{l X X}
+\caption{Decision profiles discovered from 149{,}208 bridge tournament hands.
+Profile names and assignment rates are the actual Stage~1 outputs (v2.1, May 2026).}
+\label{tab:profiles}
+\begin{tabularx}{\textwidth}{l c X X}
 \toprule
-\textbf{Profile} & \textbf{Core traits} & \textbf{In negotiation} \\
+\textbf{Profile} & \textbf{$n$ (\%)} & \textbf{Core traits (from bridge data)} & \textbf{Predicted negotiation behavior} \\
 \midrule
-Slam Hunter    & Aggressive, high risk tolerance, calculated upside bets
-               & Opens high, concedes little, walks away fast if value is low \\
-Insurance Player & Risk-averse, consistent, values certainty over upside
-               & Prefers small guaranteed gains, long close cycles, many contingencies \\
-Bluffer        & Aggressive opening but inconsistent follow-through
-               & Signals high value but folds under pressure \\
-Doubler        & Defensive-aggressive, challenges opponents' claims
-               & Rejects initial offers almost always, uses anchoring counter-offers \\
+Slam Hunter
+  & 20 (3.6\,\%)
+  & Bids slams at $1.84\times$ the population baseline; calculated upside bets; trusts partner's strength signals.
+  & Opens high, concedes little, walks away fast if the value gap is large. \\
+Insurance Player
+  & 21 (3.7\,\%)
+  & Stays in partscore at $1.20\times$ baseline; risk-averse; values certainty over upside.
+  & Prefers small guaranteed gains; long close cycles; many contingencies in the contract. \\
+NT Specialist
+  & 17 (3.0\,\%)
+  & Plays NoTrump contracts at $1.36\times$ baseline; analytical; precise trick counting.
+  & Data-driven; demands DCF / comparables justification; rejects ``gut-feel'' offers. \\
+Fighter
+  & 37 (6.6\,\%)
+  & Doubles opponents for penalties at $1.55\times$ baseline; competitive; aggressive against opponents.
+  & Counter-offers aggressively; threatens walk-away as a tactic; rejects first offer reflexively. \\
+\midrule
+Generalist (baseline)
+  & 468 (83.1\,\%)
+  & Average rates on all axes; control population.
+  & Default-reasonable; matches counterpart's style. \\
 \bottomrule
 \end{tabularx}
 \end{table}
+
+\noindent\textit{Note on naming consistency.} Earlier internal drafts of this plan used the working names ``Bluffer'' and ``Doubler'' for two of the profiles. After Stage~1 ran on the full 149K-row dataset, the actual statistical axes turned out to be \texttt{nt\_rate} and \texttt{penalty\_double\_rate}, leading to the more descriptive names \emph{NT Specialist} and \emph{Fighter}. The Preliminary Report (Table~A.2) and this Business Plan are now synchronised on these names.
 
 \section{Why bridge data works}
 
@@ -352,54 +369,113 @@ Enterprise    & Large enterprise / API integration
 \end{tabularx}
 \end{table}
 
-\section{Unit economics}
+\section{LLM pricing model -- input vs.\ output tokens}
 
-The core cost driver is LLM token consumption. Each negotiation profile
-analysis consumes approximately 5{,}000 tokens using Gemini Flash 2.0.
+LLM providers price input tokens (the prompt the model reads) and
+output tokens (the response the model generates) at \emph{different}
+rates. Output tokens are typically $4\times$ more expensive because
+generation requires more compute per token than reading. Any honest
+cost model must therefore track both directions separately.
 
 \begin{table}[H]
 \centering\small
-\caption{Unit economics per profile analysis.}
-\begin{tabular}{lr}
+\caption{Per-million-token pricing across LLM providers (May 2026).
+Output is consistently more expensive than input.}
+\label{tab:llm_pricing}
+\begin{tabular}{l r r r}
 \toprule
-\textbf{Item}                        & \textbf{Cost} \\
+\textbf{Provider / model} & \textbf{Input} & \textbf{Output} & \textbf{Out/In ratio} \\
 \midrule
-Gemini Flash 2.0 output tokens (5K)  & \$0.0015 \\
-Gemini Flash 2.0 input tokens (3K)   & \$0.0002 \\
-Infrastructure (hosting, storage)     & \$0.005  \\
-\midrule
-\textbf{Total cost per analysis}      & \textbf{\$0.007} \\
-\textbf{Revenue per analysis (Pro)}   & \textbf{\$0.245} (200 calls / \$49) \\
-\textbf{Gross margin per analysis}    & \textbf{97\,\%} \\
+\textbf{Gemini Flash 2.0 (default)} & \$0.075 / M & \$0.30 / M  & $\mathbf{4.0\times}$ \\
+Gemini 2.5 Pro                      & \$1.25 / M  & \$5.00 / M  & $4.0\times$ \\
+Claude Haiku 4.5                    & \$1.00 / M  & \$5.00 / M  & $5.0\times$ \\
+Claude Opus 4.7                     & \$15.00 / M & \$75.00 / M & $5.0\times$ \\
+GPT-4o                              & \$2.50 / M  & \$10.00 / M & $4.0\times$ \\
+GPT-4o mini                         & \$0.15 / M  & \$0.60 / M  & $4.0\times$ \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\section{Token economics summary}
+The cost of a single LLM call therefore decomposes as
+\begin{equation}
+C_{\text{call}} = \frac{T_{\text{in}}}{10^6}\cdot c_{\text{in}} \;+\; \frac{T_{\text{out}}}{10^6}\cdot c_{\text{out}}
+\end{equation}
+where $T_{\text{in}}, T_{\text{out}}$ are the input and output token counts
+and $c_{\text{in}}, c_{\text{out}}$ are the per-million-token unit prices.
+
+\section{Unit economics per analysis}
+
+The core cost driver is LLM token consumption. Each NegoPlay profile
+analysis sends a long prompt (system instruction + counterpart context)
+and receives a relatively short structured response. The input/output
+breakdown matters because input dominates the token \emph{count} but
+output dominates the token \emph{cost}.
 
 \begin{table}[H]
 \centering\small
-\caption{Token economics across the four pipeline stages.}
-\begin{tabularx}{\textwidth}{l r r X}
+\caption{Unit economics per profile analysis, with input and output costs separated.
+Note that 38\,\% of total tokens are output, but they account for 71\,\% of the LLM cost.}
+\label{tab:unit_econ}
+\begin{tabular}{l r r r}
 \toprule
-\textbf{Stage} & \textbf{Tokens/call} & \textbf{Cost/call} & \textbf{Notes} \\
+\textbf{Component} & \textbf{Tokens} & \textbf{Unit rate} & \textbf{Cost} \\
 \midrule
-Stage 2 -- Skill extraction   & $\sim$8{,}000 & \$0.003  & One-time per cluster (amortized) \\
-Stage 3 -- Agent prompt       & $\sim$2{,}000 & \$0.0006 & System prompt cached \\
-Stage 4 -- Bridge simulation  & $\sim$3{,}000 & \$0.001  & Per bid turn \\
-Stage 4 -- Negotiation sim    & $\sim$5{,}000 & \$0.0015 & Per negotiation round \\
+Gemini Flash 2.0 -- \textbf{input}  (system + user) & 3{,}000 & \$0.075 / M & \$0.000225 \\
+Gemini Flash 2.0 -- \textbf{output} (structured JSON) & 1{,}800 & \$0.300 / M & \$0.000540 \\
 \midrule
-\textbf{Full pipeline (one user analysis)} & \textbf{$\sim$18{,}000} & \textbf{\$0.006} & End-to-end \\
+\textbf{LLM subtotal per analysis} & 4{,}800 & --- & \textbf{\$0.000765} \\
+Infrastructure (hosting, storage, logging) & --- & --- & \$0.005 \\
+\midrule
+\textbf{Total cost per analysis}     & --- & --- & \textbf{\$0.0058} \\
+\textbf{Revenue per analysis (Pro)}  & --- & --- & \textbf{\$0.245} (200 calls / \$49) \\
+\textbf{Gross margin per analysis}   & --- & --- & \textbf{97.6\,\%} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Token economics summary across pipeline stages}
+
+\begin{table}[H]
+\centering\small
+\caption{Token economics across the four pipeline stages, with input
+and output costs separated. The Stage 2 skill-extraction call is
+the most expensive single call because the LLM reads many bridge
+hands (high $T_{\text{in}}$); per-turn negotiation calls are dominated
+by output cost.}
+\label{tab:token_econ_full}
+\begin{tabularx}{\textwidth}{X r r r r r}
+\toprule
+\textbf{Stage} & \textbf{$T_{in}$} & \textbf{$T_{out}$}
+               & \textbf{In cost} & \textbf{Out cost} & \textbf{Total} \\
+\midrule
+Stage 2 -- Skill extraction       & 7{,}000 & 1{,}000 & \$0.000525 & \$0.000300 & \$0.000825 \\
+Stage 3 -- Agent prompt assembly  & 1{,}600 &   400   & \$0.000120 & \$0.000120 & \$0.000240 \\
+Stage 4 -- Bridge bidding turn    & 2{,}500 &   500   & \$0.000188 & \$0.000150 & \$0.000338 \\
+Stage 4 -- Negotiation turn       & 3{,}500 & 1{,}500 & \$0.000263 & \$0.000450 & \$0.000713 \\
+\midrule
+\textbf{Full pipeline (one user analysis)} & \textbf{14{,}600} & \textbf{3{,}400} & \textbf{\$0.001096} & \textbf{\$0.001020} & \textbf{\$0.002116} \\
 \bottomrule
 \end{tabularx}
 \end{table}
 
+\begin{keybox}[Why this split matters commercially]
+\textbf{18\,\% of NegoPlay's tokens are output, but they account for
+48\,\% of the LLM cost.}
+Output prompt design is therefore a direct lever on gross margin --
+returning concise structured JSON instead of verbose free text cuts the
+per-call cost roughly in half. Our agent prompts (see Listing in the
+Preliminary Report) require strict JSON schemas of at most 1{,}500
+output tokens for this reason.
+\end{keybox}
+
 \begin{keybox}[Cost advantage of Gemini Flash 2.0]
-At \$0.30 per million output tokens, Gemini Flash 2.0 is approximately
-10$\times$ cheaper than GPT-4o for equivalent throughput. The entire
-NegoPlay MVP (development + testing) runs for under \$15 in LLM costs.
-Claude (Anthropic) and GPT are used selectively for cross-model
-validation runs to strengthen publishability, not for production traffic.
+With \textbf{input at \$0.075 / M} and \textbf{output at \$0.30 / M},
+Gemini Flash 2.0 is approximately $10\times$ cheaper than GPT-4o
+(\$2.50 / \$10.00) for equivalent throughput, and roughly $200\times$
+cheaper than Claude Opus 4.7 (\$15 / \$75). The entire NegoPlay MVP
+(development + testing) runs for under \$15 in LLM costs.
+Claude and GPT are used selectively for cross-model validation runs
+to strengthen publishability, not for production traffic.
 \end{keybox}
 
 % =====================================================================
@@ -564,7 +640,9 @@ Enterprise / API revenue         & ---             & ---             & \$127{,}2
 \textbf{Total ARR}               & \$11{,}760      & \$79{,}200      & \$480{,}000 \\
 \midrule
 \multicolumn{4}{l}{\textit{Costs}} \\
-LLM API costs (Gemini, 97\,\% GM) & \$353         & \$2{,}376       & \$14{,}400 \\
+LLM API -- input tokens  (\$0.075/M) & \$182         & \$1{,}221       & \$7{,}403  \\
+LLM API -- output tokens (\$0.300/M) & \$171         & \$1{,}155       & \$6{,}997  \\
+LLM API subtotal (Gemini, $\approx 97\,\%$ GM) & \$353         & \$2{,}376       & \$14{,}400 \\
 Infrastructure (cloud hosting)   & \$1{,}200       & \$3{,}600       & \$12{,}000 \\
 Marketing (LinkedIn, content)    & \$0             & \$24{,}000      & \$60{,}000 \\
 \textbf{Total COGS + OpEx}       & \$1{,}553       & \$29{,}976      & \$86{,}400 \\

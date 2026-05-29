@@ -112,6 +112,51 @@ torch          # If LSTM stretch goal is pursued
 
 ---
 
+## 🔧 Slash Commands (Claude Code Skills)
+
+Slash commands live in `.claude/commands/`. Type `/command-name <args>` in
+the Claude Code chat to invoke them. They make Claude act as a domain expert
+**without any Python code running or API cost** — Claude reads the `.md` file
+and responds in character.
+
+This is different from calling the equivalent Python class directly.
+
+### Available commands
+
+| Command | File | What it does |
+|---------|------|-------------|
+| `/bridge-expert <claim>` | `.claude/commands/bridge-expert.md` | Validates a statistical bridge claim as a domain expert |
+
+### `/bridge-expert` — when to use which interface
+
+| Situation | Use this |
+|-----------|----------|
+| Quick sanity check during development ("does this number make sense?") | `/bridge-expert slam_rate=0.15 over 20 boards` |
+| Supervisor asks a question mid-meeting | `/bridge-expert <paste their question>` |
+| Automated validation after Stage 1 runs | `BridgeValidator().validate_profile_assignment(...)` in Python |
+| Validate all 4 profiles at once programmatically | `BridgeValidator().validate_stage1_results(summary)` |
+
+### `/bridge-expert` — example invocations
+
+```
+/bridge-expert slam_rate=0.101 over 216 declared boards — valid Slam Hunter?
+/bridge-expert penalty_double_rate=0.40 over 15 boards — suspicious?
+/bridge-expert Is nt_rate=0.385 with n=217 boards a strong NT Specialist?
+/bridge-expert Player has n_declared=20 and slam_rate=0.20 — should we trust this?
+```
+
+The command knows NegoPlay baselines (slam ~5.5%, partscore ~57%, NT ~28.2%,
+penalty double ~8.5%), Nezer's minimum (n≥50), and Duplicate Bridge rules.
+Output follows the 4-part schema: Legality → Probability → Expert Analysis → Verdict.
+
+### Adding new slash commands
+
+Create `.claude/commands/<name>.md`. The file must end with the instructions
+Claude should follow when the command is invoked. Use `$ARGUMENTS` as the
+placeholder for user-provided text.
+
+---
+
 ## 🛠️ Working with Antigravity
 
 NegoPlay is built in Google Antigravity. When generating code, be aware:
@@ -177,6 +222,7 @@ src/
 │   └── alignment.py          ← Cross-domain alignment analysis
 ├── shared/
 │   ├── llm_client.py         ← Unified LLM wrapper (Gemini default, Claude/OpenAI optional)
+│   ├── bridge_validator.py   ← Bridge Expert Validation Skill (statistical sanity checker)
 │   ├── data_loader.py        ← CSV loading utilities
 │   ├── prompts.py            ← Centralized prompt library
 │   └── logger.py             ← Structured logging
@@ -247,27 +293,33 @@ validation or quality-critical tasks. All calls go through
 
 ### Standard Gemini call pattern
 
+> ⚠️ **Deprecation warning (May 2026):** `google-generativeai` is deprecated.
+> New code must use `google-genai` (`from google import genai`).
+> Existing code in `bridge_validator.py` uses the old package — migrate when
+> building `llm_client.py`.
+
 ```python
-import google.generativeai as genai
+# NEW pattern (google-genai)
+from google import genai
 import os
 
-genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
+client = genai.Client(api_key=os.getenv("GOOGLE_API_KEY"))
 
-model = genai.GenerativeModel(
-    model_name="gemini-2.0-flash-exp",
-    system_instruction=PROFILE_PROMPT,
-    generation_config={
+response = client.models.generate_content(
+    model="gemini-2.0-flash",
+    contents=user_prompt,
+    config={
+        "system_instruction": PROFILE_PROMPT,
         "response_mime_type": "application/json",
-        "temperature": 0.3,  # bridge: 0.3, negotiation: 0.7
+        "temperature": 0.3,   # bridge: 0.3, negotiation: 0.7
     },
 )
 
-response = model.generate_content(user_prompt)
 result = json.loads(response.text)
 
 # ALWAYS log the call
 log_llm_call(
-    model="gemini-2.0-flash-exp",
+    model="gemini-2.0-flash",
     input_tokens=response.usage_metadata.prompt_token_count,
     output_tokens=response.usage_metadata.candidates_token_count,
     purpose="profile_extraction",
@@ -444,5 +496,6 @@ This file should be updated when:
 - Anna discovers a recurring issue worth documenting
 - Major architectural decisions are made
 
-**Last updated:** Project initialization (Session 1 day)
+**Last updated:** 2026-05-28 — Added slash commands section, bridge_validator.py,
+Gemini SDK deprecation warning (google-generativeai → google-genai)
 **Maintained by:** Anna Ben-Shushan + AI collaboration

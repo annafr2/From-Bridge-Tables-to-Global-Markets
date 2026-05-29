@@ -3,10 +3,12 @@ notebooks/visualize_profiles.py
 ================================
 Generate visualizations showing how players cluster into profiles.
 
-Produces 3 images saved to docs/images/:
+Produces 5 images saved to docs/images/:
   1. pca_scatter.png    — PCA 2D scatter, coloured by profile
   2. radar_profiles.png — Radar chart comparing the 5 profiles
   3. feature_bars.png   — Side-by-side bar chart of key features
+  4. tsne_scatter.png   — t-SNE 2D scatter (visualization only — NOT evidence of clusters)
+  5. pca_variance.png   — PCA scree plot: how much variance each component explains
 """
 
 import sys
@@ -20,6 +22,7 @@ import matplotlib.patches as mpatches
 import numpy as np
 import pandas as pd
 from sklearn.decomposition import PCA
+from sklearn.manifold import TSNE
 from sklearn.preprocessing import StandardScaler
 
 from src.shared.data_loader import load_matches
@@ -230,7 +233,114 @@ plt.savefig(path3, dpi=150, bbox_inches="tight")
 plt.close()
 print(f"  Saved: {path3}")
 
-print("\nDone! All 3 images saved to docs/images/")
-print(f"  pca_scatter.png")
-print(f"  radar_profiles.png")
-print(f"  feature_bars.png")
+# ── 4. t-SNE scatter ─────────────────────────────────────────────────────────
+
+print("Creating t-SNE scatter (this takes ~30 seconds)...")
+
+X_tsne = TSNE(
+    n_components=2, perplexity=30,
+    random_state=42, max_iter=1000,
+).fit_transform(X)
+
+fig, ax = plt.subplots(figsize=(10, 7))
+fig.patch.set_facecolor("#FAFAFA")
+ax.set_facecolor("#FAFAFA")
+
+for profile in order:
+    mask = profiles["profile"] == profile
+    size  = 20  if profile == "Generalist" else 70
+    alpha = 0.35 if profile == "Generalist" else 0.85
+    ax.scatter(
+        X_tsne[mask.values, 0], X_tsne[mask.values, 1],
+        c=PROFILE_COLORS[profile],
+        marker=PROFILE_MARKERS[profile],
+        s=size, alpha=alpha,
+        zorder=3 if profile != "Generalist" else 2,
+        label=f"{profile} (n={mask.sum()})",
+    )
+
+ax.set_xlabel("t-SNE dimension 1", fontsize=11)
+ax.set_ylabel("t-SNE dimension 2", fontsize=11)
+ax.set_title(
+    "t-SNE Visualization of Player Profiles\n"
+    "⚠️  For visualization only — not evidence of clusters",
+    fontsize=13, fontweight="bold", pad=12,
+)
+ax.legend(loc="upper right", fontsize=9, framealpha=0.9)
+ax.grid(alpha=0.3, linestyle="--")
+
+# Add disclaimer text at the bottom
+fig.text(
+    0.5, -0.02,
+    "t-SNE always creates visual blobs regardless of whether true clusters exist. "
+    "Statistical clustering (K-Means/HDBSCAN) is the valid test.",
+    ha="center", fontsize=8, style="italic", color="#7F8C8D",
+)
+
+plt.tight_layout()
+path4 = os.path.join(OUT_DIR, "tsne_scatter.png")
+plt.savefig(path4, dpi=150, bbox_inches="tight")
+plt.close()
+print(f"  Saved: {path4}")
+
+
+# ── 5. PCA scree plot ─────────────────────────────────────────────────────────
+
+print("Creating PCA scree plot...")
+
+pca_full = PCA(n_components=len(FEATURE_COLS), random_state=42)
+pca_full.fit(X)
+
+explained = pca_full.explained_variance_ratio_ * 100
+cumulative = np.cumsum(explained)
+n_comp = len(explained)
+
+fig, ax1 = plt.subplots(figsize=(9, 5))
+fig.patch.set_facecolor("#FAFAFA")
+ax1.set_facecolor("#FAFAFA")
+
+bars = ax1.bar(
+    range(1, n_comp + 1), explained,
+    color="#2980B9", alpha=0.75, edgecolor="white", label="Individual variance %",
+)
+ax1.set_xlabel("Principal Component", fontsize=11)
+ax1.set_ylabel("Explained Variance (%)", fontsize=11, color="#2980B9")
+ax1.tick_params(axis="y", labelcolor="#2980B9")
+
+ax2 = ax1.twinx()
+ax2.plot(range(1, n_comp + 1), cumulative, "o-", color="#E74C3C",
+         linewidth=2, markersize=6, label="Cumulative variance %")
+ax2.set_ylabel("Cumulative Variance (%)", fontsize=11, color="#E74C3C")
+ax2.tick_params(axis="y", labelcolor="#E74C3C")
+ax2.axhline(y=80, color="#E74C3C", linestyle="--", alpha=0.4)
+ax2.text(n_comp - 0.5, 81, "80%", color="#E74C3C", fontsize=9)
+ax2.set_ylim(0, 110)
+
+# Mark the 3 components we use
+ax1.axvline(x=3.5, color="#27AE60", linestyle="--", alpha=0.7, linewidth=1.5)
+ax1.text(3.6, max(explained) * 0.9, "← 3 components used",
+         color="#27AE60", fontsize=9)
+
+ax1.set_title(
+    "PCA Scree Plot — How Much Variance Each Component Explains",
+    fontsize=12, fontweight="bold", pad=10,
+)
+ax1.set_xticks(range(1, n_comp + 1))
+
+lines1, labels1 = ax1.get_legend_handles_labels()
+lines2, labels2 = ax2.get_legend_handles_labels()
+ax1.legend(lines1 + lines2, labels1 + labels2, loc="center right", fontsize=9)
+
+plt.tight_layout()
+path5 = os.path.join(OUT_DIR, "pca_variance.png")
+plt.savefig(path5, dpi=150, bbox_inches="tight")
+plt.close()
+print(f"  Saved: {path5}")
+
+
+print("\nDone! All 5 images saved to docs/images/")
+print(f"  1. pca_scatter.png   — PCA coloured by profile")
+print(f"  2. radar_profiles.png — behavioural fingerprints")
+print(f"  3. feature_bars.png  — key feature comparison")
+print(f"  4. tsne_scatter.png  — t-SNE layout (visualization only)")
+print(f"  5. pca_variance.png  — scree plot: variance per component")

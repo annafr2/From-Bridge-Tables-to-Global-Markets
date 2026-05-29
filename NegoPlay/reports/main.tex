@@ -4,7 +4,7 @@
 % Supervisor: Dr. Yoram Segal
 % Course: AI Development Expert
 % =====================================================================
-\documentclass[11pt, a4paper, oneside]{report}
+\documentclass[11pt, a4paper, oneside, openany]{report}
 
 % ----- Encoding & Fonts -----
 \usepackage[T1]{fontenc}
@@ -30,6 +30,64 @@
 
 % ----- Math & Symbols -----
 \usepackage{amsmath, amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+
+% ----- Algorithms & Code -----
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{listings}
+\lstset{
+  basicstyle=\ttfamily\footnotesize,
+  breaklines=true,
+  frame=single,
+  rulecolor=\color{gray!40},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  showstringspaces=false,
+  commentstyle=\color{green!50!black},
+  keywordstyle=\color{blue!70!black},
+  stringstyle=\color{orange!80!black},
+}
+
+% ----- TikZ for architecture diagrams -----
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning, shapes.geometric, calc, fit, backgrounds, decorations.pathreplacing, shadows}
+
+% Reusable TikZ styles for system architecture
+\tikzset{
+  stage/.style={
+    rectangle, rounded corners=4pt, draw=black!70, thick,
+    minimum width=3.2cm, minimum height=1.2cm,
+    align=center, font=\small\bfseries,
+    drop shadow,
+  },
+  stagedone/.style={stage, fill=green!20, draw=green!50!black},
+  stagenext/.style={stage, fill=orange!25, draw=orange!70!black},
+  stagefuture/.style={stage, fill=blue!12, draw=blue!50!black},
+  artefact/.style={
+    rectangle, draw=black!50, dashed, thick,
+    minimum width=2.8cm, minimum height=0.8cm,
+    align=center, font=\scriptsize\itshape,
+    fill=yellow!10,
+  },
+  process/.style={
+    rectangle, rounded corners=3pt, draw=blue!60, fill=blue!8,
+    minimum width=2.6cm, minimum height=0.9cm,
+    align=center, font=\small,
+  },
+  data/.style={
+    cylinder, shape border rotate=90, draw=black!60, fill=gray!10,
+    aspect=0.3, minimum width=1.8cm, minimum height=1.4cm,
+    align=center, font=\scriptsize,
+  },
+  decision/.style={
+    diamond, draw=red!50, fill=red!10, thick,
+    aspect=2, align=center, font=\scriptsize,
+  },
+  flow/.style={-{Latex[length=2.5mm]}, thick, draw=black!70},
+  flowback/.style={-{Latex[length=2.5mm]}, thick, draw=black!50, dashed},
+}
 
 % ----- Lists -----
 \usepackage{enumitem}
@@ -45,10 +103,15 @@
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[L]{NegoPlay -- Preliminary Report}
-\fancyhead[R]{\leftmark}
+\fancyhead[L]{\small\itshape NegoPlay}
+\fancyhead[R]{\small\nouppercase{\rightmark}}
 \fancyfoot[C]{\thepage}
 \renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\chaptermark}[1]{\markboth{Ch.\ \thechapter.\ #1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\S\thesection\ #1}}
+% Extra space below header to prevent figure overlap
+\setlength{\headheight}{14pt}
+\setlength{\headsep}{20pt}
 
 % ----- Custom colors for the WP/Gantt table -----
 \definecolor{wpdone}{HTML}{8FCB9B}
@@ -61,6 +124,8 @@
 \usepackage{titlesec}
 \titleformat{\chapter}[hang]
   {\normalfont\Huge\bfseries}{\thechapter}{20pt}{\Huge}
+% Reduce the large vertical space before and after chapter titles
+\titlespacing*{\chapter}{0pt}{-30pt}{20pt}
 
 % =====================================================================
 % DOCUMENT START
@@ -112,7 +177,7 @@ I would like to thank \textbf{Dr.\ Yoram Segal}, my project supervisor, for his 
 
 \vspace{0.6cm}
 \noindent
-This project is also the empirical baseline for my PhD research at LUT University (Finland), under the supervision of \textbf{Prof.\ Jari H\"am\"al\"ainen}, and benefits from ongoing discussions with my advisor \textbf{Nezer} on risk-taking behavior in elite bridge play.
+This project is also the empirical baseline for my PhD research at LUT University (Finland), under the supervision of \textbf{Prof.\ Jari H\"am\"al\"ainen}. I gratefully acknowledge \textbf{Dr.\ Nezer Jacob Zaidenberg}, my PhD supervisor and advisor on bridge and cybersecurity matters, for ongoing discussions throughout this work.
 
 \vspace{0.6cm}
 \noindent
@@ -272,7 +337,7 @@ The dataset was collected by the author from the public EuroBridge database betw
 
 \begin{table}[H]
 \centering\small
-\caption{NegoPlay dataset summary.}
+\caption{NegoPlay dataset summary. Rows are progressively filtered as we narrow from the raw scrape to the analysis cohort actually used by Stage~1.}
 \label{tab:dataset}
 \begin{tabular}{lr}
 \toprule
@@ -281,31 +346,56 @@ The dataset was collected by the author from the public EuroBridge database betw
 Total rows (board $\times$ room) & 149{,}208 \\
 European Championships covered & 5 (2016--2025) \\
 Unique players (by name)        & $\approx$ 2{,}500 \\
-Players with $\geq 20$ declared boards & 1{,}572 \\
 Player-name coverage (N/S/E/W $\times$ open/closed) & 99.9\,\% \\
 Card-holding coverage (52 cards)                    & 54\,\% \\
 Bidding-sequence coverage                            & 31\,\% (100\,\% on Herning 2024 + Poznan 2025) \\
+\midrule
+\multicolumn{2}{l}{\textit{Analysis cohort -- progressive filtering for Stage 1:}} \\
+~~Players with $\geq 20$ declared boards (legacy threshold) & 1{,}572 \\
+~~Players with $\geq 50$ declared \emph{and} $\geq 50$ bidding boards (production) & \textbf{563} \\
 \bottomrule
 \end{tabular}
 \end{table}
 
+\textit{Why two thresholds appear.} The legacy threshold of 20 boards was used in
+the v2.0 Stage~1 pipeline (April 2026), which produced 64 ``Slam Hunters''
+out of 1{,}572 qualifying players. PhD supervisor Dr.\ Nezer Jacob Zaidenberg
+identified a sample-size problem: with only 20 boards and a rare-event rate
+near 5\,\%, the 95\,\% confidence interval is too wide to distinguish a true
+Slam Hunter from random variation. The pipeline was revised to require
+$\geq 50$ boards on \emph{both} the declared and the bidding axis, plus a
+one-sided binomial test (Eq.~\eqref{eq:binomial}). The cohort that enters
+all numerical results in this report is therefore the \textbf{563-player}
+v2.1 cohort; the 1{,}572 figure is shown only as a reference for the
+underlying data scale. The full revision is documented in
+RESEARCH\_INSIGHTS.md, sections Q7.5--Q7.6.
+
 \section{Stage 1 -- Profile Discovery (ML)}
 
-Five behavioural features are computed per player from declarations made by that player:
+\textbf{Ten} behavioural features are computed per player and partitioned into two groups: \emph{outcome features} extracted from the \texttt{contract} column (any board the player declared) and \emph{process features} extracted from the \texttt{bidding} column (any board where the auction is recorded, regardless of who declared). The process / outcome split follows the methodological anchor of \citet{rong2019competitive}, who separate the inference (auction-process) signal from the action (outcome) signal.
 
 \begin{itemize}[leftmargin=*]
-    \item \texttt{slam\_rate} -- percentage of declarations at slam level (6 or 7).
-    \item \texttt{success\_rate} -- percentage of contracts made.
-    \item \texttt{preempt\_rate} -- percentage of opening bids at level 2 or higher.
-    \item \texttt{double\_rate} -- percentage of double calls (penalty + takeout).
-    \item \texttt{avg\_risk\_score} -- composite risk index in $[0,10]$.
+    \item \textbf{Outcome features (declarer only, 5):}
+      \texttt{slam\_rate} (\%\ of declarations at slam level 6--7);
+      \texttt{double\_rate} (\%\ of declared contracts that opponents doubled);
+      \texttt{avg\_level} (mean contract level $\in [1,7]$);
+      \texttt{nt\_rate} (\%\ of declarations in NoTrump);
+      \texttt{partscore\_rate} (\%\ of declarations at level 1--3).
+    \item \textbf{Process features (any seat, from full bidding, 5):}
+      \texttt{opening\_rate} (\%\ of boards where this player opened the auction);
+      \texttt{preempt\_rate} (\%\ of opening bids at level $\geq 2$);
+      \texttt{intervention\_rate} (\%\ of boards with a competitive bid into the opponents' auction);
+      \texttt{penalty\_double\_rate} (\%\ of boards with a doubling call by this player);
+      \texttt{avg\_bids\_per\_board} (mean number of bids per board).
 \end{itemize}
 
-Features are standardized via \texttt{StandardScaler}. K-Means is run for $k \in \{2,3,4,5,6\}$ and the best $k$ is chosen by Silhouette. HDBSCAN is used as an independent validator -- both clusterings must agree to within $\pm 1$ cluster.
+\textit{Note on legacy features.} An earlier draft used a 5-feature set including \texttt{success\_rate} and a composite \texttt{avg\_risk\_score}; both were dropped after the variance audit in Chapter~\ref{ch:tech} showed that \texttt{success\_rate} provides almost no separating signal at elite level (all elite players succeed at $\approx 80\,\%$) and that \texttt{avg\_risk\_score} is a linear combination of other features and adds no new information.
+
+After variance and correlation filtering (Chapter~\ref{ch:tech}, Eq.~\eqref{eq:cv}), the 10 features reduce to a stable 7--8 axis behaviour space depending on the configuration (8 for the production K-Means / extreme-percentile pipeline; 7 for the V3 audit configuration which also drops \texttt{partscore\_rate}). Features are then standardised via \texttt{StandardScaler} (Eq.~\eqref{eq:zscore}), reduced via PCA (Eq.~\eqref{eq:pca_eig}), and assigned to one of five profiles via the extreme-percentile + binomial-test rule (Eq.~\eqref{eq:binomial}).
 
 \section{Stage 2 -- Skill Extraction (LLM)}
 
-For each cluster, 5--10 chunks of 20--30 representative games are sent to \textbf{Gemini Flash 2.0} with a strict JSON schema. The LLM is instructed to return 5--7 characteristic skills. Skills appearing in $\geq 3$ chunks are kept. The author then assigns a human-readable profile name to each cluster (e.g.\ \emph{Slam Hunter, Insurance Player, Bluffer, Doubler}).
+For each cluster, 5--10 chunks of 20--30 representative games are sent to \textbf{Gemini Flash 2.0} with a strict JSON schema. The LLM is instructed to return 5--7 characteristic skills. Skills appearing in $\geq 3$ chunks are kept. The author then assigns a human-readable profile name to each cluster: \emph{Slam Hunter}, \emph{Insurance Player}, \emph{NT Specialist}, and \emph{Fighter} -- the four profiles that emerged from the v2.1 production run (see Table~A.2).
 
 \section{Stage 3 -- Agent Construction}
 
@@ -326,18 +416,537 @@ Each profile becomes an LLM agent through a structured system prompt that contai
 
 \section{Tools and Stack}
 
+\subsection*{Development environment}
 \begin{itemize}[leftmargin=*]
-    \item \textbf{Language:} Python 3.11 in a virtual environment.
-    \item \textbf{IDE:} Google Antigravity (agent-first), with VS Code as fallback.
-    \item \textbf{ML libraries:} \texttt{scikit-learn}, \texttt{gensim}, \texttt{shap}.
-    \item \textbf{LLM (default):} Google Gemini Flash 2.0 -- cost \$0.30 / M output tokens.
-    \item \textbf{LLM (cross-validation):} Anthropic Claude and OpenAI GPT, routed through a single \texttt{llm\_client.py} wrapper. This strengthens the claim that findings are not a single-provider artifact.
+    \item \textbf{Language:} Python 3.11 in an isolated \texttt{venv} virtual environment.
+    \item \textbf{Operating system:} Windows 11 with WSL2 for Unix-style tooling.
+    \item \textbf{Primary IDE:} Google Antigravity (agent-first development).
+    \item \textbf{Secondary IDE:} Microsoft Visual Studio Code.
+    \item \textbf{AI coding assistant:} Anthropic Claude Code (CLI), with custom slash commands (e.g.\ \texttt{/bridge-expert}) defined in \texttt{.claude/commands/}.
     \item \textbf{Source control:} Git + GitHub, public repository.
-    \item \textbf{Experiment tracking:} JSON-Lines logs in \texttt{results/llm\_logs/}, with provider, model, tokens, latency, and cost per call.
+\end{itemize}
+
+\subsection*{Data science and statistical libraries}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Data manipulation:} \texttt{pandas}, \texttt{numpy}.
+    \item \textbf{Machine learning (scikit-learn):} \texttt{StandardScaler}, \texttt{RobustScaler} for Z-score normalisation; \texttt{PCA} for dimensionality reduction; \texttt{KMeans}, \texttt{HDBSCAN}, \texttt{GaussianMixture} for clustering; \texttt{TSNE} for visualisation; \texttt{EmpiricalCovariance} for Mahalanobis-distance outlier detection.
+    \item \textbf{Statistics:} \texttt{scipy.stats.binomtest} (one-sided binomial test for profile assignment); \texttt{scipy.stats.chi2} (Mahalanobis threshold).
+    \item \textbf{Future stages:} \texttt{gensim} (Word2Vec for bidding sequences), \texttt{shap} (XAI for cluster explanation).
+\end{itemize}
+
+\subsection*{Visualisation and reporting}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Plots:} \texttt{matplotlib} -- PCA scatter, t-SNE scatter, radar charts, scree plots, feature bar charts.
+    \item \textbf{Spreadsheets:} \texttt{openpyxl} -- transparent export of normalised features and PCA loadings to \texttt{results/preprocessing.xlsx}.
+    \item \textbf{This report:} \LaTeX{} (TeX Live), \texttt{natbib}, \texttt{booktabs}, \texttt{tabularx}.
+    \item \textbf{Internal documentation:} Markdown for PRD, RESEARCH\_INSIGHTS, CLAUDE.md, and README files.
+\end{itemize}
+
+\subsection*{LLM providers (provider-neutral architecture)}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Default:} Google Gemini Flash 2.0 -- cost \$0.075 / M input, \$0.30 / M output tokens.
+    \item \textbf{Cross-validation:} Anthropic Claude (Haiku / Opus) and OpenAI GPT, routed through a single \texttt{shared/llm\_client.py} wrapper. Running the same prompt across providers strengthens the claim that findings are not a single-provider artefact.
+    \item \textbf{Configuration:} all API keys loaded from \texttt{.env} via \texttt{python-dotenv}; never hard-coded.
+    \item \textbf{Retry handling:} \texttt{tenacity} for exponential back-off under rate limits.
+\end{itemize}
+
+\subsection*{Testing and quality}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Testing:} \texttt{pytest} (73 unit tests passing across feature engineering, profile assignment, and the bridge-expert validator); \texttt{pytest-cov} for coverage reporting.
+    \item \textbf{Linting and formatting:} \texttt{ruff}.
+    \item \textbf{Type validation:} \texttt{pydantic} for structured LLM outputs.
+\end{itemize}
+
+\subsection*{Experiment tracking and reproducibility}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Per-call logs:} JSON-Lines records in \texttt{results/llm\_logs/} with provider, model, prompt tokens, completion tokens, latency, and cost.
+    \item \textbf{Random seeds:} fixed \texttt{random\_state=42} across scikit-learn calls for reproducible clustering and PCA.
+    \item \textbf{Pipeline replay:} the entire Stage~1 pipeline runs end-to-end from a clean clone with a single command via \texttt{src/sdk.py}.
+\end{itemize}
+
+\subsection*{Source data}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{EuroBridge public database} -- five European Championships (2016--2025).
+    \item \textbf{Custom Python scraper} -- \texttt{requests} + \texttt{BeautifulSoup4}, developed in the parent collectBridgeData project.
 \end{itemize}
 
 % =====================================================================
-% CHAPTER 4 -- SCHEDULE
+% CHAPTER 4 -- TECHNICAL ARCHITECTURE AND MATHEMATICAL FOUNDATIONS
+% =====================================================================
+\chapter{Technical Architecture and Mathematical Foundations}
+\label{ch:tech}
+
+This chapter formalises the algorithms and architectures used by NegoPlay. It is written for technical reproducibility: any reader with the published dataset and the equations below should be able to reproduce every numerical result in this report.
+
+% ---------------------------------------------------------------------
+\section{System Architecture}
+\label{sec:sys_arch}
+
+NegoPlay is a four-stage hybrid pipeline (ML $\rightarrow$ LLM $\rightarrow$ LLM $\rightarrow$ LLM) connected by file artefacts on disk. Figure~\ref{fig:sys_arch_tikz} shows the system architecture with stages, intermediate artefacts, and the direction of information flow.
+
+\begin{figure}[H]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}[node distance=0.8cm and 0.7cm]
+
+% Row 1 - main pipeline
+\node[data] (raw) {Raw CSV\\149{,}208 rows};
+\node[stagedone, right=of raw] (s1) {Stage 1\\Profile\\Discovery};
+\node[stagenext, right=of s1] (s2) {Stage 2\\Skill\\Extraction};
+\node[stagefuture, right=of s2] (s3) {Stage 3\\Agent\\Construction};
+\node[stagefuture, right=of s3] (s4) {Stage 4\\Dual\\Simulation};
+\node[stagefuture, right=of s4] (s5) {Stage 5\\Alignment\\(Spearman $\rho$)};
+
+% Row 2 - artefacts
+\node[artefact, below=0.7cm of s1] (a1) {\texttt{player\_profiles.csv}\\563 players};
+\node[artefact, below=0.7cm of s2] (a2) {\texttt{skill\_profiles.json}\\$5\!\times\!7$ skills};
+\node[artefact, below=0.7cm of s3] (a3) {5 LLM agents\\\texttt{*.py + prompts}};
+\node[artefact, below=0.7cm of s4] (a4) {bridge + nego\\\texttt{*.csv}};
+\node[artefact, below=0.7cm of s5] (a5) {\texttt{alignment\_report.md}};
+
+% Horizontal flow
+\draw[flow] (raw) -- (s1);
+\draw[flow] (s1) -- (s2);
+\draw[flow] (s2) -- (s3);
+\draw[flow] (s3) -- (s4);
+\draw[flow] (s4) -- (s5);
+
+% Vertical to artefacts
+\draw[flowback] (s1) -- (a1);
+\draw[flowback] (s2) -- (a2);
+\draw[flowback] (s3) -- (a3);
+\draw[flowback] (s4) -- (a4);
+\draw[flowback] (s5) -- (a5);
+
+% Legend below
+\node[stagedone, scale=0.7, below=1.4cm of a2, xshift=-0.3cm] (l1) {DONE};
+\node[stagenext, scale=0.7, right=0.3cm of l1] (l2) {NEXT};
+\node[stagefuture, scale=0.7, right=0.3cm of l2] (l3) {PLANNED};
+\node[right=0.3cm of l3, font=\scriptsize] {legend};
+
+\end{tikzpicture}}
+\caption{NegoPlay system architecture. Solid arrows: information flow between stages. Dashed arrows: persisted artefacts on disk. Stage~1 is complete; Stage~2 is next; Stages~3--5 are planned.}
+\label{fig:sys_arch_tikz}
+\end{figure}
+
+% ---------------------------------------------------------------------
+\section{Stage 1: Mathematical Pipeline}
+\label{sec:stage1_math}
+
+Stage 1 transforms the raw EuroBridge CSV into a labelled profile assignment for each qualifying player. Figure~\ref{fig:stage1_pipeline} shows the full preprocessing and assignment pipeline.
+
+\begin{figure}[H]
+\centering
+\resizebox{0.95\textwidth}{!}{%
+\begin{tikzpicture}[node distance=0.6cm and 0.55cm]
+
+% Row 1: input -> features -> filters
+\node[data] (raw) {149{,}208\\rows};
+\node[process, right=of raw] (feat) {Feature\\engineering};
+\node[process, right=of feat] (filter) {Min-boards\\filter};
+\node[process, right=of filter] (var) {Variance\\filter};
+
+% Row 2: corr -> zscore -> pca -> extreme  (going leftward)
+\node[process, below=1.2cm of var] (corr) {Correlation\\analysis};
+\node[process, left=of corr] (zscore) {Z-score\\(StandardScaler)};
+\node[process, left=of zscore] (pca) {PCA};
+\node[process, left=of pca] (extreme) {Extreme-\\percentile +\\binomial test};
+
+% Output (below extreme)
+\node[data, below=1.2cm of extreme] (out) {563 players\\5 profiles};
+
+% Row 1 arrows (left to right)
+\draw[flow] (raw) -- (feat);
+\draw[flow] (feat) -- node[above, font=\tiny] {$\geq 50$} (filter);
+\draw[flow] (filter) -- (var);
+
+% Bend from var down to corr
+\draw[flow] (var.south) -- ++(0,-0.3) -| node[near start, right, font=\tiny] {$cv > 0.10$} (corr.north);
+
+% Row 2 arrows (right to left)
+\draw[flow] (corr) -- node[above, font=\tiny] {$|r| < 0.7$} (zscore);
+\draw[flow] (zscore) -- (pca);
+\draw[flow] (pca) -- (extreme);
+
+% Down to output
+\draw[flow] (extreme) -- node[right, font=\tiny] {$p < 0.05$} (out);
+
+\end{tikzpicture}}
+\caption{Stage~1 pipeline: raw data $\rightarrow$ feature engineering $\rightarrow$ statistical filters $\rightarrow$ scaling $\rightarrow$ PCA $\rightarrow$ extreme-percentile profile assignment. Each filter is labelled with its threshold.}
+\label{fig:stage1_pipeline}
+\end{figure}
+
+\subsection{Notation}
+
+Let $\mathbf{X} \in \mathbb{R}^{n \times p}$ denote the player-feature matrix where $n = 563$ is the number of qualifying players (those with $\geq 50$ declared boards \emph{and} $\geq 50$ bidding boards). The $i$-th row $\mathbf{x}_i$ represents one player; the $j$-th column $\mathbf{X}_{\cdot j}$ represents one feature.
+
+\textbf{Two configurations of $p$.} The feature count depends on the pipeline:
+\begin{itemize}[leftmargin=*, itemsep=0pt, topsep=2pt]
+    \item \textbf{Production pipeline ($p = 8$):} we start from the 10 features of Section~\ref{ch:method}, then drop \texttt{avg\_level} ($\mathrm{CV} = 0.04$) and \texttt{avg\_bids\_per\_board} ($\mathrm{CV} = 0.08$) for failing the variance gate of Eq.~\eqref{eq:cv}.
+    \item \textbf{V3 audit configuration ($p = 7$):} same as production, but \texttt{partscore\_rate} ($\mathrm{CV} = 0.09$) is also dropped as borderline-low-variance during Dr.\ Rami's preprocessing audit. The Mahalanobis-distance outlier detection below is run in the V3 configuration, hence $p = 7$ in Eq.~\eqref{eq:mahalanobis_threshold}.
+\end{itemize}
+
+\subsection{Z-score standardisation}
+
+To make features comparable across different scales (e.g., \texttt{slam\_rate} $\in [0, 0.15]$ vs.\ \texttt{nt\_rate} $\in [0, 0.45]$), each feature is standardised to zero mean and unit variance:
+
+\begin{equation}
+\label{eq:zscore}
+z_{ij} = \frac{x_{ij} - \mu_j}{\sigma_j}
+\end{equation}
+
+\noindent\textbf{Parameters:}
+\begin{itemize}[leftmargin=2.2cm, itemsep=0pt, topsep=2pt]
+    \item[$z_{ij}$] standardised score of player $i$ on feature $j$.
+    \item[$x_{ij}$] raw value of feature $j$ for player $i$ (e.g., player's observed \texttt{slam\_rate}).
+    \item[$\mu_j$] population mean of feature $j$ across all $n = 563$ qualifying players: $\mu_j = \tfrac{1}{n}\sum_{i=1}^{n} x_{ij}$.
+    \item[$\sigma_j$] population standard deviation of feature $j$: $\sigma_j = \sqrt{\tfrac{1}{n}\sum_{i=1}^{n}(x_{ij} - \mu_j)^2}$.
+\end{itemize}
+
+\noindent Equation~\eqref{eq:zscore} is implemented by \texttt{sklearn.preprocessing.StandardScaler}. A $z$-score of $+2$ means the player is two population standard deviations above the mean on that feature; in a normal distribution this corresponds to the $\approx$\,97.5\textsuperscript{th} percentile. We use the same formula both for preprocessing (input to K-Means / PCA) and for profile-significance scoring (column \texttt{profile\_z} in \texttt{player\_profiles.csv}).
+
+\subsection{Variance audit (coefficient of variation)}
+
+Following Dr.\ Rami's preprocessing review, we audit each feature by its coefficient of variation:
+
+\begin{equation}
+\label{eq:cv}
+\mathrm{CV}_j = \frac{\sigma_j}{|\mu_j|}
+\end{equation}
+
+\noindent\textbf{Parameters:}
+\begin{itemize}[leftmargin=2.2cm, itemsep=0pt, topsep=2pt]
+    \item[$\mathrm{CV}_j$] coefficient of variation of feature $j$ (dimensionless).
+    \item[$\sigma_j$] population standard deviation of feature $j$ (as in Eq.~\eqref{eq:zscore}).
+    \item[$\mu_j$] population mean of feature $j$ (as in Eq.~\eqref{eq:zscore}).
+\end{itemize}
+
+\noindent Features with $\mathrm{CV}_j < 0.10$ are discarded as low-information: their relative spread is below 10\% of the mean, so they cannot meaningfully distinguish players. In our data, \texttt{avg\_level} ($\mathrm{CV} = 0.04$) and \texttt{avg\_bids\_per\_board} ($\mathrm{CV} = 0.08$) were removed by this filter.
+
+\subsection{Principal Component Analysis}
+
+PCA computes the eigendecomposition of the standardised covariance matrix:
+\begin{equation}
+\label{eq:pca_cov}
+\mathbf{C} = \frac{1}{n-1}\, \mathbf{Z}^\top \mathbf{Z}
+\end{equation}
+
+\noindent\textbf{Parameters:}
+\begin{itemize}[leftmargin=2.2cm, itemsep=0pt, topsep=2pt]
+    \item[$\mathbf{C}$] $p \times p$ covariance matrix of the standardised features.
+    \item[$\mathbf{Z}$] $n \times p$ matrix of $z$-scores from Eq.~\eqref{eq:zscore} ($n = 563$, $p = 8$).
+    \item[$n-1$] degrees-of-freedom correction (Bessel's correction).
+\end{itemize}
+
+Solving the eigenvalue problem
+\begin{equation}
+\label{eq:pca_eig}
+\mathbf{C}\, \mathbf{v}_k = \lambda_k \mathbf{v}_k, \qquad k = 1, \ldots, p
+\end{equation}
+
+\noindent\textbf{Parameters:}
+\begin{itemize}[leftmargin=2.2cm, itemsep=0pt, topsep=2pt]
+    \item[$\mathbf{v}_k$] $k$-th eigenvector (principal direction in feature space).
+    \item[$\lambda_k$] $k$-th eigenvalue, ordered $\lambda_1 \geq \lambda_2 \geq \cdots \geq \lambda_p$.
+    \item[$k$] component index, $k \in \{1, \ldots, p\}$.
+\end{itemize}
+
+The fraction of variance explained by component $k$ is
+\begin{equation}
+\label{eq:pca_var}
+\mathrm{EV}_k = \frac{\lambda_k}{\sum_{i=1}^{p} \lambda_i}
+\end{equation}
+
+We retain the top $K$ components that satisfy $\sum_{k=1}^{K} \mathrm{EV}_k \geq 0.80$ (cumulative variance threshold). In our data, $K = 5$ components achieve 85.2\% cumulative variance: $\mathrm{EV} = (0.246, 0.191, 0.135, 0.103, 0.077)$.
+
+\subsection{Clustering validity: Silhouette score}
+
+For each player $i$ assigned to cluster $C_{k(i)}$, define:
+\begin{align}
+a(i) &= \frac{1}{|C_{k(i)}| - 1} \sum_{\substack{j \in C_{k(i)} \\ j \neq i}} d(\mathbf{x}_i, \mathbf{x}_j) \label{eq:silhouette_a} \\
+b(i) &= \min_{\ell \neq k(i)} \; \frac{1}{|C_\ell|} \sum_{j \in C_\ell} d(\mathbf{x}_i, \mathbf{x}_j) \label{eq:silhouette_b}
+\end{align}
+
+\noindent\textbf{Parameters:}
+\begin{itemize}[leftmargin=2.2cm, itemsep=0pt, topsep=2pt]
+    \item[$a(i)$] mean Euclidean distance from player $i$ to all \emph{other} players in their own cluster $C_{k(i)}$ -- the ``cohesion'' term.
+    \item[$b(i)$] mean Euclidean distance from player $i$ to the nearest \emph{other} cluster -- the ``separation'' term. The min ranges over all clusters $\ell \neq k(i)$.
+    \item[$d(\mathbf{x}_i, \mathbf{x}_j)$] Euclidean distance in the scaled PCA space.
+    \item[$C_{k(i)}$] the cluster to which player $i$ is assigned.
+\end{itemize}
+
+The silhouette score for player $i$ and the overall mean are:
+\begin{equation}
+\label{eq:silhouette}
+s(i) = \frac{b(i) - a(i)}{\max\{a(i), b(i)\}}, \qquad \bar{s} = \frac{1}{n} \sum_{i=1}^{n} s(i)
+\end{equation}
+
+\noindent\textbf{Range:} $s(i) \in [-1, +1]$ for every player. Interpretation:
+\begin{itemize}[leftmargin=2.2cm, itemsep=0pt, topsep=2pt]
+    \item[$\bar{s} \geq 0.50$] strong cluster structure.
+    \item[$0.25 \leq \bar{s} < 0.50$] weak structure.
+    \item[$\bar{s} < 0.25$] no meaningful cluster structure.
+\end{itemize}
+
+\noindent Our maximum across five preprocessing configurations was $\bar{s} = 0.24$ (V2: 8 features + PCA(3), Z-score). Computed via \texttt{sklearn.metrics.silhouette\_score}.
+
+\subsection{Mahalanobis-distance outlier detection}
+
+For multivariate outlier detection prior to clustering (V3 configuration only), we use the squared Mahalanobis distance:
+
+\begin{equation}
+\label{eq:mahalanobis}
+D^2(\mathbf{x}_i) = (\mathbf{x}_i - \boldsymbol{\mu})^\top\, \mathbf{S}^{-1}\, (\mathbf{x}_i - \boldsymbol{\mu})
+\end{equation}
+
+\noindent\textbf{Parameters:}
+\begin{itemize}[leftmargin=2.2cm, itemsep=0pt, topsep=2pt]
+    \item[$D^2(\mathbf{x}_i)$] squared Mahalanobis distance of player $i$ from the data centre.
+    \item[$\mathbf{x}_i$] feature vector of player $i$ (after scaling).
+    \item[$\boldsymbol{\mu}$] sample mean vector of all players, $\boldsymbol{\mu} \in \mathbb{R}^p$.
+    \item[$\mathbf{S}^{-1}$] inverse of the empirical covariance matrix (estimated by \texttt{sklearn.covariance.EmpiricalCovariance}). The inverse weights features by their inter-correlations, so a player who is unusual on \emph{correlated} features counts as more outlying.
+\end{itemize}
+
+Under multivariate normality, $D^2 \sim \chi^2_p$, so player $i$ is flagged as an outlier when
+
+\begin{equation}
+\label{eq:mahalanobis_threshold}
+D^2(\mathbf{x}_i) > \chi^2_{p,\, 1 - \alpha}
+\end{equation}
+
+\noindent\textbf{Parameters:}
+\begin{itemize}[leftmargin=2.2cm, itemsep=0pt, topsep=2pt]
+    \item[$\chi^2_{p, 1-\alpha}$] $(1-\alpha)$ critical value of the chi-square distribution with $p$ degrees of freedom (number of features). Computed via \texttt{scipy.stats.chi2.ppf(1-$\alpha$, df=$p$)}.
+    \item[$\alpha$] significance level; we use $\alpha = 0.01$ (top 1\% of the tail). For $p = 7$, this gives a threshold of $\approx 18.5$.
+\end{itemize}
+
+\noindent\emph{Methodological note:} outlier removal is appropriate for K-Means and GMM but counterproductive for the extreme-percentile method, since the outliers are precisely the profile members we want to identify.
+
+\subsection{Extreme-percentile profile assignment}
+
+The production pipeline uses an extreme-percentile method on the standardised features, supported by a binomial significance test. For each profile axis $j$ (slam\_rate, partscore\_rate, nt\_rate, penalty\_double\_rate), we:
+
+\begin{enumerate}[leftmargin=*]
+    \item Identify the top 10\% of players on $z_{\cdot j}$ (Eq.~\ref{eq:zscore}).
+    \item Test the null hypothesis that their observed rate equals the population baseline $p_0$ using a one-sided binomial test (Eq.~\ref{eq:binomial}).
+    \item Assign the player to profile $j$ only if both gates pass.
+\end{enumerate}
+
+\begin{equation}
+\label{eq:binomial}
+\mathrm{p\text{-value}}_i = \sum_{m = k_i}^{n_i} \binom{n_i}{m} p_0^{\,m}\, (1 - p_0)^{n_i - m}
+\end{equation}
+
+\noindent\textbf{Parameters:}
+\begin{itemize}[leftmargin=2.2cm, itemsep=0pt, topsep=2pt]
+    \item[$n_i$] player $i$'s denominator: \texttt{n\_declared} for outcome features (Slam Hunter, Insurance Player, NT Specialist) or \texttt{n\_bidding\_boards} for process features (Fighter).
+    \item[$k_i$] number of ``successes'' for player $i$ on the profile axis (e.g., number of slam contracts declared, for Slam Hunter).
+    \item[$p_0$] population baseline rate of the event (e.g., $p_0 = 0.055$ for slam).
+    \item[$\binom{n_i}{m}$] binomial coefficient ``$n_i$ choose $m$''.
+    \item[$m$] summation index over all outcomes at least as extreme as the observed $k_i$.
+\end{itemize}
+
+\noindent\textbf{Interpretation:} the p-value is the probability of observing at least $k_i$ successes under the null hypothesis that the player's true rate equals the baseline $p_0$ (one-sided, ``greater than'' alternative). We require $\mathrm{p\text{-value}}_i < 0.05$ for profile assignment. Implemented as \texttt{scipy.stats.binomtest($k_i$, $n_i$, $p_0$, alternative=`greater')}.
+
+% ---------------------------------------------------------------------
+\section{Stage 3: LLM Agent Architecture}
+\label{sec:agent_arch}
+
+Each profile becomes an LLM agent through a structured prompt. Figure~\ref{fig:agent_arch} shows the agent's request/response cycle.
+
+\begin{figure}[H]
+\centering
+\resizebox{0.95\textwidth}{!}{%
+\begin{tikzpicture}[node distance=0.7cm and 1.0cm]
+
+\node[data] (in) {Game state\\(hand, auction\\or scenario)};
+\node[process, right=of in] (prompt) {Prompt builder\\\scriptsize identity + skills\\+ rules + schema};
+\node[stage, right=of prompt, fill=yellow!20] (llm)
+  {LLM\\Gemini Flash 2.0\\$T=0.3$};
+\node[process, below=1.6cm of llm] (json) {JSON\\response};
+\node[decision, left=of json] (val) {Valid?};
+\node[process, left=of val] (act) {Action\\(bid / offer)};
+\node[artefact, right=1.2cm of llm] (log) {LLM call log\\(tokens, cost)};
+
+\draw[flow] (in) -- (prompt);
+\draw[flow] (prompt) -- (llm);
+\draw[flow] (llm) -- (json);
+\draw[flow] (json) -- (val);
+\draw[flow] (val.west) -- node[above, font=\scriptsize] {YES} (act);
+\draw[flow] (val.south) -- ++(0, -0.4) -| node[near start, below, font=\scriptsize] {NO, retry $\leq 3$} (prompt.south);
+\draw[flowback] (llm) -- (log);
+
+\end{tikzpicture}}
+\caption{LLM agent architecture: game state $\rightarrow$ prompt builder $\rightarrow$ Gemini $\rightarrow$ JSON response $\rightarrow$ validator $\rightarrow$ action. Invalid responses trigger a retry with the validation error in the next turn. Every call is logged with token counts and cost for reproducibility.}
+\label{fig:agent_arch}
+\end{figure}
+
+\subsection{System prompt anatomy}
+
+Every agent's system prompt has the same five-block structure. We formalise this so that the four profile agents differ only in the content of blocks 1 and 2:
+
+\begin{lstlisting}[language=, caption={Five-block system prompt template. Filled blocks become the production prompt in \texttt{shared/prompts.py}.}, label={lst:prompt_template}]
+[BLOCK 1 - IDENTITY]
+You are a <profile_name>. <one-line role description>.
+
+[BLOCK 2 - CORE SKILLS]
+Your 5-7 characteristic skills (extracted from real bridge hands):
+  - <skill 1>
+  - <skill 2>
+  ...
+
+[BLOCK 3 - DECISION RULES]
+Domain rules (Laws of Duplicate Bridge / negotiation conventions).
+
+[BLOCK 4 - OUTPUT FORMAT]
+Respond ONLY with this JSON schema:
+{ "decision": "...", "reasoning": "...", "confidence": 0.0-1.0 }
+
+[BLOCK 5 - FEW-SHOT EXAMPLES]
+Example 1: <hand> -> <bid> (reasoning: ...)
+Example 2: <scenario> -> <offer> (reasoning: ...)
+\end{lstlisting}
+
+\subsection{Temperature sampling}
+
+LLM token selection follows a softmax over logits, modulated by a temperature parameter $T$:
+
+\begin{equation}
+\label{eq:softmax_temperature}
+P(\text{token} = t \mid \text{context}) = \frac{\exp(z_t / T)}{\sum_{t' = 1}^{V} \exp(z_{t'} / T)}
+\end{equation}
+
+\noindent\textbf{Parameters:}
+\begin{itemize}[leftmargin=2.2cm, itemsep=0pt, topsep=2pt]
+    \item[$P(t \mid \text{ctx})$] probability that the model emits token $t$ next, given context.
+    \item[$z_t$] raw logit of token $t$ produced by the model's final linear layer.
+    \item[$V$] vocabulary size (Gemini's tokeniser: $\approx 256\text{K}$ tokens).
+    \item[$T$] temperature parameter, $T > 0$. As $T \to 0$ the distribution becomes peaked (deterministic, argmax); as $T \to \infty$ it becomes uniform.
+\end{itemize}
+
+\noindent\textbf{Choices for NegoPlay:}
+\begin{itemize}[leftmargin=*]
+    \item $T = 0.3$ for bridge bidding (consistency is critical: the same hand should produce the same bid).
+    \item $T = 0.7$ for negotiation (diversity of offers is part of the experiment).
+    \item $T = 0.1$ for the Bridge-Expert Validation skill (we want deterministic expert opinions).
+\end{itemize}
+
+\subsection{Per-call cost accounting}
+
+Each LLM call writes a JSON-Lines record to \texttt{results/llm\_logs/}. The cost is computed as
+
+\begin{equation}
+\label{eq:llm_cost}
+C_{\text{call}} = \frac{T_{\text{in}} \cdot c_{\text{in}} + T_{\text{out}} \cdot c_{\text{out}}}{10^6}
+\end{equation}
+
+\noindent\textbf{Parameters:}
+\begin{itemize}[leftmargin=2.2cm, itemsep=0pt, topsep=2pt]
+    \item[$C_{\text{call}}$] cost of a single LLM call, in US dollars.
+    \item[$T_{\text{in}}$] number of input tokens (system prompt + user message), reported by the provider's API metadata.
+    \item[$T_{\text{out}}$] number of output tokens (completion).
+    \item[$c_{\text{in}}$] unit cost per $10^6$ input tokens (\$0.075 for Gemini Flash 2.0).
+    \item[$c_{\text{out}}$] unit cost per $10^6$ output tokens (\$0.30 for Gemini Flash 2.0).
+\end{itemize}
+
+\noindent The cumulative cost is monitored against a hard cap of \$50, with an alert at \$20.
+
+% ---------------------------------------------------------------------
+\section{Stage 4: Dual Simulation and Alignment Measure}
+\label{sec:stage4_math}
+
+The core empirical claim of NegoPlay is measured by a single number: the Spearman rank correlation between profile win-rates in bridge and in negotiation.
+
+\begin{figure}[H]
+\centering
+\resizebox{0.95\textwidth}{!}{%
+\begin{tikzpicture}[node distance=0.7cm and 0.8cm]
+
+\node[process] (agents) {5 LLM\\agents};
+\node[stage, fill=red!12, right=of agents, yshift=1.3cm] (bridge) {Bridge\\Simulator};
+\node[stage, fill=teal!12, right=of agents, yshift=-1.3cm] (nego) {Negotiation\\Simulator};
+\node[artefact, right=of bridge] (br_wr) {$\{w_k^{br}\}_{k=1}^{4}$\\bridge win-rates};
+\node[artefact, right=of nego] (ng_wr) {$\{w_k^{ng}\}_{k=1}^{4}$\\nego.\ win-rates};
+\node[stage, fill=purple!15, right=1.6cm of br_wr, yshift=-1.3cm] (rho) {Spearman\\$\rho \in [-1, 1]$};
+\node[decision, right=of rho] (target) {$\rho \geq 0.7$?};
+
+\draw[flow] (agents.east) -- ++(0.3,0) |- (bridge.west);
+\draw[flow] (agents.east) -- ++(0.3,0) |- (nego.west);
+\draw[flow] (bridge) -- node[above, font=\tiny] {50 games} (br_wr);
+\draw[flow] (nego) -- node[above, font=\tiny] {50 games} (ng_wr);
+\draw[flow] (br_wr.east) -- ++(0.3,0) |- (rho.west);
+\draw[flow] (ng_wr.east) -- ++(0.3,0) |- (rho.west);
+\draw[flow] (rho) -- (target);
+
+\end{tikzpicture}}
+\caption{Stage~4 dual simulation: the same agents play bridge and negotiation, producing two vectors of profile-level win-rates. Spearman correlation between them is the main outcome.}
+\label{fig:stage4_arch}
+\end{figure}
+
+\subsection{Per-profile win rate}
+
+\begin{equation}
+\label{eq:winrate}
+w_k^D = \frac{1}{N_D} \sum_{g = 1}^{N_D} \mathbf{1}[\text{agent}_{P_k} \text{ won game } g]
+\end{equation}
+
+\noindent\textbf{Parameters:}
+\begin{itemize}[leftmargin=2.2cm, itemsep=0pt, topsep=2pt]
+    \item[$w_k^D$] win-rate of profile $k$ in domain $D \in \{\text{bridge}, \text{negotiation}\}$, $w_k^D \in [0, 1]$.
+    \item[$N_D$] number of games in domain $D$ ($N_{\text{bridge}} = N_{\text{negotiation}} = 50$ in Phase~1).
+    \item[{$\mathbf{1}[\cdot]$}] indicator function: $1$ if the inner condition is true, $0$ otherwise.
+    \item[$P_k$] one of the four behavioural profiles ($k \in \{1, \ldots, 4\}$), excluding the Generalist baseline.
+\end{itemize}
+
+\subsection{Spearman rank correlation}
+
+The main outcome measure of NegoPlay. Let $r_k^{br}$ and $r_k^{ng}$ be the ranks of profile $k$ within its domain (rank $1$ = highest win-rate). The Spearman correlation, when there are no ties, is
+
+\begin{equation}
+\label{eq:spearman}
+\rho_s = 1 - \frac{6 \sum_{k=1}^{K} d_k^{\,2}}{K(K^2 - 1)}, \qquad d_k = r_k^{br} - r_k^{ng}
+\end{equation}
+
+\noindent\textbf{Parameters:}
+\begin{itemize}[leftmargin=2.2cm, itemsep=0pt, topsep=2pt]
+    \item[$\rho_s$] Spearman rank correlation, $\rho_s \in [-1, +1]$. Value $+1$ means perfect rank agreement; $-1$ means perfect rank inversion; $0$ means no correlation.
+    \item[$K$] number of profiles compared ($K = 4$).
+    \item[$d_k$] difference in ranks of profile $k$ between bridge and negotiation.
+\end{itemize}
+
+The general formula (which handles ties correctly) is the Pearson correlation applied to the ranks:
+\begin{equation}
+\label{eq:spearman_general}
+\rho_s = \frac{\sum_k (r_k^{br} - \bar{r}^{br})(r_k^{ng} - \bar{r}^{ng})}{\sqrt{\sum_k (r_k^{br} - \bar{r}^{br})^2\, \sum_k (r_k^{ng} - \bar{r}^{ng})^2}}
+\end{equation}
+
+\noindent\textbf{Parameters:}
+\begin{itemize}[leftmargin=2.2cm, itemsep=0pt, topsep=2pt]
+    \item[$r_k^{br}, r_k^{ng}$] ranks of profile $k$ in bridge and negotiation respectively.
+    \item[$\bar{r}^{br}, \bar{r}^{ng}$] mean ranks (always $(K+1)/2 = 2.5$ for $K=4$).
+\end{itemize}
+
+\noindent\textbf{Decision rule:} $\rho_s \geq 0.70 \Rightarrow$ support for H3 (alignment hypothesis); $0.50 \leq \rho_s < 0.70 \Rightarrow$ partial support; $\rho_s < 0.50 \Rightarrow$ null result. Significance is tested by a two-sided permutation test with $10{,}000$ random permutations of the negotiation win-rate vector. Implemented as \texttt{scipy.stats.spearmanr}.
+
+\subsection{Falsifiability test (Phase 3)}
+
+To rule out the \emph{tautological alignment} confound (\textit{i.e.}, the LLM merely following the prompt rather than transferring a learned style), we run an inverse-prompt control:
+
+\begin{equation}
+\label{eq:falsify}
+\rho_{\text{inverse}} = \mathrm{Spearman}\bigl(\{w_k^{br}\}_{k=1}^{K},\ \{w_k^{ng,\text{inverse}}\}_{k=1}^{K}\bigr)
+\end{equation}
+
+\noindent\textbf{Parameters:}
+\begin{itemize}[leftmargin=2.6cm, itemsep=0pt, topsep=2pt]
+    \item[$w_k^{ng,\text{inverse}}$] negotiation win-rate of an agent prompted with the \emph{opposite} profile (e.g., a Slam Hunter in bridge becomes an Insurance-style agent in negotiation).
+    \item[$\rho_{\text{inverse}}$] alignment under the inverted-prompt control.
+\end{itemize}
+
+\noindent\textbf{Falsifiability criterion:} if $\rho_{\text{inverse}} \geq 0.70$, the original alignment is a prompt-following artefact, not a true behavioural transfer, and H3 must be rejected even when the main $\rho_s$ is above threshold.
+
+% =====================================================================
+% CHAPTER 5 -- SCHEDULE
 % =====================================================================
 \chapter{Schedule}
 \label{ch:schedule}
@@ -629,6 +1238,184 @@ If the hypothesis is not supported, the project still contributes: (i) a validat
 \section{Beyond the course: link to the PhD}
 
 NegoPlay is the empirical baseline for Paper 1 of the author's PhD thesis. The four discovered profiles, the prompt library and the alignment methodology are designed to be reused in PhD Year 2 with: a larger dataset (BBO Vugraph adds millions of deals), a deeper model (the ENN+PNN+PPO stack described by \citealp{rong2019competitive} and \citealp{kita2024simple}), and real negotiation transcripts (Year 2--3). This continuity between the course project and the PhD is intentional: the same single-SDK code base will carry the work forward.
+
+% =====================================================================
+% APPENDIX -- REPRODUCIBILITY PACKAGE
+% =====================================================================
+\appendix
+
+\chapter{Reproducibility Package}
+\label{app:repro}
+
+This appendix collects every operational detail required to reproduce the numerical results in this report. A reader with the public dataset and the code repository should be able to regenerate Tables and Figures bit-for-bit.
+
+\section{Code repository}
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{URL:} \url{https://github.com/annafr2/bridge-business-research}
+    \item \textbf{Subdirectory:} \texttt{projects/negoplay/}
+    \item \textbf{License:} MIT
+    \item \textbf{Pinned commit for this report:} see \texttt{git log -1} at time of submission.
+\end{itemize}
+
+\section{Dataset}
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Source:} European Bridge League (EBL) public results database (\url{https://db.eurobridge.org}).
+    \item \textbf{Competitions scraped:} Budapest 2016, Ostend 2018, Madeira 2022, Herning 2024, Poznan 2025.
+    \item \textbf{Master file:} \texttt{data/processed/all\_matches\_full.csv} (149{,}208 rows $\times$ 48 columns; UTF-8 with BOM).
+    \item \textbf{Scraper:} \texttt{src/downloaders/eurobridge\_bulk\_scraper.py} (custom Python, \texttt{requests} + \texttt{BeautifulSoup4}). Logged to \texttt{logs/scrape\_log.csv}.
+    \item \textbf{Data coverage:} player names (N/S/E/W per room) 99.9\%; card holdings 54\%; bidding sequences 31\% (Herning + Poznan only; 100\% in those competitions).
+\end{itemize}
+
+\section{Software environment}
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{OS:} Windows 11 + WSL2 (Ubuntu 24.04).
+    \item \textbf{Python:} 3.12.10 in \texttt{venv}; full pin in \texttt{requirements.txt}.
+    \item \textbf{Key library versions:} \texttt{scikit-learn 1.8.0}, \texttt{scipy 1.17.1}, \texttt{pandas 3.0.3}, \texttt{numpy 2.4.6}, \texttt{matplotlib 3.10.9}, \texttt{openpyxl 3.1.5}.
+\end{itemize}
+
+\section{Stage 1 hyper-parameters}
+
+\begin{table}[H]
+\centering\small
+\caption{Stage 1 hyper-parameters (production pipeline, May 2026).}
+\label{tab:stage1_hyper}
+\begin{tabular}{p{6.5cm} l p{4.5cm}}
+\toprule
+\textbf{Parameter} & \textbf{Value} & \textbf{Equation / function} \\
+\midrule
+Minimum declared boards per player & 50 & filter on $n_i^{declared}$ \\
+Minimum bidding boards per player  & 50 & filter on $n_i^{bidding}$ \\
+Variance filter: minimum CV       & 0.10 & Eq.~\eqref{eq:cv} \\
+Correlation filter: maximum $|r|$ & 0.70 & Pearson on $z$-scores \\
+Mahalanobis $\alpha$ (audit only) & 0.01 & Eq.~\eqref{eq:mahalanobis_threshold} \\
+PCA target cumulative variance    & 0.80 & Eq.~\eqref{eq:pca_var} \\
+Extreme-percentile cutoff         & top 10\% & per axis \\
+Binomial significance level       & $p < 0.05$ & Eq.~\eqref{eq:binomial} \\
+Random seed                       & 42 & \texttt{random\_state} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Population baselines (Stage 1 output)}
+
+Population baselines are the means computed across the 563 qualifying players and are used both as the binomial-test null ($p_0$ in Eq.~\ref{eq:binomial}) and as the radar-chart reference. They are stored in \texttt{src/shared/bridge\_validator.py}.
+
+\begin{table}[H]
+\centering\small
+\caption{NegoPlay population baselines and assigned-profile rates (v2.1, May 2026).}
+\label{tab:baselines}
+\begin{tabular}{l l c c c}
+\toprule
+\textbf{Profile} & \textbf{Metric} & \textbf{Baseline $p_0$} & \textbf{Profile mean} & \textbf{Ratio} \\
+\midrule
+Slam Hunter      & \texttt{slam\_rate}           & 0.055 & 0.101 & 1.84$\times$ \\
+Insurance Player & \texttt{partscore\_rate}      & 0.570 & 0.684 & 1.20$\times$ \\
+NT Specialist    & \texttt{nt\_rate}             & 0.282 & 0.385 & 1.36$\times$ \\
+Fighter          & \texttt{penalty\_double\_rate} & 0.085 & 0.131 & 1.55$\times$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Stage 2 -- LLM call configuration}
+
+\begin{lstlisting}[language=Python, caption={Skill extraction call configuration. Identical configuration is used for all four profiles; only the user prompt changes.}, label={lst:llm_config}]
+provider = "gemini"
+model    = "gemini-2.0-flash-exp"
+temperature = 0.3
+response_mime_type = "application/json"
+max_output_tokens = 2048
+system_instruction = (
+    "You are a bridge analyst. Given 20-30 declared boards from a "
+    "single elite player, return their 5-7 characteristic skills as "
+    "structured JSON. Skills must be bridge-specific phrases, not "
+    "generic personality words."
+)
+seed = 42
+\end{lstlisting}
+
+\section{Stage 3 -- Agent system prompts (template)}
+
+The full prompt library lives in \texttt{src/shared/prompts.py}. Listing~\ref{lst:agent_template} shows the abstract template; the four profile instances differ only in the identity line and the skills block.
+
+\begin{lstlisting}[language=, caption={Bridge-agent system prompt template (abridged for length).}, label={lst:agent_template}]
+You are a {profile_name} bridge bidder.
+
+Your decision-making is characterised by:
+  {skill_1}
+  {skill_2}
+  ...
+  {skill_n}
+
+Bridge rules you must obey:
+  - Bids strictly ascend (e.g., 1NT < 2C < 2D < ... < 7NT).
+  - Double (X) is legal only over an opponent's contract bid.
+  - Pass is always legal.
+
+Given the current state, return JSON with this schema:
+{
+  "bid": "<one of: Pass, X, XX, 1C..7NT>",
+  "reasoning": "<2-3 sentences>",
+  "confidence": <float between 0.0 and 1.0>
+}
+
+Example 1:
+  Hand: S:AKQJxx H:Kxx D:Qx C:Ax
+  Auction: -
+  -> { "bid": "1S", "reasoning": "Standard opening with 17 HCP and 6S.", "confidence": 0.95 }
+
+Now decide for:
+  Hand: {hand}
+  Auction so far: {auction}
+\end{lstlisting}
+
+\section{Stage 4 -- Simulation protocol}
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Bridge games:} 50 randomly generated PBN deals per matchup. Each agent receives only its own 13 cards. The simulator records the full auction, final contract, declarer, tricks, and IMP score relative to a fixed datum table.
+    \item \textbf{Negotiation games:} four scenarios (M\&A, JV equity, B2B SaaS pricing, government tender), each run 12--13 times per matchup for 50 games total. Maximum 10 rounds per scenario; explicit walk-away condition logged.
+    \item \textbf{Logging:} every game writes a structured record to \texttt{results/} including provider, model, full prompt, full response, tokens, latency, cost, and outcome.
+    \item \textbf{Random seeds:} the deal generator and the negotiation initial-state seed are derived from a master seed of 42, fixed in \texttt{src/sdk.py}.
+\end{itemize}
+
+\section{Anchor papers}
+
+In addition to the in-text citations, the project rests on two anchor papers and one theoretical foundation:
+
+\begin{itemize}[leftmargin=*]
+    \item Anchor 1 (Stage 1, clustering): \citet{talwadker2022cognitionnet}.
+    \item Anchor 2 (Stage 3, agent split): \citet{rong2019competitive}.
+    \item Theoretical foundation (cardinal opponent profiles): \citet{lockett2007evolving}.
+\end{itemize}
+
+\section{How to reproduce, end-to-end}
+
+\begin{enumerate}[leftmargin=*]
+    \item \texttt{git clone https://github.com/annafr2/bridge-business-research.git}
+    \item \texttt{cd bridge-business-research/projects/negoplay}
+    \item \texttt{python3.12 -m venv .venv \&\& source .venv/bin/activate}
+    \item \texttt{pip install -r requirements.txt}
+    \item \texttt{cp .env.example .env} -- add your \texttt{GOOGLE\_API\_KEY}.
+    \item \texttt{python -m src.stage1\_clustering} -- regenerates \texttt{player\_profiles.csv} (ML only, no API cost).
+    \item \texttt{python notebooks/visualize\_profiles.py} -- regenerates all 5 figures in \texttt{docs/images/}.
+    \item \texttt{python notebooks/preprocessing\_comparison.py} -- reruns the 5-configuration preprocessing audit.
+    \item \texttt{python -m src.stage2\_skills} -- runs Gemini skill extraction (Stage 2 onward; incurs API cost $\sim$\$0.05).
+    \item \texttt{python -m src.stage4\_simulate -{}-bridge-games 50 -{}-negotiation-games 50}.
+    \item \texttt{python -m src.report} -- produces \texttt{results/alignment\_report.md}.
+\end{enumerate}
+
+\section{Tests and continuous validation}
+
+The pipeline is covered by 73 \texttt{pytest} unit tests:
+
+\begin{itemize}[leftmargin=*]
+    \item \texttt{tests/test\_features.py} -- 18 tests for feature engineering.
+    \item \texttt{tests/test\_extreme\_profiles.py} -- 11 tests for profile assignment (including the small-sample-demotion test that locks in the Nezer sample-size correction).
+    \item \texttt{tests/test\_bridge\_validator.py} -- 29 tests for the bridge-expert validation skill (all LLM calls mocked).
+    \item Run all: \texttt{pytest tests/ -v}.
+\end{itemize}
 
 % =====================================================================
 % BIBLIOGRAPHY
