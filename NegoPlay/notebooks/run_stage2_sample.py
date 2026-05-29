@@ -55,7 +55,7 @@ DATA = (
     r"\data\processed\all_matches_full.csv"
 )
 PROFILES_CSV = "data/processed/player_profiles.csv"
-OUT_DIR = Path("results/stage2_sample")
+OUT_DIR = Path("results/stage2_sample_v2_focused_prompt")
 
 NON_GENERALIST_PROFILES = [
     "Slam Hunter", "Insurance Player", "Fighter", "NT Specialist",

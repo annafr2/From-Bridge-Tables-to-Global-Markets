@@ -198,39 +198,52 @@
 
 ---
 
-# 📅 SESSION 4 — Stage 2: LLM Skill Extraction  ← YOU ARE HERE
-**Date:** _[fill in — next session]_
+# 📅 SESSION 4 — Stage 2: LLM Skill Extraction  ← IN PROGRESS
+**Date:** May 29, 2026
 **Duration:** ~3 hours
 **Goal:** 4 named profiles with 5-7 skills each.
 
 ### Tasks
 
-- [ ] 🔲 **`src/shared/llm_client.py`**
+- [x] ✅ **`src/shared/llm_client.py`**
   - Class: `LLMClient` — unified wrapper with `provider=` arg (default `"gemini"`)
-  - Supports: `google-generativeai`, `anthropic`, `openai`
-  - Features: retry with exponential backoff, cost tracking per provider, structured logging
-  - Output: standardized response format regardless of provider
-  - **Tests:** Mocked API tests + 1 smoke test with real key per provider available
+  - Supports: `google-genai` (modern), `anthropic`, `openai`
+  - Features: retry with exponential backoff (1/2/4s), cost tracking per provider,
+    structured JSONL logging (`results/llm_logs/calls.jsonl`), budget cap enforcement
+  - Output: standardized `LLMResponse` regardless of provider
+  - Default Gemini model: `gemini-2.5-flash` (2.0 deprecated for new users May 2026)
+  - **Tests:** Real smoke test passed ($0.000094 single call)
 
-- [ ] 🔲 **`src/stage2_skills/chunker.py`**
-  - Function: `chunk_games_by_cluster(df, clusters, chunk_size=25)`
-  - Smart sampling: diverse games per chunk
-  - Format: structured text representation of bridge games
-  - **Tests:** Chunk size and diversity validation
+- [x] ✅ **`src/stage2_skills/chunker.py`**
+  - `find_player_boards(df, name)` — searches across all 8 player columns
+  - `build_player_chunks(df, name, profile, chunk_size=25)` — formats compact
+    text representation per board (hand, bidding, contract, result, player role)
+  - **Tests:** 7 unit tests passing (`tests/test_chunker.py`)
 
-- [ ] 🔲 **`src/stage2_skills/extractor.py`**
-  - Function: `extract_skills(chunk, profile_id) → dict`
-  - Use Gemini Flash 2.0 with `response_mime_type="application/json"`
-  - JSON schema enforced
-  - Logged calls in `results/llm_logs/`
-  - **Tests:** Smoke test with 1 real API call
+- [x] ✅ **`src/stage2_skills/extractor.py`**
+  - `extract_skills_from_chunk(client, chunk) → ChunkExtraction`
+  - Uses Gemini 2.5 Flash with `response_schema` (typed JSON)
+  - **v2 (May 29, 2026):** Added `PROFILE_GUIDANCE` — profile-specific framing
+    that tells the LLM the defining axis (slam/partscore/penalty-double/NT) and
+    requires ≥2 skills to be on-axis
+  - **Tests:** Real smoke test → 4 skills extracted in 23s for $0.002
 
-- [ ] 🔲 **`src/stage2_skills/aggregator.py`**
-  - Function: `aggregate_skills(extractions) → list[Skill]`
-  - Aggregate: skills appearing in 3+ chunks
-  - Deduplicate similar skills (semantic similarity check)
-  - Rank by frequency
-  - **Tests:** Mock data with known patterns
+- [x] ✅ **`src/stage2_skills/aggregator.py`**
+  - `aggregate_player(extractions) → PlayerSkillProfile` — buckets by normalized
+    skill name, ranks by mention count + confidence
+  - `aggregate_profile(players) → ProfileSkillSignature` — top 7 skills shared
+    by ≥30% of profile members
+  - **Tests:** 7 unit tests passing (`tests/test_aggregator.py`)
+
+### Sample runs
+
+- ✅ **v1 generic prompt** (`results/stage2_sample/`) — 20 players, $0.118
+  - Finding: all 4 profiles surface "Aggressive Competitive Bidding" as top skill
+  - Pipeline works but prompt was too generic to differentiate
+
+- 🟡 **v2 focused prompt** (`results/stage2_sample_v2_focused_prompt/`) — RUNNING
+  - Same 20 players + same seed for direct comparison
+  - Profile-specific guidance added per profile in `PROFILE_GUIDANCE`
 
 - [ ] 🔲 **Manual profile naming**
   - Anna reviews top skills per cluster
