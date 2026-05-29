@@ -1,0 +1,241 @@
+INFO: Loading dataset from C:\Users\annaf\OneDrive\Desktop\гечиеши\гечиеши ард\гечиеши - щймеб бйрд омалеъйъ\collectBridgeData\data\processed\all_matches_full.csv ...
+INFO: Loaded 149208 rows ™ 48 columns. Bidding coverage: 31.0% | Cards coverage: 53.8%
+INFO: Sampled 50 / 412 boards for AUKEN Sabine (seed=42)
+INFO: Built 2 chunks for AUKEN Sabine (50 boards total, 25 boards/chunk)
+INFO: AFC is enabled with max remote calls: 10.
+INFO: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+INFO: AFC is enabled with max remote calls: 10.
+INFO: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+INFO: Sampled 50 / 388 boards for SZABO Csaba (seed=42)
+INFO: Built 2 chunks for SZABO Csaba (50 boards total, 25 boards/chunk)
+INFO: AFC is enabled with max remote calls: 10.
+INFO: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+INFO: AFC is enabled with max remote calls: 10.
+INFO: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+INFO: Sampled 50 / 384 boards for ZAMIR Ami (seed=42)
+INFO: Built 2 chunks for ZAMIR Ami (50 boards total, 25 boards/chunk)
+INFO: AFC is enabled with max remote calls: 10.
+INFO: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+INFO: AFC is enabled with max remote calls: 10.
+INFO: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+INFO: Sampled 50 / 508 boards for BILDE Dennis (seed=42)
+INFO: Built 2 chunks for BILDE Dennis (50 boards total, 25 boards/chunk)
+INFO: AFC is enabled with max remote calls: 10.
+INFO: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+INFO: AFC is enabled with max remote calls: 10.
+INFO: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+INFO: Sampled 50 / 384 boards for MIKKELSEN Arne (seed=42)
+INFO: Built 2 chunks for MIKKELSEN Arne (50 boards total, 25 boards/chunk)
+INFO: AFC is enabled with max remote calls: 10.
+INFO: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+INFO: AFC is enabled with max remote calls: 10.
+INFO: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+INFO: Sampled 50 / 256 boards for ORAS Maarja (seed=42)
+INFO: Built 2 chunks for ORAS Maarja (50 boards total, 25 boards/chunk)
+INFO: AFC is enabled with max remote calls: 10.
+INFO: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+INFO: AFC is enabled with max remote calls: 10.
+INFO: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+INFO: Sampled 50 / 320 boards for BOZEMPERGK Kostas (seed=42)
+INFO: Built 2 chunks for BOZEMPERGK Kostas (50 boards total, 25 boards/chunk)
+INFO: AFC is enabled with max remote calls: 10.
+INFO: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+INFO: AFC is enabled with max remote calls: 10.
+INFO: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+INFO: Sampled 50 / 192 boards for BLAT Marek (seed=42)
+INFO: Built 2 chunks for BLAT Marek (50 boards total, 25 boards/chunk)
+INFO: AFC is enabled with max remote calls: 10.
+INFO: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+INFO: AFC is enabled with max remote calls: 10.
+INFO: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+INFO: Sampled 50 / 192 boards for GOSSCHALK Willem (seed=42)
+INFO: Built 2 chunks for GOSSCHALK Willem (50 boards total, 25 boards/chunk)
+INFO: AFC is enabled with max remote calls: 10.
+INFO: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+INFO: AFC is enabled with max remote calls: 10.
+INFO: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+INFO: Sampled 50 / 224 boards for ADAMSEN Klaus (seed=42)
+INFO: Built 2 chunks for ADAMSEN Klaus (50 boards total, 25 boards/chunk)
+INFO: AFC is enabled with max remote calls: 10.
+INFO: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+INFO: AFC is enabled with max remote calls: 10.
+INFO: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+INFO: Sampled 50 / 384 boards for TOLEDANO Oren (seed=42)
+INFO: Built 2 chunks for TOLEDANO Oren (50 boards total, 25 boards/chunk)
+INFO: AFC is enabled with max remote calls: 10.
+INFO: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+INFO: AFC is enabled with max remote calls: 10.
+INFO: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+INFO: Sampled 50 / 320 boards for GOMEZ Ramon (seed=42)
+INFO: Built 2 chunks for GOMEZ Ramon (50 boards total, 25 boards/chunk)
+INFO: AFC is enabled with max remote calls: 10.
+INFO: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+INFO: AFC is enabled with max remote calls: 10.
+INFO: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+INFO: Sampled 50 / 448 boards for SKRZYPCZAK Jerzy (seed=42)
+INFO: Built 2 chunks for SKRZYPCZAK Jerzy (50 boards total, 25 boards/chunk)
+INFO: AFC is enabled with max remote calls: 10.
+INFO: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+INFO: AFC is enabled with max remote calls: 10.
+INFO: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+INFO: Sampled 50 / 388 boards for KANLIKILIC Ferda (seed=42)
+INFO: Built 2 chunks for KANLIKILIC Ferda (50 boards total, 25 boards/chunk)
+INFO: AFC is enabled with max remote calls: 10.
+INFO: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+INFO: AFC is enabled with max remote calls: 10.
+INFO: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+INFO: Sampled 50 / 60 boards for PASKE Thomas (seed=42)
+INFO: Built 2 chunks for PASKE Thomas (50 boards total, 25 boards/chunk)
+INFO: AFC is enabled with max remote calls: 10.
+INFO: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+INFO: AFC is enabled with max remote calls: 10.
+INFO: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+INFO: Sampled 50 / 384 boards for JONES Gary (seed=42)
+INFO: Built 2 chunks for JONES Gary (50 boards total, 25 boards/chunk)
+INFO: AFC is enabled with max remote calls: 10.
+INFO: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+INFO: AFC is enabled with max remote calls: 10.
+INFO: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+INFO: Sampled 50 / 224 boards for ROSADO Alexandra (seed=42)
+INFO: Built 2 chunks for ROSADO Alexandra (50 boards total, 25 boards/chunk)
+INFO: AFC is enabled with max remote calls: 10.
+INFO: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+INFO: AFC is enabled with max remote calls: 10.
+INFO: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+INFO: Sampled 50 / 352 boards for PERCARIO Giacomo (seed=42)
+INFO: Built 2 chunks for PERCARIO Giacomo (50 boards total, 25 boards/chunk)
+INFO: AFC is enabled with max remote calls: 10.
+INFO: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+INFO: AFC is enabled with max remote calls: 10.
+INFO: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+INFO: Sampled 50 / 288 boards for HOPFENHEIT Guido (seed=42)
+INFO: Built 2 chunks for HOPFENHEIT Guido (50 boards total, 25 boards/chunk)
+INFO: AFC is enabled with max remote calls: 10.
+INFO: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+INFO: AFC is enabled with max remote calls: 10.
+INFO: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+INFO: Sampled 50 / 368 boards for KUREK BEAULIEU Margaux (seed=42)
+INFO: Built 2 chunks for KUREK BEAULIEU Margaux (50 boards total, 25 boards/chunk)
+INFO: AFC is enabled with max remote calls: 10.
+INFO: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+INFO: AFC is enabled with max remote calls: 10.
+INFO: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+INFO: Saved skill profiles to results\stage2_sample\skill_profiles.json
+============================================================
+STAGE 2 SAMPLE RUN Ч 5 players ™ 4 profiles = 20 players
+============================================================
+
+Loading data...
+Sample size: 20 players across 4 profiles
+profile
+Fighter             5
+Insurance Player    5
+NT Specialist       5
+Slam Hunter         5
+
+Provider: gemini  |  Model: gemini-2.5-flash
+Budget cap: $15.0
+Starting cumulative cost: $0.045460
+
+[ 1/20] Slam Hunter        Ч AUKEN Sabine
+   chunk 1/2: 25 boards, 4 skills, $0.001824, 25.9s Ч OK
+   chunk 2/2: 25 boards, 4 skills, $0.001942, 29.7s Ч OK
+[ 2/20] Slam Hunter        Ч SZABO Csaba
+   chunk 1/2: 25 boards, 4 skills, $0.001781, 23.4s Ч OK
+   chunk 2/2: 25 boards, 4 skills, $0.001868, 22.3s Ч OK
+[ 3/20] Slam Hunter        Ч ZAMIR Ami
+   chunk 1/2: 25 boards, 4 skills, $0.001750, 34.7s Ч OK
+   chunk 2/2: 25 boards, 4 skills, $0.001739, 17.7s Ч OK
+[ 4/20] Slam Hunter        Ч BILDE Dennis
+   chunk 1/2: 25 boards, 4 skills, $0.001788, 24.4s Ч OK
+   chunk 2/2: 25 boards, 4 skills, $0.001777, 19.5s Ч OK
+[ 5/20] Slam Hunter        Ч MIKKELSEN Arne
+   chunk 1/2: 25 boards, 3 skills, $0.001656, 25.5s Ч OK
+   chunk 2/2: 25 boards, 3 skills, $0.001737, 27.1s Ч OK
+[ 6/20] Insurance Player   Ч ORAS Maarja
+   chunk 1/2: 25 boards, 4 skills, $0.001877, 19.2s Ч OK
+   chunk 2/2: 25 boards, 4 skills, $0.001787, 29.0s Ч OK
+[ 7/20] Insurance Player   Ч BOZEMPERGK Kostas
+   chunk 1/2: 25 boards, 4 skills, $0.001882, 26.7s Ч OK
+   chunk 2/2: 25 boards, 4 skills, $0.001889, 29.8s Ч OK
+[ 8/20] Insurance Player   Ч BLAT Marek
+   chunk 1/2: 25 boards, 4 skills, $0.001795, 29.4s Ч OK
+   chunk 2/2: 25 boards, 5 skills, $0.002052, 33.8s Ч OK
+[ 9/20] Insurance Player   Ч GOSSCHALK Willem
+   chunk 1/2: 25 boards, 3 skills, $0.001604, 27.0s Ч OK
+   chunk 2/2: 25 boards, 4 skills, $0.001790, 27.0s Ч OK
+[10/20] Insurance Player   Ч ADAMSEN Klaus
+   chunk 1/2: 25 boards, 4 skills, $0.002018, 38.3s Ч OK
+   chunk 2/2: 25 boards, 4 skills, $0.001931, 23.5s Ч OK
+[11/20] Fighter            Ч TOLEDANO Oren
+   chunk 1/2: 25 boards, 3 skills, $0.001695, 28.0s Ч OK
+   chunk 2/2: 25 boards, 3 skills, $0.001753, 16.1s Ч OK
+[12/20] Fighter            Ч GOMEZ Ramon
+   chunk 1/2: 25 boards, 4 skills, $0.001795, 25.8s Ч OK
+   chunk 2/2: 25 boards, 4 skills, $0.001830, 23.8s Ч OK
+[13/20] Fighter            Ч SKRZYPCZAK Jerzy
+   chunk 1/2: 25 boards, 4 skills, $0.001953, 32.9s Ч OK
+   chunk 2/2: 25 boards, 4 skills, $0.001837, 23.3s Ч OK
+[14/20] Fighter            Ч KANLIKILIC Ferda
+   chunk 1/2: 25 boards, 3 skills, $0.001762, 17.4s Ч OK
+   chunk 2/2: 25 boards, 4 skills, $0.001780, 38.3s Ч OK
+[15/20] Fighter            Ч PASKE Thomas
+   chunk 1/2: 25 boards, 4 skills, $0.001783, 17.8s Ч OK
+   chunk 2/2: 25 boards, 4 skills, $0.001904, 29.5s Ч OK
+[16/20] NT Specialist      Ч JONES Gary
+   chunk 1/2: 25 boards, 4 skills, $0.001839, 22.4s Ч OK
+   chunk 2/2: 25 boards, 4 skills, $0.001831, 28.6s Ч OK
+[17/20] NT Specialist      Ч ROSADO Alexandra
+   chunk 1/2: 25 boards, 5 skills, $0.001932, 23.8s Ч OK
+   chunk 2/2: 25 boards, 4 skills, $0.001815, 16.6s Ч OK
+[18/20] NT Specialist      Ч PERCARIO Giacomo
+   chunk 1/2: 25 boards, 4 skills, $0.001972, 30.0s Ч OK
+   chunk 2/2: 25 boards, 4 skills, $0.001876, 28.5s Ч OK
+[19/20] NT Specialist      Ч HOPFENHEIT Guido
+   chunk 1/2: 25 boards, 4 skills, $0.001866, 37.3s Ч OK
+   chunk 2/2: 25 boards, 3 skills, $0.001666, 35.8s Ч OK
+[20/20] NT Specialist      Ч KUREK BEAULIEU Margaux
+   chunk 1/2: 25 boards, 4 skills, $0.001875, 24.8s Ч OK
+   chunk 2/2: 25 boards, 3 skills, $0.001680, 23.7s Ч OK
+
+Total chunks processed: 40
+Total cost: $0.118388
+
+Aggregating profile-level signatures...
+
+============================================================
+PROFILE SIGNATURES
+============================================================
+
+### Slam Hunter  (5 players)
+  1. Active Competitive Overcaller  (mentions: 2, conf: 1.00)
+     Consistently enters the bidding with overcalls, even with moderate hands, to compete for the partial or game.
+  2. Aggressive Competitive Bidding  (mentions: 2, conf: 1.00)
+     The player frequently makes competitive game bids or overcalls at high levels, even with marginal hands or against stron
+
+### Insurance Player  (5 players)
+  1. Aggressive Competitive Bidding  (mentions: 5, conf: 1.00)
+     The player frequently enters competitive auctions with overcalls, takeout doubles, or direct game bids, often with stron
+  2. Active Competitive Bidding  (mentions: 2, conf: 1.00)
+     The player frequently enters the auction with overcalls, doubles, or game bids in competitive situations, demonstrating 
+  3. Standard System Adherence  (mentions: 2, conf: 1.00)
+     Consistently employs common conventions like Stayman and transfers, and a strong club system, demonstrating solid partne
+
+### Fighter  (5 players)
+  1. Aggressive Competitive Bidding  (mentions: 4, conf: 1.00)
+     The player consistently enters the auction with competitive bids, including overcalls and raises, often at higher levels
+  2. Active Competitive Bidding  (mentions: 2, conf: 1.00)
+     The player frequently enters competitive auctions with overcalls, raises, and doubles, aiming to secure their contract o
+  3. Proactive Competitive Bidding  (mentions: 2, conf: 1.00)
+     Consistently enters competitive auctions, pushing for game or making strong overcalls and raises to challenge opponents 
+
+### NT Specialist  (5 players)
+  1. Aggressive Competitive Bidding  (mentions: 4, conf: 1.00)
+     The player frequently enters the auction with preemptive bids, overcalls, and competitive raises, often with distributio
+  2. Active Competitive Bidding  (mentions: 2, conf: 1.00)
+     The player frequently enters competitive auctions with overcalls and takeout doubles, demonstrating a willingness to fig
+
+============================================================
+Saved: results\stage2_sample\skill_profiles.json
+Final cost: $0.118388
+============================================================
