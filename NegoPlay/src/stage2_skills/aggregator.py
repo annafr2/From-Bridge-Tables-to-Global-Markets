@@ -39,6 +39,12 @@ from src.stage2_skills.extractor import ChunkExtraction
 
 logger = logging.getLogger(__name__)
 
+# ── Semantic similarity threshold ─────────────────────────────────────────────
+# Skill names with cosine similarity >= this value are merged into one cluster.
+# 0.30 is intentionally low — bridge skill names are short phrases and TF-IDF
+# underestimates similarity. Tune up if you see false merges.
+_SEMANTIC_THRESHOLD = 0.40
+
 
 # ── Output containers ─────────────────────────────────────────────────────────
 
@@ -126,6 +132,73 @@ def _normalize_name(name: str) -> str:
     s = re.sub(r"[^a-z0-9 ]+", " ", s)
     s = re.sub(r"\s+", " ", s)
     return s.strip()
+
+
+def _semantic_cluster_names(
+    names: list[str],
+    threshold: float = _SEMANTIC_THRESHOLD,
+) -> dict[str, str]:
+    """Map each normalized skill name to a cluster representative.
+
+    Uses TF-IDF (unigrams + bigrams) cosine similarity with Union-Find
+    clustering.  Names with similarity >= threshold are merged; the most
+    common raw name in the cluster becomes the representative key.
+
+    Falls back to identity mapping (each name maps to itself) when:
+    - fewer than 2 names are provided
+    - sklearn is unavailable
+    - any exception occurs (always safe to degrade gracefully)
+
+    Args:
+        names:     List of *normalized* skill names.
+        threshold: Cosine-similarity cutoff for merging (default 0.30).
+
+    Returns:
+        Dict mapping each input name to its cluster representative.
+    """
+    if len(names) < 2:
+        return {n: n for n in names}
+
+    try:
+        from sklearn.feature_extraction.text import TfidfVectorizer
+        from sklearn.metrics.pairwise import cosine_similarity as sk_cosine
+
+        vec = TfidfVectorizer(analyzer="word", ngram_range=(1, 2), min_df=1)
+        X = vec.fit_transform(names)
+        sim = sk_cosine(X)
+
+        n = len(names)
+        parent = list(range(n))
+
+        def _find(x: int) -> int:
+            while parent[x] != x:
+                parent[x] = parent[parent[x]]
+                x = parent[x]
+            return x
+
+        for i in range(n):
+            for j in range(i + 1, n):
+                if sim[i, j] >= threshold:
+                    pi, pj = _find(i), _find(j)
+                    if pi != pj:
+                        parent[pi] = pj
+
+        clusters: dict[int, list[int]] = {}
+        for i in range(n):
+            clusters.setdefault(_find(i), []).append(i)
+
+        mapping: dict[str, str] = {}
+        for indices in clusters.values():
+            cluster_names = [names[idx] for idx in indices]
+            representative = Counter(cluster_names).most_common(1)[0][0]
+            for cn in cluster_names:
+                mapping[cn] = representative
+
+        return mapping
+
+    except Exception as exc:  # noqa: BLE001
+        logger.debug("Semantic clustering failed (%s) — falling back to identity", exc)
+        return {n: n for n in names}
 
 
 # ── Player-level aggregation ──────────────────────────────────────────────────
@@ -251,19 +324,36 @@ def aggregate_profile(
     n_players = len(player_profiles)
     min_mentions = max(1, int(round(n_players * min_player_share)))
 
-    # Bucket skills across players
+    # ── Step 1: collect all normalized skill names across all players ──────────
+    all_norm_names: list[str] = []
+    for player in player_profiles:
+        for skill in player.skills:
+            all_norm_names.append(_normalize_name(skill.name))
+
+    # ── Step 2: compute semantic clusters so that, e.g.,
+    #    "initiates slam exploration with splinters" and
+    #    "employs splinter bids for slam exploration" land in the same bucket
+    unique_norm_names = list(dict.fromkeys(all_norm_names))   # preserve order, dedupe
+    name_to_cluster = _semantic_cluster_names(unique_norm_names)
+    logger.debug(
+        "aggregate_profile(%s): %d unique names → %d clusters",
+        profile_name, len(unique_norm_names), len(set(name_to_cluster.values())),
+    )
+
+    # ── Step 3: bucket skills using cluster representatives ────────────────────
     buckets: dict[str, list[SkillEntry]] = defaultdict(list)
     raw_names: dict[str, list[str]] = defaultdict(list)
 
     for player in player_profiles:
-        seen_keys_for_this_player: set[str] = set()
+        seen_clusters_for_this_player: set[str] = set()
         for skill in player.skills:
-            key = _normalize_name(skill.name)
-            if key in seen_keys_for_this_player:
+            norm = _normalize_name(skill.name)
+            cluster_key = name_to_cluster.get(norm, norm)
+            if cluster_key in seen_clusters_for_this_player:
                 continue  # don't double-count one player
-            seen_keys_for_this_player.add(key)
-            buckets[key].append(skill)
-            raw_names[key].append(skill.name)
+            seen_clusters_for_this_player.add(cluster_key)
+            buckets[cluster_key].append(skill)
+            raw_names[cluster_key].append(skill.name)
 
     # Build profile-level entries
     entries: list[SkillEntry] = []
