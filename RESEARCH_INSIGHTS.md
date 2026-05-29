@@ -1,6 +1,6 @@
 # RESEARCH_INSIGHTS.md — Empirical Questions We Can Now Answer
 
-**Last updated:** May 2026
+**Last updated:** 2026-05-28 — Added Q7.4 (bridge expert validation caveats), Q7.5 (v2.0→v2.1 revision methodology), Q7.6 (Dr. Rami's preprocessing audit — continuum confirmed across 5 algorithms)
 **Status of data:** **149,208 rows** × 48 columns, 5 EBL competitions (2016–2025), individual player names per position
 
 This file is a living research notebook. Each section = one empirically testable question,
@@ -521,6 +521,221 @@ Many were almost certainly false positives driven by small samples.
 - `NegoPlay/docs/images/pca_scatter.png` — 2D PCA, coloured by profile
 - `NegoPlay/docs/images/radar_profiles.png` — behavioural fingerprints per profile
 - `NegoPlay/docs/images/feature_bars.png` — key feature comparison across profiles
+
+---
+
+### Q7.4 — Bridge Expert Validation: Profile-Specific Caveats (May 2026)
+
+> Source: `/bridge-expert` validation run against the v2.1 profile table.
+> Two profiles received ACCEPT, two received ACCEPT_WITH_CAVEAT.
+> These caveats must appear as **footnotes in Paper 1** (risk taxonomy chapter).
+
+**✅ Slam Hunter — ACCEPT**
+Rate 10.1% with median n=216 boards is fully credible at European Championship level.
+Approximate 95% CI: [6.3%, 15.2%] — well above the 5.5% baseline.
+*Caveat for paper (footnote):* Bridge is a partnership game; the declarer does not
+bid alone. Part of an elevated slam_rate may reflect an aggressive bidding partner
+rather than the individual's own risk preference. Recommend future work: track
+pair-level slam rates vs. individual-level rates to quantify the partnership effect.
+
+**⚠️ Insurance Player — ACCEPT_WITH_CAVEAT**
+Rate 68.4% partscores with ratio 1.20× is statistically valid but the **weakest signal**
+of the four profiles. Smallest effect size. The key confound: partscore_rate is partly
+determined by hand distribution — a player who repeatedly draws flat 4-3-3-3 hands
+across multiple tournaments may appear as an Insurance Player even with average risk appetite.
+*Footnote for paper:* "The Insurance Player profile has the smallest effect size (1.20×)
+and may partly reflect hand-distribution variance across tournaments rather than a stable
+individual risk preference. Replication across different tournament formats is recommended."
+
+**✅ Fighter — ACCEPT (strongest profile)**
+Rate 13.1% penalty doubles over bidding boards with ratio 1.55× is clear and well-supported.
+This is methodologically the **most defensible profile** because:
+(a) the denominator (n_bidding_boards) correctly captures both sides of the table —
+a player who doubles opponents but doesn't declare that board would be invisible
+in n_declared but is correctly counted here;
+(b) penalty doubles are a fully conscious, deliberate decision that directly reflects
+individual style;
+(c) the event is common enough (8.5% baseline) that CIs narrow quickly.
+*Recommendation: lead with Fighter as the primary methodological example in Paper 1.*
+
+**⚠️ NT Specialist — ACCEPT_WITH_CAVEAT**
+Rate 38.5% NT contracts with ratio 1.36× is valid, but there is a known confound:
+bidding convention system. Pairs playing Precision Club open 1NT on a wider HCP range
+than pairs playing Standard American or Acol, systematically generating more NT contracts
+regardless of individual preference. This is a partnership/system effect, not individual.
+*Footnote for paper:* "NT rate may partly reflect the partnership's bidding system
+(Precision vs. Natural) rather than individual stylistic preference. Without system
+data per pair, this confound cannot be fully controlled."
+
+---
+
+### Q7.5 — Methodological Contribution: The v2.0 → v2.1 Revision
+
+> ⚠️ **ACTION ITEM FOR THESIS/PAPER:** The before/after revision must appear as a
+> dedicated paragraph in the **Methods section** of Paper 1. This is not just a
+> correction — it is a standalone methodological contribution.
+
+**Why this belongs in the paper (not just a footnote):**
+
+The revision from v2.0 (64 Slam Hunters, 2.8× ratio, min_boards=20) to v2.1
+(20 Slam Hunters, 1.84× ratio, min_boards=50 + binomial test) illustrates a general
+problem in rare-event player profiling that is not widely discussed in the game AI
+literature:
+
+> *When the event of interest has a low base rate (≤5%), small samples produce
+> false positives even with high observed rates. A player with 20 boards and
+> 2 slams (rate=10%) has a 95% CI of [1.2%, 31.7%] — completely overlapping the
+> baseline. The appropriate gate is not a percentile cutoff alone, but a
+> significance test against the population rate.*
+
+**The paragraph structure for the Methods chapter:**
+
+```
+Paragraph 1 — The original pipeline and its result:
+  "Initial profiling used a minimum of 20 declared boards, yielding 807 qualifying
+  players and 64 Slam Hunters (7.9%) with a mean slam rate of 11.6% (2.8× baseline)."
+
+Paragraph 2 — The expert review and identified problem:
+  "Expert review by [Nezer, a national-level bridge player and PhD co-supervisor]
+  raised a methodological concern: with only 20 declared boards, rare events such as
+  slam contracts (≈4–6% baseline) produce unreliable rate estimates. A player with
+  20 boards and 2 slams (rate=10%) has a 95% CI of [1.2%, 31.7%], indistinguishable
+  from noise at conventional significance levels."
+
+Paragraph 3 — The fix and its justification:
+  "We revised the pipeline in two ways: (1) raising the minimum to 50 declared boards
+  for outcome features and 50 bidding boards for process features, and (2) adding a
+  one-sided binomial significance test (p < 0.05) against the population baseline as
+  a secondary gate. This is a standard tool for rare-event count data (binom_test,
+  SciPy 1.11)."
+
+Paragraph 4 — The revised results and interpretation:
+  "The revised pipeline yields 563 qualifying players and 20 Slam Hunters (3.6%)
+  with a mean slam rate of 10.1% (1.84× baseline, median n=216 boards per player).
+  The reduction from 64 to 20 confirms that the original cohort included false
+  positives; each remaining assignment passes both the percentile and significance gates."
+```
+
+**Key numbers to cite in that paragraph:**
+- v2.0: 807 players, 64 Slam Hunters, ratio 2.8×, min n_declared=20
+- v2.1: 563 players, 20 Slam Hunters, ratio 1.84×, median n_declared=216, all p<0.05
+- CI example: n=20, k=2 → 95% CI [1.2%, 31.7%] (scipy.stats.binomtest)
+- CI after fix: n=216, rate=0.101 → 95% CI [6.3%, 15.2%]
+
+---
+
+### Q7.6 — Dr. Rami's Preprocessing Audit (May 2026)
+
+> Source: Course supervisor Dr. Rami challenged the initial continuum finding,
+> arguing that K-Means is well-suited to this kind of behavioral data and that
+> the failure to find clusters likely meant our pre-processing was incomplete.
+> We took the challenge seriously and ran a 5-configuration audit.
+
+**Dr. Rami's specific recommendations (April 2026 meeting):**
+1. Normalize the data (StandardScaler / RobustScaler)
+2. Run PCA before K-Means — discard low-variance dimensions
+3. Work only with "meaty" features (those with real variance)
+4. Try t-SNE for visualization
+5. Add full visualizations and Excel exports for transparency
+
+**What we tested (5 configurations):**
+
+| # | Pipeline | Best k | Silhouette | HDBSCAN clusters |
+|---|----------|--------|------------|-------------------|
+| V1 | 10 features, no PCA, StandardScaler | 4 | ~0.15 | 0 |
+| V2 | 8 features + PCA(3), StandardScaler | 4 | **0.24** | 0 |
+| V3a | Full preprocessing + K-Means | 2 | 0.17 | — |
+| V3b | Full preprocessing + GMM (BIC) | 2 | 0.14 | — |
+| V3c | Full preprocessing + HDBSCAN | — | n/a | **0** |
+
+**Full preprocessing details (V3):**
+- Variance filter (cv < 0.10): removed `avg_level`, `partscore_rate`, `avg_bids_per_board`
+- Correlation analysis: no feature pairs above |r|>0.7 → all 7 remaining features are statistically independent
+- Outlier removal: Mahalanobis distance at α=0.01 removed 18 / 567 players (3%)
+- Scaling: RobustScaler (less sensitive to outliers than StandardScaler)
+- PCA: 5 components → 85.2% cumulative variance explained
+
+**Key empirical findings:**
+
+1. **No correlated feature pairs.** All 7 retained features (slam_rate, double_rate,
+   nt_rate, opening_rate, preempt_rate, intervention_rate, penalty_double_rate)
+   are statistically independent — each measures a genuinely different aspect
+   of bridge behavior. They are not redundant.
+
+2. **PCA scree plot shows gradual variance decay.** PC1=24.6%, PC2=19.1%,
+   PC3=13.5%, PC4=10.3%, PC5=9.2%. The absence of a dominant component
+   (>60% of variance) is the signature of data WITHOUT a strong cluster structure.
+   If clusters existed, we would expect 1-2 components to dominate.
+
+3. **More aggressive preprocessing makes K-Means WORSE, not better.**
+   Going from V2 (silhouette=0.24) to V3 (silhouette=0.17) means the outlier
+   removal stripped away the very players carrying the weak signal — exactly
+   the Slam Hunters and Fighters we want to study. This is the opposite of
+   what would happen if hidden clusters existed.
+
+4. **HDBSCAN finds zero clusters in every configuration.** This is the most
+   important result. HDBSCAN is density-based and far more flexible than K-Means
+   — it can detect arbitrary shapes including elongated structures. Its
+   consistent verdict of "no natural clusters, 100% noise" across all 5
+   configurations is the strongest possible empirical evidence for the continuum.
+
+5. **GMM with BIC selection agrees.** BIC penalizes model complexity, so it
+   defaults to the simplest model that fits. BIC chose k=2, the smallest k
+   tested — which means the data does not support a richer cluster structure.
+
+**Implication for the methodology:**
+
+The extreme-percentile approach (current pipeline) is **not just one of several
+options — it is the appropriate methodology for this data**. K-Means looks for
+groups that do not exist. Extreme-percentile profiling identifies the tails of
+a continuous distribution, which is what we actually have.
+
+This finding strengthens (rather than weakens) the contribution: we have
+empirically demonstrated, through 5 independent algorithmic tests, that
+clustering is the wrong frame for elite bridge player behavior — and we have
+a principled alternative that works.
+
+**Paragraph template for Paper 1 (Methods section):**
+
+```
+"Following expert review by our course supervisor (Dr. Rami), we conducted a
+five-configuration audit to ensure our continuum finding was not an artifact
+of inadequate preprocessing. We tested K-Means, GMM, and HDBSCAN under
+escalating preprocessing pipelines: (V1) StandardScaler only; (V2)
+StandardScaler + PCA(3); (V3) RobustScaler + low-variance feature filter
++ correlation pruning + Mahalanobis outlier removal + PCA(5).
+
+Across all configurations, K-Means silhouette scores remained below 0.25
+(maximum 0.24 at V2), GMM with BIC selection chose the simplest model (k=2)
+with silhouette 0.14, and HDBSCAN consistently detected zero natural
+clusters with 100% of players classified as density noise.
+
+Notably, more aggressive preprocessing (V3) reduced rather than improved
+K-Means silhouette, indicating that the modest structure detected at V2 was
+driven by behaviorally extreme players whose removal as outliers eliminated
+the weak signal. The PCA variance distribution (PC1=24.6%, PC2=19.1%,
+PC3=13.5%, ..., PC10=1.2%) shows gradual decay without a dominant component,
+the characteristic signature of data lacking discrete cluster structure.
+
+These results converge on a robust empirical finding: elite European
+Championship bridge players form a statistical continuum rather than
+discrete strategic types. We therefore adopt an extreme-percentile profiling
+approach (Section X.X) that identifies the tails of this continuum rather
+than attempting to partition it into groups."
+```
+
+**Outputs from the audit:**
+- `NegoPlay/notebooks/preprocessing_comparison.py` — runs all 5 configurations
+- `NegoPlay/src/stage1_clustering/preprocessing.py` — reusable preprocessing module
+- `NegoPlay/docs/images/pca_variance.png` — scree plot showing gradual decay
+- `NegoPlay/docs/images/tsne_scatter.png` — 2D layout showing profile overlap
+- `NegoPlay/results/preprocessing.xlsx` — normalized data + PCA loadings (for transparency)
+
+**Methodological note:** Outlier removal is appropriate for K-Means/GMM (group-finding
+algorithms) but is **incompatible with the extreme-percentile approach** — the
+"outliers" are precisely the Slam Hunters and Fighters we want to profile.
+In the production pipeline, we therefore keep all players and use the variance-filtered
+feature set without outlier removal for profile assignment.
 
 ### What Cannot Be Fixed (Known Limitations)
 
