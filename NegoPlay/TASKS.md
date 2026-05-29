@@ -162,29 +162,39 @@
 
 - [x] ✅ **`src/shared/data_loader.py`** — loads + validates 149K CSV, schema check, utf-8-sig
 - [x] ✅ **`src/stage1_clustering/bidding_parser.py`** *(added beyond plan)* — parses 46K bidding sequences into per-player process features
-- [x] ✅ **`src/stage1_clustering/features.py`** — 15 features per player (8 outcome + 5 bidding-process), filter ≥20 boards + ≥20 bidding boards → 807 players
-- [x] ✅ **`src/stage1_clustering/clustering.py`** — K-Means k=2..6 + HDBSCAN; finding: silhouette ≤ 0.15, continuum not clusters
-- [x] ✅ **`src/stage1_clustering/extreme_profiles.py`** *(replaces clustering as primary)* — top 10% per axis → 5 profiles
+- [x] ✅ **`src/stage1_clustering/features.py`** — 10 features per player (8 outcome + 2 bidding-process), filter ≥50 boards + ≥50 bidding boards → 567 players
+- [x] ✅ **`src/stage1_clustering/clustering.py`** — K-Means k=2..6 + HDBSCAN + PCA + t-SNE; finding: silhouette ≤ 0.24, continuum not clusters
+- [x] ✅ **`src/stage1_clustering/preprocessing.py`** *(added: Dr. Rami audit)* — variance filter, correlation filter, Mahalanobis outlier detection, RobustScaler, auto-PCA
+- [x] ✅ **`src/stage1_clustering/extreme_profiles.py`** *(replaces clustering as primary)* — top 10% per axis + binomial significance test → 4 profiles
 - [x] ✅ **`src/stage1_clustering/profiles_compare.py`** — PCA + GMM + extreme profiles comparison
+- [x] ✅ **`src/shared/bridge_validator.py`** *(added beyond plan)* — BridgeValidator class + ValidationResult, statistical sanity checker (Gemini default)
 - [x] ✅ **`src/sdk.py`** — `build_profiles()` SDK entry point
 - [x] ✅ **`tests/test_features.py`** + **`tests/test_extreme_profiles.py`** — 52 tests passing
-- [x] ✅ **`notebooks/visualize_profiles.py`** — 3 visualizations saved to `docs/images/`
+- [x] ✅ **`tests/test_bridge_validator.py`** *(added beyond plan)* — 29 mocked tests passing
+- [x] ✅ **`notebooks/visualize_profiles.py`** — 5 visualizations saved to `docs/images/` (incl. t-SNE, PCA scree)
+- [x] ✅ **`notebooks/preprocessing_comparison.py`** *(added: Dr. Rami audit)* — 5-pipeline comparison confirming continuum
+- [x] ✅ **`.claude/commands/bridge-expert.md`** *(added beyond plan)* — slash command for bridge expert validation
 - [x] ✅ **`סיכום_פרויקט.txt`** — plain-language Hebrew summary
 
 ### Deliverables Produced
 
-- ✅ `data/processed/player_profiles.csv` — 807 players, 5 profiles
+- ✅ `data/processed/player_profiles.csv` — 563 players, 4 profiles
 - ✅ `docs/images/pca_scatter.png` — PCA scatter coloured by profile
 - ✅ `docs/images/radar_profiles.png` — behavioural fingerprints
 - ✅ `docs/images/feature_bars.png` — feature comparison bars
-- ✅ 52 tests passing
+- ✅ `docs/images/tsne_scatter.png` — t-SNE 2D scatter (added Dr. Rami review)
+- ✅ `docs/images/pca_variance.png` — PCA scree plot (added Dr. Rami review)
+- ✅ 52 + 29 = 81 tests passing
 
 ### Key Research Finding
 
 > Elite bridge players form a statistical **continuum**, not discrete clusters.
-> K-Means silhouette ≤ 0.15; HDBSCAN finds 0 natural clusters.
-> Solution: extreme-percentile profiling (top 10% per axis).
-> Documented in `collectBridgeData/RESEARCH_INSIGHTS.md` Part 7.
+> **Confirmed across 5 pipeline configurations** (Dr. Rami preprocessing audit, May 2026):
+> best silhouette = 0.24 (V2: 8-feat + PCA + StandardScaler); HDBSCAN finds 0 natural clusters in every run.
+> Even with full preprocessing (variance filter + correlation filter + Mahalanobis outlier removal + RobustScaler + auto-PCA),
+> K-Means max silhouette = 0.24, GMM max silhouette = 0.22, HDBSCAN = 0 clusters.
+> Solution: extreme-percentile profiling (top 10% per axis) + binomial test (p < 0.05).
+> Documented in `collectBridgeData/RESEARCH_INSIGHTS.md` Q7.4–Q7.6.
 
 ---
 
@@ -226,8 +236,7 @@
   - Anna reviews top skills per cluster
   - Assigns human-readable names
   - Updates `data/processed/skill_profiles.json`
-  - **Deliverable:** 4 named profiles (e.g., Slam Hunter, Insurance Player,
-    Bluffer, Doubler)
+  - **Deliverable:** 4 named profiles: Slam Hunter, Insurance Player, Fighter, NT Specialist
 
 - [ ] 🔲 **Document profiles**
   - For each profile: name, skills, example player, narrative description

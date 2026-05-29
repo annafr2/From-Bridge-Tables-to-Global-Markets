@@ -52,7 +52,7 @@ Three audiences:
 INPUT: 149K bridge boards (CSV)
    │
    ├─→ Stage 1: Profile Discovery (scikit-learn + extreme percentile) ✅ DONE
-   │   Output: 5 extreme-percentile profiles (807 players, May 2026)
+   │   Output: 4 extreme-percentile profiles (563 players, May 2026)
    │
    ├─→ Stage 2: LLM Skill Extraction (Gemini Flash by default)
    │   Output: Named profiles with 5-7 skills each
@@ -99,9 +99,10 @@ All calls route through `src/shared/llm_client.py` with a `provider=` argument. 
 >
 > **H1 (Revised):** Elite bridge players do not form discrete behavioral clusters. Instead, they occupy a statistical continuum. Meaningful profiles can be identified via **extreme-percentile profiling**: players in the top 10% on a defining behavioral axis (slam_rate, partscore_rate, penalty_double_rate, nt_rate) represent the behavioral "tails" of the expert distribution.
 >
-> **Method used:** For each of 4 defining axes, compute z-scores across all 807 qualifying players. Assign a player to a profile if their z-score on that axis is (a) above the 90th percentile AND (b) their personal maximum across all axes. All remaining players = Generalist (baseline).
+> **Method used:** For each of 4 defining axes, compute z-scores across all 563 qualifying players (≥50 declared boards AND ≥50 bidding boards). Assign a player to a profile if their z-score on that axis is (a) above the 90th percentile AND (b) passes a one-sided binomial test at p < 0.05 vs population baseline. All remaining players = Generalist (baseline).
 >
-> **Result:** 5 profiles identified — Slam Hunter (n=64), Insurance Player (n=60), Fighter (n=66), NT Specialist (n=53), Generalist (n=564). Key ratios: Slam Hunter 2.8× Insurance on slam_rate; Fighter 1.6× average on penalty_double_rate.
+> **Result:** 4 extreme profiles identified — Slam Hunter (n=20), Insurance Player (n=21), Fighter (n=37), NT Specialist (n=17), Generalist (n=468). Key ratios: Slam Hunter 1.84× on slam_rate; Fighter 1.55× on penalty_double_rate.
+> *(v2.0 numbers of n=64/60/66/53 were based on min_boards=20 — statistically unreliable for rare-event rates; revised to min_boards=50 + binomial test)*
 >
 > **This continuum finding is itself a publishable contribution** and will be reported as a primary result in the PhD paper.
 
@@ -156,22 +157,21 @@ Full literature: [`docs/literature.md`](docs/literature.md) (17 papers, NegoPlay
 
 ### Stage 1: Profile Discovery ✅ COMPLETE (May 2026)
 
-**Description:** Statistical profiling of 807 elite bridge players into 5 behavioral profiles via extreme-percentile method. Original plan was K-Means clustering — see H1 revision above for why the method changed.
+**Description:** Statistical profiling of 563 elite bridge players into 4 extreme behavioral profiles + 1 Generalist baseline via extreme-percentile method with binomial significance test. Original plan was K-Means clustering — see H1 revision above for why the method changed.
 
 **Inputs:**
 - `data/raw/all_matches_full.csv` (149,208 rows)
 
-**Processing (as executed):**
-1. Filter to players with ≥20 declared boards AND ≥20 boards with bidding data → **807 players**
-2. Compute **15 features** per player (8 outcome + 5 bidding-process + 2 composite):
-   - *Outcome (from `contract` column):* `slam_rate`, `game_rate`, `partscore_rate`, `nt_rate`, `success_rate`, `doubled_rate`, `avg_level`, `double_rate`
-   - *Process (from `bidding` column):* `opening_rate`, `preempt_rate`, `intervention_rate`, `penalty_double_rate`, `avg_bids_per_board`
-3. Standardize features (StandardScaler) → compute z-scores per feature
-4. **Attempted K-Means** (k=2–6): best Silhouette = 0.15 → rejected
-5. **Attempted HDBSCAN**: 0 clusters found → rejected
-6. **Attempted GMM + BIC**: selected k=2, but both centroids nearly identical → rejected
-7. **PCA** (exploratory): 3 components explain 56.8% variance; PC1 = bidding height, PC2 = bidding activity. No natural separation visible.
-8. **Extreme Percentile Profiling** (adopted method): top 10% per defining axis → 5 profiles
+**Processing (as executed — v2.1 after Dr. Rami preprocessing audit):**
+1. Filter to players with ≥50 declared boards AND ≥50 boards with bidding data → **563 players**
+2. Compute **8 features** per player (selected after variance + correlation filter):
+   - `slam_rate`, `partscore_rate`, `nt_rate`, `double_rate`, `opening_rate`, `preempt_rate`, `intervention_rate`, `penalty_double_rate`
+3. **Full preprocessing pipeline** (`src/stage1_clustering/preprocessing.py`): variance filter (CV ≥ 0.10), correlation filter (|r| ≤ 0.70), Mahalanobis outlier detection (α=0.01), RobustScaler, auto-PCA
+4. **Attempted K-Means** (k=2–8): best Silhouette = 0.24 → below 0.40 target → rejected
+5. **Attempted HDBSCAN**: 0 clusters found in every configuration → rejected
+6. **Attempted GMM + BIC**: max silhouette = 0.22 → rejected
+7. **5-pipeline audit** (`notebooks/preprocessing_comparison.py`) confirmed continuum across all configurations
+8. **Extreme Percentile Profiling** (adopted method): top 10% per defining axis + binomial test (p < 0.05) → 4 extreme profiles
 
 **Outputs:**
 - `data/processed/player_features.csv`
@@ -205,11 +205,12 @@ Full literature: [`docs/literature.md`](docs/literature.md) (17 papers, NegoPlay
 > p-values < 0.05. This is a healthier basis for Stages 2-4.
 
 **Success criteria (revised v2.1):**
-- ✅ 5 profiles with statistically distinct defining features (ratios 1.20×–1.84×)
+- ✅ 4 extreme profiles with statistically distinct defining features (ratios 1.20×–1.84×)
 - ✅ Binomial significance test confirms every assignment (p < 0.05)
-- ✅ Continuum finding documented and interpretable
-- ✅ Generalist baseline identified (83% of population)
-- ✅ 56 pytest tests passing (was 52 before adding sample-size tests)
+- ✅ Continuum finding confirmed across **5 pipeline configurations** (Dr. Rami preprocessing audit, May 2026)
+- ✅ Generalist baseline identified (83% of population, n=468)
+- ✅ 81 pytest tests passing (52 Stage 1 + 29 bridge_validator)
+- ✅ Bridge Expert Validation Skill added (`src/shared/bridge_validator.py` + `.claude/commands/bridge-expert.md`)
 - ⚠️ Original silhouette target (≥0.4) NOT met — explained by continuum structure, not pipeline error
 
 ---
@@ -506,7 +507,8 @@ This PRD is the authoritative specification for NegoPlay v1.0.
 
 **Version history:**
 - v1.0 — Initial PRD (project kickoff, Session 1)
-- v2.0 — Stage 1 results incorporated (May 2026): K-Means/HDBSCAN/GMM failed → Extreme Percentile Profiling adopted; continuum finding documented; 5 profiles confirmed; all "4 agents" references updated to 5
+- v2.0 — Stage 1 results incorporated (May 2026): K-Means/HDBSCAN/GMM failed → Extreme Percentile Profiling adopted; continuum finding documented; 5 profiles confirmed
+- v2.1 — Dr. Rami preprocessing audit (May 2026): full preprocessing pipeline added; continuum confirmed across 5 configurations (max silhouette 0.24); player count revised 807→563 (min_boards 20→50 + binomial test); profiles revised 5→4 extreme; Bridge Expert Validation Skill added; 81 tests passing
 - v2.1 — Sample-size revision (May 2026, after Nezer review): raised min_boards 20→50, added binomial significance test (p < 0.05). Slam Hunters: 64 → 20 (each statistically robust). Tests: 52 → 56.
 
 Changes to this document require re-validation against:

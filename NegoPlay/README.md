@@ -43,9 +43,10 @@ against real negotiation data.
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │  STAGE 1: PROFILE DISCOVERY (Machine Learning)  ✅ DONE     │
-│  • 15 features per player (8 outcome + 5 bidding-process)   │
-│  • Extreme-percentile profiling → 5 profiles                │
+│  • 8 features per player (after variance + correlation filter)│
+│  • Extreme-percentile profiling → 4 profiles + Generalist  │
 │  • Finding: elite players form a continuum, not clusters    │
+│  • Continuum confirmed across 5 pipeline configs (Dr. Rami) │
 └─────────────────────────────────────────────────────────────┘
                             ↓
 ┌─────────────────────────────────────────────────────────────┐
@@ -124,6 +125,7 @@ Simple caption: This picture shows bars of different heights for different featu
 | European Championships | 5 (2016–2025) |
 | Unique players | 1,572 |
 | Players with ≥20 boards | 1,421 (90%) |
+| Players with ≥50 boards (profile-eligible) | 563 (36%) |
 | Rows with full bidding | 46,230 (31%) |
 | Total bidding tokens | 630,207 |
 | Vocabulary size | 39 unique bids |
