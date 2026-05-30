@@ -5,6 +5,10 @@ All public operations go through this module (Dr. Segal methodology).
 
 Stage 1 — Profile discovery
     build_profiles(data_path) → DataFrame with 5 player profiles
+
+Stage 3 — Agent construction
+    build_bridge_agent(profile)  → one BridgeAgent
+    build_bridge_agents()        → dict of all 5 BridgeAgents
 """
 
 from pathlib import Path
@@ -12,6 +16,11 @@ from pathlib import Path
 import pandas as pd
 
 from src.shared.data_loader import load_matches
+from src.shared.llm_client import LLMClient
+from src.shared.prompts import (
+    PROFILE_NAMES as AGENT_PROFILE_NAMES,
+    load_profile_signatures,
+)
 from src.stage1_clustering.extreme_profiles import (
     DEFAULT_EXTREME_PCT,
     PROFILE_NAMES,
@@ -19,6 +28,7 @@ from src.stage1_clustering.extreme_profiles import (
     profile_summary,
 )
 from src.stage1_clustering.features import compute_player_features
+from src.stage3_agents.bridge_agent import BridgeAgent
 
 
 def build_profiles(
@@ -65,6 +75,69 @@ def build_profiles(
     return profiles
 
 
+# ── Stage 3: Agent construction ───────────────────────────────────────────────
+
+def build_bridge_agent(
+    profile: str,
+    signatures_path: str | Path | None = None,
+    client: LLMClient | None = None,
+    temperature: float = 0.3,
+) -> BridgeAgent:
+    """Build ONE bridge-bidding agent for the given profile.
+
+    Args:
+        profile: One of {Slam Hunter, Insurance Player, Fighter, NT Specialist,
+            Generalist}.
+        signatures_path: Path to the Stage 2 skill_profiles JSON. Defaults to
+            the validated threshold-0.40 output.
+        client: Optional shared LLMClient (share one across agents to keep a
+            single budget/cost log for a whole game). A new one is created if
+            omitted.
+        temperature: Sampling temperature (0.3 = consistent bridge bidding).
+
+    Returns:
+        A ready-to-use BridgeAgent.
+
+    Raises:
+        ValueError: if `profile` is not a known profile name.
+    """
+    if profile not in AGENT_PROFILE_NAMES:
+        raise ValueError(
+            f"Unknown profile {profile!r}. Must be one of {AGENT_PROFILE_NAMES}."
+        )
+    sigs = (
+        load_profile_signatures(signatures_path)
+        if signatures_path is not None
+        else load_profile_signatures()
+    )
+    return BridgeAgent(sigs[profile], client=client, temperature=temperature)
+
+
+def build_bridge_agents(
+    signatures_path: str | Path | None = None,
+    client: LLMClient | None = None,
+    temperature: float = 0.3,
+) -> dict[str, BridgeAgent]:
+    """Build ALL five bridge agents, sharing one LLMClient by default.
+
+    Sharing a single client means cost is logged and budget-capped across the
+    whole set of agents (important once they play full games).
+
+    Returns:
+        Mapping {profile_name: BridgeAgent} for all five profiles.
+    """
+    sigs = (
+        load_profile_signatures(signatures_path)
+        if signatures_path is not None
+        else load_profile_signatures()
+    )
+    shared = client or LLMClient()
+    return {
+        name: BridgeAgent(sigs[name], client=shared, temperature=temperature)
+        for name in AGENT_PROFILE_NAMES
+    }
+
+
 class NegoPlaySDK:
     """Main SDK class — single contract for all NegoPlay operations.
 
@@ -89,3 +162,13 @@ class NegoPlaySDK:
     def profile_summary(profiles: pd.DataFrame) -> pd.DataFrame:
         """Mean of every feature, grouped by profile."""
         return profile_summary(profiles)
+
+    @staticmethod
+    def build_bridge_agent(profile: str, **kwargs) -> BridgeAgent:
+        """Build one bridge agent. See module-level build_bridge_agent()."""
+        return build_bridge_agent(profile, **kwargs)
+
+    @staticmethod
+    def build_bridge_agents(**kwargs) -> dict[str, BridgeAgent]:
+        """Build all five bridge agents. See module-level build_bridge_agents()."""
+        return build_bridge_agents(**kwargs)
