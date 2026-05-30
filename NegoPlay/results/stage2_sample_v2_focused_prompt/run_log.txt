@@ -83,10 +83,11 @@ INFO: Built 2 chunks for KANLIKILIC Ferda (50 boards total, 25 boards/chunk)
 INFO: AFC is enabled with max remote calls: 10.
 INFO: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
 INFO: AFC is enabled with max remote calls: 10.
-INFO: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
-INFO: Sampled 50 / 60 boards for PASKE Thomas (seed=42)
-INFO: Built 2 chunks for PASKE Thomas (50 boards total, 25 boards/chunk)
+WARNING: Gemini call failed (attempt 1/3): Server disconnected without sending a response. — retrying in 1s
 INFO: AFC is enabled with max remote calls: 10.
+WARNING: Gemini call failed (attempt 2/3): [Errno 11001] getaddrinfo failed — retrying in 2s
+INFO: AFC is enabled with max remote calls: 10.
+calls: 10.
 INFO: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
 INFO: AFC is enabled with max remote calls: 10.
 INFO: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"

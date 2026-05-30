@@ -1,6 +1,6 @@
 # RESEARCH_INSIGHTS.md — Empirical Questions We Can Now Answer
 
-**Last updated:** 2026-05-28 — Added Q7.4 (bridge expert validation caveats), Q7.5 (v2.0→v2.1 revision methodology), Q7.6 (Dr. Rami's preprocessing audit — continuum confirmed across 5 algorithms)
+**Last updated:** 2026-05-30 — Added Q7.7 (Stage 2: LLM-extracted profiles empirically validated — all 4 behaviourally distinct, Cohen's d 2.13–4.62, all p<0.05). Previously: Q7.4 (bridge expert validation caveats), Q7.5 (v2.0→v2.1 revision methodology), Q7.6 (Dr. Rami's preprocessing audit — continuum confirmed across 5 algorithms)
 **Status of data:** **149,208 rows** × 48 columns, 5 EBL competitions (2016–2025), individual player names per position
 
 This file is a living research notebook. Each section = one empirically testable question,
@@ -736,6 +736,74 @@ algorithms) but is **incompatible with the extreme-percentile approach** — the
 "outliers" are precisely the Slam Hunters and Fighters we want to profile.
 In the production pipeline, we therefore keep all players and use the variance-filtered
 feature set without outlier removal for profile assignment.
+
+### Q7.7 — Stage 2: LLM-Extracted Profiles Are Empirically Validated (May 2026)
+
+> This is the key Stage 2 result. Stage 1 produced 4 candidate profiles by
+> extreme-percentile profiling. Stage 2 used an LLM (Gemini 2.5 Flash) to read
+> each player's actual hands and describe their decision-making "skills".
+> The open question: are these profiles *real* behavioural types, or an artefact
+> of the clustering / a hallucination of the LLM?
+
+**What we did:**
+For each profile we measured its *defining* behaviour rate directly from the raw
+bidding/contract data — **no LLM, no clustering** — and compared it to a baseline
+of Generalist players. Crucially, the Generalist baseline is itself elite
+tournament players, so this is an **elite-vs-elite** comparison; any separation is
+therefore conservative (harder to achieve than vs the general population).
+
+**Method (reproducible):**
+- Denominators aligned exactly with Stage 1: declarer-only boards for
+  contract-level metrics (slam / partscore / NT); per-board-with-bidding for the
+  Fighter's penalty-double metric.
+- Effect size = Cohen's d; significance = one-sided Mann-Whitney U.
+- Script: `NegoPlay/notebooks/validate_base_rates.py` →
+  `results/stage2_sample_v2_focused_prompt/validation_table.xlsx`
+
+**Result — all four profiles separate from Generalist, all significant:**
+
+| Profile | Defining metric | Ratio vs Generalist | Cohen's d | p-value | Verdict |
+|---------|-----------------|--------------------|-----------|---------|---------|
+| Fighter | penalty_double_rate | ×1.31 | 2.13 | 0.016 | STRONG |
+| Insurance Player | partscore_rate | ×1.24 | 3.30 | 0.004 | STRONG |
+| Slam Hunter | slam_rate | ×1.37 | 2.81 | 0.004 | STRONG |
+| NT Specialist | nt_rate | ×1.27 | 4.62 | 0.004 | STRONG |
+
+Cohen's d ≥ 0.8 is "large"; ≥ 2.0 is "very large". All p < 0.05.
+
+**Why this matters for the thesis (RQ1):**
+This is the first empirical evidence in the project that AI can recover stable,
+distinguishable decision-making styles ("bidding dialects") from real bridge data
+under incomplete information — *and* that an independent LLM description of those
+styles matches the players' actual behaviour. It is the foundational result the
+downstream negotiation-transfer argument (RQ3/RQ6) rests on: the profiles are
+shown to be real **before** any agents are built from them.
+
+**Methodological note worth a footnote in Paper 1:**
+The Fighter metric was initially measured per-call (doubles ÷ total calls), which
+gave a weak, overlapping signal and was *rejected* by the bridge-expert review.
+Switching to the Stage-1-aligned per-board metric (boards where the player made
+≥1 double ÷ boards-with-bidding) produced a clean ×1.31 separation, d=2.13.
+**Lesson: the validation denominator must match the clustering denominator
+exactly**, or a real profile can look spurious (and vice versa).
+
+**Caveats:**
+- The validation sample is 5 players per profile. (Nezer's n≥50 minimum applies to
+  per-player board counts, which is satisfied — the 5-per-profile is the validation
+  sample, not the clustering sample.)
+- One Generalist (NAWROCKI) falls inside the Fighter penalty-double range — a single
+  borderline case, expected at this sample size.
+- Profile-specific confounds from Q7.4 still apply (partnership effects, bidding
+  system for NT) and should remain as footnotes.
+
+**Aggregation engineering note:**
+Profile-level skill aggregation uses TF-IDF + cosine-similarity + Union-Find
+clustering of skill names (`NegoPlay/src/stage2_skills/aggregator.py`), with the
+merge threshold tuned to 0.40. At 0.30 unrelated skills falsely merged
+(e.g. "control bidding" with "competitive overcalling"); 0.40 gives clean,
+conservative clusters and fixed the NT Specialist returning zero skills.
+
+---
 
 ### What Cannot Be Fixed (Known Limitations)
 

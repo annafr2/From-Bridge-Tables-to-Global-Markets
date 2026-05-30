@@ -198,10 +198,24 @@
 
 ---
 
-# 📅 SESSION 4 — Stage 2: LLM Skill Extraction  ← IN PROGRESS
-**Date:** May 29, 2026
+# 📅 SESSION 4 — Stage 2: LLM Skill Extraction  ✅ COMPLETE
+**Date:** May 29–30, 2026
 **Duration:** ~3 hours
 **Goal:** 4 named profiles with 5-7 skills each.
+
+> **Outcome (May 30, 2026):** All 4 profiles extracted, semantically aggregated,
+> and **empirically validated** against a Generalist baseline. Bridge-expert
+> review verdict: **PROCEED TO STAGE 3.**
+>
+> | Profile | Defining metric | Ratio vs Generalist | Cohen's d | p-value | Verdict |
+> |---------|-----------------|--------------------|-----------|---------|---------|
+> | Fighter | penalty_double_rate | ×1.31 | 2.13 | 0.016 | [STRONG] |
+> | Insurance Player | partscore_rate | ×1.24 | 3.30 | 0.004 | [STRONG] |
+> | Slam Hunter | slam_rate | ×1.37 | 2.81 | 0.004 | [STRONG] |
+> | NT Specialist | nt_rate | ×1.27 | 4.62 | 0.004 | [STRONG] |
+>
+> Validation script: `notebooks/validate_base_rates.py` →
+> `results/stage2_sample_v2_focused_prompt/validation_table.xlsx`
 
 ### Tasks
 
@@ -241,17 +255,29 @@
   - Finding: all 4 profiles surface "Aggressive Competitive Bidding" as top skill
   - Pipeline works but prompt was too generic to differentiate
 
-- 🟡 **v2 focused prompt** (`results/stage2_sample_v2_focused_prompt/`) — RUNNING
+- [x] ✅ **v2 focused prompt** (`results/stage2_sample_v2_focused_prompt/`) — DONE
   - Same 20 players + same seed for direct comparison
   - Profile-specific guidance added per profile in `PROFILE_GUIDANCE`
 
-- [ ] 🔲 **Manual profile naming**
-  - Anna reviews top skills per cluster
-  - Assigns human-readable names
-  - Updates `data/processed/skill_profiles.json`
-  - **Deliverable:** 4 named profiles: Slam Hunter, Insurance Player, Fighter, NT Specialist
+- [x] ✅ **Semantic aggregation** (`aggregator.py`)
+  - TF-IDF + cosine similarity + Union-Find clustering of skill names
+  - Threshold tuned to **0.40** (0.30 caused false merges, e.g. "control bidding"
+    merged with "competitive overcalling")
+  - Fixed NT Specialist returning 0 skills (exact-name matching was too strict)
+  - Re-aggregation without new API calls: `notebooks/reaggregate_v2.py`
 
-- [ ] 🔲 **Document profiles**
+- [x] ✅ **Empirical validation** (`notebooks/validate_base_rates.py`) — NO LLM CALLS
+  - Measured each profile's defining behaviour directly from raw bidding/contract data
+  - Denominators aligned exactly with Stage 1 (declarer-only for slam/partscore/NT;
+    per-board-with-bidding for Fighter's penalty doubles)
+  - Cohen's d + one-sided Mann-Whitney U vs Generalist baseline
+  - **Result: all 4 profiles [STRONG], all p < 0.05** (see table in Session header)
+
+- [x] ✅ **Bridge-expert re-validation** (`/bridge-expert` skill)
+  - First pass rejected Fighter (wrong metric: per-call instead of per-board) → fixed
+  - Second pass: all 4 confirmed → **PROCEED TO STAGE 3**
+
+- [ ] 🔲 **Document profiles** (optional polish)
   - For each profile: name, skills, example player, narrative description
   - **Deliverable:** `docs/profile_descriptions.md`
 
@@ -623,13 +649,13 @@ Items that came up but aren't actionable now.
 | Sprint | Sessions | Status | % Complete | Notes |
 |--------|----------|--------|------------|-------|
 | Sprint 1 | 1-2 | ✅ DONE | 100% | Repo, setup, PRD, LaTeX reports |
-| Sprint 2 | 3-4 | 🟡 WIP | 50% | Session 3 ✅ — Session 4 next |
-| Sprint 3 | 5-6 | 🔲 TODO | 0% | — |
+| Sprint 2 | 3-4 | ✅ DONE | 100% | Session 3 ✅ (Stage 1) — Session 4 ✅ (Stage 2, all 4 profiles validated) |
+| Sprint 3 | 5-6 | 🔲 TODO | 0% | Stage 3 — agent construction (NEXT) |
 | Sprint 4 | 7-8 | 🔲 TODO | 0% | — |
 | Sprint 5 | 9-10 | 🔲 TODO | 0% | — |
 
-**Last updated:** May 27, 2026
-**Next checkpoint:** Session 4 — Stage 2 Skill Extraction (Gemini Flash 2.0)
+**Last updated:** May 30, 2026
+**Next checkpoint:** Session 5 — Stage 3 Agent Construction (4 bridge + 4 negotiation agents)
 
 ---
 
