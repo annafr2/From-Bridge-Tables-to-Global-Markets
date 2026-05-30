@@ -834,11 +834,29 @@ before any large-scale Stage 4 simulation. Cost: $0.0018 for all five calls.
 **Caveat:** n=1 hand. This only shows the mechanism works; per-profile bidding
 distributions over many hands come in Stage 4.
 
-**Reproducibility fix (May 2026):** The first sanity run used temperature=0.3
-and gave *different bids on reruns* of the same hand — unacceptable for a
-replicable experiment. Set agent temperature to **0.0**; reruns are now
-byte-identical (verified). Personality comes from the system prompt, not from
-sampling noise.
+**Reproducibility finding (May 2026) — IMPORTANT, partially open:**
+The first sanity run used temperature=0.3 and gave different bids on reruns of
+the same hand. We lowered agent temperature to **0.0** — but a controlled test
+(two consecutive runs, same hands) showed the bids were *still not identical*
+(e.g. Fighter 6S vs 3S; Generalist 2NT vs 3NT). **Conclusion: Gemini 2.5 Flash
+is NOT deterministic even at temperature 0** (a known property of these models —
+parallel GPU execution introduces tiny numerical differences that flip
+borderline decisions). Temperature 0 reduces but does not eliminate the
+variance.
+
+**Implication for the research design:** we cannot rely on regenerating
+identical bids. The reproducibility strategy must instead be:
+1. **Persist every raw LLM output** (already done — results saved to JSON), so
+   the *analysis* is fully reproducible from saved data even if regeneration
+   differs.
+2. **Report distributions over many hands**, not single-hand bids — the random
+   flips average out across a large sample (this is the Stage 4 design anyway).
+3. Optionally pass a fixed `seed` to the API and pin the model version to
+   shrink (not remove) the variance. Tracked as a Stage 4 robustness item.
+
+This is itself a worthwhile methodological note for the thesis: LLM-agent
+experiments need sample-level reproducibility (saved outputs + distributions),
+not call-level determinism.
 
 **Known bridge-quality limitations (bridge-expert review, deferred):** at
 temperature 0 the agents bid with the *correct profile direction* (Slam Hunter
