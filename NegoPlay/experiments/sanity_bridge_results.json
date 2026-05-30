@@ -1,0 +1,57 @@
+{
+  "date": "2026-05-30",
+  "hand": {
+    "S": "AKQ72",
+    "H": "AK4",
+    "D": "A83",
+    "C": "Q2"
+  },
+  "auction": [
+    "1S",
+    "Pass"
+  ],
+  "results": [
+    {
+      "profile": "Slam Hunter",
+      "bid": "4C",
+      "reasoning": "Aggressive splinter bid in clubs, showing a singleton and strong slam interest with excellent spade support.",
+      "legal": true,
+      "raw_bid": "4C"
+    },
+    {
+      "profile": "Insurance Player",
+      "bid": "4S",
+      "reasoning": "Signing off in a safe game contract, preferring certainty over exploring a potentially risky slam.",
+      "legal": true,
+      "raw_bid": "4S"
+    },
+    {
+      "profile": "Fighter",
+      "bid": "2NT",
+      "reasoning": "Jacoby 2NT shows a game-forcing hand with 4+ card support for partner's spades, aggressively exploring slam.",
+      "legal": true,
+      "raw_bid": "2NT"
+    },
+    {
+      "profile": "NT Specialist",
+      "bid": "3NT",
+      "reasoning": "Prioritizing 3NT with a strong, balanced hand and stoppers, even with a major fit.",
+      "legal": true,
+      "raw_bid": "3NT"
+    },
+    {
+      "profile": "Generalist",
+      "bid": "3NT",
+      "reasoning": "A 3NT rebid by opener shows 25-27 HCP and a balanced hand after opening 1S.",
+      "legal": true,
+      "raw_bid": "3NT"
+    }
+  ],
+  "distinct_bids": [
+    "2NT",
+    "3NT",
+    "4C",
+    "4S"
+  ],
+  "total_cost_usd": 0.243881
+}
