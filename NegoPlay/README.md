@@ -117,6 +117,69 @@ Simple caption: This picture shows bars of different heights for different featu
 
 ---
 
+### 📈 Profile snapshot (May 2026) — explained for everyone
+
+These five charts are built from the 563 real players
+(`python notebooks/visualize_for_supervisor.py`). Every caption is in plain
+language — no bridge or statistics knowledge needed.
+
+**1. Each profile spikes on its own behaviour**
+
+![Box plots of each profile's defining behaviour](docs/images/supervisor_box_defining_metrics.png)
+
+Think of four "habits": bidding big (slam), playing it safe (partscore),
+fighting opponents (penalty double), and preferring one contract type (NT).
+Each mini-chart picks one habit and shows how much every group does it. In every
+chart **one group clearly stands out** — and that group is named after the habit.
+This is the picture-version of "the groups are real".
+
+**2. The fingerprint of each profile**
+
+![Heatmap fingerprint of profiles](docs/images/supervisor_heatmap_fingerprint.png)
+
+One row per group, one column per behaviour. **Red = does it more than average,
+blue = less.** The strong red square in each row sits on that group's own
+behaviour — like a fingerprint. The *other* coloured squares are the interesting
+part: they are side-habits we did **not** pick the groups for (for example, the
+Fighter also opens the bidding more often). Those "bonus" patterns are the real
+proof the groups are genuine, not invented.
+
+**3. How the players split up**
+
+![Population breakdown](docs/images/supervisor_population_breakdown.png)
+
+Left: how many players are in each group — most (83%) are "average", and the
+special types are small groups at the edges. Right: each special group next to
+the average player, with a "×" number showing how many times more they do their
+signature behaviour.
+
+**4. The risk line: bold vs. careful**
+
+![Risk continuum scatter](docs/images/supervisor_scatter_risk_axis.png)
+
+Every dot is one player. Right = takes more risk (bids slams), up = plays it safe
+(stops low). Bold players (Slam Hunters) drift right; careful players (Insurance
+Players) sit high. Notice there are **no separate islands** — it's one big cloud
+with the special types at the edges. That is our main finding: elite players form
+a smooth *continuum*, not neat separate boxes.
+
+**5. Fighters vs. NT-lovers**
+
+![Fighter vs NT scatter](docs/images/supervisor_scatter_fighter_nt.png)
+
+Chart 4 separates two of the four special types; this one separates the other
+two. Right = fights opponents more (penalty doubles), up = prefers NT contracts.
+Fighters drift right, NT Specialists drift up.
+
+> ⚠️ **Honest note for readers:** charts 1 and 3 partly *re-describe how the
+> groups were defined* — we picked the most extreme players, so of course they
+> look extreme. The genuinely independent evidence is chart 2's side-habits plus
+> the statistical validation (effect size Cohen's d 2.13–4.62, all p < 0.05).
+> The "Insurance Player" group is the weakest of the four (only ×1.20 vs the
+> average player), so we describe it carefully.
+
+---
+
 ## 📊 Dataset
 
 | Metric | Value |
