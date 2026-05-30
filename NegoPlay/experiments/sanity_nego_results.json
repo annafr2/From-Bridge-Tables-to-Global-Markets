@@ -1,0 +1,68 @@
+{
+  "date": "2026-05-30",
+  "model": "gemini-2.5-flash",
+  "scenario": {
+    "title": "Acquiring a SaaS startup",
+    "role": "buyer (acquirer)",
+    "description": "You want to acquire a profitable SaaS startup. Independent valuation puts fair value around $9M. The seller has just opened at $13M.",
+    "terms": {
+      "price_musd": {
+        "min": 5.0,
+        "max": 15.0,
+        "unit": "M USD"
+      }
+    },
+    "your_target": {
+      "price_musd": 8.0
+    },
+    "your_limit": {
+      "price_musd": 11.0
+    }
+  },
+  "opening_offer": {
+    "price_musd": 13.0
+  },
+  "results": [
+    {
+      "profile": "Slam Hunter",
+      "action": "counter",
+      "offer": {},
+      "willing_to_close": false,
+      "reasoning": "I make a bold splinter bid to explore the maximum potential of this deal, aiming for the biggest swing.",
+      "valid": true
+    },
+    {
+      "profile": "Insurance Player",
+      "action": "counter",
+      "offer": {},
+      "willing_to_close": true,
+      "reasoning": "I prefer a safe and reasonable deal, so I'm offering a fair value to secure a quick agreement.",
+      "valid": true
+    },
+    {
+      "profile": "Fighter",
+      "action": "counter",
+      "offer": {},
+      "willing_to_close": false,
+      "reasoning": "Their initial bid is an overreach; I'm making an aggressive counter to punish their high valuation and assert control.",
+      "valid": true
+    },
+    {
+      "profile": "NT Specialist",
+      "action": "counter",
+      "offer": {},
+      "willing_to_close": false,
+      "reasoning": "I'm making a confident counter to steer the deal towards a balanced, favorable NT contract.",
+      "valid": true
+    },
+    {
+      "profile": "Generalist",
+      "action": "counter",
+      "offer": {},
+      "willing_to_close": false,
+      "reasoning": "A standard counter to establish a reasonable negotiating range based on fair value.",
+      "valid": true
+    }
+  ],
+  "total_cost_usd": 0.254101
+}

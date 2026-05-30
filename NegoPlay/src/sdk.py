@@ -9,6 +9,8 @@ Stage 1 — Profile discovery
 Stage 3 — Agent construction
     build_bridge_agent(profile)  → one BridgeAgent
     build_bridge_agents()        → dict of all 5 BridgeAgents
+    build_nego_agent(profile)    → one NegotiationAgent
+    build_nego_agents()          → dict of all 5 NegotiationAgents
 """
 
 from pathlib import Path
@@ -29,6 +31,7 @@ from src.stage1_clustering.extreme_profiles import (
 )
 from src.stage1_clustering.features import compute_player_features
 from src.stage3_agents.bridge_agent import BridgeAgent
+from src.stage3_agents.nego_agent import NegotiationAgent
 
 
 def build_profiles(
@@ -139,6 +142,67 @@ def build_bridge_agents(
     }
 
 
+def build_nego_agent(
+    profile: str,
+    signatures_path: str | Path | None = None,
+    client: LLMClient | None = None,
+    temperature: float = 0.7,
+) -> NegotiationAgent:
+    """Build ONE business-negotiation agent for the given profile.
+
+    The agent's character card is built from the SAME Stage 2 bridge skills as
+    its BridgeAgent twin — only the domain rules differ. This is the mechanism
+    that lets us test cross-domain behavioural alignment (the core research
+    question) without injecting new personality.
+
+    Args:
+        profile: One of the five profile names.
+        signatures_path: Path to the Stage 2 skill_profiles JSON (defaults to
+            the validated threshold-0.40 output).
+        client: Optional shared LLMClient (one budget log across agents).
+        temperature: Sampling temperature (0.7 = some bargaining variety;
+            reproducibility comes from persisting outputs, not determinism).
+
+    Returns:
+        A ready-to-use NegotiationAgent.
+
+    Raises:
+        ValueError: if `profile` is not a known profile name.
+    """
+    if profile not in AGENT_PROFILE_NAMES:
+        raise ValueError(
+            f"Unknown profile {profile!r}. Must be one of {AGENT_PROFILE_NAMES}."
+        )
+    sigs = (
+        load_profile_signatures(signatures_path)
+        if signatures_path is not None
+        else load_profile_signatures()
+    )
+    return NegotiationAgent(sigs[profile], client=client, temperature=temperature)
+
+
+def build_nego_agents(
+    signatures_path: str | Path | None = None,
+    client: LLMClient | None = None,
+    temperature: float = 0.7,
+) -> dict[str, NegotiationAgent]:
+    """Build ALL five negotiation agents, sharing one LLMClient by default.
+
+    Returns:
+        Mapping {profile_name: NegotiationAgent} for all five profiles.
+    """
+    sigs = (
+        load_profile_signatures(signatures_path)
+        if signatures_path is not None
+        else load_profile_signatures()
+    )
+    shared = client or LLMClient()
+    return {
+        name: NegotiationAgent(sigs[name], client=shared, temperature=temperature)
+        for name in AGENT_PROFILE_NAMES
+    }
+
+
 class NegoPlaySDK:
     """Main SDK class — single contract for all NegoPlay operations.
 
@@ -173,3 +237,13 @@ class NegoPlaySDK:
     def build_bridge_agents(**kwargs) -> dict[str, BridgeAgent]:
         """Build all five bridge agents. See module-level build_bridge_agents()."""
         return build_bridge_agents(**kwargs)
+
+    @staticmethod
+    def build_nego_agent(profile: str, **kwargs) -> NegotiationAgent:
+        """Build one negotiation agent. See module-level build_nego_agent()."""
+        return build_nego_agent(profile, **kwargs)
+
+    @staticmethod
+    def build_nego_agents(**kwargs) -> dict[str, NegotiationAgent]:
+        """Build all five negotiation agents. See module-level build_nego_agents()."""
+        return build_nego_agents(**kwargs)

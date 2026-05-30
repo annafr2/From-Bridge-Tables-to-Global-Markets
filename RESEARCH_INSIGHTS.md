@@ -1,6 +1,6 @@
 # RESEARCH_INSIGHTS.md — Empirical Questions We Can Now Answer
 
-**Last updated:** 2026-05-30 — Added Q7.8 (Stage 3 sanity: personality changes bidding). Earlier today: Q7.7 (Stage 2: LLM-extracted profiles empirically validated — all 4 behaviourally distinct, Cohen's d 2.13–4.62, all p<0.05). Previously: Q7.4 (bridge expert validation caveats), Q7.5 (v2.0→v2.1 revision methodology), Q7.6 (Dr. Rami's preprocessing audit — continuum confirmed across 5 algorithms)
+**Last updated:** 2026-05-30 — Added Q7.9 (Stage 3: bridge personality transfers to negotiation). Earlier today: Q7.8 (bidding sanity), Q7.7 (profile validation) (Stage 2: LLM-extracted profiles empirically validated — all 4 behaviourally distinct, Cohen's d 2.13–4.62, all p<0.05). Previously: Q7.4 (bridge expert validation caveats), Q7.5 (v2.0→v2.1 revision methodology), Q7.6 (Dr. Rami's preprocessing audit — continuum confirmed across 5 algorithms)
 **Status of data:** **149,208 rows** × 48 columns, 5 EBL competitions (2016–2025), individual player names per position
 
 This file is a living research notebook. Each section = one empirically testable question,
@@ -867,6 +867,40 @@ reasoning that confuses opener/responder seat. These are acceptable for
 measuring behavioural *direction* (the research target) but should be reduced
 with bridge-rule reminders in the prompt before any claim about bid *quality*.
 Tracked for a later Stage 3 polish pass.
+
+---
+
+### Q7.9 — Stage 3: Bridge Personality Transfers to Business Negotiation (sanity, May 2026)
+
+> The cross-domain twin of Q7.8, and the first glimpse of the CORE thesis
+> mechanism. NOT a hypothesis test — a wiring check that the bridge-derived
+> character shows up in a business negotiation.
+
+**What we did:** Built five negotiation agents from the SAME Stage 2 bridge
+skills (no new personality — the anti-tautology rule), and gave all five the
+SAME opening offer in an M&A scenario: buying a SaaS startup, fair value ≈ $9M,
+the agent is the buyer, seller opens at $13M.
+
+**Result — the bridge styles map cleanly onto bargaining:**
+
+| Profile (bridge style) | Counter | Behaviour in negotiation |
+|------------------------|---------|--------------------------|
+| Slam Hunter (bold) | $10.5M | highest counter — "aggressive jump, seize initiative" |
+| Generalist (baseline) | $10.0M | middle-of-road, "leave room to negotiate" |
+| Insurance Player (safe) | $9.0M | "fair, secure deal over aggressive bidding" |
+| NT Specialist (analytical) | $9.0M | "precisely anchored to the $9M valuation, data-driven" |
+| Fighter (combative) | $8.5M | hardest line — "this price is not serious", anchors low |
+
+**Why it matters:** This is exactly the cross-domain pattern the thesis
+predicts. The Slam Hunter opens boldest (closest to seller, confident of closing
+big), the Fighter counters hardest/lowest (combative), the NT Specialist anchors
+to data, the Insurance Player seeks a safe fair deal — and these come from
+skills extracted from REAL bridge hands, not from personality labels. The spread
+($8.5M–$10.5M from one offer) shows personality drives the bargaining stance.
+
+**Caveat:** n=1 scenario, single turn. Whether bridge *winners* are also
+negotiation *winners* (the actual ≥70% alignment hypothesis) is the Stage 4
+experiment over many sessions. Cost: $0.0055 for five negotiation turns.
 
 ---
 

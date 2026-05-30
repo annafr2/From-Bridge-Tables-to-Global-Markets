@@ -336,11 +336,17 @@
   - Handles bidding rules (valid bids only)
   - **Tests:** Verify legal bid generation
 
-- [ ] 🔲 **`src/stage3_agents/nego_agent.py`**
-  - Class: `NegotiationAgent(BaseAgent)`
-  - Method: `respond_to_offer(scenario, history, current_offer) → Response`
-  - Response includes: counter_offer, justification, willing_to_close
-  - **Tests:** Output format validation
+- [x] ✅ **`src/stage3_agents/nego_agent.py`**
+  - `NegotiationAgent.respond_to_offer(scenario, current_offer, history)`
+  - Returns action (counter/accept/walk_away) + offer + willing_to_close +
+    reasoning; clamps offers to the scenario's legal ranges; invalid action
+    falls back to walk_away
+  - SDK: `build_nego_agent()` / `build_nego_agents()` (temperature 0.7)
+  - **Tests:** `tests/test_nego_agent.py` — 11 tests passing (mocked LLM)
+  - **Sanity** (`experiments/sanity_nego_agents.py`): same $13M opening offer
+    → Slam Hunter $10.5M (bold) / Fighter $8.5M (hard) / Insurance & NT $9M
+    (fair/data) / Generalist $10M. Bridge personality visibly transfers to
+    negotiation. Cost $0.0055. See RESEARCH_INSIGHTS Q7.9.
 
 - [ ] 🔲 **`src/shared/prompts.py`**
   - Centralized prompt templates
