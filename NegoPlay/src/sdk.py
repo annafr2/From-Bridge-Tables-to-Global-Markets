@@ -81,7 +81,7 @@ def build_bridge_agent(
     profile: str,
     signatures_path: str | Path | None = None,
     client: LLMClient | None = None,
-    temperature: float = 0.3,
+    temperature: float = 0.0,
 ) -> BridgeAgent:
     """Build ONE bridge-bidding agent for the given profile.
 
@@ -93,7 +93,8 @@ def build_bridge_agent(
         client: Optional shared LLMClient (share one across agents to keep a
             single budget/cost log for a whole game). A new one is created if
             omitted.
-        temperature: Sampling temperature (0.3 = consistent bridge bidding).
+        temperature: Sampling temperature (0.0 = reproducible bridge bidding;
+            same hand → same bid across runs).
 
     Returns:
         A ready-to-use BridgeAgent.
@@ -116,7 +117,7 @@ def build_bridge_agent(
 def build_bridge_agents(
     signatures_path: str | Path | None = None,
     client: LLMClient | None = None,
-    temperature: float = 0.3,
+    temperature: float = 0.0,
 ) -> dict[str, BridgeAgent]:
     """Build ALL five bridge agents, sharing one LLMClient by default.
 

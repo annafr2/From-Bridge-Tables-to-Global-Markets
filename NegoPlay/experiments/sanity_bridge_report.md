@@ -4,37 +4,37 @@
 
 - **Date:** 2026-05-30
 - **Model:** gemini-2.5-flash
-- **Total LLM cost:** $0.246711
+- **Total LLM cost:** $0.252370
 
 ## Hand 1: Strong balanced-ish, partner opened 1S (slam-interest hand)
 
 - **Hand:** `S:AKQ72  H:AK4  D:A83  C:Q2`  (20 HCP)
 - **Auction so far:** `1S Pass`
 - **Reviewer note:** 20 HCP with a spade fit — slam exploration is reasonable; a cautious player signs off in 4S.
-- **Distinct bids across agents:** 2NT, 3D, 4C, 4NT, 4S
+- **Distinct bids across agents:** 2H, 3NT, 3S
 
 | Profile | Bid | Legal? | Agent's reasoning |
 |---------|-----|--------|-------------------|
-| Slam Hunter | **4C** | ✅ | This is an aggressive splinter bid, showing a singleton in clubs, strong spade support, and immediate slam interest. |
-| Insurance Player | **4S** | ✅ | A strong fit and sufficient points for a safe game, avoiding speculative slam bidding. |
-| Fighter | **3D** | ✅ | Strong cue-bid showing first-round diamond control and slam interest with excellent spade support, aggressively pursuing the best contract. |
-| NT Specialist | **4NT** | ✅ | With 19 HCP and a balanced hand, a 4NT quantitative bid accurately describes my strength and preference for No Trump, inviting slam. |
-| Generalist | **2NT** | ✅ | Jacoby 2NT shows a game-forcing hand with 4+ card support for partner's major, initiating slam exploration. |
+| Slam Hunter | **2H** | ✅ | Game-forcing bid showing a strong hand with spade support and initiating slam exploration. |
+| Insurance Player | **3S** | ✅ | A strong game-forcing raise to ensure a safe game contract in spades, allowing partner to place the final contract. |
+| Fighter | **3S** | ✅ | Strong raise with slam interest, allowing partner to describe their hand further for slam exploration and maximizing our score. |
+| NT Specialist | **3NT** | ✅ | With a balanced 19 HCP hand and stoppers in all suits, I prioritize a direct 3NT game over exploring a major suit fit. |
+| Generalist | **3NT** | ✅ | A 3NT rebid after opening 1S shows a balanced hand with 20-22 HCP. |
 
 ## Hand 2: Flat 12-count, opponents opened 1H (defensive decision)
 
 - **Hand:** `S:KJ95  H:Q72  D:KQ4  C:J83`  (12 HCP)
 - **Auction so far:** `1H`
 - **Reviewer note:** Balanced minimum over 1H — pass / double / 1S overcall are all defensible; a Fighter is more likely to act.
-- **Distinct bids across agents:** 1NT, 1S, X
+- **Distinct bids across agents:** 1NT, 2H, 3NT, X
 
 | Profile | Bid | Legal? | Agent's reasoning |
 |---------|-----|--------|-------------------|
-| Slam Hunter | **1S** | ✅ | Showing a 4-card major and forcing partner to describe their hand further, keeping slam possibilities open. |
-| Insurance Player | **1NT** | ✅ | My 12 HCP is borderline for game, and I prefer to make a conservative 1NT response to prioritize partscore safety rather than inviting game. |
-| Fighter | **X** | ✅ | Proactively using a takeout double to enter the auction and compete, showing interest in the unbid suits. |
-| NT Specialist | **1NT** | ✅ | Aggressively overcalling 1NT to show a balanced hand with stoppers in all suits, consistent with my preference for NT and willingness to stretch on points. |
-| Generalist | **1S** | ✅ | With 13 HCP and a 4-card spade suit, bidding 1S is the standard response to partner's 1H opening. |
+| Slam Hunter | **2H** | ✅ | Showing 10-12 HCP and 3-card support for partner's hearts, inviting game and keeping slam possibilities open. |
+| Insurance Player | **2H** | ✅ | Opting for a safe partscore in partner's suit, signaling minimum support to avoid pushing for game. |
+| Fighter | **X** | ✅ | A proactive takeout double with good shape and borderline opening points to compete aggressively. |
+| NT Specialist | **1NT** | ✅ | Aggressively overcalling 1NT with a balanced 14-count and stoppers in all suits, prioritizing No Trump. |
+| Generalist | **3NT** | ✅ | With 13 HCP and a balanced hand, 3NT is the standard response to show 13-15 HCP and deny 4-card support for partner's major. |
 
 ---
 

@@ -834,6 +834,22 @@ before any large-scale Stage 4 simulation. Cost: $0.0018 for all five calls.
 **Caveat:** n=1 hand. This only shows the mechanism works; per-profile bidding
 distributions over many hands come in Stage 4.
 
+**Reproducibility fix (May 2026):** The first sanity run used temperature=0.3
+and gave *different bids on reruns* of the same hand — unacceptable for a
+replicable experiment. Set agent temperature to **0.0**; reruns are now
+byte-identical (verified). Personality comes from the system prompt, not from
+sampling noise.
+
+**Known bridge-quality limitations (bridge-expert review, deferred):** at
+temperature 0 the agents bid with the *correct profile direction* (Slam Hunter
+drives to slam, Insurance signs off, Fighter competes/doubles, NT Specialist
+leans NT) but make occasional *bridge-mechanics errors* — e.g. a "splinter"
+named with a doubleton, a 1NT overcall on 12 HCP (standard is 15-18), or
+reasoning that confuses opener/responder seat. These are acceptable for
+measuring behavioural *direction* (the research target) but should be reduced
+with bridge-rule reminders in the prompt before any claim about bid *quality*.
+Tracked for a later Stage 3 polish pass.
+
 ---
 
 ### What Cannot Be Fixed (Known Limitations)

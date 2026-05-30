@@ -19,46 +19,44 @@
       "results": [
         {
           "profile": "Slam Hunter",
-          "bid": "4C",
-          "reasoning": "This is an aggressive splinter bid, showing a singleton in clubs, strong spade support, and immediate slam interest.",
+          "bid": "2H",
+          "reasoning": "Game-forcing bid showing a strong hand with spade support and initiating slam exploration.",
           "legal": true,
-          "raw_bid": "4C"
+          "raw_bid": "2H"
         },
         {
           "profile": "Insurance Player",
-          "bid": "4S",
-          "reasoning": "A strong fit and sufficient points for a safe game, avoiding speculative slam bidding.",
+          "bid": "3S",
+          "reasoning": "A strong game-forcing raise to ensure a safe game contract in spades, allowing partner to place the final contract.",
           "legal": true,
-          "raw_bid": "4S"
+          "raw_bid": "3S"
         },
         {
           "profile": "Fighter",
-          "bid": "3D",
-          "reasoning": "Strong cue-bid showing first-round diamond control and slam interest with excellent spade support, aggressively pursuing the best contract.",
+          "bid": "3S",
+          "reasoning": "Strong raise with slam interest, allowing partner to describe their hand further for slam exploration and maximizing our score.",
           "legal": true,
-          "raw_bid": "3D"
+          "raw_bid": "3S"
         },
         {
           "profile": "NT Specialist",
-          "bid": "4NT",
-          "reasoning": "With 19 HCP and a balanced hand, a 4NT quantitative bid accurately describes my strength and preference for No Trump, inviting slam.",
+          "bid": "3NT",
+          "reasoning": "With a balanced 19 HCP hand and stoppers in all suits, I prioritize a direct 3NT game over exploring a major suit fit.",
           "legal": true,
-          "raw_bid": "4NT"
+          "raw_bid": "3NT"
         },
         {
           "profile": "Generalist",
-          "bid": "2NT",
-          "reasoning": "Jacoby 2NT shows a game-forcing hand with 4+ card support for partner's major, initiating slam exploration.",
+          "bid": "3NT",
+          "reasoning": "A 3NT rebid after opening 1S shows a balanced hand with 20-22 HCP.",
           "legal": true,
-          "raw_bid": "2NT"
+          "raw_bid": "3NT"
         }
       ],
       "distinct_bids": [
-        "2NT",
-        "3D",
-        "4C",
-        "4NT",
-        "4S"
+        "2H",
+        "3NT",
+        "3S"
       ]
     },
     {
@@ -77,46 +75,47 @@
       "results": [
         {
           "profile": "Slam Hunter",
-          "bid": "1S",
-          "reasoning": "Showing a 4-card major and forcing partner to describe their hand further, keeping slam possibilities open.",
+          "bid": "2H",
+          "reasoning": "Showing 10-12 HCP and 3-card support for partner's hearts, inviting game and keeping slam possibilities open.",
           "legal": true,
-          "raw_bid": "1S"
+          "raw_bid": "2H"
         },
         {
           "profile": "Insurance Player",
-          "bid": "1NT",
-          "reasoning": "My 12 HCP is borderline for game, and I prefer to make a conservative 1NT response to prioritize partscore safety rather than inviting game.",
+          "bid": "2H",
+          "reasoning": "Opting for a safe partscore in partner's suit, signaling minimum support to avoid pushing for game.",
           "legal": true,
-          "raw_bid": "1NT"
+          "raw_bid": "2H"
         },
         {
           "profile": "Fighter",
           "bid": "X",
-          "reasoning": "Proactively using a takeout double to enter the auction and compete, showing interest in the unbid suits.",
+          "reasoning": "A proactive takeout double with good shape and borderline opening points to compete aggressively.",
           "legal": true,
           "raw_bid": "X"
         },
         {
           "profile": "NT Specialist",
           "bid": "1NT",
-          "reasoning": "Aggressively overcalling 1NT to show a balanced hand with stoppers in all suits, consistent with my preference for NT and willingness to stretch on points.",
+          "reasoning": "Aggressively overcalling 1NT with a balanced 14-count and stoppers in all suits, prioritizing No Trump.",
           "legal": true,
           "raw_bid": "1NT"
         },
         {
           "profile": "Generalist",
-          "bid": "1S",
-          "reasoning": "With 13 HCP and a 4-card spade suit, bidding 1S is the standard response to partner's 1H opening.",
+          "bid": "3NT",
+          "reasoning": "With 13 HCP and a balanced hand, 3NT is the standard response to show 13-15 HCP and deny 4-card support for partner's major.",
           "legal": true,
-          "raw_bid": "1S"
+          "raw_bid": "3NT"
         }
       ],
       "distinct_bids": [
         "1NT",
-        "1S",
+        "2H",
+        "3NT",
         "X"
       ]
     }
   ],
-  "total_cost_usd": 0.246711
+  "total_cost_usd": 0.25237
 }
