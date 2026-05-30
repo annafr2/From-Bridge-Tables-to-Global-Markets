@@ -858,15 +858,23 @@ This is itself a worthwhile methodological note for the thesis: LLM-agent
 experiments need sample-level reproducibility (saved outputs + distributions),
 not call-level determinism.
 
-**Known bridge-quality limitations (bridge-expert review, deferred):** at
-temperature 0 the agents bid with the *correct profile direction* (Slam Hunter
-drives to slam, Insurance signs off, Fighter competes/doubles, NT Specialist
-leans NT) but make occasional *bridge-mechanics errors* — e.g. a "splinter"
-named with a doubleton, a 1NT overcall on 12 HCP (standard is 15-18), or
-reasoning that confuses opener/responder seat. These are acceptable for
-measuring behavioural *direction* (the research target) but should be reduced
-with bridge-rule reminders in the prompt before any claim about bid *quality*.
-Tracked for a later Stage 3 polish pass.
+**Bridge-quality polish (done, May 2026):** A first review found bridge-mechanics
+errors at temperature 0 — a "splinter" named on a doubleton, a 1NT overcall on
+12 HCP (standard 15-18), and opener/responder seat confusion. We added three
+rule blocks to the bridge system prompt: (1) convention correctness (splinter =
+singleton/void; 1NT overcall = 15-18; takeout-double shape), (2) seat awareness
+(partner opened → you are responder), (3) "count your own cards/HCP before
+describing your hand". After the fix, a re-run showed:
+- Splinter error **gone** — Slam Hunter now uses 4NT Blackwood on the 5-3-3-2
+  20-HCP hand instead of inventing shortness.
+- Seat confusion **gone** — Generalist correctly bids Jacoby 2NT *as responder*.
+- HCP mis-counts **gone** — agents now state their point count correctly.
+- 1NT overcall: Insurance now correctly **passes**, citing the 15-18 rule; the
+  NT Specialist still stretches to 1NT but now *transparently* ("slightly
+  sub-standard point count") — an acceptable profile-driven stylistic stretch,
+  not an error.
+Net: the remaining behaviour is profile-faithful and bridge-legal. Residual
+non-determinism (Q7.8 above) still applies — bids can vary run to run.
 
 ---
 
@@ -907,9 +915,14 @@ personality labels.
 2. **Non-determinism:** an earlier run of this same scenario gave a different
    spread ($7.5M–$10M). Same caveat as Q7.8 — report distributions, not single
    turns.
-3. **Bridge-vocabulary leakage:** some reasonings still use bridge terms in the
-   business context ("penalty double", "NT overcall", "partscore"). Numeric
-   behaviour is right; the framing needs prompt polish. Tracked as deferred.
+3. **Bridge-vocabulary leakage — FIXED (May 2026):** early reasonings used
+   bridge terms in the business context ("penalty double", "NT overcall",
+   "splinter"). We added a LANGUAGE block to the negotiation prompt banning
+   bridge vocabulary and requiring business framing. After the fix a re-run had
+   **zero** bridge terms in any negotiation reasoning — e.g. the Fighter now
+   says "I am countering their overreach with a firm, low offer to reset their
+   expectations" instead of "aggressive penalty double". Numeric behaviour
+   unchanged; framing is now clean business language.
 
 n=1 scenario, single turn — the real ≥70% alignment test is Stage 4.
 

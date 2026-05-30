@@ -171,7 +171,32 @@ BRIDGE BIDDING RULES (you must obey these):
 - You may always "Pass". You may "X" (double) the opponents' last contract bid,
   or "XX" (redouble) if they doubled you.
 - The auction ends after three consecutive passes following a bid.
-- Bid according to your style and the hand you hold — do not invent cards."""
+- Bid according to your style and the hand you hold — do not invent cards.
+
+BIDDING-CONVENTION CORRECTNESS (do not misuse these — they have strict meanings):
+- SPLINTER: a double-jump in a NEW suit promises a SINGLETON or VOID in that
+  suit plus support for partner. NEVER make a splinter holding two or more cards
+  in the suit. If you have no singleton/void, use a different slam try (e.g. a
+  control cue-bid or Jacoby 2NT).
+- 1NT OVERCALL (bidding 1NT directly over an opponent's opening): promises a
+  BALANCED hand with 15-18 HCP and a stopper in their suit. Do NOT overcall 1NT
+  with fewer than 15 HCP.
+- STRONG 2C OPENING: ~22+ HCP or game-forcing. Do not open 2C on a normal hand.
+- TAKEOUT DOUBLE of an opening: ideally shortness in their suit and support for
+  the unbid suits. A flat hand with length in their suit is a poor takeout double.
+
+SEAT AWARENESS (track who you are):
+- Read the auction carefully. If your PARTNER opened, you are the RESPONDER —
+  reason about responding/raising, NOT about an opener's rebid.
+- If an OPPONENT opened, you are overcalling/defending.
+- Never describe yourself as "opener" when partner or an opponent opened.
+
+COUNT YOUR OWN CARDS before describing your hand:
+- Before claiming a singleton/void/shortness or a specific suit length, COUNT
+  the cards shown in that suit in YOUR hand. A 2-card holding is a doubleton,
+  NOT a singleton. Do not claim shortness you do not hold.
+- Count your HCP (A=4, K=3, Q=2, J=1) before claiming a points range; do not
+  overstate or understate your strength."""
 
 _BRIDGE_EXAMPLE = """\
 EXAMPLE (for format only):
@@ -207,7 +232,16 @@ BUSINESS NEGOTIATION RULES:
   adopt a new personality. A risk-seeking bridge style implies bold offers;
   a safety-first style implies quick, secure deals; a combative style implies
   hard counter-offers; an analytical style implies data-driven justification.
-- Stay within the numeric ranges defined by the scenario. Do not invent terms."""
+- Stay within the numeric ranges defined by the scenario. Do not invent terms.
+
+LANGUAGE — speak as a BUSINESS NEGOTIATOR, not a bridge player:
+- Your reasoning MUST use business language only. Translate your bridge instinct
+  into business terms; never name a bridge action in your reasoning.
+- BANNED words in your output: "bid", "splinter", "overcall", "penalty double",
+  "NT", "no-trump", "partscore", "slam", "contract level", "suit", "trump",
+  "Blackwood", "Jacoby", "auction", "partner".
+- Example translation: instead of "I make an aggressive penalty double", write
+  "I reject their valuation with a firm low counter-offer to reset expectations"."""
 
 _NEGO_EXAMPLE = """\
 EXAMPLE (for format only):

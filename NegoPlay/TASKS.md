@@ -350,6 +350,21 @@
   - **Fixed:** offer JSON schema needed an explicit `price_musd` property —
     Gemini returned empty offers for a bare `{"type":"object"}`. Now populated.
 
+- [x] ✅ **Prompt polish — closing Stage 3 loose ends** (`src/shared/prompts.py`)
+  - Bridge card: added convention-correctness rules (splinter = singleton/void;
+    1NT overcall = 15-18; takeout-double shape), seat awareness (responder vs
+    opener), and "count your own cards/HCP" → splinter error, seat confusion,
+    and HCP mis-counts all resolved on re-run (Slam Hunter now uses Blackwood,
+    not a fake splinter).
+  - Negotiation card: added a LANGUAGE block banning bridge vocabulary →
+    re-run had ZERO bridge terms in negotiation reasoning (clean business
+    framing). See RESEARCH_INSIGHTS Q7.8/Q7.9.
+  - 44 Stage 3 tests still pass.
+
+**Stage 3 status: COMPLETE.** Agents (bridge + negotiation, 5 profiles each)
+built, orchestrated via SDK, sanity-checked, expert-reviewed, and polished.
+Next: Stage 4 — dual simulation over many hands/scenarios + alignment.
+
 - [ ] 🔲 **`src/shared/prompts.py`**
   - Centralized prompt templates
   - One template per (profile × domain) = 8 prompts
