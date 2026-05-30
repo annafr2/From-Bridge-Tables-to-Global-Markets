@@ -129,8 +129,12 @@ class BridgeAgent(BaseAgent):
         self,
         signature: ProfileSignature,
         client: LLMClient | None = None,
-        temperature: float = 0.3,
+        temperature: float = 0.0,
     ):
+        # temperature=0.0 by default for REPRODUCIBILITY: the same hand must
+        # produce the same bid across runs, otherwise the experiment is not
+        # replicable. (An earlier 0.3 default gave different bids on reruns.)
+        # The personality comes from the system prompt, not from sampling noise.
         super().__init__(signature, client=client, temperature=temperature)
         # Build the character card once, at construction.
         self.system_prompt = build_bridge_system_prompt(signature)
