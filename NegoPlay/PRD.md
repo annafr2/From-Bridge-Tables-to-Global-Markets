@@ -237,9 +237,9 @@ Full literature: [`docs/literature.md`](docs/literature.md) (17 papers, NegoPlay
 4. Aggregate skills across chunks (skills appearing in 3+ chunks)
 5. Assign human-readable profile name per cluster
 
-**Outputs:**
-- `data/processed/skill_profiles.json`
-- `docs/profile_descriptions.md`
+**Outputs:** ✅ COMPLETE (May 2026)
+- `results/stage2_sample_v2_focused_prompt/skill_profiles_reagg_t040.json`
+- Empirically validated vs Generalist baseline (Cohen's d 2.13–4.62, p < 0.05)
 
 **Success criteria:**
 - ✅ Each profile has 5-7 distinct skills
@@ -274,10 +274,11 @@ Full literature: [`docs/literature.md`](docs/literature.md) (17 papers, NegoPlay
 3. Implement `NegotiationAgent.respond(offer, context)` method
 4. Sanity test: each agent should behave differently in same context
 
-**Outputs:**
+**Outputs:** ✅ COMPLETE (May 2026)
+- `src/stage3_agents/base_agent.py` (shared skeleton)
 - `src/stage3_agents/bridge_agent.py`
 - `src/stage3_agents/nego_agent.py`
-- `docs/prompts.md` (full prompt book)
+- `src/shared/prompts.py` (centralised prompt/"character card" library)
 
 **Success criteria:**
 - ✅ All 5 agents produce valid JSON output 95%+ of the time

@@ -50,20 +50,20 @@ against real negotiation data.
 └─────────────────────────────────────────────────────────────┘
                             ↓
 ┌─────────────────────────────────────────────────────────────┐
-│  STAGE 2: SKILL EXTRACTION (LLM)  ← NEXT                   │
+│  STAGE 2: SKILL EXTRACTION (LLM)                ✅ DONE     │
 │  • Send chunks of 20-30 games per profile to Gemini Flash   │
 │  • LLM identifies 5-7 characteristic skills                 │
 │  • Output: skill_profiles.json                              │
 └─────────────────────────────────────────────────────────────┘
                             ↓
 ┌─────────────────────────────────────────────────────────────┐
-│  STAGE 3: AGENT CONSTRUCTION                                │
+│  STAGE 3: AGENT CONSTRUCTION                    ✅ DONE     │
 │  • 5 LLM-based agents, each with profile-specific prompts   │
 │  • Methods: make_bid(), respond_to_offer()                  │
 └─────────────────────────────────────────────────────────────┘
                             ↓
 ┌─────────────────────────────────────────────────────────────┐
-│  STAGE 4: DUAL SIMULATION + ALIGNMENT                       │
+│  STAGE 4: DUAL SIMULATION + ALIGNMENT           ← NEXT      │
 │  • 50 bridge bidding simulations                            │
 │  • 48 business negotiation simulations (4 scenarios)        │
 │  • Spearman ρ: bridge win rate vs negotiation win rate      │
