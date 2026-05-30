@@ -1,0 +1,24 @@
+Player: DONCIU Sabin-Horia
+Profile: Slam Hunter
+Total boards in this chunk: 3
+
+============================================================
+
+Board 3 (Dealer South, Vul: E-W)
+You are E (Dummy). Your hand: ♠84 ♥AJT63 ♦62 ♣K732
+Bidding: W:- N:- E:- S:Pass | W:2D N:x E:2S S:Pass | W:2NT N:Pass E:3D S:x | W:Pass N:Pass E:xx S:Pass | W:3H N:Pass E:4H S:Pass | W:Pass N:Pass
+Result: 4H by W, made 10 tricks, NS +0
+
+---
+
+Board 4 (Dealer West, Vul: All)
+You are N (Defender). Your hand: ♠Q95 ♥T75 ♦KQ86 ♣QJ7
+Bidding: W:1D N:Pass E:1S S:Pass | W:3S N:Pass E:Pass S:Pass | 
+Result: 3S by E, made 8 tricks, NS +100
+
+---
+
+Board 8 (Dealer West, Vul: None)
+You are E (Defender). Your hand: ♠T94 ♥KQT5 ♦J643 ♣J5
+Bidding: W:Pass N:1D E:Pass S:2C | W:Pass N:2D E:Pass S:2H | W:Pass N:2NT E:Pass S:3NT | W:Pass N:Pass E:Pass
+Result: 3NT by N, made 9 tricks, NS +400

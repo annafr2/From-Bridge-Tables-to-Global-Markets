@@ -1,0 +1,51 @@
+{
+  "player": "DONCIU Sabin-Horia",
+  "profile": "Slam Hunter",
+  "cost_usd": 0.0019154,
+  "skills": [
+    {
+      "name": "Active Competitive Bidding",
+      "description": "The player frequently enters the auction with overcalls, doubles, and raises, even with moderate hands, to compete for the contract.",
+      "evidence_boards": [
+        3,
+        4,
+        11,
+        13,
+        29,
+        8,
+        6
+      ],
+      "confidence": "high"
+    },
+    {
+      "name": "Aggressive Sacrifice/Penalty Actions",
+      "description": "The player is willing to take calculated risks by sacrificing at high levels or making penalty doubles to disrupt opponents' contracts.",
+      "evidence_boards": [
+        27,
+        10
+      ],
+      "confidence": "medium"
+    },
+    {
+      "name": "Constructive Game-Seeking",
+      "description": "The player employs clear, systematic bidding sequences to explore and reach game contracts when holding sufficient values and fit.",
+      "evidence_boards": [
+        8,
+        10,
+        29
+      ],
+      "confidence": "high"
+    },
+    {
+      "name": "Responsive Suit Showing",
+      "description": "The player consistently shows suit preferences and support through natural bids and rebids, aiding partner in finding the best fit.",
+      "evidence_boards": [
+        3,
+        16,
+        29
+      ],
+      "confidence": "high"
+    }
+  ],
+  "summary": "DONCIU Sabin-Horia demonstrates a highly competitive and proactive bidding style, frequently entering auctions with overcalls, doubles, and sacrifices to challenge opponents. This player also exhibits strong constructive bidding, using clear sequences to explore and reach optimal game contracts. Overall, the player is not afraid to take calculated risks in competitive situations while maintaining a systematic approach to finding the best fit."
+}
