@@ -7,12 +7,12 @@
 - **Scenario:** Acquiring a SaaS startup (you are the buyer (acquirer))
 - **Fair value ≈ $9M; your target $8M; walk-away $11M.**
 - **Seller's opening offer:** $13.0M
-- **Total LLM cost:** $0.255917
+- **Total LLM cost:** $0.267848
 
 | Profile | Action | Counter price | Close? | Reasoning |
 |---------|--------|---------------|--------|-----------|
-| Slam Hunter | counter | 7.5 | no | I initiate slam exploration with an aggressive bid, signaling my strong interest and setting the stage for a big deal. |
-| Insurance Player | counter | 8.0 | yes | I prefer a sure small gain over a risky large one, and this offer secures a safe partscore. |
-| Fighter | counter | 7.5 | no | Their opening bid is an overreach; I'm making a strong penalty double to anchor the negotiation and maximize my score. |
-| NT Specialist | counter | 7.5 | no | Aggressively establishing our preferred balanced contract early, much like an NT overcall, to find a stable deal. |
-| Generalist | counter | 9.0 | yes | A standard counter-offer based on fair valuation, setting a reasonable baseline for negotiation. |
+| Slam Hunter | counter | 7.5 | no | I reject their high valuation with a firm, low counter-offer to reset expectations and pursue maximum upside. |
+| Insurance Player | counter | 8.0 | yes | I reject their valuation with a firm low counter-offer to reset expectations, seeking a secure and favorable acquisition. |
+| Fighter | counter | 7.5 | yes | I reject their valuation with a firm low counter-offer to reset expectations. |
+| NT Specialist | counter | 7.5 | no | I am making a firm, balanced counter-offer to establish a strong, stable position and reset expectations for a favorable outcome. |
+| Generalist | counter | 9.0 | yes | We are presenting a valuation aligned with market assessments to establish a fair basis for discussion. |
