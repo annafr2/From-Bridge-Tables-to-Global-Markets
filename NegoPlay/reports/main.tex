@@ -395,7 +395,88 @@ After variance and correlation filtering (Chapter~\ref{ch:tech}, Eq.~\eqref{eq:c
 
 \section{Stage 2 -- Skill Extraction (LLM)}
 
-For each cluster, 5--10 chunks of 20--30 representative games are sent to \textbf{Gemini Flash 2.0} with a strict JSON schema. The LLM is instructed to return 5--7 characteristic skills. Skills appearing in $\geq 3$ chunks are kept. The author then assigns a human-readable profile name to each cluster: \emph{Slam Hunter}, \emph{Insurance Player}, \emph{NT Specialist}, and \emph{Fighter} -- the four profiles that emerged from the v2.1 production run (see Table~A.2).
+For each of the four extreme profiles we sampled five players and sent their
+actual played boards to \textbf{Gemini~2.5~Flash} in chunks of up to 25 boards,
+with a strict JSON schema. Each call returns 5--7 decision-making skills, each
+with a confidence label and supporting board references. A profile-specific
+guidance prompt (\texttt{PROFILE\_GUIDANCE}) requires at least two skills to lie
+on the profile's defining axis; without it, an unguided prompt returned the
+generic ``aggressive competitive bidding'' for every profile.
+
+\subsection*{Semantic aggregation}
+Raw skill names vary in wording (e.g.\ ``initiates slam exploration with
+splinters'' vs.\ ``employs splinter bids for slam exploration''). We merge
+synonymous skills with TF--IDF cosine similarity and Union--Find clustering
+(merge threshold $0.40$; the lower value $0.30$ produced false merges such as
+``control bidding'' with ``competitive overcalling''). The most frequent raw
+name in each cluster becomes the canonical skill label.
+
+\subsection*{Empirical validation}
+The central question is whether the LLM-described profiles are \emph{real}
+behavioural types or an artefact of the clustering / an LLM hallucination. We
+therefore measured each profile's defining behaviour directly from the raw
+bidding and contract data---no LLM, no clustering---and compared it against a
+Generalist baseline drawn from the same elite population (an
+\emph{elite-vs-elite} comparison, which makes any separation conservative).
+Denominators match Stage~1 exactly: declarer-only boards for the contract-level
+metrics (slam, partscore, NT) and per-board-with-bidding for the Fighter's
+penalty doubles. Effect size is Cohen's~$d$; significance is a one-sided
+Mann--Whitney~$U$ test. All four profiles separate from the baseline with large
+effect sizes and statistical significance (Table~\ref{tab:stage2validation}).
+
+\begin{table}[H]
+\centering
+\caption{Stage~2 empirical validation: each profile's defining behaviour vs.\
+the Generalist baseline (validation sample, five players per profile).}
+\label{tab:stage2validation}
+\begin{tabular}{llrrr}
+\toprule
+\textbf{Profile} & \textbf{Defining metric} & \textbf{Ratio} & \textbf{Cohen's $d$} & \textbf{$p$-value} \\
+\midrule
+Fighter          & penalty\_double\_rate & $\times1.31$ & 2.13 & 0.016 \\
+Insurance Player & partscore\_rate       & $\times1.24$ & 3.30 & 0.004 \\
+Slam Hunter      & slam\_rate            & $\times1.37$ & 2.81 & 0.004 \\
+NT Specialist    & nt\_rate              & $\times1.27$ & 4.62 & 0.004 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Cohen's $d \ge 0.8$ is conventionally ``large'' and $d \ge 2.0$ ``very large'';
+all four profiles clear $d = 2.0$ and all are significant at $p < 0.05$. (These
+ratios use the five-player validation sample and so differ slightly from the
+full-population ratios in Table~\ref{tab:profiles}; both tell the same story.) A
+second independent review by a bridge-domain expert confirmed the result with
+the verdict ``proceed to Stage~3''. The human-readable profile names are
+\emph{Slam Hunter}, \emph{Insurance Player}, \emph{Fighter}, and
+\emph{NT Specialist}.
+
+\subsection*{Methodological note}
+The Fighter metric was initially measured per call (doubles $\div$ total calls),
+which gave a weak, overlapping signal and was rejected on expert review.
+Switching to the Stage-1-aligned per-board metric (boards with at least one
+double $\div$ boards with bidding) produced the clean $\times1.31$ separation
+above. The validation denominator must match the clustering denominator
+exactly, or a genuine profile can appear spurious.
+
+\subsection*{Visual summary}
+Figure~\ref{fig:stage2viz} presents the validation visually: each profile spikes
+on its own defining metric (panel a), the per-profile ``fingerprint'' heatmap
+shows the selected axis plus coherent side-behaviours we did \emph{not} select
+for (panel b), and the population splits into a dense Generalist continuum with
+the four profiles forming the behavioural tails (panel c).
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.86\textwidth]{../docs/images/supervisor_box_defining_metrics.png}\\[2pt]
+{\small (a) Each profile spikes on its defining metric.}\par\medskip
+\includegraphics[width=0.86\textwidth]{../docs/images/supervisor_heatmap_fingerprint.png}\\[2pt]
+{\small (b) Per-profile behavioural fingerprint ($z$-scores vs.\ the population).}\par\medskip
+\includegraphics[width=0.86\textwidth]{../docs/images/supervisor_population_breakdown.png}\\[2pt]
+{\small (c) Population breakdown and defining-metric ratios.}
+\caption{Stage~2 validation visualised (563 players). Generated by
+\texttt{notebooks/visualize\_for\_supervisor.py}.}
+\label{fig:stage2viz}
+\end{figure}
 
 \section{Stage 3 -- Agent Construction}
 
