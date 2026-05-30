@@ -296,7 +296,7 @@
 
 ---
 
-# 📅 SESSION 5 — Stage 3: Agent Construction  ← IN PROGRESS (May 30, 2026)
+# 📅 SESSION 5 — Stage 3: Agent Construction  ✅ COMPLETE (May 30, 2026)
 **Date:** May 30, 2026
 **Duration:** ~3 hours
 **Goal:** 4 working LLM agents (+ Generalist baseline) with valid behavior.
@@ -693,7 +693,7 @@ Items that came up but aren't actionable now.
 |--------|----------|--------|------------|-------|
 | Sprint 1 | 1-2 | ✅ DONE | 100% | Repo, setup, PRD, LaTeX reports |
 | Sprint 2 | 3-4 | ✅ DONE | 100% | Session 3 ✅ (Stage 1) — Session 4 ✅ (Stage 2, all 4 profiles validated) |
-| Sprint 3 | 5-6 | 🔲 TODO | 0% | Stage 3 — agent construction (NEXT) |
+| Sprint 3 | 5-6 | 🟡 WIP | 50% | Session 5 ✅ (Stage 3 agents complete) — Session 6 next (Stage 4 simulation) |
 | Sprint 4 | 7-8 | 🔲 TODO | 0% | — |
 | Sprint 5 | 9-10 | 🔲 TODO | 0% | — |
 
