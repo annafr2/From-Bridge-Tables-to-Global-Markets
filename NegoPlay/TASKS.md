@@ -317,6 +317,19 @@
   - Synthesises an empty Generalist baseline (control agent)
   - **Tests:** `tests/test_prompts.py` — 12 pure unit tests passing (no API)
 
+- [x] ✅ **`src/stage3_agents/bridge_agent.py`**
+  - `BridgeAgent.make_bid(hand, auction)` → returns legal call + reasoning
+  - Local auction-legality check (no LLM); illegal bid falls back to Pass
+  - **Tests:** `tests/test_bridge_agent.py` — 22 tests passing (mocked LLM)
+- [x] ✅ **`src/sdk.py` orchestration** *(extended in motion)*
+  - `build_bridge_agent(profile)` + `build_bridge_agents()` — all agents go
+    through the single SDK contract (Dr. Segal methodology)
+- [x] ✅ **Sanity check** (`experiments/sanity_bridge_agents.py`) — FIRST real LLM call
+  - Same 20-HCP hand through all 5 agents → 4 distinct bids
+  - Slam Hunter **4C** (splinter, slam drive) / Fighter **2NT** (Jacoby) /
+    NT Specialist & Generalist **3NT** / Insurance **4S** (safe game)
+  - Personality visibly changes the bid. Cost: $0.0018
+
 - [ ] 🔲 **`src/stage3_agents/bridge_agent.py`**
   - Class: `BridgeAgent(BaseAgent)`
   - Method: `make_bid(hand, auction_so_far) → str`

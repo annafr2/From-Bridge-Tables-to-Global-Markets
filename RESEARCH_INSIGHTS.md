@@ -1,6 +1,6 @@
 # RESEARCH_INSIGHTS.md — Empirical Questions We Can Now Answer
 
-**Last updated:** 2026-05-30 — Added Q7.7 (Stage 2: LLM-extracted profiles empirically validated — all 4 behaviourally distinct, Cohen's d 2.13–4.62, all p<0.05). Previously: Q7.4 (bridge expert validation caveats), Q7.5 (v2.0→v2.1 revision methodology), Q7.6 (Dr. Rami's preprocessing audit — continuum confirmed across 5 algorithms)
+**Last updated:** 2026-05-30 — Added Q7.8 (Stage 3 sanity: personality changes bidding). Earlier today: Q7.7 (Stage 2: LLM-extracted profiles empirically validated — all 4 behaviourally distinct, Cohen's d 2.13–4.62, all p<0.05). Previously: Q7.4 (bridge expert validation caveats), Q7.5 (v2.0→v2.1 revision methodology), Q7.6 (Dr. Rami's preprocessing audit — continuum confirmed across 5 algorithms)
 **Status of data:** **149,208 rows** × 48 columns, 5 EBL competitions (2016–2025), individual player names per position
 
 This file is a living research notebook. Each section = one empirically testable question,
@@ -802,6 +802,37 @@ clustering of skill names (`NegoPlay/src/stage2_skills/aggregator.py`), with the
 merge threshold tuned to 0.40. At 0.30 unrelated skills falsely merged
 (e.g. "control bidding" with "competitive overcalling"); 0.40 gives clean,
 conservative clusters and fixed the NT Specialist returning zero skills.
+
+---
+
+### Q7.8 — Stage 3: Personality Visibly Changes Bidding (sanity check, May 2026)
+
+> First real LLM call of Stage 3. NOT a hypothesis test — a wiring check that
+> the profile system prompts actually steer behaviour.
+
+**What we did:** Built five bridge agents (4 profiles + Generalist baseline),
+each conditioned on its Stage 2 extracted skills, and gave all five the SAME
+hand (S:AKQ72 H:AK4 D:A83 C:Q2 — 20 HCP) after partner opened 1S.
+
+**Result — FOUR distinct bids from one hand:**
+
+| Agent | Bid | Behaviour (from its own reasoning) |
+|-------|-----|-------------------------------------|
+| Slam Hunter | 4C | aggressive splinter, singleton + slam interest |
+| Fighter | 2NT | Jacoby 2NT, game-forcing, exploring slam |
+| NT Specialist | 3NT | prioritises NT despite the major fit |
+| Generalist | 3NT | standard 3NT rebid, no slam push |
+| Insurance Player | 4S | signs off in safe game, declines slam |
+
+**Why it matters:** Each agent's bid matches its profile's logic — the Slam
+Hunter and Fighter explore slam (splinter / Jacoby), the NT Specialist insists
+on NT, and the Insurance Player deliberately stops in a safe 4S game. These
+behaviours emerge from skills extracted from REAL hands, not from us writing
+"be aggressive". Preliminary evidence the agents are faithful to their profiles
+before any large-scale Stage 4 simulation. Cost: $0.0018 for all five calls.
+
+**Caveat:** n=1 hand. This only shows the mechanism works; per-profile bidding
+distributions over many hands come in Stage 4.
 
 ---
 
