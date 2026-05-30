@@ -41,8 +41,10 @@ logger = logging.getLogger(__name__)
 
 # ── Semantic similarity threshold ─────────────────────────────────────────────
 # Skill names with cosine similarity >= this value are merged into one cluster.
-# 0.30 is intentionally low — bridge skill names are short phrases and TF-IDF
-# underestimates similarity. Tune up if you see false merges.
+# Raised to 0.40 (from 0.30) after observing false merges at the lower value
+# (e.g. "control bidding" wrongly merged with "competitive overcalling").
+# 0.40 gives cleaner, more conservative clusters. Lower it if real synonyms
+# stop merging; raise it if you see unrelated skills collapsing together.
 _SEMANTIC_THRESHOLD = 0.40
 
 
@@ -151,7 +153,7 @@ def _semantic_cluster_names(
 
     Args:
         names:     List of *normalized* skill names.
-        threshold: Cosine-similarity cutoff for merging (default 0.30).
+        threshold: Cosine-similarity cutoff for merging (default 0.40).
 
     Returns:
         Dict mapping each input name to its cluster representative.
