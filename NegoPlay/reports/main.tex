@@ -480,12 +480,21 @@ the four profiles forming the behavioural tails (panel c).
 
 \section{Stage 3 -- Agent Construction}
 
-Each profile becomes an LLM agent through a structured system prompt that contains: identity (profile name), 5--7 traits, domain context (bridge \textit{or} negotiation), output schema (JSON), and 1--2 few-shot examples. Two agent classes are implemented:
+Each profile becomes an LLM agent through a structured system prompt (``character card'') that contains: identity (profile name), the 5--7 skills extracted in Stage~2, domain rules (bridge \textit{or} negotiation), a strict JSON output schema, and one few-shot example. Crucially, the skills injected are the \emph{bridge-derived} ones from Stage~2 (e.g.\ ``Aggressive Penalty Doubling''), never hand-written personality words such as ``be aggressive''. This is the anti-tautology safeguard: any cross-domain alignment measured in Stage~4 must \emph{emerge} from bridge behaviour rather than from a personality label we supplied.
 
+\subsection*{Architecture}
+A shared abstract \texttt{BaseAgent} holds the profile signature, the LLM client, and a single decision choke-point \texttt{\_decide()} through which every call passes (centralising cost logging, JSON parsing, and retries). Two concrete agents inherit from it:
 \begin{itemize}[leftmargin=*]
-    \item \texttt{BridgeAgent.make\_bid(hand, auction)} -- returns a valid bridge bid.
-    \item \texttt{NegotiationAgent.respond\_to\_offer(scenario, history, offer)} -- returns a counter-offer plus reasoning.
+    \item \texttt{BridgeAgent.make\_bid(hand, auction)} -- returns a legal call (contract bid, \texttt{Pass}, \texttt{X}, or \texttt{XX}) plus one-line reasoning. A local Laws-of-Bridge legality check runs with no LLM; an illegal call is replaced by \texttt{Pass} (the guardrail against hallucinated bids).
+    \item \texttt{NegotiationAgent.respond\_to\_offer(scenario, offer, history)} -- returns an action (\texttt{counter}/\texttt{accept}/\texttt{walk\_away}), a numeric offer clamped to the scenario's legal range, a \texttt{willing\_to\_close} flag, and reasoning.
 \end{itemize}
+All construction is routed through the SDK (\texttt{build\_bridge\_agents()}, \texttt{build\_nego\_agents()}), honouring the single-entry-point methodology. Agents share one LLM client so cost is budget-capped across a whole game.
+
+\subsection*{Reproducibility and the determinism finding}
+Bridge agents run at temperature~$0$ and negotiation agents at $0.7$. A controlled test revealed that Gemini~2.5~Flash is \textbf{not deterministic even at temperature~0} (a known consequence of parallel GPU execution): the same hand can yield different bids across runs. The reproducibility strategy is therefore \emph{sample-level}, not \emph{call-level}: every raw output is persisted to JSON, and Stage~4 reports distributions over many hands/scenarios rather than single decisions. This is itself a methodological note for LLM-agent research.
+
+\subsection*{Sanity validation}
+Two small real-LLM checks (saved under \texttt{experiments/}) confirm the wiring and that personality is visible before scaling up. On one 20-HCP hand the five agents produced three to four distinct calls, with the Slam Hunter driving toward slam and the Insurance Player signing off in game; on one M\&A scenario the two safety/cooperative profiles (Insurance, Generalist) were the only ones willing to close while the aggressive/analytic profiles held out for a better price. A bridge-expert review confirmed the profile \emph{directions} were correct and flagged bridge-mechanics errors (a splinter named on a doubleton, an under-strength 1NT overcall, opener/responder seat confusion) and bridge-vocabulary leakage into the business reasoning. Both were fixed by adding convention-correctness, seat-awareness, and card-counting rules to the bridge card and a language constraint to the negotiation card; a re-run eliminated the flagged errors and the vocabulary leakage.
 
 \section{Stage 4 -- Dual Simulation and Alignment}
 
