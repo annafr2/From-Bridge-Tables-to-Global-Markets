@@ -296,19 +296,26 @@
 
 ---
 
-# 📅 SESSION 5 — Stage 3: Agent Construction
-**Date:** _[fill in]_
+# 📅 SESSION 5 — Stage 3: Agent Construction  ← IN PROGRESS (May 30, 2026)
+**Date:** May 30, 2026
 **Duration:** ~3 hours
-**Goal:** 4 working LLM agents with valid behavior.
+**Goal:** 4 working LLM agents (+ Generalist baseline) with valid behavior.
+
+> **Approach:** building step-by-step (skeleton → bridge agent → sanity check →
+> negotiation agent), verifying each piece before the next.
 
 ### Tasks
 
-- [ ] 🔲 **`src/stage3_agents/base_agent.py`**
-  - Abstract class: `BaseAgent`
-  - Methods: `respond(context) → Response`
-  - Properties: `profile_name`, `skills`, `system_prompt`
-  - Uses `GeminiClient` from shared
-  - **Tests:** Interface compliance
+- [x] ✅ **`src/stage3_agents/base_agent.py`**
+  - Abstract class: `BaseAgent` with a single `_decide()` LLM choke-point
+    (cost logging, JSON parsing, retries all in one place)
+  - Properties: `profile`, `signature`, `client`, `temperature`, `system_prompt`
+  - LLMClient can be shared across agents (one budget log per game)
+- [x] ✅ **`src/shared/prompts.py`** *(built alongside base_agent)*
+  - Builds bridge + negotiation system prompts ("character cards") from Stage 2
+    skill signatures; injects REAL extracted skills (anti-tautology rule)
+  - Synthesises an empty Generalist baseline (control agent)
+  - **Tests:** `tests/test_prompts.py` — 12 pure unit tests passing (no API)
 
 - [ ] 🔲 **`src/stage3_agents/bridge_agent.py`**
   - Class: `BridgeAgent(BaseAgent)`
