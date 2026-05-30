@@ -343,10 +343,12 @@
     falls back to walk_away
   - SDK: `build_nego_agent()` / `build_nego_agents()` (temperature 0.7)
   - **Tests:** `tests/test_nego_agent.py` — 11 tests passing (mocked LLM)
-  - **Sanity** (`experiments/sanity_nego_agents.py`): same $13M opening offer
-    → Slam Hunter $10.5M (bold) / Fighter $8.5M (hard) / Insurance & NT $9M
-    (fair/data) / Generalist $10M. Bridge personality visibly transfers to
-    negotiation. Cost $0.0055. See RESEARCH_INSIGHTS Q7.9.
+  - **Sanity** (`experiments/sanity_nego_agents.py`): same $13M opening offer →
+    Insurance & Generalist willing to CLOSE ($8M/$9M), the three aggressive/
+    analytic profiles hold out ($7.5M, no close). Personality shows mainly in
+    close-vs-hold-out. See RESEARCH_INSIGHTS Q7.9.
+  - **Fixed:** offer JSON schema needed an explicit `price_musd` property —
+    Gemini returned empty offers for a bare `{"type":"object"}`. Now populated.
 
 - [ ] 🔲 **`src/shared/prompts.py`**
   - Centralized prompt templates
