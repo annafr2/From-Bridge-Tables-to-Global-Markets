@@ -358,15 +358,20 @@ def test_<unit>_<scenario>_<expected>():
 - Smoke test for each agent (one Gemini call each)
 - E2E test that runs 1 bridge game (mocked Gemini)
 
-### Mocking Gemini
+### Mocking the LLM
+Mock the shared `LLMClient` (not a provider SDK) — inject a mock client into the
+object under test. This is how `test_bridge_validator.py` and the Stage 3 agent
+tests work, with no API key or network.
 ```python
-from unittest.mock import patch, MagicMock
+from unittest.mock import MagicMock
 
-@patch("google.generativeai.GenerativeModel")
-def test_skill_extractor(mock_model):
-    mock_response = MagicMock()
-    mock_response.text = '{"skills": ["aggressive", "risk-taking"]}'
-    mock_model.return_value.generate_content.return_value = mock_response
+def test_skill_extractor():
+    client = MagicMock()
+    resp = MagicMock()
+    resp.json = {"skills": ["aggressive", "risk-taking"]}
+    resp.text = '{"skills": ["aggressive", "risk-taking"]}'
+    client.generate.return_value = resp
+    # inject: BridgeValidator(client=client)
     # ... test logic
 ```
 
