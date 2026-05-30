@@ -881,26 +881,37 @@ skills (no new personality — the anti-tautology rule), and gave all five the
 SAME opening offer in an M&A scenario: buying a SaaS startup, fair value ≈ $9M,
 the agent is the buyer, seller opens at $13M.
 
-**Result — the bridge styles map cleanly onto bargaining:**
+**Result — the behavioural split shows in *whether they close*, more than in the
+counter price** (buyer; fair ≈ $9M; seller opened $13M):
 
-| Profile (bridge style) | Counter | Behaviour in negotiation |
-|------------------------|---------|--------------------------|
-| Slam Hunter (bold) | $10.5M | highest counter — "aggressive jump, seize initiative" |
-| Generalist (baseline) | $10.0M | middle-of-road, "leave room to negotiate" |
-| Insurance Player (safe) | $9.0M | "fair, secure deal over aggressive bidding" |
-| NT Specialist (analytical) | $9.0M | "precisely anchored to the $9M valuation, data-driven" |
-| Fighter (combative) | $8.5M | hardest line — "this price is not serious", anchors low |
+| Profile (bridge style) | Counter | Willing to close? | Reasoning gist |
+|------------------------|---------|-------------------|----------------|
+| Generalist (baseline) | $9.0M | **yes** | "standard counter at fair valuation" |
+| Insurance Player (safe) | $8.0M | **yes** | "sure small gain over a risky large one" |
+| Slam Hunter (bold) | $7.5M | no | "aggressive bid, set the stage for a big deal" |
+| Fighter (combative) | $7.5M | no | "their bid is an overreach; anchor hard" |
+| NT Specialist (analytical) | $7.5M | no | "establish our preferred contract early" |
 
-**Why it matters:** This is exactly the cross-domain pattern the thesis
-predicts. The Slam Hunter opens boldest (closest to seller, confident of closing
-big), the Fighter counters hardest/lowest (combative), the NT Specialist anchors
-to data, the Insurance Player seeks a safe fair deal — and these come from
-skills extracted from REAL bridge hands, not from personality labels. The spread
-($8.5M–$10.5M from one offer) shows personality drives the bargaining stance.
+**Why it matters:** The cross-domain personality is visible — the two
+safety/cooperative profiles (Insurance, Generalist) are the **only ones willing
+to close**, while the three aggressive/analytic profiles hold out for a better
+price. This split flows from skills extracted from REAL bridge hands, not from
+personality labels.
 
-**Caveat:** n=1 scenario, single turn. Whether bridge *winners* are also
-negotiation *winners* (the actual ≥70% alignment hypothesis) is the Stage 4
-experiment over many sessions. Cost: $0.0055 for five negotiation turns.
+**Honest caveats (this is a sanity check, not a result):**
+1. **Weaker price separation than hoped:** three profiles all countered $7.5M
+   (the schema fix landed them on the same anchor). The *close/no-close* signal
+   separated them better than the price did. Stage 4 must measure richer
+   outcomes (final agreed price, who walked, surplus captured) over many
+   sessions, not a single counter.
+2. **Non-determinism:** an earlier run of this same scenario gave a different
+   spread ($7.5M–$10M). Same caveat as Q7.8 — report distributions, not single
+   turns.
+3. **Bridge-vocabulary leakage:** some reasonings still use bridge terms in the
+   business context ("penalty double", "NT overcall", "partscore"). Numeric
+   behaviour is right; the framing needs prompt polish. Tracked as deferred.
+
+n=1 scenario, single turn — the real ≥70% alignment test is Stage 4.
 
 ---
 

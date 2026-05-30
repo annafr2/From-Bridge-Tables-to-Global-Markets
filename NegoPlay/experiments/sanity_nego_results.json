@@ -26,43 +26,53 @@
     {
       "profile": "Slam Hunter",
       "action": "counter",
-      "offer": {},
+      "offer": {
+        "price_musd": 7.5
+      },
       "willing_to_close": false,
-      "reasoning": "I make a bold splinter bid to explore the maximum potential of this deal, aiming for the biggest swing.",
+      "reasoning": "I initiate slam exploration with an aggressive bid, signaling my strong interest and setting the stage for a big deal.",
       "valid": true
     },
     {
       "profile": "Insurance Player",
       "action": "counter",
-      "offer": {},
+      "offer": {
+        "price_musd": 8.0
+      },
       "willing_to_close": true,
-      "reasoning": "I prefer a safe and reasonable deal, so I'm offering a fair value to secure a quick agreement.",
+      "reasoning": "I prefer a sure small gain over a risky large one, and this offer secures a safe partscore.",
       "valid": true
     },
     {
       "profile": "Fighter",
       "action": "counter",
-      "offer": {},
+      "offer": {
+        "price_musd": 7.5
+      },
       "willing_to_close": false,
-      "reasoning": "Their initial bid is an overreach; I'm making an aggressive counter to punish their high valuation and assert control.",
+      "reasoning": "Their opening bid is an overreach; I'm making a strong penalty double to anchor the negotiation and maximize my score.",
       "valid": true
     },
     {
       "profile": "NT Specialist",
       "action": "counter",
-      "offer": {},
+      "offer": {
+        "price_musd": 7.5
+      },
       "willing_to_close": false,
-      "reasoning": "I'm making a confident counter to steer the deal towards a balanced, favorable NT contract.",
+      "reasoning": "Aggressively establishing our preferred balanced contract early, much like an NT overcall, to find a stable deal.",
       "valid": true
     },
     {
       "profile": "Generalist",
       "action": "counter",
-      "offer": {},
-      "willing_to_close": false,
-      "reasoning": "A standard counter to establish a reasonable negotiating range based on fair value.",
+      "offer": {
+        "price_musd": 9.0
+      },
+      "willing_to_close": true,
+      "reasoning": "A standard counter-offer based on fair valuation, setting a reasonable baseline for negotiation.",
       "valid": true
     }
   ],
-  "total_cost_usd": 0.254101
+  "total_cost_usd": 0.255917
 }

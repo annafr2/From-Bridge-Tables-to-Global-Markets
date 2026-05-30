@@ -37,15 +37,28 @@ logger = logging.getLogger(__name__)
 VALID_ACTIONS = {"counter", "accept", "walk_away"}
 
 # JSON schema the LLM must fill.
+#
+# NOTE: `offer` is modelled as a flat object whose numeric terms are declared
+# explicitly. Gemini's structured-output mode returns an EMPTY object for a
+# bare {"type": "object"} with no declared properties — so we must name the
+# term we expect back. This schema covers the single-term scenarios used in
+# Stage 3/4 (price_musd); extend `offer.properties` when richer scenarios are
+# added. A free-form fallback (`offer_terms` as a JSON string) is also provided
+# so multi-term offers are never silently dropped.
 NEGO_RESPONSE_SCHEMA: dict = {
     "type": "object",
     "properties": {
         "action": {"type": "string", "enum": ["counter", "accept", "walk_away"]},
-        "offer": {"type": "object"},
+        "offer": {
+            "type": "object",
+            "properties": {
+                "price_musd": {"type": "number"},
+            },
+        },
         "willing_to_close": {"type": "boolean"},
         "reasoning": {"type": "string"},
     },
-    "required": ["action", "willing_to_close", "reasoning"],
+    "required": ["action", "offer", "willing_to_close", "reasoning"],
 }
 
 
