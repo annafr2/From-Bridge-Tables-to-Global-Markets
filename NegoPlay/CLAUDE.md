@@ -86,7 +86,7 @@ gensim         # Word2Vec
 shap           # XAI for cluster explanation
 
 # LLM providers (Gemini = default; others available when justified)
-google-generativeai  # Gemini Flash 2.0 / Pro — default
+google-genai         # Gemini Flash 2.0 / Pro — default (modern SDK)
 anthropic            # Claude — for cross-validation or quality tasks
 openai               # OpenAI — for cross-validation or quality tasks
 
