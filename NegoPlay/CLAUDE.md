@@ -293,10 +293,11 @@ validation or quality-critical tasks. All calls go through
 
 ### Standard Gemini call pattern
 
-> ⚠️ **Deprecation warning (May 2026):** `google-generativeai` is deprecated.
-> New code must use `google-genai` (`from google import genai`).
-> Existing code in `bridge_validator.py` uses the old package — migrate when
-> building `llm_client.py`.
+> ⚠️ **Deprecation note (resolved May 2026):** `google-generativeai` is
+> deprecated and has been REMOVED from requirements.txt. All code now uses
+> `google-genai` (`from google import genai`). `bridge_validator.py` was
+> migrated to route through the shared `LLMClient`. New code must use
+> `google-genai` only.
 
 ```python
 # NEW pattern (google-genai)
