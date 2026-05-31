@@ -86,7 +86,7 @@ After building 15 behavioural features per player from 149K boards, we identifie
 
 **Two key findings:**
 
-1. **Continuum, not clusters.** K-Means, HDBSCAN, and GMM all failed (best silhouette = 0.15). Elite players form a statistical continuum, not discrete groups. The extreme-percentile approach identifies the behavioural tails of this continuum.
+1. **Continuum, not clusters.** K-Means, HDBSCAN, and GMM all failed (best silhouette = **0.24**, across 5 preprocessing configurations; a real cluster structure needs ≥ 0.5). Elite players form a statistical continuum, not discrete groups. The extreme-percentile approach identifies the behavioural tails of this continuum. (See the two diagnostic charts below for *why* clustering fails.)
 
 2. **Sample size matters (added May 2026 after expert review).** An earlier version of this pipeline used `min_boards=20` and reported 64 Slam Hunters with a 2.8× ratio. Expert bridge advisor Nezer (PhD supervisor) noted that 20 declared boards is too few to estimate rare-event rates like slam (≈4% baseline) — small samples produce false positives. The revised pipeline:
    - Raises minimum to **≥50 declared boards AND ≥50 bidding boards**
@@ -114,6 +114,46 @@ Simple caption: This star-shaped chart shows a player's strengths. Each spoke is
 ![Feature bars](docs/images/feature_bars.png)
 
 Simple caption: This picture shows bars of different heights for different features. Taller bars mean more of that trait, like taller blocks showing more of something.
+
+---
+
+### 🔍 Why clustering (K-Means) did NOT work — the evidence
+
+We *tried* to find neat groups with K-Means, HDBSCAN, and GMM. They failed —
+and that failure is itself a finding. These two charts show **why**.
+
+**Chart A — The Scree Plot (the statistician's proof)**
+
+![PCA scree plot](docs/images/pca_variance.png)
+
+Plain English: each bar is how much "spread" one direction in the data explains.
+When real clusters exist, **one or two bars dominate** (a tall bar then a cliff).
+Here the bars **fade gradually** — 24.6%, 19.1%, 13.5%, 10.4%, ... with **no
+dominant component and no cliff**. That smooth decay is the classic signature of
+data with **no cluster structure** — it's one continuous cloud, not separate
+blobs. (For a statistician: absence of a dominant eigenvalue → no low-rank
+group structure.)
+
+**Chart B — The t-SNE Map (the intuitive picture)**
+
+![t-SNE scatter](docs/images/tsne_scatter.png)
+
+Plain English: this squeezes every player onto a 2-D map; similar players land
+near each other. The grey "average" players (Generalist) fill the whole middle,
+and the coloured profiles sit at the **edges with no clean borders** — they
+blend into the cloud rather than forming islands.
+
+> ⚠️ **Important caveat (written on the chart):** t-SNE *always* produces
+> visual blobs, even from data with no real clusters — so it is **for intuition
+> only, not proof**. The real test is the silhouette score (0.24, far below the
+> 0.5 needed) and HDBSCAN finding **zero** natural clusters. Both agree: a
+> continuum, not clusters.
+
+**The bottom line:** more aggressive preprocessing made K-Means *worse*, not
+better — because it removed, as "outliers", exactly the extreme players we want
+to study. So we switched to **extreme-percentile profiling**: instead of cutting
+a continuum into fake groups, we identify the genuine *tails* of each behaviour
+axis and confirm each with a significance test.
 
 ---
 

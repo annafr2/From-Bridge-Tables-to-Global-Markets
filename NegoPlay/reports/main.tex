@@ -583,8 +583,8 @@ NegoPlay is a four-stage hybrid pipeline (ML $\rightarrow$ LLM $\rightarrow$ LLM
 \node[data] (raw) {Raw CSV\\149{,}208 rows};
 \node[stagedone, right=of raw] (s1) {Stage 1\\Profile\\Discovery};
 \node[stagenext, right=of s1] (s2) {Stage 2\\Skill\\Extraction};
-\node[stagefuture, right=of s2] (s3) {Stage 3\\Agent\\Construction};
-\node[stagefuture, right=of s3] (s4) {Stage 4\\Dual\\Simulation};
+\node[stagedone, right=of s2] (s3) {Stage 3\\Agent\\Construction};
+\node[stagenext, right=of s3] (s4) {Stage 4\\Dual\\Simulation};
 \node[stagefuture, right=of s4] (s5) {Stage 5\\Alignment\\(Spearman $\rho$)};
 
 % Row 2 - artefacts
@@ -615,7 +615,7 @@ NegoPlay is a four-stage hybrid pipeline (ML $\rightarrow$ LLM $\rightarrow$ LLM
 \node[right=0.3cm of l3, font=\scriptsize] {legend};
 
 \end{tikzpicture}}
-\caption{NegoPlay system architecture. Solid arrows: information flow between stages. Dashed arrows: persisted artefacts on disk. Stage~1 is complete; Stage~2 is next; Stages~3--5 are planned.}
+\caption{NegoPlay system architecture. Solid arrows: information flow between stages. Dashed arrows: persisted artefacts on disk. Stages~1--3 are complete; Stage~4 (dual simulation) is the current focus; Stage~5 (alignment) is planned.}
 \label{fig:sys_arch_tikz}
 \end{figure}
 
