@@ -53,13 +53,16 @@ Each feature is **one number per player**, describing one behaviour. We built
 | `penalty_double_rate` | how often they double opponents to punish them |
 | `avg_bids_per_board` | how many calls they make per deal |
 
-### What actually went into K-Means: **8 features**
+### What actually went into the model: **8 features**
 
 We dropped **2** features because they were almost the same for everybody
 (they don't separate players — "low variance"):
 
 - ❌ `avg_level` (everyone averages ~3.3)
 - ❌ `avg_bids_per_board`
+
+So **8 features** were used — first tried with K-Means (which failed), then
+with the extreme-percentile method that actually worked (see Section 4).
 
 So **8 features** entered the clustering.
 
@@ -94,11 +97,21 @@ The whole thesis is two `y = f(x)` steps chained together.
 
 ```
 x = how a player bids        (the 8 features)
-f = the clustering model      (extreme-percentile + significance test)
+f = extreme-percentile + binomial test    (NOT K-Means — see note below)
 y = which behaviour type      (Slam Hunter / Insurance / Fighter / NT / Generalist)
 ```
 
 In words: *"From how you bid, we figure out what kind of decision-maker you are."*
+
+> ⚠️ **Important — why `f` is NOT K-Means.** We first *tried* K-Means (and
+> HDBSCAN, and GMM) to find groups. **They failed** — the players form one
+> smooth continuum, not separate clusters (best silhouette only 0.24; a real
+> cluster structure needs ≥ 0.5). That failure is itself a finding. So the `f`
+> we actually use is **extreme-percentile profiling**: instead of cutting the
+> cloud into fake groups, we take the top ~10% on each behaviour axis and
+> confirm each one with a binomial significance test (p < 0.05). K-Means is part
+> of the *story* (we tried it, it failed), but it is **not** the function that
+> produces `y`.
 
 ### Level 2 — from bridge to business (the real research question ⏳)
 
