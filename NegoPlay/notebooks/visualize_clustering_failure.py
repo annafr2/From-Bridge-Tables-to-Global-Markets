@@ -25,8 +25,14 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from sklearn.cluster import KMeans
+from sklearn.decomposition import PCA
 from sklearn.metrics import silhouette_score
 from sklearn.preprocessing import StandardScaler
+
+# Match the documented V2 config (main.tex §Silhouette): 8 features ->
+# StandardScaler -> PCA(3) -> K-Means. This is the config that reaches the
+# 0.24 best silhouette quoted everywhere else, so the figure stays consistent.
+N_PCA_COMPONENTS = 3
 
 PROFILES_CSV = Path("data/processed/player_profiles.csv")
 OUT_DIR = Path("docs/images")
@@ -104,7 +110,10 @@ def fig_features(df: pd.DataFrame) -> Path:
 def fig_kmeans_fails(df: pd.DataFrame) -> Path:
     """Run K-Means for k=2..6 on the real 8 features; plot silhouette scores.
     All stay far below the 0.5 'real clusters' line — the failure, quantified."""
-    X = StandardScaler().fit_transform(df[FEATURE_COLS].fillna(0).values)
+    # V2 config: standardise the 8 features, then reduce to 3 PCA components,
+    # then cluster. This is the documented config whose best silhouette is 0.24.
+    X_scaled = StandardScaler().fit_transform(df[FEATURE_COLS].fillna(0).values)
+    X = PCA(n_components=N_PCA_COMPONENTS, random_state=SEED).fit_transform(X_scaled)
     ks = list(range(2, 7))
     sils = []
     for k in ks:
@@ -128,11 +137,9 @@ def fig_kmeans_fails(df: pd.DataFrame) -> Path:
                  fontweight="bold")
     ax.legend(loc="upper right")
     ax.grid(alpha=0.3)
-    # Note: this run uses the 8 raw features (no PCA) -> ~0.13. The audit's best
-    # config (8 features + PCA to 3 dims) reached 0.24 — still far below 0.5.
     ax.text(0.5, -0.16,
-            "Computed on the 8 raw features (no PCA). The best of 5 preprocessing "
-            "configs (with PCA) reached only 0.24 — still well below 0.5.",
+            "Config: 8 features → StandardScaler → PCA(3) → K-Means (the documented "
+            "best of 5 preprocessing configs). Peak silhouette 0.24, still well below 0.5.",
             transform=ax.transAxes, ha="center", fontsize=8, color="#555555")
     fig.tight_layout()
     out = OUT_DIR / "clustering_kmeans_fails.png"
