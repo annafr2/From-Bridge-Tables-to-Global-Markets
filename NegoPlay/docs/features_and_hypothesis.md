@@ -62,9 +62,10 @@ We dropped **2** features because they were almost the same for everybody
 - ❌ `avg_bids_per_board`
 
 So **8 features** were used — first tried with K-Means (which failed), then
-with the extreme-percentile method that actually worked (see Section 4).
+with the extreme-percentile method that actually worked (see Sections 4 & 7).
 
-So **8 features** entered the clustering.
+Figure 1 below (Section 7) shows these 8 features sorted by how much they
+separate players.
 
 ---
 
@@ -165,5 +166,72 @@ and predicting negotiation styles, without needing private business data.*
 
 ---
 
+## 7. Visualizations: why K-Means failed and extreme-percentile worked
+
+> All three figures are computed live from the real 563-player data by
+> `notebooks/visualize_clustering_failure.py` — nothing is hand-typed, so the
+> numbers cannot drift from the truth.
+
+### Figure 1 — The 8 features that go into the model
+
+![The 8 clustering features](images/clustering_features.png)
+
+The 8 behaviours we measure per player, sorted by how much they **separate**
+players (coefficient of variation = spread ÷ mean). A tall bar means players
+differ a lot on that behaviour, so it helps tell them apart. These 8 numbers are
+the *only* thing the model sees about each player.
+
+> All 8 shown features are used. A separate variance gate (CV < 0.10) removed
+> **two other** features — `avg_level` and `avg_bids_per_board` — because almost
+> every player scored the same on them.
+
+### Figure 2 — Why K-Means FAILS
+
+![K-Means silhouette across k](images/clustering_kmeans_fails.png)
+
+We ran K-Means asking for 2–6 groups (config: 8 features → StandardScaler →
+PCA(3), the documented best of 5 preprocessing configs). The red line is the
+**silhouette score** — how cleanly separated the groups are:
+
+- silhouette ≥ **0.5** = real, well-separated clusters (green zone)
+- ~0.25 = weak structure
+- ~0.1 = essentially no clusters
+
+Every k peaks at only **0.24** — nowhere near 0.5. No matter how many groups we
+ask for, K-Means cannot find clean ones, because elite players form **one smooth
+cloud (a continuum)**, not separate islands. K-Means is built to find islands;
+with none present it just draws arbitrary lines, and the silhouette stays low.
+
+### Figure 3 — Why extreme-percentile SUCCEEDS
+
+![Extreme-percentile tails](images/clustering_extreme_succeeds.png)
+
+Four mini-charts, one per profile. Grey = the whole population on that profile's
+defining behaviour; coloured bars = that profile's members; dashed line = the
+top-10% cutoff. Instead of forcing the cloud into fake groups, we keep it as-is
+and **name its extreme tails**:
+
+- **Slam Hunter** = top tail of `slam_rate`
+- **Insurance Player** = top tail of `partscore_rate`
+- **Fighter** = top tail of `penalty_double_rate`
+- **NT Specialist** = top tail of `nt_rate`
+
+Each coloured group sits cleanly in the right-hand tail, and every member passes
+a **binomial significance test** (p < 0.05) so the extreme score is real, not a
+small-sample fluke. K-Means asks *"which island is this player on?"* (wrong
+question — no islands); extreme-percentile asks *"is this player in the extreme
+tail of a behaviour?"* (the right question for a continuum).
+
+**One-paragraph summary for the supervisor:** elite bridge players do not split
+into discrete clusters — K-Means, HDBSCAN, and GMM all score silhouette ≤ 0.24,
+far below the 0.5 needed, because the data is a smooth continuum. We therefore
+replaced clustering with extreme-percentile profiling: each profile is the
+statistically significant top tail (top 10%, binomial p < 0.05) of one behaviour
+axis. This is the correct tool for tail-finding in a continuum, and it produced
+the four validated profiles.
+
+---
+
 *Generated as a supervisor-facing reference. Source data: 149,208 EuroBridge
-rows (2016–2025); 563 qualifying players; 8 clustering features.*
+rows (2016–2025); 563 qualifying players; 8 clustering features. Figures:
+`python notebooks/visualize_clustering_failure.py`.*
