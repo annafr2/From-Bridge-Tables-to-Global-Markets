@@ -92,8 +92,52 @@ def load_nego() -> dict:
     return df.to_dict()
 
 
+PROFILE_COLORS = {
+    "Generalist": "#9aa0a6", "Slam Hunter": "#d62728",
+    "Insurance Player": "#1f77b4", "Fighter": "#ff7f0e", "NT Specialist": "#2ca02c",
+}
+SCATTER_PATH = RESULTS_DIR / "alignment_before_after.png"
+
+
 def combined(par: dict, fight: dict, w: float) -> dict:
     return {p: (1 - w) * par[p] + w * fight[p] for p in PROFILES}
+
+
+def make_before_after_scatter(par: dict, fight: dict, nego: dict) -> Path:
+    """Two side-by-side scatters: par-only bridge metric (rho 0.20) vs the
+    fight-aware metric (rho 0.80). Same layout as the original alignment.png so
+    the supervisor can compare them directly."""
+    before = {p: par[p] for p in PROFILES}            # par only
+    after = combined(par, fight, CHOSEN_W)            # fight-aware (w=0.3)
+    rho_b = rho_for(before, nego)[0]
+    rho_a = rho_for(after, nego)[0]
+
+    fig, axes = plt.subplots(1, 2, figsize=(15, 6.5))
+    for ax, bridge, rho, title in [
+        (axes[0], before, rho_b, "BEFORE: par-only bridge metric"),
+        (axes[1], after, rho_a, "AFTER: fight-aware bridge metric (w=0.3)"),
+    ]:
+        for p in PROFILES:
+            ax.scatter(bridge[p], nego[p], s=190, color=PROFILE_COLORS[p],
+                       edgecolors="black", zorder=3)
+            ax.annotate(p, (bridge[p], nego[p]), xytext=(8, 4),
+                        textcoords="offset points", fontsize=10)
+        xs = list(bridge.values()) + list(nego.values())
+        lo, hi = min(xs) - 0.05, max(xs) + 0.05
+        ax.plot([lo, hi], [lo, hi], ls="--", color="gray", alpha=0.6,
+                label="perfect agreement")
+        ax.set_xlabel("Bridge win rate")
+        ax.set_ylabel("Negotiation win rate")
+        ax.set_title(f"{title}\nSpearman ρ = {rho:+.2f}", fontweight="bold")
+        ax.legend(loc="lower right")
+        ax.grid(alpha=0.3)
+
+    fig.suptitle("Correcting the bridge metric pulls the Fighter into line "
+                 "→ the alignment appears", fontsize=14, fontweight="bold")
+    fig.tight_layout(rect=(0, 0, 1, 0.96))
+    fig.savefig(SCATTER_PATH, dpi=150, bbox_inches="tight")
+    plt.close(fig)
+    return SCATTER_PATH
 
 
 def rho_for(bridge: dict, nego: dict, drop_fighter: bool = False) -> tuple[float, float]:
@@ -226,9 +270,11 @@ def main() -> None:
         print(f"  {w:.1f}   |  {ra:+.2f}     | {rnf:+.2f}{mark}")
 
     make_sensitivity_plot(par, fight, nego)
+    make_before_after_scatter(par, fight, nego)
     write_report(par, fight, nego)
     print(f"\nSaved: {REPORT_PATH}")
     print(f"Saved: {PLOT_PATH}")
+    print(f"Saved: {SCATTER_PATH}")
 
 
 if __name__ == "__main__":
