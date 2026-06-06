@@ -289,6 +289,17 @@ Full literature: [`docs/literature.md`](docs/literature.md) (17 papers, NegoPlay
 
 ### Stage 4: Dual Simulation
 
+**Status:** ✅ COMPLETE (June 2026)
+
+**Result:** Full pipeline ran end-to-end. Bridge (4a): 50 deals × 5 profiles × 3
+runs, objective par scoring. Negotiation (4b): 4 scenarios × 5 profiles × 3 runs
+vs a fixed hard-bargaining seller. Alignment (4c): **Spearman ρ = +0.20**
+(p = 0.75), target ≥ 0.70 → **partial/null** (pre-registered as a valid finding).
+The *Fighter* is the outlier dragging ρ down — strong in negotiation but weak in
+the HCP-based bridge proxy that ignores its defining penalty-double skill (the
+bridge-expert predicted this). Outputs: `results/stage4/alignment_report.md`,
+`alignment.png`. See RESEARCH_INSIGHTS Q7.10.
+
 **Description:** Run agents in both bridge auctions and business negotiations; measure alignment.
 
 #### Sub-stage 4a: Bridge Simulation

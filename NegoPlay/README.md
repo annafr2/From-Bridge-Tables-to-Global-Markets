@@ -36,6 +36,18 @@ negotiations using the same strategic pattern.
 This is a **proof-of-concept** in a simulated environment, not validation
 against real negotiation data.
 
+### 🏁 Result (all 4 stages complete, June 2026)
+
+The full pipeline ran end-to-end: 149K hands → 5 profiles → LLM agents → dual
+simulation → alignment. **Cross-domain alignment: Spearman ρ = +0.20** (target
+≥ 0.70) — a **weak/partial positive** result. The **foundation is strong**:
+profile discovery and validation are statistically robust (Cohen's d 2.1–4.6,
+all p < 0.05). The weak transfer is driven by one outlier (the *Fighter*, whose
+defining skill — penalty doubles — is not rewarded by the bridge proxy, exactly
+as the bridge-expert predicted) plus the very low power of n=5 profiles. A
+null/partial result was pre-registered as a valid finding. See
+`docs/features_and_hypothesis.md` §8 and `results/stage4/alignment_report.md`.
+
 ---
 
 ## 🏗️ Architecture
@@ -63,10 +75,10 @@ against real negotiation data.
 └─────────────────────────────────────────────────────────────┘
                             ↓
 ┌─────────────────────────────────────────────────────────────┐
-│  STAGE 4: DUAL SIMULATION + ALIGNMENT           ← NEXT      │
-│  • 50 bridge bidding simulations                            │
-│  • 48 business negotiation simulations (4 scenarios)        │
-│  • Spearman ρ: bridge win rate vs negotiation win rate      │
+│  STAGE 4: DUAL SIMULATION + ALIGNMENT           ✅ DONE     │
+│  • 50 bridge deals × 5 profiles × 3 runs                    │
+│  • 4 negotiation scenarios × 5 profiles × 3 runs            │
+│  • Spearman ρ = +0.20 (partial/null; target ≥ 0.70)         │
 └─────────────────────────────────────────────────────────────┘
 ```
 

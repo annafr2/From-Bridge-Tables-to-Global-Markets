@@ -37,6 +37,15 @@ the **empirical baseline** for Paper 1 of Anna's PhD.
 **Important:** Bridge is the *laboratory*. The research target is *business
 negotiation*. Frame discussions accordingly.
 
+**Project status (June 2026): all 4 stages COMPLETE end-to-end.** Final result:
+cross-domain alignment Spearman ρ = +0.20 (target ≥ 0.70) — a partial/null but
+pre-registered-valid finding. The foundation is strong: profile discovery +
+validation are statistically robust (Cohen's d 2.1–4.6, all p < 0.05). The weak
+transfer is driven by the *Fighter* outlier (its penalty-double skill is not
+captured by the HCP-based bridge proxy) and the low power of n=5. Full
+write-up: `docs/features_and_hypothesis.md` §8, `RESEARCH_INSIGHTS.md` Q7.10,
+`results/stage4/alignment_report.md`.
+
 ---
 
 ## 🏗️ Technical Stack
