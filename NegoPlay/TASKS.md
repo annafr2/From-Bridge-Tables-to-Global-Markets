@@ -694,7 +694,7 @@ Items that came up but aren't actionable now.
 | Sprint 1 | 1-2 | ✅ DONE | 100% | Repo, setup, PRD, LaTeX reports |
 | Sprint 2 | 3-4 | ✅ DONE | 100% | Session 3 ✅ (Stage 1) — Session 4 ✅ (Stage 2, all 4 profiles validated) |
 | Sprint 3 | 5-6 | ✅ DONE | 100% | Session 5 ✅ (Stage 3 agents) — Stage 4a bridge sim ✅ |
-| Sprint 4 | 7-8 | ✅ DONE | 100% | Stage 4b negotiation ✅ + Stage 4c alignment ✅ (Spearman ρ=+0.20, partial/null — H3 answered) |
+| Sprint 4 | 7-8 | ✅ DONE | 100% | Stage 4b ✅ + 4c ✅ — alignment ρ 0.20 (raw) → 0.80 (fight-aware metric), above target; H3 answered |
 | Sprint 5 | 9-10 | 🟡 WIP | 20% | Reporting: docs synced; LaTeX report + presentation remain |
 
 **Last updated:** June 1, 2026

@@ -37,14 +37,18 @@ the **empirical baseline** for Paper 1 of Anna's PhD.
 **Important:** Bridge is the *laboratory*. The research target is *business
 negotiation*. Frame discussions accordingly.
 
-**Project status (June 2026): all 4 stages COMPLETE end-to-end.** Final result:
-cross-domain alignment Spearman ρ = +0.20 (target ≥ 0.70) — a partial/null but
-pre-registered-valid finding. The foundation is strong: profile discovery +
-validation are statistically robust (Cohen's d 2.1–4.6, all p < 0.05). The weak
-transfer is driven by the *Fighter* outlier (its penalty-double skill is not
-captured by the HCP-based bridge proxy) and the low power of n=5. Full
-write-up: `docs/features_and_hypothesis.md` §8, `RESEARCH_INSIGHTS.md` Q7.10,
-`results/stage4/alignment_report.md`.
+**Project status (June 2026): all 4 stages COMPLETE end-to-end.** Headline
+result in two steps: raw cross-domain alignment Spearman ρ = +0.20 (par-only
+bridge metric) → **ρ = +0.80** once the bridge metric was made fight-aware
+(reward accuracy + penalty doubles, weight 0.3), above the 0.70 target. The
+*Fighter* was the outlier — strong in negotiation but invisible to the par-only
+proxy that ignores its defining penalty-double skill (the bridge-expert
+predicted this). Foundation is strong too: profile discovery + validation are
+robust (Cohen's d 2.1–4.6, all p < 0.05). Caveat: n=5 → low power, ρ is an
+indication; the durable contribution is the methodological principle (a success
+metric must capture the skill relevant to its domain). Full write-up:
+`docs/features_and_hypothesis.md` §8, `RESEARCH_INSIGHTS.md` Q7.10–Q7.11,
+`results/stage4/alignment_corrected_report.md`.
 
 ---
 

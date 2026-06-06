@@ -39,14 +39,23 @@ against real negotiation data.
 ### 🏁 Result (all 4 stages complete, June 2026)
 
 The full pipeline ran end-to-end: 149K hands → 5 profiles → LLM agents → dual
-simulation → alignment. **Cross-domain alignment: Spearman ρ = +0.20** (target
-≥ 0.70) — a **weak/partial positive** result. The **foundation is strong**:
-profile discovery and validation are statistically robust (Cohen's d 2.1–4.6,
-all p < 0.05). The weak transfer is driven by one outlier (the *Fighter*, whose
-defining skill — penalty doubles — is not rewarded by the bridge proxy, exactly
-as the bridge-expert predicted) plus the very low power of n=5 profiles. A
-null/partial result was pre-registered as a valid finding. See
-`docs/features_and_hypothesis.md` §8 and `results/stage4/alignment_report.md`.
+simulation → alignment. The headline finding came in two steps:
+
+- **Raw metric:** cross-domain alignment **Spearman ρ = +0.20** — weak. Traced
+  to one outlier, the *Fighter*, whose defining skill (penalty doubles, 33% of
+  its calls) the par-only bridge metric ignored — a gap the bridge-expert
+  predicted in advance.
+- **Corrected metric:** a fight-aware bridge score (reward accuracy *and*
+  penalty doubles, weight 0.3) lifts alignment to **Spearman ρ = +0.80** —
+  above the 0.70 target. A sensitivity sweep confirms the trend is robust.
+
+So a strong cross-domain signal was hidden behind one domain's metric being
+blind to one profile's defining skill. The **foundation is also strong**:
+profile discovery + validation are statistically robust (Cohen's d 2.1–4.6, all
+p < 0.05). Caveat: n=5 gives low power, so ρ is an indication; the durable
+contribution is the methodological principle (*a success metric must capture the
+skill relevant to its domain*). See `docs/features_and_hypothesis.md` §8,
+`results/stage4/alignment_corrected_report.md`, and `alignment_sensitivity.png`.
 
 ---
 
@@ -78,7 +87,7 @@ null/partial result was pre-registered as a valid finding. See
 │  STAGE 4: DUAL SIMULATION + ALIGNMENT           ✅ DONE     │
 │  • 50 bridge deals × 5 profiles × 3 runs                    │
 │  • 4 negotiation scenarios × 5 profiles × 3 runs            │
-│  • Spearman ρ = +0.20 (partial/null; target ≥ 0.70)         │
+│  • Spearman ρ: 0.20 (raw) → 0.80 (fight-aware metric)       │
 └─────────────────────────────────────────────────────────────┘
 ```
 

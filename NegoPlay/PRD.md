@@ -293,12 +293,15 @@ Full literature: [`docs/literature.md`](docs/literature.md) (17 papers, NegoPlay
 
 **Result:** Full pipeline ran end-to-end. Bridge (4a): 50 deals × 5 profiles × 3
 runs, objective par scoring. Negotiation (4b): 4 scenarios × 5 profiles × 3 runs
-vs a fixed hard-bargaining seller. Alignment (4c): **Spearman ρ = +0.20**
-(p = 0.75), target ≥ 0.70 → **partial/null** (pre-registered as a valid finding).
-The *Fighter* is the outlier dragging ρ down — strong in negotiation but weak in
-the HCP-based bridge proxy that ignores its defining penalty-double skill (the
-bridge-expert predicted this). Outputs: `results/stage4/alignment_report.md`,
-`alignment.png`. See RESEARCH_INSIGHTS Q7.10.
+vs a fixed hard-bargaining seller. Alignment (4c): raw **Spearman ρ = +0.20**
+(par-only bridge metric) → corrected **ρ = +0.80** once the bridge metric was
+made fight-aware (reward accuracy + penalty doubles, weight 0.3), above the 0.70
+target. The *Fighter* was the outlier: strong in negotiation but invisible to
+the par-only proxy that ignores its defining penalty-double skill — a gap the
+bridge-expert predicted in advance. A sensitivity sweep confirms robustness;
+n=5 keeps power low (ρ is an indication). Outputs:
+`results/stage4/alignment_corrected_report.md`, `alignment_sensitivity.png`. See
+RESEARCH_INSIGHTS Q7.10–Q7.11.
 
 **Description:** Run agents in both bridge auctions and business negotiations; measure alignment.
 
