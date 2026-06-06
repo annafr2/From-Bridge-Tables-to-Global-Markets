@@ -57,6 +57,28 @@ contribution is the methodological principle (*a success metric must capture the
 skill relevant to its domain*). See `docs/features_and_hypothesis.md` §8,
 `results/stage4/alignment_corrected_report.md`, and `alignment_sensitivity.png`.
 
+**Before vs. after the metric correction** — same scatter, two panels. Each dot
+is a profile: bridge win rate (x) vs. negotiation win rate (y); the dashed line
+is perfect agreement.
+
+![Alignment before vs. after the fight-aware correction](docs/images/alignment_before_after.png)
+
+*Left (raw, ρ=+0.20):* the **Fighter** sits far off the diagonal — strong in
+negotiation but scored low in bridge, because the par-only metric ignored its
+defining penalty-double skill. *Right (fight-aware, ρ=+0.80):* once the bridge
+metric rewards penalty doubles (w=0.3), the Fighter moves onto the diagonal and
+all five profiles line up. The single remaining inversion — Insurance vs.
+Generalist swapping the bottom two ranks — is itself a finding: conservatism
+*hurts* in bridge (systematic underbidding) but *helps* in negotiation
+(patience), so that one trait transfers in the opposite direction.
+
+**Robustness — how ρ moves with the weight:**
+
+![Sensitivity of alignment to the penalty-double weight](docs/images/alignment_sensitivity.png)
+
+ρ climbs smoothly as the weight rises; w=0.3 was chosen for honesty (moderate,
+not the value that maximises ρ), and the trend holds across the sweep.
+
 ---
 
 ## 🏗️ Architecture
