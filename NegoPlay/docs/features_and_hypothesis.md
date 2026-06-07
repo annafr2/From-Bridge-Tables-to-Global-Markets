@@ -50,7 +50,7 @@ Each feature is **one number per player**, describing one behaviour. We built
 | `opening_rate` | how often they open the auction |
 | `preempt_rate` | how often they open high (level 2+) — aggressive |
 | `intervention_rate` | how often they butt into the opponents' auction |
-| `penalty_double_rate` | how often they double opponents to punish them |
+| `penalty_double_rate` | how often they double the opponents — counts **all** doubles (takeout *and* penalty); a measure of aggressive, competitive bidding (the name is a slight misnomer) |
 | `avg_bids_per_board` | how many calls they make per deal |
 
 ### What actually went into the model: **8 features**
@@ -130,7 +130,7 @@ domains, using **Spearman's ρ** (a correlation of rankings). Target: **ρ ≥ 0
 
 > ⚠️ **Honest status:** Level 1 is proven. Level 2 (Stage 4) is now complete —
 > see Section 8 for the result (Spearman ρ rose from 0.20 to 0.80 once the
-> bridge metric was corrected to reward the Fighter's penalty doubles).
+> bridge metric was corrected to reward the Fighter's aggressive doubling).
 
 ---
 
@@ -258,10 +258,16 @@ the four validated profiles.
 במדידה הראשונה היישור יצא חלש. הסיבה הייתה **חריג אחד — ה-Fighter**: הוא יצא
 חלש בברידג' אבל **הכי טוב** במשא ומתן, וזה "שבר" את הקשר.
 
-**למה?** הכישור המגדיר של ה-Fighter הוא **הכפלות עונשין** (penalty doubles) —
-הוא עשה אותן ב-33% מהכרזותיו, פי 6-8 מכל פרופיל אחר! אבל מדד הברידג' שלנו
-(שמודד רק "גובה חוזה") היה **עיוור** להכפלות. אז הוא נראה חלש בברידג' למרות
+**למה?** הכישור המגדיר של ה-Fighter הוא **דאבלים תוקפניים** —
+הוא עשה דאבל ב-33% מהכרזותיו, פי 6-8 מכל פרופיל אחר! אבל מדד הברידג' שלנו
+(שמודד רק "גובה חוזה") היה **עיוור** לדאבלים. אז הוא נראה חלש בברידג' למרות
 שהוא לוחם מצוין. **מומחה הברידג' חזה את זה מראש.**
+
+> ⚠️ **הערת דיוק (חשובה לפני הפגישה):** התכונה `penalty_double_rate` סופרת
+> בפועל את **כל הדאבלים** — גם דאבל הזמנה (takeout) וגם דאבל עונשין — לא רק
+> עונשין. שני הסוגים הם בחירה *להיכנס ולהילחם* במכרז במקום לפסוח, ולכן זה מדד
+> תקף ל**תחרותיות אגרסיבית**. השם המדויק יותר הוא "דאבלר תוקפני", לא "מעניש".
+> זה לא משנה את המספרים ולא את ρ — רק את הפרשנות המילולית.
 
 ### שלב שני: תיקנו את המדד → ρ = +0.80 (מעל היעד!)
 

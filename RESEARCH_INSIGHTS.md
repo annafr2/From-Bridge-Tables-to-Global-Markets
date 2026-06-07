@@ -1006,6 +1006,16 @@ The Fighter doubled on **33% of its calls (49/150), 6–8× any other profile**,
 yet earned nothing for it in the par-only metric. The bridge-expert flagged this
 *before* the alignment was computed (Q7.8 era).
 
+> **Label correction (bridge-expert audit, post-hoc):** the `penalty_double_rate`
+> feature — in both Stage 1 (`bidding_parser.py`: `made_double` = any `x` token,
+> "penalty or takeout") and the Stage 4 simulation — counts **all** doubles, not
+> penalty doubles alone. The name is a slight misnomer. Both takeout and penalty
+> doubles are an active choice to *contest* the auction rather than pass, so the
+> feature is a valid measure of **aggressive, competitive bidding**; the Fighter
+> archetype is real. Numbers and ρ are unchanged — only the precise label should
+> read "aggressive doubling," not strictly "penalty doubling." (A future refinement
+> could separate takeout from penalty doubles by auction context.)
+
 **The correction.** A combined metric that rewards both bidding accuracy and
 combative play:
 `bridge_combined = (1 − w)·par_accuracy + w·penalty_double_rate`.

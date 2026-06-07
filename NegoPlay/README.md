@@ -42,11 +42,12 @@ The full pipeline ran end-to-end: 149K hands → 5 profiles → LLM agents → d
 simulation → alignment. The headline finding came in two steps:
 
 - **Raw metric:** cross-domain alignment **Spearman ρ = +0.20** — weak. Traced
-  to one outlier, the *Fighter*, whose defining skill (penalty doubles, 33% of
-  its calls) the par-only bridge metric ignored — a gap the bridge-expert
+  to one outlier, the *Fighter*, whose defining skill (aggressive doubling —
+  the `penalty_double_rate` feature counts *all* doubles, takeout and penalty —
+  33% of its calls) the par-only bridge metric ignored — a gap the bridge-expert
   predicted in advance.
 - **Corrected metric:** a fight-aware bridge score (reward accuracy *and*
-  penalty doubles, weight 0.3) lifts alignment to **Spearman ρ = +0.80** —
+  aggressive doubling, weight 0.3) lifts alignment to **Spearman ρ = +0.80** —
   above the 0.70 target. A sensitivity sweep confirms the trend is robust.
 
 So a strong cross-domain signal was hidden behind one domain's metric being
@@ -65,8 +66,8 @@ is perfect agreement.
 
 *Left (raw, ρ=+0.20):* the **Fighter** sits far off the diagonal — strong in
 negotiation but scored low in bridge, because the par-only metric ignored its
-defining penalty-double skill. *Right (fight-aware, ρ=+0.80):* once the bridge
-metric rewards penalty doubles (w=0.3), the Fighter moves onto the diagonal and
+defining aggressive-doubling skill. *Right (fight-aware, ρ=+0.80):* once the bridge
+metric rewards the Fighter's doubling (w=0.3), the Fighter moves onto the diagonal and
 all five profiles line up. The single remaining inversion — Insurance vs.
 Generalist swapping the bottom two ranks — is itself a finding: conservatism
 *hurts* in bridge (systematic underbidding) but *helps* in negotiation
@@ -211,7 +212,7 @@ language — no bridge or statistics knowledge needed.
 ![Box plots of each profile's defining behaviour](docs/images/supervisor_box_defining_metrics.png)
 
 Think of four "habits": bidding big (slam), playing it safe (partscore),
-fighting opponents (penalty double), and preferring one contract type (NT).
+fighting opponents (doubling — takeout or penalty), and preferring one contract type (NT).
 Each mini-chart picks one habit and shows how much every group does it. In every
 chart **one group clearly stands out** — and that group is named after the habit.
 This is the picture-version of "the groups are real".
@@ -251,8 +252,8 @@ a smooth *continuum*, not neat separate boxes.
 ![Fighter vs NT scatter](docs/images/supervisor_scatter_fighter_nt.png)
 
 Chart 4 separates two of the four special types; this one separates the other
-two. Right = fights opponents more (penalty doubles), up = prefers NT contracts.
-Fighters drift right, NT Specialists drift up.
+two. Right = fights opponents more (doubles of any type — takeout or penalty),
+up = prefers NT contracts. Fighters drift right, NT Specialists drift up.
 
 > ⚠️ **Honest note for readers:** charts 1 and 3 partly *re-describe how the
 > groups were defined* — we picked the most extreme players, so of course they
