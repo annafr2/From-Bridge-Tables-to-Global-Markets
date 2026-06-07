@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>הכנה לפגישה עם דר' רמי — שאלות ותשובות</title>
+<style>
+  @page { size: A4; margin: 2cm 1.8cm; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { font-family: 'Segoe UI','Arial',sans-serif; color:#1f2933; line-height:1.7; font-size:11.5pt; direction:rtl; text-align:right; }
+  h1 { font-size:21pt; color:#16324f; border-bottom:3px solid #16324f; padding-bottom:10px; margin-bottom:6px; }
+  h2 { font-size:14.5pt; color:#16324f; margin-top:26px; padding-right:12px; border-right:5px solid #2c5f8a; }
+  h3 { font-size:12pt; color:#2c5f8a; margin-top:18px; }
+  p { margin:7px 0; }
+  code { font-family:'Consolas','Courier New',monospace; background:#eef1f4; color:#b4317a; padding:1px 5px; border-radius:3px; font-size:9.5pt; direction:ltr; display:inline-block; }
+  .intro { background:#f2f4f6; border-radius:6px; padding:14px 18px; font-style:italic; color:#52606d; margin:14px 0 6px; }
+  ul,ol { padding-right:22px; padding-left:0; }
+  li { margin:5px 0; }
+  .qa { border:1px solid #dde4ea; border-radius:6px; margin:12px 0; padding:0; overflow:hidden; page-break-inside:avoid; }
+  .q { background:#e8eef4; color:#16324f; font-weight:700; padding:10px 14px; font-size:11.5pt; }
+  .q::before { content:"ש: "; color:#2c5f8a; }
+  .a { padding:10px 14px; }
+  .a::before { content:"ת: "; color:#1f7a4d; font-weight:700; }
+  .ex { background:#eaf2fb; border-right:4px solid #4a90d9; border-radius:4px; padding:8px 12px; margin:8px 0 2px; font-size:10.5pt; }
+  .ex .h { font-weight:700; color:#2c5f8a; }
+  .stat { background:#fdf6e3; border-right:4px solid #d9a441; border-radius:4px; padding:8px 12px; margin:8px 0 2px; font-size:10.5pt; }
+  .stat .h { font-weight:700; color:#a6791f; }
+  .bridgebox { background:#eafaf1; border:1px solid #bfe6cf; border-radius:6px; padding:12px 16px; margin:14px 0; }
+  .bridgebox h3 { margin-top:6px; color:#1f7a4d; }
+  table { border-collapse:collapse; width:100%; margin:10px 0; font-size:10pt; }
+  th { background:#e8eef4; color:#16324f; border:1px solid #c5d3e0; padding:6px 9px; text-align:right; }
+  td { border:1px solid #d8e0e8; padding:6px 9px; text-align:right; }
+  tr:nth-child(even) td { background:#f6f9fc; }
+  figure { margin:12px 0; text-align:center; page-break-inside:avoid; }
+  figure img { max-width:90%; border:1px solid #e0e6ec; border-radius:4px; }
+  figcaption { font-size:9pt; color:#6b7785; margin-top:5px; }
+  .footer { margin-top:26px; padding-top:12px; border-top:1px solid #d8e0e8; font-size:9pt; color:#8a949e; font-style:italic; }
+  .pagebreak { page-break-before:always; }
+  .ltr { direction:ltr; display:inline-block; }
+  .tip { background:#f0ecfb; border-right:4px solid #8a6fd4; border-radius:4px; padding:8px 12px; margin:8px 0; font-size:10pt; }
+  .tip .h { font-weight:700; color:#6a4fb0; }
+</style>
+</head>
+<body>
+
+<h1>הכנה לפגישה עם דר' רמי — שאלות ותשובות</h1>
+<div class="intro">
+מסמך הכנה אישי. דר' רמי הוא <strong>סטטיסטיקאי</strong> (לכן התשובות הסטטיסטיות מדויקות ונוקבות), אבל <strong>לא מכיר ברידג'</strong>
+(לכן כל מונח ברידג' מוסבר בפשטות). לכל שאלה: תשובה קצרה, ואם צריך — דוגמה או הערה סטטיסטית.
+</div>
+
+<h2>מה עשינו עד כה — בקצרה</h2>
+<ul>
+  <li><strong>שאלת המחקר:</strong> האם סגנון קבלת-ההחלטות של שחקן ברידג' מנבא את התנהגותו במשא ומתן עסקי? הברידג' הוא <em>מעבדה</em>, היעד הוא מו"מ עסקי.</li>
+  <li><strong>הנתונים:</strong> 149,208 שורות מתחרויות ברידג' אירופאיות (2016–2025); אחרי סינון נשארו <strong>563 שחקנים</strong> עם מספיק נתונים (≥50 ידיים).</li>
+  <li><strong>שלב 1 — גילוי פרופילים:</strong> חישבנו 8 תכונות התנהגות לכל שחקן. ניסינו K-Means לחלק לקבוצות — <strong>נכשל</strong> (הנתונים רצף, לא אשכולות). במקום זה השתמשנו ב<strong>אחוזון-קיצון + מבחן בינומי</strong> וקיבלנו 4 פרופילים + "כללי".</li>
+  <li><strong>שלב 2 — חילוץ כישורים:</strong> מודל שפה (LLM) קרא את משחקי כל פרופיל והפיק 5–7 כישורים מאפיינים.</li>
+  <li><strong>שלב 3 — בניית סוכנים:</strong> כל פרופיל הפך לסוכן LLM עם "כרטיס אופי" (הכישורים מהברידג', לא תיוג שהמצאנו).</li>
+  <li><strong>שלב 4 — סימולציה כפולה:</strong> כל סוכן שיחק גם <em>ברידג'</em> וגם <em>משא ומתן עסקי</em>; השווינו את דירוג המנצחים עם <strong>Spearman ρ</strong>.</li>
+  <li><strong>התוצאה:</strong> מדד ברידג' ראשוני נתן ρ=0.20 (חלש) בגלל חריג אחד; אחרי תיקון המדד → <strong>ρ=0.80</strong> (מעל היעד 0.70). היסוד מובהק (Cohen's d 2.1–4.6).</li>
+  <li><strong>הסתייגות מרכזית:</strong> n=5 פרופילים → כוח סטטיסטי נמוך. ρ הוא <strong>אינדיקציה</strong>, והתרומה האמיתית היא <em>מתודולוגית</em>.</li>
+</ul>
+
+<div class="bridgebox">
+<h3>🃏 ברידג' ב-90 שניות (כדי שתוכלי לענות לו על הבסיס)</h3>
+<ul>
+  <li><strong>המשחק:</strong> 4 שחקנים, 2 זוגות (אתה ושותפך מול 2 יריבים). כל אחד מקבל 13 קלפים.</li>
+  <li><strong>המכרז (bidding):</strong> לפני המשחק יש "מכרז" — כל זוג מבטיח כמה לקיחות (tricks) ייקח. ההבטחה המנצחת נקראת <strong>חוזה (contract)</strong>.</li>
+  <li><strong>רמות 1–7:</strong> חוזה ברמה <span class="ltr">N</span> = הבטחה לקחת <span class="ltr">6+N</span> לקיחות. רמה גבוהה = הבטחה שאפתנית ומסוכנת.</li>
+  <li><strong>מונחי המפתח שלנו:</strong>
+    <em>סלאם</em> = חוזה רמה 6–7 (שאפתני, סיכון גבוה) ·
+    <em>part-score</em> = חוזה נמוך 1–3 (בטוח, שמרני) ·
+    <em>NT</em> = משחק בלי "צבע מנצח" ·
+    <em>דאבל</em> = מהלך תחרותי במכרז (ראו השאלה הייעודית בהמשך — יש לו <strong>שני סוגים</strong>).</li>
+  <li><strong>HCP (כוח יד):</strong> נקודות לפי קלפים גבוהים (אס=4, מלך=3, מלכה=2, נסיך=1). מודד כמה היד "חזקה".</li>
+  <li><strong>פאר (par):</strong> החוזה האופטימלי תאורטית לחלוקת קלפים נתונה — "מה היה <em>נכון</em> להכריז".</li>
+</ul>
+</div>
+
+<h2>חלק א' — תכונות, נתונים, ויחידת הניתוח</h2>
+
+<div class="qa">
+  <div class="q">אילו פיצ'רים (תכונות) יש לך? (השאלה ששאל בפעם הקודמת)</div>
+  <div class="a">10 תכונות התנהגות לכל שחקן, ב-2 משפחות; 8 מהן נכנסו למודל. כל תכונה היא <strong>שיעור</strong> (יחס בין 0 ל-1).
+  <table>
+    <tr><th>מתוך "מה הוכרז" (חוזה)</th><th>מתוך "איך הוכרז" (מכרז)</th></tr>
+    <tr><td><code>slam_rate</code> — שיעור חוזי סלאם</td><td><code>opening_rate</code> — שיעור פתיחת מכרז</td></tr>
+    <tr><td><code>nt_rate</code> — שיעור חוזי NT</td><td><code>preempt_rate</code> — פתיחה גבוהה (אגרסיבי)</td></tr>
+    <tr><td><code>partscore_rate</code> — שיעור עצירה נמוך/בטוח</td><td><code>intervention_rate</code> — התערבות במכרז היריב</td></tr>
+    <tr><td><code>game_rate</code> — שיעור חוזי "משחק"</td><td><code>penalty_double_rate</code> — שיעור דאבלים (כל הסוגים)</td></tr>
+    <tr><td><code>double_rate</code> — שיעור חוזים שהוכפלו</td><td><code>avg_bids_per_board</code> — מס' הכרזות לחלוקה</td></tr>
+  </table>
+  </div>
+</div>
+
+<div class="qa">
+  <div class="q">מהי יחידת הניתוח? מהו n?</div>
+  <div class="a">יחידת הניתוח היא <strong>שחקן בודד</strong>. n = <strong>563 שחקנים</strong> שעברו סף כשירות (≥50 ידיים שהכריזו עליהן וגם ≥50 ידיים עם נתוני מכרז). כל שחקן הוא וקטור של 8 מספרים.</div>
+</div>
+
+<div class="qa">
+  <div class="q">איך בחרת אילו תכונות להכניס? למה 8 ולא 10?</div>
+  <div class="a">הסרנו 2 תכונות עם <strong>שונות נמוכה</strong> — מקדם השונות (CV = סטיית תקן ÷ ממוצע) קטן מ-0.10. תכונה שכמעט זהה אצל כולם לא מבדילה בין שחקנים.
+  <div class="ex"><span class="h">דוגמה:</span> <code>avg_level</code> — כל שחקני העילית מכריזים בממוצע סביב רמה 3.3. אם לכולם אותו ערך, התכונה חסרת תועלת — כמו לשאול "למי יש שתי עיניים?".</div>
+  </div>
+</div>
+
+<div class="qa">
+  <div class="q">האם התכונות מתואמות ביניהן? (מולטי-קולינאריות)</div>
+  <div class="a">כן, בדקנו. "תכונות מתואמות" = שתי תכונות שמודדות כמעט אותו דבר, אז אחת מהן מיותרת. עשינו 2 דברים: (1) הסתכלנו על טבלה שמראה אילו תכונות "כפולות" וזרקנו אותן; (2) הרצנו <strong>PCA</strong> — טכניקה שמכווצת את התכונות לכמה "צירים חדשים" שלא חופפים זה לזה.
+  <div class="ex"><span class="h">דוגמה:</span> "גובה בסנטימטרים" ו"גובה באינצ'ים" הן לא שתי תכונות — זו אותה תכונה פעמיים. בדיוק את הכפילויות האלה זרקנו.</div>
+  </div>
+</div>
+
+<h2>חלק ב' — למה K-Means נכשל ומהו "רצף"</h2>
+
+<div class="qa">
+  <div class="q">למה K-Means נכשל? (השאלה ששאל בפעם הקודמת)</div>
+  <div class="a">K-Means מחפש <strong>קבוצות נפרדות</strong> ("איים"). בנתונים שלנו אין איים — יש ענן רציף אחד. מדד ה<strong>סילואט</strong> הגיע לכל היותר ל-<strong>0.24</strong>, בעוד שמבנה אשכולות אמיתי דורש ≥ 0.5. ניסינו k=2 עד 6 — כולם נכשלו.
+  <div class="stat"><span class="h">הערה סטטיסטית:</span> סילואט מודד לכל נקודה כמה היא קרובה לאשכול שלה לעומת השכן: <span class="ltr">s = (b−a)/max(a,b)</span>. ערך סביב 0 = הנקודה על הגבול = אין הפרדה אמיתית.</div>
+  </div>
+</div>
+
+<div class="qa">
+  <div class="q">מה זה "רצף" (continuum)? (השאלה ששאל בפעם הקודמת)</div>
+  <div class="a"><strong>רצף</strong> = הנתונים משתנים בהדרגה חלקה, בלי קפיצות שמפרידות קבוצות. אין "סוגים", יש <em>ספקטרום</em>.
+  <div class="ex"><span class="h">דוגמה:</span> <strong>גובה</strong> הוא רצף — אין פער ריק בין "נמוכים" ל"גבוהים", יש מעבר חלק. <strong>סוג דם</strong> (A/B/AB/O) הוא קטגוריות נפרדות עם פערים = אשכולות אמיתיים. השחקנים שלנו כמו גובה, לא כמו סוג דם.</div>
+  </div>
+</div>
+
+<div class="qa">
+  <div class="q">אבל אפשר לחתוך גובה ל-150/160/170 — זה לא קבוצות?</div>
+  <div class="a">אפשר, אבל החיתוך <strong>מלאכותי</strong> — את ממציאה אותו, הוא לא קיים בטבע. ההבדל: האם יש <strong>"חורים ריקים"</strong> בין הקבוצות. בגובה אין חור (יש אנשים בכל ערך), אז אדם 159 ו-160 כמעט זהים אבל "נחתכו" לקבוצות שונות. בסוג דם יש חורים אמיתיים — אף אחד לא "בין A ל-B".
+  <div class="ex"><span class="h">המבחן:</span> אם אזיז את קו החיתוך קצת והתוצאה משתנה — אין קבוצות אמיתיות. הסילואט הנמוך (0.24) מאשר שאין מבנה טבעי, אז עברנו לזיהוי הקצוות במקום אשכול.</div>
+  </div>
+</div>
+
+<div class="qa">
+  <div class="q">אם K-Means נכשל — איך הגדרת פרופילים?</div>
+  <div class="a">ב<strong>אחוזון-קיצון</strong>: לקחנו את ה-<strong>10% העליונים</strong> בכל ציר התנהגות, ואישרנו במבחן בינומי. זה לא ממיין את כולם בכוח — זה מנקד את הזנבות הקיצוניים של הרצף.
+  <div class="ex"><span class="h">דוגמה:</span> "צייד סלאם" = ה-10% עם הכי הרבה סלאמים. "לוחם" = ה-10% עם הכי הרבה דאבלים.</div>
+  </div>
+</div>
+
+<div class="pagebreak"></div>
+<figure>
+  <img src="clustering_kmeans_fails.png" alt="K-Means silhouette">
+  <figcaption>K-Means: כל k נותן סילואט ~0.24, הרחק מתחת ל-0.5 הנדרש. אין אשכולות אמיתיים.</figcaption>
+</figure>
+
+<div class="qa">
+  <div class="q">המבחן הבינומי — בשביל מה, ולמה p&lt;0.05?</div>
+  <div class="a">הוא מאשר שהציון הקיצוני של שחקן <strong>אמיתי ולא מקרה</strong> של מדגם קטן. השאלה: "בהינתן השיעור הבסיסי באוכלוסייה, מה ההסתברות להגיע לשיעור כה גבוה במקרה?". p&lt;0.05 → לא מקרה.
+  <div class="ex"><span class="h">דוגמה:</span> שיעור סלאם בסיסי ~5.5%; שחקן עשה 10% מתוך 200 ידיים. המבחן בודק אם 10%/200 חורג מובהקית מ-5.5%.</div>
+  </div>
+</div>
+
+<div class="qa">
+  <div class="q">בדקת הרבה שחקנים וצירים — מה עם השוואות מרובות?</div>
+  <div class="a">שאלה צפויה. כן רלוונטי. הדרכים שלנו: (1) סף שמרני (10% עליונים <em>וגם</em> p&lt;0.05); (2) גדלי האפקט <strong>עצומים</strong> (Cohen's d 2.1–4.6) — שורדים כל תיקון; (3) נשמח ליישם <strong>FDR (Benjamini-Hochberg)</strong> — לא ישנה את הפרופילים בגלל גודל האפקט.
+  <div class="stat"><span class="h">המסר:</span> "אני מודעת ל-multiple comparisons; האפקטים עמידים, ואני פתוחה ל-FDR."</div>
+  </div>
+</div>
+
+<figure>
+  <img src="clustering_extreme_succeeds.png" alt="extreme percentile tails">
+  <figcaption>כל פרופיל = הזנב הימני (10% העליונים) של ציר התנהגות אחד. אפור=כלל האוכלוסייה, צבע=הפרופיל.</figcaption>
+</figure>
+
+<h2>חלק ג' — ולידציה של הפרופילים</h2>
+
+<div class="qa">
+  <div class="q">מה זה Cohen's d ולמה הערכים 2.1–4.6 חשובים?</div>
+  <div class="a">Cohen's d מודד <strong>גודל אפקט</strong> — בכמה סטיות-תקן נבדל הפרופיל מהממוצע. d=0.8 כבר "גדול". הערכים שלנו 2.1–4.6 עצומים — הפרדה כמעט מלאה.
+  <div class="ex"><span class="h">דוגמה:</span> d=2.1 → כמעט כל "צייד סלאם" מעל כמעט כל שחקן רגיל בציר הסלאם. החפיפה זעירה.</div>
+  </div>
+</div>
+
+<div class="qa">
+  <div class="q">גדלי הקבוצות קטנים (20, 21, 37...) — בעיה?</div>
+  <div class="a">לוולידציה של שלב 1 — לא, כי גודל האפקט עצום וה-p מובהק גם ב-n קטן. הקבוצות: צייד סלאם 20, ביטוח 21, לוחם 37, מומחה NT 17, והשאר "כללי", מתוך 563.
+  <div class="stat"><span class="h">הערה:</span> ה-n הקטן <em>כן</em> הופך לבעיה בשלב 4, כששאלת היחידה היא הפרופיל (n=5).</div>
+  </div>
+</div>
+
+<h2>חלק ד' — הדאבלים, הפייטר, והכובע ההגנתי</h2>
+
+<div class="qa">
+  <div class="q">מה זה "דאבל", ויש לו סוגים?</div>
+  <div class="a">דאבל הוא מהלך תחרותי במכרז (מסומן <code>x</code>), <strong>ויש לו שני סוגים שונים לגמרי</strong>:
+  <table>
+    <tr><th>סוג</th><th>משמעות</th><th>שכיחות</th></tr>
+    <tr><td><strong>דאבל עונשין</strong></td><td>"היריב יכשל בחוזה — אני מעניש אותו" (נגד היריב)</td><td>נדיר</td></tr>
+    <tr><td><strong>דאבל הזמנה (takeout)</strong></td><td>"שותף, בוא תכריז משהו" (שיתופי עם השותף)</td><td>נפוץ</td></tr>
+  </table>
+  אותה מילה (<code>x</code>), שתי כוונות הפוכות.</div>
+</div>
+
+<div class="qa">
+  <div class="q">⚠️ התכונה נקראת penalty_double_rate — היא סופרת רק עונשין?</div>
+  <div class="a"><strong>לא — וזו הערת דיוק חשובה.</strong> בדקנו בקוד: התכונה סופרת את <strong>כל הדאבלים</strong> (גם הזמנה וגם עונשין), לא רק עונשין. <strong>השם מטעה.</strong> אבל זה <strong>בסדר</strong>: שני הסוגים הם בחירה <em>להיכנס ולהילחם</em> במכרז במקום לפסוח, אז המדד תקף לתחרותיות אגרסיבית. השם המדויק: "דאבלר תוקפני", לא "מעניש". <strong>המספרים ו-ρ לא משתנים — רק השם.</strong>
+  <div class="stat"><span class="h">המסר לבוחן ברידג':</span> "33% דאבלי עונשין היה לא ריאלי — אבל 33% דאבלים מכל סוג הגיוני לשחקן תחרותי. הסיגנל אמיתי, רק השם דורש דיוק."</div>
+  </div>
+</div>
+
+<div class="qa">
+  <div class="q">למה דאבל הוא תכונה של פייטר? כולם עושים דאבל הזמנה...</div>
+  <div class="a">המפתח: לא "האם עושה דאבל" אלא <strong>"כמה הרבה"</strong>. הפייטר ב-10% העליונים — פי 2–4 מהממוצע. <strong>הרבה</strong> דאבלים (מכל סוג) = שחקן ש<strong>לא מוותר</strong>, כל הזמן נכנס לקרב במקום לפסוח. זה הסגנון התוקפני.
+  <div class="ex"><span class="h">אנלוגיה:</span> שחקן כדורסל שעושה עבירות פי 3 מכולם — את יודעת שהוא אגרסיבי, בלי קשר לסוג העבירה.</div>
+  </div>
+</div>
+
+<div class="qa">
+  <div class="q">הפיצ'רים מתייחסים להתקפה או להגנה?</div>
+  <div class="a"><strong>לשניהם</strong>, אבל לא מאוזן. רוב הפיצ'רים הם <strong>התקפה</strong> (החוזה שהשחקן הכריז: סלאם/NT/partscore). <strong>2 פיצ'רים הגנתיים:</strong> <code>intervention_rate</code> ו-<code>penalty_double_rate</code> (דאבל = פעולה הגנתית, להפיל את היריב).
+  <div class="stat"><span class="h">מגבלה כנה:</span> כל הפיצ'רים הם משלב ה<em>מכרז</em> בלבד — אין לנו נתוני <em>משחק-קלפים</em>, אז "הגנה בשולחן" לא נמדדת. כיוון לדוקטורט.</div>
+  </div>
+</div>
+
+<h2>חלק ה' — המשא ומתן, התהליך, והיישור (שלב 4)</h2>
+
+<div class="qa">
+  <div class="q">איך עובד המשא ומתן? מי מנהל אותו?</div>
+  <div class="a">כל פרופיל (סוכן LLM) משחק <strong>קונה</strong> ב-4 תרחישים עסקיים, מול <strong>מוכר קבוע שאינו LLM</strong> (נוסחה: מוותר בהדרגה לכיוון "רצפה"). כך ההבדלים נובעים מהקונה, לא מרעש של מוכר משתנה.
+  <div class="ex"><span class="h">דוגמה:</span> רכישת SaaS — הוגן 9M, המוכר פותח 13M, רצפה 8M. הקונה מנסה להוריד מחיר עד 4 סבבים.</div>
+  </div>
+</div>
+
+<div class="qa">
+  <div class="q">איך מוגדר "ניצחון" בכל תחום?</div>
+  <div class="a"><strong>בברידג':</strong> כמה קרוב השחקן הכריז ל"חוזה הנכון" (par). <strong>במו"מ:</strong> איזה אחוז מהפער תפס הקונה — <span class="ltr">(פתיחה − סופי)/(פתיחה − רצפה)</span>. שניהם בין 0 ל-1, ממוצע על כל הידיים/התרחישים.</div>
+</div>
+
+<div class="qa">
+  <div class="q">מה זה Spearman ρ ולמה לא Pearson?</div>
+  <div class="a">Spearman ρ הוא מתאם על <strong>דירוגים</strong>, לא על הערכים. השאלה שלנו על <strong>סדר</strong>: "מי שמנצח בברידג' מנצח גם במו"מ?". הוא עמיד לחריגים ולא מניח קשר ליניארי.
+  <div class="ex"><span class="h">דוגמה:</span> אם בברידג' A&gt;B&gt;C וגם במו"מ A&gt;B&gt;C → ρ=1, גם אם הערכים שונים.</div>
+  </div>
+</div>
+
+<div class="qa">
+  <div class="q">n=5 פרופילים — כוח סטטיסטי? ה-p לא מובהק!</div>
+  <div class="a">נכון, וזו ההסתייגות המרכזית שאני <strong>מציינת מפורשות</strong>. עם n=5 גם ρ=0.80 נותן p≈0.10. לכן ρ הוא <strong>אינדיקציה ולא הוכחה</strong>, והתרומה היא <strong>מתודולוגית</strong>.
+  <div class="stat"><span class="h">המסר:</span> "אני לא טוענת למובהקות; אני טוענת לעיקרון מתודולוגי שהודגם, עם תוכנית להגדיל את ה-n."</div>
+  </div>
+</div>
+
+<div class="qa">
+  <div class="q">שינית את המדד אחרי שראית את התוצאה — זה לא p-hacking?</div>
+  <div class="a">השאלה הכי חשובה. <strong>לא</strong>, מ-3 סיבות: (1) ה"לוחם" <strong>מוגדר</strong> ע"י דאבלים כבר משלב 1 — המדד מודד את הכישור שלו עצמו; (2) <strong>מומחה הברידג' חזה את הבעיה מראש</strong>, לפני שראינו ρ; (3) בחרנו משקל <strong>מתון (0.3)</strong>, לא הממקסם (0.4 היה נותן 0.90), והצגנו <strong>ניתוח רגישות</strong>.
+  <div class="stat"><span class="h">המסר:</span> "התיקון a-priori ומוגדר-תאורטית, לא חיפוש אחורה. משקל מתון + sensitivity analysis מונעים garden-of-forking-paths."</div>
+  </div>
+</div>
+
+<figure>
+  <img src="alignment_before_after.png" alt="before after alignment">
+  <figcaption>לפני (par בלבד, ρ=0.20) מול אחרי (מדד מודע-לחימה, ρ=0.80). ה-Fighter (כתום) זז אל האלכסון.</figcaption>
+</figure>
+
+<div class="qa">
+  <div class="q">למה נשאר היפוך בין Insurance ל-Generalist?</div>
+  <div class="a">ההיפוך היחיד שמחזיק את ρ על 0.80 ולא 1.0, וזה <strong>ממצא</strong>: שחקן ה"ביטוח" (השמרן) חלש בברידג' אבל חזק במו"מ. <strong>שמרנות פוגעת בברידג'</strong> (מכריז נמוך מדי) אבל <strong>עוזרת במו"מ</strong> (סבלנות, סגירה יציבה). אותה תכונה עוברת בכיוון הפוך.</div>
+</div>
+
+<div class="qa">
+  <div class="q">איך התמודדת עם אי-הדטרמיניזם של ה-LLM?</div>
+  <div class="a">גם ב-temperature=0 ה-LLM נותן תשובות שונות (GPU מקבילי). הפתרון: כל יד רצה <strong>3 פעמים</strong> והוכרעה ב<strong>הצבעת רוב</strong>; כל פלט נשמר ל-JSONL. הרפרודוקטיביות ברמת ה<strong>מדגם</strong>, לא הקריאה הבודדת.</div>
+</div>
+
+<h2>חלק ו' — התמונה הגדולה והדוקטורט</h2>
+
+<div class="qa">
+  <div class="q">למה ברידג' בכלל? איך זה קשור לעסקים?</div>
+  <div class="a">נתוני מו"מ אמיתיים <strong>סודיים ולא נמדדים</strong>. ברידג' הוא מעבדה נקייה לאותן החלטות (מתי לקחת סיכון, מתי לעצור, מתי ללחוץ), עם 149K תוצאות מדידות. אם הפרופיל מהברידג' מנבא מו"מ — קיבלנו דרך ללמוד אסטרטגיה עסקית בלי נתונים פרטיים.</div>
+</div>
+
+<div class="qa">
+  <div class="q">מה התרומה אם המספר לא מובהק?</div>
+  <div class="a"><strong>מתודולוגית:</strong> <em>מדד ההצלחה בכל תחום חייב לתפוס את הכישור הרלוונטי לאותו תחום.</em> מדדנו ציר לא-נכון בברידג' וזה הסתיר קשר אמיתי; ברגע שהמדד תפס את הלחימה — הקשר הופיע. עיקרון שמתקף את עצמו ולא תלוי ב-n.</div>
+</div>
+
+<div class="qa">
+  <div class="q">מה הצעדים הבאים לדוקטורט?</div>
+  <div class="a">(1) להגדיל את ה-n (יותר פרופילים ותרחישים) למובהקות; (2) מדד ברידג' עשיר יותר / מנוע <span class="ltr">double-dummy</span>; (3) <strong>הפרדת דאבל הזמנה מעונשין</strong>; (4) נתוני משחק-קלפים (הגנה בשולחן); (5) בקרת פרומפט-הפוך בפועל.</div>
+</div>
+
+<div class="tip">
+<span class="h">💡 טיפ אחרון לפגישה:</span> אם הוא לוחץ על נקודה — אל תתגונני. "נקודה טובה, אני מודעת, וזו בדיוק הסיבה ש-X". כל ההסתייגויות (n קטן, multiple comparisons, p-hacking, שם הדאבל) כבר <strong>מתועדות מראש</strong> — זה מראה בגרות מחקרית.
+</div>
+
+<div class="footer">
+מסמך הכנה אישי. מבוסס על: <code>features_and_hypothesis.md</code>, <code>RESEARCH_INSIGHTS.md</code>,
+<code>alignment_corrected_report.md</code>, ופרק התוצאות ב-<code>main.tex</code>.
+נתונים: 149,208 שורות EuroBridge; 563 שחקנים; 8 תכונות; 5 פרופילים.
+</div>
+
+</body>
+</html>

@@ -1051,7 +1051,7 @@ Each profile produced one bridge win rate (4a) and one negotiation win rate (4b)
 
 \begin{table}[H]
 \centering\small
-\caption{Stage~4 per-profile win rates. Bridge (par only) is the raw 4a metric; the penalty-double rate is the share of a profile's calls that are penalty doubles.}
+\caption{Stage~4 per-profile win rates. Bridge (par only) is the raw 4a metric; the double rate is the share of a profile's calls that are doubles (the \texttt{penalty\_double\_rate} feature counts \emph{all} doubles, takeout and penalty -- see footnote~\ref{fn:double}).}
 \label{tab:winrates}
 \begin{tabularx}{\textwidth}{X c c c}
 \toprule
@@ -1070,7 +1070,7 @@ Insurance Player & 0.324 & 0.04 & 0.386 \\
 
 With the par-only bridge metric, the cross-domain Spearman correlation was $\rho_s = +0.20$ ($p = 0.75$) -- well below the $0.70$ target and not significant. Figure~\ref{fig:align_ba} (left panel) shows why: a single outlier, the \emph{Fighter}, sits far off the diagonal. It is the strongest negotiator ($0.444$) yet scores near the bottom in bridge ($0.368$).
 
-The cause is a measurement blind spot. The Fighter's defining skill, established in Stage~1, is the penalty double: it doubles on $33\%$ of its calls -- six to eight times any other profile. The par-only bridge metric scores only how close a contract is to the par level and is completely blind to penalty doubles, so the Fighter's signature skill earned it nothing. \textbf{The bridge-expert review predicted exactly this confound before the alignment was computed.}
+The cause is a measurement blind spot. The Fighter's defining skill, established in Stage~1, is aggressive doubling: it doubles on $33\%$ of its calls -- six to eight times any other profile.\footnote{\label{fn:double}The \texttt{penalty\_double\_rate} feature counts \emph{all} doubles parsed from the bidding string, takeout \emph{and} penalty, not penalty doubles alone -- the name is a slight misnomer. Both double types are an active choice to \emph{contest} the auction rather than pass, so the feature remains a valid measure of aggressive, competitive bidding. The numbers and the result are unaffected; only the precise label should read ``aggressive doubling.''} The par-only bridge metric scores only how close a contract is to the par level and is completely blind to doubling, so the Fighter's signature skill earned it nothing. \textbf{The bridge-expert review predicted exactly this confound before the alignment was computed.}
 
 \section{Step 2 -- fight-aware alignment: \texorpdfstring{$\rho = +0.80$}{rho = +0.80}}
 
@@ -1139,7 +1139,7 @@ A single rank inversion keeps $\rho$ at $0.80$ rather than $1.0$: the Insurance 
 \section{Interpretation}
 
 \begin{itemize}[leftmargin=*]
-    \item \textbf{Why the correction is legitimate, not curve-fitting.} (i)~The Fighter is \emph{defined} by penalty doubles in Stage~1; the corrected metric measures the profile's own signature skill. (ii)~The expert predicted the confound \emph{a priori}, before $\rho$ was seen. (iii)~A moderate weight was reported, and the trend is stable across all reasonable weights.
+    \item \textbf{Why the correction is legitimate, not curve-fitting.} (i)~The Fighter is \emph{defined} by its (aggressive) doubling rate in Stage~1; the corrected metric measures the profile's own signature skill. (ii)~The expert predicted the confound \emph{a priori}, before $\rho$ was seen. (iii)~A moderate weight was reported, and the trend is stable across all reasonable weights.
     \item \textbf{Methodological contribution (the durable result).} A domain's success metric must capture the skill that is relevant to that domain. We initially measured the wrong axis in bridge, and that hid a strong cross-domain signal that genuinely exists. Once the metric captured fighting, the alignment appeared.
     \item \textbf{Honest caveat.} With $n = 5$ profiles the statistical power is low and $p$ is not significant; $\rho$ is an \emph{indication}, not a proof. The value of the result lies in the methodological principle, not in the precise coefficient. PhD directions follow: a richer bridge metric (or a true double-dummy engine), more profiles, and real negotiation scenarios.
 \end{itemize}

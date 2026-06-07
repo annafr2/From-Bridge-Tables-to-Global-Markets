@@ -14,6 +14,8 @@ The original bridge win rate measured **par-level accuracy only** and was blind 
 
 The Fighter doubles on **33%** of its calls — 6–8× any other profile — yet earned nothing for it in the par-only metric.
 
+> **Note on the label:** the `penalty_double_rate` feature counts **all** doubles (takeout *and* penalty), not just penalty doubles — the name is a slight misnomer. Both double types are an active choice to *contest* the auction rather than pass, so the feature is a valid measure of **aggressive, competitive bidding**. The behavioural signal and all numbers are unchanged; only the precise label should read "aggressive doubling," not strictly "penalty doubling."
+
 ## Corrected metric
 
 ```
