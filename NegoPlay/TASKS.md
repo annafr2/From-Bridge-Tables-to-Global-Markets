@@ -29,6 +29,65 @@
 
 ---
 
+# 🔬 NEW DIRECTION — Post-Supervisor Meeting (Jun 8, 2026)
+
+> **Source:** joint meeting with **Rami (statistician)** + **Nezer (bridge expert)**.
+> **Core idea:** anchor performance between a **random floor** and a **perfect-play
+> ceiling**, in both domains — far more rigorous than a bare Spearman ρ over n=5.
+> Validated by the bridge-expert skill (ACCEPT, both proposals sound & complementary).
+
+```
+   random monkey (0%) ───── our agent ───── double-dummy / perfect (100%)
+```
+
+### The two supervisor proposals
+
+| # | From | Proposal | Fixes which weakness |
+|---|------|----------|----------------------|
+| **P1** | Rami | **Random "monkey" baseline** — agent with no strategy, random *legal* actions. Test each profile is significantly **better than random** (many deals → real per-agent power). Measure everything relative to this floor. | The **n=5 low-power** problem (gives per-deal significance *within* each domain) |
+| **P2** | Nezer | **Double-dummy reference** (perfect play, all 52 cards visible) as the ceiling, replacing the HCP-based par PROXY. | The **HCP-proxy** caveat (true optimal contract, bridge-standard) |
+
+### ⚠️ Hard data limitation to state honestly
+- DD **par contract/result** from the 52 cards → **computable** (we have card holdings). Upgrades the *bidding* metric. ✅
+- DD **defensive play quality** → **NOT computable** — needs trick-by-trick play data we do **not** have (EuroBridge = auction only). So DD complements but does **not** replace the fight-aware (doubling) term, and the Fighter's *defensive play* skill stays out of reach until we add play-by-play data (BBO/LIN — future scrape). ⚠️
+
+### 📋 Tasks for the coming week (priority order)
+
+- [ ] 🔲 **T-A: Random "monkey" agent** (`src/stage4_simulate/monkey_agent.py`)
+  - Random **legal** bid in the auction; random **legal** offer-in-range in negotiation.
+  - Filter illegal calls; seed for reproducibility; persist raw outputs to JSONL.
+  - **Deliverable:** a baseline agent usable in both 4a and 4b.
+
+- [ ] 🔲 **T-B: Significance vs monkey** (`src/stage4_simulate/baseline_test.py`)
+  - Run each profile **and** the monkey over **≥200 deals / scenarios**.
+  - Per-profile test: is profile > random? (paired test / bootstrap → real p-values).
+  - **Deliverable:** table "profile, advantage-over-random, p" for both domains.
+
+- [ ] 🔲 **T-C: Double-dummy par integration** (`src/features/double_dummy.py`)
+  - Add `endplay` (or `python-dds`) DDS solver; compute DD par from the 52 cards.
+  - Replace the HCP-based par proxy in the bridge score with true DD-par.
+  - **Deliverable:** DD-par column per deal; re-scored 4a bridge metric.
+
+- [ ] 🔲 **T-D: Normalized 0–100% skill scale + re-run alignment**
+  - `skill% = (agent − random) / (perfect − random)` in **both** domains.
+  - Re-compute cross-domain alignment on the **normalized** scores (not raw ranks).
+  - **Deliverable:** updated alignment report + before/after vs the ρ=0.80 result.
+
+- [ ] 🔲 **T-E: Document the defensive-play data gap**
+  - Add to limitations (README, main.tex, RESEARCH_INSIGHTS): DD can't score defense
+    without play data; plan BBO/LIN scrape as the fix.
+
+- [ ] 🔲 **T-F: (carried over) Path B — 10-round negotiation diagnostic** (~₪0.2)
+  - One profile, 10 rounds, to see if/when negotiations reach an explicit "accept".
+
+### Acceptance for this direction
+- Each profile is **provably > random** (p<0.05) in bridge AND negotiation.
+- Bridge metric uses **true double-dummy par**, not HCP proxy.
+- Alignment reported on a **normalized floor→ceiling** scale, with the n=5
+  cross-domain caveat stated precisely (per-deal power ≠ 5-profile power).
+
+---
+
 # 🚀 BEFORE SESSION 1 (Pre-class checklist)
 
 > **Goal:** Arrive at Session 1 (today!) with foundation ready.
