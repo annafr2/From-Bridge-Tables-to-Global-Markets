@@ -188,6 +188,10 @@ class _GeminiAdapter:
         config: dict[str, Any] = {
             "system_instruction": system,
             "temperature": temperature,
+            # Per-request HTTP timeout (milliseconds). Without it a dropped/hung
+            # socket blocks forever and the retry loop below never fires — which
+            # silently stalled a 1500-call batch run. 60s is ample for one bid.
+            "http_options": {"timeout": 60_000},
         }
         if response_schema is not None:
             config["response_mime_type"] = "application/json"

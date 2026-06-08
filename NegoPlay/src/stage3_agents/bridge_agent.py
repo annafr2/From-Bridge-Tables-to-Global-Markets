@@ -143,6 +143,7 @@ class BridgeAgent(BaseAgent):
         self,
         hand: dict[str, str] | list[str],
         auction: list[str] | None = None,
+        partner_note: str | None = None,
     ) -> dict:
         """Decide the next call for `hand` given `auction` so far.
 
@@ -150,6 +151,10 @@ class BridgeAgent(BaseAgent):
             hand:    The agent's 13 cards (dict by suit, or list of cards).
             auction: Ordered list of prior calls, e.g. ["1S", "Pass", "2H"].
                      Empty/None means the agent is the opener.
+            partner_note: Optional description of partner's hand revealed by their
+                     rebid (e.g. "Partner shows ~16 HCP, balanced"). Used by the
+                     multi-round auction runner so the agent can place a final
+                     contract with better information.
 
         Returns:
             dict with:
@@ -161,9 +166,11 @@ class BridgeAgent(BaseAgent):
         auction = auction or []
         auction_str = " ".join(auction) if auction else "(you are the opener)"
 
+        note_line = f"Partner's hand (from their rebid): {partner_note}\n\n" if partner_note else ""
         user_prompt = (
             f"Your hand:\n  {_format_hand(hand)}\n\n"
             f"Auction so far (left to right): {auction_str}\n\n"
+            f"{note_line}"
             "Decide your next call, in character. Respond with JSON only."
         )
 

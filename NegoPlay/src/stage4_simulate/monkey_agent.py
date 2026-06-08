@@ -66,12 +66,13 @@ class MonkeyAgent:
         self,
         hand: dict[str, str] | list[str] | None = None,
         auction: list[str] | None = None,
+        partner_note: str | None = None,
     ) -> dict[str, Any]:
         """Return a uniformly random LEGAL call for the current auction.
 
-        The hand is ignored on purpose — the monkey has no idea what its cards
-        mean. Mirrors BridgeAgent.make_bid's return shape so the bridge runner
-        can use it unchanged.
+        The hand and partner_note are ignored on purpose — the monkey has no idea
+        what its cards mean. Mirrors BridgeAgent.make_bid's return shape so the
+        bridge runner (and the multi-round auction runner) can use it unchanged.
         """
         auction = auction or []
         legal = [c for c in _ALL_CALLS if is_legal_call(c, auction)]
