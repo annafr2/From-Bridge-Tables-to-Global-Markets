@@ -1,0 +1,300 @@
+{"profile": "Slam Hunter", "board": 1, "run": 0, "north_open": "1H", "north_desc": "~16 HCP, unbalanced, 5 hearts", "south_1": "4S", "south_2": "5S", "final_contract": "5S"}
+{"profile": "Insurance Player", "board": 1, "run": 0, "north_open": "1H", "north_desc": "~16 HCP, unbalanced, 5 hearts", "south_1": "4S", "south_2": "Pass", "final_contract": "4S"}
+{"profile": "Fighter", "board": 1, "run": 0, "north_open": "1H", "north_desc": "~16 HCP, unbalanced, 5 hearts", "south_1": "2S", "south_2": "3H", "final_contract": "3H"}
+{"profile": "NT Specialist", "board": 1, "run": 0, "north_open": "1H", "north_desc": "~16 HCP, unbalanced, 5 hearts", "south_1": "4S", "south_2": "Pass", "final_contract": "4S"}
+{"profile": "Generalist", "board": 1, "run": 0, "north_open": "1H", "north_desc": "~16 HCP, unbalanced, 5 hearts", "south_1": "4S", "south_2": "5S", "final_contract": "5S"}
+{"profile": "Monkey (random)", "board": 1, "run": 0, "north_open": "1H", "north_desc": "~16 HCP, unbalanced, 5 hearts", "south_1": "2S", "south_2": "Pass", "final_contract": "2S"}
+{"profile": "Slam Hunter", "board": 2, "run": 0, "north_open": "1H", "north_desc": "~14 HCP, balanced", "south_1": "2S", "south_2": "3S", "final_contract": "3S"}
+{"profile": "Insurance Player", "board": 2, "run": 0, "north_open": "1H", "north_desc": "~14 HCP, balanced", "south_1": "2S", "south_2": "Pass", "final_contract": "2S"}
+{"profile": "Fighter", "board": 2, "run": 0, "north_open": "1H", "north_desc": "~14 HCP, balanced", "south_1": "2S", "south_2": "Pass", "final_contract": "2S"}
+{"profile": "NT Specialist", "board": 2, "run": 0, "north_open": "1H", "north_desc": "~14 HCP, balanced", "south_1": "2S", "south_2": "Pass", "final_contract": "2S"}
+{"profile": "Generalist", "board": 2, "run": 0, "north_open": "1H", "north_desc": "~14 HCP, balanced", "south_1": "2S", "south_2": "Pass", "final_contract": "2S"}
+{"profile": "Monkey (random)", "board": 2, "run": 0, "north_open": "1H", "north_desc": "~14 HCP, balanced", "south_1": "4S", "south_2": "5NT", "final_contract": "5NT"}
+{"profile": "Slam Hunter", "board": 3, "run": 0, "north_open": "Pass", "north_desc": "~9 HCP, unbalanced, 6 spades", "south_1": "2H", "south_2": "3H", "final_contract": "3H"}
+{"profile": "Insurance Player", "board": 3, "run": 0, "north_open": "Pass", "north_desc": "~9 HCP, unbalanced, 6 spades", "south_1": "2H", "south_2": "3H", "final_contract": "3H"}
+{"profile": "Fighter", "board": 3, "run": 0, "north_open": "Pass", "north_desc": "~9 HCP, unbalanced, 6 spades", "south_1": "1H", "south_2": "2H", "final_contract": "2H"}
+{"profile": "NT Specialist", "board": 3, "run": 0, "north_open": "Pass", "north_desc": "~9 HCP, unbalanced, 6 spades", "south_1": "1H", "south_2": "2H", "final_contract": "2H"}
+{"profile": "Generalist", "board": 3, "run": 0, "north_open": "Pass", "north_desc": "~9 HCP, unbalanced, 6 spades", "south_1": "1H", "south_2": "2H", "final_contract": "2H"}
+{"profile": "Monkey (random)", "board": 3, "run": 0, "north_open": "Pass", "north_desc": "~9 HCP, unbalanced, 6 spades", "south_1": "3S", "south_2": "4D", "final_contract": "4D"}
+{"profile": "Slam Hunter", "board": 4, "run": 0, "north_open": "Pass", "north_desc": "~10 HCP, balanced", "south_1": "2H", "south_2": "3H", "final_contract": "3H"}
+{"profile": "Insurance Player", "board": 4, "run": 0, "north_open": "Pass", "north_desc": "~10 HCP, balanced", "south_1": "1H", "south_2": "2H", "final_contract": "2H"}
+{"profile": "Fighter", "board": 4, "run": 0, "north_open": "Pass", "north_desc": "~10 HCP, balanced", "south_1": "1H", "south_2": "2H", "final_contract": "2H"}
+{"profile": "NT Specialist", "board": 4, "run": 0, "north_open": "Pass", "north_desc": "~10 HCP, balanced", "south_1": "1H", "south_2": "2H", "final_contract": "2H"}
+{"profile": "Generalist", "board": 4, "run": 0, "north_open": "Pass", "north_desc": "~10 HCP, balanced", "south_1": "1H", "south_2": "2H", "final_contract": "2H"}
+{"profile": "Monkey (random)", "board": 4, "run": 0, "north_open": "Pass", "north_desc": "~10 HCP, balanced", "south_1": "2C", "south_2": "6C", "final_contract": "6C"}
+{"profile": "Slam Hunter", "board": 5, "run": 0, "north_open": "Pass", "north_desc": "~11 HCP, unbalanced, 5 diamonds", "south_1": "1C", "south_2": "2D", "final_contract": "2D"}
+{"profile": "Insurance Player", "board": 5, "run": 0, "north_open": "Pass", "north_desc": "~11 HCP, unbalanced, 5 diamonds", "south_1": "1D", "south_2": "2D", "final_contract": "2D"}
+{"profile": "Fighter", "board": 5, "run": 0, "north_open": "Pass", "north_desc": "~11 HCP, unbalanced, 5 diamonds", "south_1": "1C", "south_2": "2D", "final_contract": "2D"}
+{"profile": "NT Specialist", "board": 5, "run": 0, "north_open": "Pass", "north_desc": "~11 HCP, unbalanced, 5 diamonds", "south_1": "1NT", "south_2": "2D", "final_contract": "2D"}
+{"profile": "Generalist", "board": 5, "run": 0, "north_open": "Pass", "north_desc": "~11 HCP, unbalanced, 5 diamonds", "south_1": "1C", "south_2": "2D", "final_contract": "2D"}
+{"profile": "Monkey (random)", "board": 5, "run": 0, "north_open": "Pass", "north_desc": "~11 HCP, unbalanced, 5 diamonds", "south_1": "7S", "south_2": "Pass", "final_contract": "7S"}
+{"profile": "Slam Hunter", "board": 6, "run": 0, "north_open": "Pass", "north_desc": "~8 HCP, unbalanced, 6 diamonds", "south_1": "2C", "south_2": "3C", "final_contract": "3C"}
+{"profile": "Insurance Player", "board": 6, "run": 0, "north_open": "Pass", "north_desc": "~8 HCP, unbalanced, 6 diamonds", "south_1": "1C", "south_2": "2C", "final_contract": "2C"}
+{"profile": "Fighter", "board": 6, "run": 0, "north_open": "Pass", "north_desc": "~8 HCP, unbalanced, 6 diamonds", "south_1": "1C", "south_2": "2C", "final_contract": "2C"}
+{"profile": "NT Specialist", "board": 6, "run": 0, "north_open": "Pass", "north_desc": "~8 HCP, unbalanced, 6 diamonds", "south_1": "1NT", "south_2": "2NT", "final_contract": "2NT"}
+{"profile": "Generalist", "board": 6, "run": 0, "north_open": "Pass", "north_desc": "~8 HCP, unbalanced, 6 diamonds", "south_1": "1C", "south_2": "2D", "final_contract": "2D"}
+{"profile": "Monkey (random)", "board": 6, "run": 0, "north_open": "Pass", "north_desc": "~8 HCP, unbalanced, 6 diamonds", "south_1": "6D", "south_2": "Pass", "final_contract": "6D"}
+{"profile": "Slam Hunter", "board": 7, "run": 0, "north_open": "1NT", "north_desc": "~15 HCP, balanced", "south_1": "2H", "south_2": "2S", "final_contract": "2S"}
+{"profile": "Insurance Player", "board": 7, "run": 0, "north_open": "1NT", "north_desc": "~15 HCP, balanced", "south_1": "Pass", "south_2": "Pass", "final_contract": "1NT"}
+{"profile": "Fighter", "board": 7, "run": 0, "north_open": "1NT", "north_desc": "~15 HCP, balanced", "south_1": "2H", "south_2": "2S", "final_contract": "2S"}
+{"profile": "NT Specialist", "board": 7, "run": 0, "north_open": "1NT", "north_desc": "~15 HCP, balanced", "south_1": "2H", "south_2": "2S", "final_contract": "2S"}
+{"profile": "Generalist", "board": 7, "run": 0, "north_open": "1NT", "north_desc": "~15 HCP, balanced", "south_1": "2H", "south_2": "2S", "final_contract": "2S"}
+{"profile": "Monkey (random)", "board": 7, "run": 0, "north_open": "1NT", "north_desc": "~15 HCP, balanced", "south_1": "X", "south_2": "2S", "final_contract": "2S"}
+{"profile": "Slam Hunter", "board": 8, "run": 0, "north_open": "1D", "north_desc": "~14 HCP, balanced", "south_1": "2C", "south_2": "2H", "final_contract": "2H"}
+{"profile": "Insurance Player", "board": 8, "run": 0, "north_open": "1D", "north_desc": "~14 HCP, balanced", "south_1": "1S", "south_2": "2S", "final_contract": "2S"}
+{"profile": "Fighter", "board": 8, "run": 0, "north_open": "1D", "north_desc": "~14 HCP, balanced", "south_1": "1S", "south_2": "2S", "final_contract": "2S"}
+{"profile": "NT Specialist", "board": 8, "run": 0, "north_open": "1D", "north_desc": "~14 HCP, balanced", "south_1": "1S", "south_2": "2S", "final_contract": "2S"}
+{"profile": "Generalist", "board": 8, "run": 0, "north_open": "1D", "north_desc": "~14 HCP, balanced", "south_1": "1S", "south_2": "2S", "final_contract": "2S"}
+{"profile": "Monkey (random)", "board": 8, "run": 0, "north_open": "1D", "north_desc": "~14 HCP, balanced", "south_1": "3S", "south_2": "4NT", "final_contract": "4NT"}
+{"profile": "Slam Hunter", "board": 9, "run": 0, "north_open": "1S", "north_desc": "~12 HCP, unbalanced, 5 spades", "south_1": "2C", "south_2": "2H", "final_contract": "2H"}
+{"profile": "Insurance Player", "board": 9, "run": 0, "north_open": "1S", "north_desc": "~12 HCP, unbalanced, 5 spades", "south_1": "Pass", "south_2": "2C", "final_contract": "2C"}
+{"profile": "Fighter", "board": 9, "run": 0, "north_open": "1S", "north_desc": "~12 HCP, unbalanced, 5 spades", "south_1": "2C", "south_2": "2S", "final_contract": "2S"}
+{"profile": "NT Specialist", "board": 9, "run": 0, "north_open": "1S", "north_desc": "~12 HCP, unbalanced, 5 spades", "south_1": "2C", "south_2": "2H", "final_contract": "2H"}
+{"profile": "Generalist", "board": 9, "run": 0, "north_open": "1S", "north_desc": "~12 HCP, unbalanced, 5 spades", "south_1": "2C", "south_2": "2H", "final_contract": "2H"}
+{"profile": "Monkey (random)", "board": 9, "run": 0, "north_open": "1S", "north_desc": "~12 HCP, unbalanced, 5 spades", "south_1": "7NT", "south_2": "Pass", "final_contract": "7NT"}
+{"profile": "Slam Hunter", "board": 10, "run": 0, "north_open": "1C", "north_desc": "~14 HCP, unbalanced, 6 clubs", "south_1": "3D", "south_2": "4D", "final_contract": "4D"}
+{"profile": "Insurance Player", "board": 10, "run": 0, "north_open": "1C", "north_desc": "~14 HCP, unbalanced, 6 clubs", "south_1": "3D", "south_2": "Pass", "final_contract": "3D"}
+{"profile": "Fighter", "board": 10, "run": 0, "north_open": "1C", "north_desc": "~14 HCP, unbalanced, 6 clubs", "south_1": "2D", "south_2": "2H", "final_contract": "2H"}
+{"profile": "NT Specialist", "board": 10, "run": 0, "north_open": "1C", "north_desc": "~14 HCP, unbalanced, 6 clubs", "south_1": "3D", "south_2": "3H", "final_contract": "3H"}
+{"profile": "Generalist", "board": 10, "run": 0, "north_open": "1C", "north_desc": "~14 HCP, unbalanced, 6 clubs", "south_1": "2D", "south_2": "2H", "final_contract": "2H"}
+{"profile": "Monkey (random)", "board": 10, "run": 0, "north_open": "1C", "north_desc": "~14 HCP, unbalanced, 6 clubs", "south_1": "7NT", "south_2": "Pass", "final_contract": "7NT"}
+{"profile": "Slam Hunter", "board": 11, "run": 0, "north_open": "Pass", "north_desc": "~7 HCP, balanced", "south_1": "1H", "south_2": "2H", "final_contract": "2H"}
+{"profile": "Insurance Player", "board": 11, "run": 0, "north_open": "Pass", "north_desc": "~7 HCP, balanced", "south_1": "1H", "south_2": "2H", "final_contract": "2H"}
+{"profile": "Fighter", "board": 11, "run": 0, "north_open": "Pass", "north_desc": "~7 HCP, balanced", "south_1": "1H", "south_2": "2H", "final_contract": "2H"}
+{"profile": "NT Specialist", "board": 11, "run": 0, "north_open": "Pass", "north_desc": "~7 HCP, balanced", "south_1": "1H", "south_2": "2H", "final_contract": "2H"}
+{"profile": "Generalist", "board": 11, "run": 0, "north_open": "Pass", "north_desc": "~7 HCP, balanced", "south_1": "1H", "south_2": "2H", "final_contract": "2H"}
+{"profile": "Monkey (random)", "board": 11, "run": 0, "north_open": "Pass", "north_desc": "~7 HCP, balanced", "south_1": "7S", "south_2": "X", "final_contract": "7S"}
+{"profile": "Slam Hunter", "board": 12, "run": 0, "north_open": "Pass", "north_desc": "~8 HCP, balanced", "south_1": "2S", "south_2": "3S", "final_contract": "3S"}
+{"profile": "Insurance Player", "board": 12, "run": 0, "north_open": "Pass", "north_desc": "~8 HCP, balanced", "south_1": "1S", "south_2": "2S", "final_contract": "2S"}
+{"profile": "Fighter", "board": 12, "run": 0, "north_open": "Pass", "north_desc": "~8 HCP, balanced", "south_1": "1S", "south_2": "2S", "final_contract": "2S"}
+{"profile": "NT Specialist", "board": 12, "run": 0, "north_open": "Pass", "north_desc": "~8 HCP, balanced", "south_1": "1S", "south_2": "3S", "final_contract": "3S"}
+{"profile": "Generalist", "board": 12, "run": 0, "north_open": "Pass", "north_desc": "~8 HCP, balanced", "south_1": "1S", "south_2": "2S", "final_contract": "2S"}
+{"profile": "Monkey (random)", "board": 12, "run": 0, "north_open": "Pass", "north_desc": "~8 HCP, balanced", "south_1": "3S", "south_2": "6D", "final_contract": "6D"}
+{"profile": "Slam Hunter", "board": 13, "run": 0, "north_open": "Pass", "north_desc": "~4 HCP, unbalanced, 6 spades", "south_1": "1H", "south_2": "2H", "final_contract": "2H"}
+{"profile": "Insurance Player", "board": 13, "run": 0, "north_open": "Pass", "north_desc": "~4 HCP, unbalanced, 6 spades", "south_1": "1H", "south_2": "2H", "final_contract": "2H"}
+{"profile": "Fighter", "board": 13, "run": 0, "north_open": "Pass", "north_desc": "~4 HCP, unbalanced, 6 spades", "south_1": "1NT", "south_2": "2H", "final_contract": "2H"}
+{"profile": "NT Specialist", "board": 13, "run": 0, "north_open": "Pass", "north_desc": "~4 HCP, unbalanced, 6 spades", "south_1": "1NT", "south_2": "2H", "final_contract": "2H"}
+{"profile": "Generalist", "board": 13, "run": 0, "north_open": "Pass", "north_desc": "~4 HCP, unbalanced, 6 spades", "south_1": "1H", "south_2": "2C", "final_contract": "2C"}
+{"profile": "Monkey (random)", "board": 13, "run": 0, "north_open": "Pass", "north_desc": "~4 HCP, unbalanced, 6 spades", "south_1": "4D", "south_2": "Pass", "final_contract": "4D"}
+{"profile": "Slam Hunter", "board": 14, "run": 0, "north_open": "1D", "north_desc": "~13 HCP, balanced", "south_1": "3S", "south_2": "4S", "final_contract": "4S"}
+{"profile": "Insurance Player", "board": 14, "run": 0, "north_open": "1D", "north_desc": "~13 HCP, balanced", "south_1": "2S", "south_2": "Pass", "final_contract": "2S"}
+{"profile": "Fighter", "board": 14, "run": 0, "north_open": "1D", "north_desc": "~13 HCP, balanced", "south_1": "2S", "south_2": "3S", "final_contract": "3S"}
+{"profile": "NT Specialist", "board": 14, "run": 0, "north_open": "1D", "north_desc": "~13 HCP, balanced", "south_1": "2S", "south_2": "3S", "final_contract": "3S"}
+{"profile": "Generalist", "board": 14, "run": 0, "north_open": "1D", "north_desc": "~13 HCP, balanced", "south_1": "2S", "south_2": "3S", "final_contract": "3S"}
+{"profile": "Monkey (random)", "board": 14, "run": 0, "north_open": "1D", "north_desc": "~13 HCP, balanced", "south_1": "3C", "south_2": "7D", "final_contract": "7D"}
+{"profile": "Slam Hunter", "board": 15, "run": 0, "north_open": "Pass", "north_desc": "~11 HCP, balanced", "south_1": "1S", "south_2": "2S", "final_contract": "2S"}
+{"profile": "Insurance Player", "board": 15, "run": 0, "north_open": "Pass", "north_desc": "~11 HCP, balanced", "south_1": "1C", "south_2": "Pass", "final_contract": "1C"}
+{"profile": "Fighter", "board": 15, "run": 0, "north_open": "Pass", "north_desc": "~11 HCP, balanced", "south_1": "1C", "south_2": "1S", "final_contract": "1S"}
+{"profile": "NT Specialist", "board": 15, "run": 0, "north_open": "Pass", "north_desc": "~11 HCP, balanced", "south_1": "1C", "south_2": "1H", "final_contract": "1H"}
+{"profile": "Generalist", "board": 15, "run": 0, "north_open": "Pass", "north_desc": "~11 HCP, balanced", "south_1": "1C", "south_2": "1H", "final_contract": "1H"}
+{"profile": "Monkey (random)", "board": 15, "run": 0, "north_open": "Pass", "north_desc": "~11 HCP, balanced", "south_1": "6D", "south_2": "7C", "final_contract": "7C"}
+{"profile": "Slam Hunter", "board": 16, "run": 0, "north_open": "Pass", "north_desc": "~9 HCP, unbalanced, 7 spades", "south_1": "1D", "south_2": "2H", "final_contract": "2H"}
+{"profile": "Insurance Player", "board": 16, "run": 0, "north_open": "Pass", "north_desc": "~9 HCP, unbalanced, 7 spades", "south_1": "1D", "south_2": "2D", "final_contract": "2D"}
+{"profile": "Fighter", "board": 16, "run": 0, "north_open": "Pass", "north_desc": "~9 HCP, unbalanced, 7 spades", "south_1": "1D", "south_2": "2C", "final_contract": "2C"}
+{"profile": "NT Specialist", "board": 16, "run": 0, "north_open": "Pass", "north_desc": "~9 HCP, unbalanced, 7 spades", "south_1": "1D", "south_2": "2H", "final_contract": "2H"}
+{"profile": "Generalist", "board": 16, "run": 0, "north_open": "Pass", "north_desc": "~9 HCP, unbalanced, 7 spades", "south_1": "1D", "south_2": "2D", "final_contract": "2D"}
+{"profile": "Monkey (random)", "board": 16, "run": 0, "north_open": "Pass", "north_desc": "~9 HCP, unbalanced, 7 spades", "south_1": "4D", "south_2": "4NT", "final_contract": "4NT"}
+{"profile": "Slam Hunter", "board": 17, "run": 0, "north_open": "Pass", "north_desc": "~9 HCP, unbalanced, 5 hearts", "south_1": "2D", "south_2": "2H", "final_contract": "2H"}
+{"profile": "Insurance Player", "board": 17, "run": 0, "north_open": "Pass", "north_desc": "~9 HCP, unbalanced, 5 hearts", "south_1": "1D", "south_2": "2H", "final_contract": "2H"}
+{"profile": "Fighter", "board": 17, "run": 0, "north_open": "Pass", "north_desc": "~9 HCP, unbalanced, 5 hearts", "south_1": "1D", "south_2": "2H", "final_contract": "2H"}
+{"profile": "NT Specialist", "board": 17, "run": 0, "north_open": "Pass", "north_desc": "~9 HCP, unbalanced, 5 hearts", "south_1": "1D", "south_2": "1H", "final_contract": "1H"}
+{"profile": "Generalist", "board": 17, "run": 0, "north_open": "Pass", "north_desc": "~9 HCP, unbalanced, 5 hearts", "south_1": "1D", "south_2": "1H", "final_contract": "1H"}
+{"profile": "Monkey (random)", "board": 17, "run": 0, "north_open": "Pass", "north_desc": "~9 HCP, unbalanced, 5 hearts", "south_1": "3H", "south_2": "5D", "final_contract": "5D"}
+{"profile": "Slam Hunter", "board": 18, "run": 0, "north_open": "1S", "north_desc": "~12 HCP, balanced", "south_1": "2S", "south_2": "3S", "final_contract": "3S"}
+{"profile": "Insurance Player", "board": 18, "run": 0, "north_open": "1S", "north_desc": "~12 HCP, balanced", "south_1": "Pass", "south_2": "2D", "final_contract": "2D"}
+{"profile": "Fighter", "board": 18, "run": 0, "north_open": "1S", "north_desc": "~12 HCP, balanced", "south_1": "2S", "south_2": "3S", "final_contract": "3S"}
+{"profile": "NT Specialist", "board": 18, "run": 0, "north_open": "1S", "north_desc": "~12 HCP, balanced", "south_1": "2H", "south_2": "2S", "final_contract": "2S"}
+{"profile": "Generalist", "board": 18, "run": 0, "north_open": "1S", "north_desc": "~12 HCP, balanced", "south_1": "2D", "south_2": "2H", "final_contract": "2H"}
+{"profile": "Monkey (random)", "board": 18, "run": 0, "north_open": "1S", "north_desc": "~12 HCP, balanced", "south_1": "2S", "south_2": "2NT", "final_contract": "2NT"}
+{"profile": "Slam Hunter", "board": 19, "run": 0, "north_open": "Pass", "north_desc": "~10 HCP, unbalanced, 5 spades", "south_1": "3D", "south_2": "4D", "final_contract": "4D"}
+{"profile": "Insurance Player", "board": 19, "run": 0, "north_open": "Pass", "north_desc": "~10 HCP, unbalanced, 5 spades", "south_1": "3D", "south_2": "Pass", "final_contract": "3D"}
+{"profile": "Fighter", "board": 19, "run": 0, "north_open": "Pass", "north_desc": "~10 HCP, unbalanced, 5 spades", "south_1": "2D", "south_2": "X", "final_contract": "2D"}
+{"profile": "NT Specialist", "board": 19, "run": 0, "north_open": "Pass", "north_desc": "~10 HCP, unbalanced, 5 spades", "south_1": "2D", "south_2": "3D", "final_contract": "3D"}
+{"profile": "Generalist", "board": 19, "run": 0, "north_open": "Pass", "north_desc": "~10 HCP, unbalanced, 5 spades", "south_1": "2D", "south_2": "3D", "final_contract": "3D"}
+{"profile": "Monkey (random)", "board": 19, "run": 0, "north_open": "Pass", "north_desc": "~10 HCP, unbalanced, 5 spades", "south_1": "5S", "south_2": "X", "final_contract": "5S"}
+{"profile": "Slam Hunter", "board": 20, "run": 0, "north_open": "1D", "north_desc": "~14 HCP, unbalanced, 7 diamonds", "south_1": "2H", "south_2": "3H", "final_contract": "3H"}
+{"profile": "Insurance Player", "board": 20, "run": 0, "north_open": "1D", "north_desc": "~14 HCP, unbalanced, 7 diamonds", "south_1": "2H", "south_2": "Pass", "final_contract": "2H"}
+{"profile": "Fighter", "board": 20, "run": 0, "north_open": "1D", "north_desc": "~14 HCP, unbalanced, 7 diamonds", "south_1": "2H", "south_2": "2S", "final_contract": "2S"}
+{"profile": "NT Specialist", "board": 20, "run": 0, "north_open": "1D", "north_desc": "~14 HCP, unbalanced, 7 diamonds", "south_1": "2H", "south_2": "2S", "final_contract": "2S"}
+{"profile": "Generalist", "board": 20, "run": 0, "north_open": "1D", "north_desc": "~14 HCP, unbalanced, 7 diamonds", "south_1": "2H", "south_2": "2S", "final_contract": "2S"}
+{"profile": "Monkey (random)", "board": 20, "run": 0, "north_open": "1D", "north_desc": "~14 HCP, unbalanced, 7 diamonds", "south_1": "5H", "south_2": "7NT", "final_contract": "7NT"}
+{"profile": "Slam Hunter", "board": 21, "run": 0, "north_open": "1S", "north_desc": "~12 HCP, unbalanced, 5 spades", "south_1": "2S", "south_2": "3S", "final_contract": "3S"}
+{"profile": "Insurance Player", "board": 21, "run": 0, "north_open": "1S", "north_desc": "~12 HCP, unbalanced, 5 spades", "south_1": "2S", "south_2": "3S", "final_contract": "3S"}
+{"profile": "Fighter", "board": 21, "run": 0, "north_open": "1S", "north_desc": "~12 HCP, unbalanced, 5 spades", "south_1": "2S", "south_2": "3S", "final_contract": "3S"}
+{"profile": "NT Specialist", "board": 21, "run": 0, "north_open": "1S", "north_desc": "~12 HCP, unbalanced, 5 spades", "south_1": "2S", "south_2": "3S", "final_contract": "3S"}
+{"profile": "Generalist", "board": 21, "run": 0, "north_open": "1S", "north_desc": "~12 HCP, unbalanced, 5 spades", "south_1": "2S", "south_2": "3S", "final_contract": "3S"}
+{"profile": "Monkey (random)", "board": 21, "run": 0, "north_open": "1S", "north_desc": "~12 HCP, unbalanced, 5 spades", "south_1": "5NT", "south_2": "7H", "final_contract": "7H"}
+{"profile": "Slam Hunter", "board": 22, "run": 0, "north_open": "1D", "north_desc": "~13 HCP, balanced", "south_1": "2H", "south_2": "2S", "final_contract": "2S"}
+{"profile": "Insurance Player", "board": 22, "run": 0, "north_open": "1D", "north_desc": "~13 HCP, balanced", "south_1": "1H", "south_2": "2H", "final_contract": "2H"}
+{"profile": "Fighter", "board": 22, "run": 0, "north_open": "1D", "north_desc": "~13 HCP, balanced", "south_1": "1H", "south_2": "2H", "final_contract": "2H"}
+{"profile": "NT Specialist", "board": 22, "run": 0, "north_open": "1D", "north_desc": "~13 HCP, balanced", "south_1": "1H", "south_2": "2H", "final_contract": "2H"}
+{"profile": "Generalist", "board": 22, "run": 0, "north_open": "1D", "north_desc": "~13 HCP, balanced", "south_1": "1H", "south_2": "2H", "final_contract": "2H"}
+{"profile": "Monkey (random)", "board": 22, "run": 0, "north_open": "1D", "north_desc": "~13 HCP, balanced", "south_1": "4D", "south_2": "X", "final_contract": "4D"}
+{"profile": "Slam Hunter", "board": 23, "run": 0, "north_open": "Pass", "north_desc": "~8 HCP, unbalanced, 5 spades", "south_1": "1S", "south_2": "2S", "final_contract": "2S"}
+{"profile": "Insurance Player", "board": 23, "run": 0, "north_open": "Pass", "north_desc": "~8 HCP, unbalanced, 5 spades", "south_1": "1C", "south_2": "1S", "final_contract": "1S"}
+{"profile": "Fighter", "board": 23, "run": 0, "north_open": "Pass", "north_desc": "~8 HCP, unbalanced, 5 spades", "south_1": "1C", "south_2": "1S", "final_contract": "1S"}
+{"profile": "NT Specialist", "board": 23, "run": 0, "north_open": "Pass", "north_desc": "~8 HCP, unbalanced, 5 spades", "south_1": "1NT", "south_2": "2S", "final_contract": "2S"}
+{"profile": "Generalist", "board": 23, "run": 0, "north_open": "Pass", "north_desc": "~8 HCP, unbalanced, 5 spades", "south_1": "1H", "south_2": "1S", "final_contract": "1S"}
+{"profile": "Monkey (random)", "board": 23, "run": 0, "north_open": "Pass", "north_desc": "~8 HCP, unbalanced, 5 spades", "south_1": "6S", "south_2": "X", "final_contract": "6S"}
+{"profile": "Slam Hunter", "board": 24, "run": 0, "north_open": "Pass", "north_desc": "~7 HCP, unbalanced, 6 spades", "south_1": "2D", "south_2": "2H", "final_contract": "2H"}
+{"profile": "Insurance Player", "board": 24, "run": 0, "north_open": "Pass", "north_desc": "~7 HCP, unbalanced, 6 spades", "south_1": "1NT", "south_2": "Pass", "final_contract": "1NT"}
+{"profile": "Fighter", "board": 24, "run": 0, "north_open": "Pass", "north_desc": "~7 HCP, unbalanced, 6 spades", "south_1": "1S", "south_2": "2S", "final_contract": "2S"}
+{"profile": "NT Specialist", "board": 24, "run": 0, "north_open": "Pass", "north_desc": "~7 HCP, unbalanced, 6 spades", "south_1": "1NT", "south_2": "2S", "final_contract": "2S"}
+{"profile": "Generalist", "board": 24, "run": 0, "north_open": "Pass", "north_desc": "~7 HCP, unbalanced, 6 spades", "south_1": "1S", "south_2": "2H", "final_contract": "2H"}
+{"profile": "Monkey (random)", "board": 24, "run": 0, "north_open": "Pass", "north_desc": "~7 HCP, unbalanced, 6 spades", "south_1": "5S", "south_2": "X", "final_contract": "5S"}
+{"profile": "Slam Hunter", "board": 25, "run": 0, "north_open": "1S", "north_desc": "~12 HCP, unbalanced, 5 spades", "south_1": "2C", "south_2": "3C", "final_contract": "3C"}
+{"profile": "Insurance Player", "board": 25, "run": 0, "north_open": "1S", "north_desc": "~12 HCP, unbalanced, 5 spades", "south_1": "2C", "south_2": "Pass", "final_contract": "2C"}
+{"profile": "Fighter", "board": 25, "run": 0, "north_open": "1S", "north_desc": "~12 HCP, unbalanced, 5 spades", "south_1": "2C", "south_2": "2H", "final_contract": "2H"}
+{"profile": "NT Specialist", "board": 25, "run": 0, "north_open": "1S", "north_desc": "~12 HCP, unbalanced, 5 spades", "south_1": "2S", "south_2": "3S", "final_contract": "3S"}
+{"profile": "Generalist", "board": 25, "run": 0, "north_open": "1S", "north_desc": "~12 HCP, unbalanced, 5 spades", "south_1": "2C", "south_2": "2H", "final_contract": "2H"}
+{"profile": "Monkey (random)", "board": 25, "run": 0, "north_open": "1S", "north_desc": "~12 HCP, unbalanced, 5 spades", "south_1": "5C", "south_2": "7C", "final_contract": "7C"}
+{"profile": "Slam Hunter", "board": 26, "run": 0, "north_open": "Pass", "north_desc": "~10 HCP, unbalanced, 5 spades", "south_1": "2H", "south_2": "3H", "final_contract": "3H"}
+{"profile": "Insurance Player", "board": 26, "run": 0, "north_open": "Pass", "north_desc": "~10 HCP, unbalanced, 5 spades", "south_1": "Pass", "south_2": "Pass", "final_contract": "Pass"}
+{"profile": "Fighter", "board": 26, "run": 0, "north_open": "Pass", "north_desc": "~10 HCP, unbalanced, 5 spades", "south_1": "1H", "south_2": "2H", "final_contract": "2H"}
+{"profile": "NT Specialist", "board": 26, "run": 0, "north_open": "Pass", "north_desc": "~10 HCP, unbalanced, 5 spades", "south_1": "2H", "south_2": "3H", "final_contract": "3H"}
+{"profile": "Generalist", "board": 26, "run": 0, "north_open": "Pass", "north_desc": "~10 HCP, unbalanced, 5 spades", "south_1": "1H", "south_2": "2H", "final_contract": "2H"}
+{"profile": "Monkey (random)", "board": 26, "run": 0, "north_open": "Pass", "north_desc": "~10 HCP, unbalanced, 5 spades", "south_1": "3D", "south_2": "7H", "final_contract": "7H"}
+{"profile": "Slam Hunter", "board": 27, "run": 0, "north_open": "Pass", "north_desc": "~9 HCP, unbalanced, 6 hearts", "south_1": "1H", "south_2": "2H", "final_contract": "2H"}
+{"profile": "Insurance Player", "board": 27, "run": 0, "north_open": "Pass", "north_desc": "~9 HCP, unbalanced, 6 hearts", "south_1": "1H", "south_2": "2H", "final_contract": "2H"}
+{"profile": "Fighter", "board": 27, "run": 0, "north_open": "Pass", "north_desc": "~9 HCP, unbalanced, 6 hearts", "south_1": "1H", "south_2": "2H", "final_contract": "2H"}
+{"profile": "NT Specialist", "board": 27, "run": 0, "north_open": "Pass", "north_desc": "~9 HCP, unbalanced, 6 hearts", "south_1": "1H", "south_2": "2H", "final_contract": "2H"}
+{"profile": "Generalist", "board": 27, "run": 0, "north_open": "Pass", "north_desc": "~9 HCP, unbalanced, 6 hearts", "south_1": "1H", "south_2": "2H", "final_contract": "2H"}
+{"profile": "Monkey (random)", "board": 27, "run": 0, "north_open": "Pass", "north_desc": "~9 HCP, unbalanced, 6 hearts", "south_1": "1S", "south_2": "1NT", "final_contract": "1NT"}
+{"profile": "Slam Hunter", "board": 28, "run": 0, "north_open": "Pass", "north_desc": "~7 HCP, unbalanced, 4 spades", "south_1": "2D", "south_2": "3D", "final_contract": "3D"}
+{"profile": "Insurance Player", "board": 28, "run": 0, "north_open": "Pass", "north_desc": "~7 HCP, unbalanced, 4 spades", "south_1": "3D", "south_2": "Pass", "final_contract": "3D"}
+{"profile": "Fighter", "board": 28, "run": 0, "north_open": "Pass", "north_desc": "~7 HCP, unbalanced, 4 spades", "south_1": "1D", "south_2": "2H", "final_contract": "2H"}
+{"profile": "NT Specialist", "board": 28, "run": 0, "north_open": "Pass", "north_desc": "~7 HCP, unbalanced, 4 spades", "south_1": "1NT", "south_2": "2D", "final_contract": "2D"}
+{"profile": "Generalist", "board": 28, "run": 0, "north_open": "Pass", "north_desc": "~7 HCP, unbalanced, 4 spades", "south_1": "1D", "south_2": "2D", "final_contract": "2D"}
+{"profile": "Monkey (random)", "board": 28, "run": 0, "north_open": "Pass", "north_desc": "~7 HCP, unbalanced, 4 spades", "south_1": "3S", "south_2": "5D", "final_contract": "5D"}
+{"profile": "Slam Hunter", "board": 29, "run": 0, "north_open": "Pass", "north_desc": "~7 HCP, unbalanced, 6 hearts", "south_1": "1D", "south_2": "2D", "final_contract": "2D"}
+{"profile": "Insurance Player", "board": 29, "run": 0, "north_open": "Pass", "north_desc": "~7 HCP, unbalanced, 6 hearts", "south_1": "1NT", "south_2": "Pass", "final_contract": "1NT"}
+{"profile": "Fighter", "board": 29, "run": 0, "north_open": "Pass", "north_desc": "~7 HCP, unbalanced, 6 hearts", "south_1": "1D", "south_2": "2H", "final_contract": "2H"}
+{"profile": "NT Specialist", "board": 29, "run": 0, "north_open": "Pass", "north_desc": "~7 HCP, unbalanced, 6 hearts", "south_1": "1D", "south_2": "1H", "final_contract": "1H"}
+{"profile": "Generalist", "board": 29, "run": 0, "north_open": "Pass", "north_desc": "~7 HCP, unbalanced, 6 hearts", "south_1": "1D", "south_2": "1H", "final_contract": "1H"}
+{"profile": "Monkey (random)", "board": 29, "run": 0, "north_open": "Pass", "north_desc": "~7 HCP, unbalanced, 6 hearts", "south_1": "1NT", "south_2": "4H", "final_contract": "4H"}
+{"profile": "Slam Hunter", "board": 30, "run": 0, "north_open": "1D", "north_desc": "~18 HCP, unbalanced, 6 diamonds", "south_1": "3H", "south_2": "4H", "final_contract": "4H"}
+{"profile": "Insurance Player", "board": 30, "run": 0, "north_open": "1D", "north_desc": "~18 HCP, unbalanced, 6 diamonds", "south_1": "3H", "south_2": "Pass", "final_contract": "3H"}
+{"profile": "Fighter", "board": 30, "run": 0, "north_open": "1D", "north_desc": "~18 HCP, unbalanced, 6 diamonds", "south_1": "4H", "south_2": "Pass", "final_contract": "4H"}
+{"profile": "NT Specialist", "board": 30, "run": 0, "north_open": "1D", "north_desc": "~18 HCP, unbalanced, 6 diamonds", "south_1": "2H", "south_2": "3H", "final_contract": "3H"}
+{"profile": "Generalist", "board": 30, "run": 0, "north_open": "1D", "north_desc": "~18 HCP, unbalanced, 6 diamonds", "south_1": "2H", "south_2": "3H", "final_contract": "3H"}
+{"profile": "Monkey (random)", "board": 30, "run": 0, "north_open": "1D", "north_desc": "~18 HCP, unbalanced, 6 diamonds", "south_1": "2D", "south_2": "4H", "final_contract": "4H"}
+{"profile": "Slam Hunter", "board": 31, "run": 0, "north_open": "1S", "north_desc": "~14 HCP, unbalanced, 6 spades", "south_1": "2H", "south_2": "3H", "final_contract": "3H"}
+{"profile": "Insurance Player", "board": 31, "run": 0, "north_open": "1S", "north_desc": "~14 HCP, unbalanced, 6 spades", "south_1": "2H", "south_2": "3H", "final_contract": "3H"}
+{"profile": "Fighter", "board": 31, "run": 0, "north_open": "1S", "north_desc": "~14 HCP, unbalanced, 6 spades", "south_1": "2H", "south_2": "2S", "final_contract": "2S"}
+{"profile": "NT Specialist", "board": 31, "run": 0, "north_open": "1S", "north_desc": "~14 HCP, unbalanced, 6 spades", "south_1": "2H", "south_2": "3H", "final_contract": "3H"}
+{"profile": "Generalist", "board": 31, "run": 0, "north_open": "1S", "north_desc": "~14 HCP, unbalanced, 6 spades", "south_1": "2H", "south_2": "3H", "final_contract": "3H"}
+{"profile": "Monkey (random)", "board": 31, "run": 0, "north_open": "1S", "north_desc": "~14 HCP, unbalanced, 6 spades", "south_1": "4NT", "south_2": "7H", "final_contract": "7H"}
+{"profile": "Slam Hunter", "board": 32, "run": 0, "north_open": "Pass", "north_desc": "~8 HCP, balanced", "south_1": "1NT", "south_2": "2C", "final_contract": "2C"}
+{"profile": "Insurance Player", "board": 32, "run": 0, "north_open": "Pass", "north_desc": "~8 HCP, balanced", "south_1": "1NT", "south_2": "Pass", "final_contract": "1NT"}
+{"profile": "Fighter", "board": 32, "run": 0, "north_open": "Pass", "north_desc": "~8 HCP, balanced", "south_1": "1NT", "south_2": "X", "final_contract": "1NT"}
+{"profile": "NT Specialist", "board": 32, "run": 0, "north_open": "Pass", "north_desc": "~8 HCP, balanced", "south_1": "1NT", "south_2": "2C", "final_contract": "2C"}
+{"profile": "Generalist", "board": 32, "run": 0, "north_open": "Pass", "north_desc": "~8 HCP, balanced", "south_1": "1NT", "south_2": "2D", "final_contract": "2D"}
+{"profile": "Monkey (random)", "board": 32, "run": 0, "north_open": "Pass", "north_desc": "~8 HCP, balanced", "south_1": "5H", "south_2": "5S", "final_contract": "5S"}
+{"profile": "Slam Hunter", "board": 33, "run": 0, "north_open": "Pass", "north_desc": "~7 HCP, unbalanced, 6 spades", "south_1": "2H", "south_2": "4H", "final_contract": "4H"}
+{"profile": "Insurance Player", "board": 33, "run": 0, "north_open": "Pass", "north_desc": "~7 HCP, unbalanced, 6 spades", "south_1": "2H", "south_2": "3H", "final_contract": "3H"}
+{"profile": "Fighter", "board": 33, "run": 0, "north_open": "Pass", "north_desc": "~7 HCP, unbalanced, 6 spades", "south_1": "1H", "south_2": "2H", "final_contract": "2H"}
+{"profile": "NT Specialist", "board": 33, "run": 0, "north_open": "Pass", "north_desc": "~7 HCP, unbalanced, 6 spades", "south_1": "1H", "south_2": "3H", "final_contract": "3H"}
+{"profile": "Generalist", "board": 33, "run": 0, "north_open": "Pass", "north_desc": "~7 HCP, unbalanced, 6 spades", "south_1": "1H", "south_2": "2H", "final_contract": "2H"}
+{"profile": "Monkey (random)", "board": 33, "run": 0, "north_open": "Pass", "north_desc": "~7 HCP, unbalanced, 6 spades", "south_1": "5H", "south_2": "6D", "final_contract": "6D"}
+{"profile": "Slam Hunter", "board": 34, "run": 0, "north_open": "1S", "north_desc": "~18 HCP, unbalanced, 5 spades", "south_1": "2C", "south_2": "3C", "final_contract": "3C"}
+{"profile": "Insurance Player", "board": 34, "run": 0, "north_open": "1S", "north_desc": "~18 HCP, unbalanced, 5 spades", "south_1": "Pass", "south_2": "2C", "final_contract": "2C"}
+{"profile": "Fighter", "board": 34, "run": 0, "north_open": "1S", "north_desc": "~18 HCP, unbalanced, 5 spades", "south_1": "2D", "south_2": "2S", "final_contract": "2S"}
+{"profile": "NT Specialist", "board": 34, "run": 0, "north_open": "1S", "north_desc": "~18 HCP, unbalanced, 5 spades", "south_1": "2D", "south_2": "2H", "final_contract": "2H"}
+{"profile": "Generalist", "board": 34, "run": 0, "north_open": "1S", "north_desc": "~18 HCP, unbalanced, 5 spades", "south_1": "2D", "south_2": "2H", "final_contract": "2H"}
+{"profile": "Monkey (random)", "board": 34, "run": 0, "north_open": "1S", "north_desc": "~18 HCP, unbalanced, 5 spades", "south_1": "4C", "south_2": "5H", "final_contract": "5H"}
+{"profile": "Slam Hunter", "board": 35, "run": 0, "north_open": "1NT", "north_desc": "~17 HCP, balanced", "south_1": "2C", "south_2": "2D", "final_contract": "2D"}
+{"profile": "Insurance Player", "board": 35, "run": 0, "north_open": "1NT", "north_desc": "~17 HCP, balanced", "south_1": "Pass", "south_2": "Pass", "final_contract": "1NT"}
+{"profile": "Fighter", "board": 35, "run": 0, "north_open": "1NT", "north_desc": "~17 HCP, balanced", "south_1": "X", "south_2": "2D", "final_contract": "2D"}
+{"profile": "NT Specialist", "board": 35, "run": 0, "north_open": "1NT", "north_desc": "~17 HCP, balanced", "south_1": "2D", "south_2": "3NT", "final_contract": "3NT"}
+{"profile": "Generalist", "board": 35, "run": 0, "north_open": "1NT", "north_desc": "~17 HCP, balanced", "south_1": "2D", "south_2": "2H", "final_contract": "2H"}
+{"profile": "Monkey (random)", "board": 35, "run": 0, "north_open": "1NT", "north_desc": "~17 HCP, balanced", "south_1": "2H", "south_2": "6C", "final_contract": "6C"}
+{"profile": "Slam Hunter", "board": 36, "run": 0, "north_open": "Pass", "north_desc": "~10 HCP, unbalanced, 5 clubs", "south_1": "2H", "south_2": "4H", "final_contract": "4H"}
+{"profile": "Insurance Player", "board": 36, "run": 0, "north_open": "Pass", "north_desc": "~10 HCP, unbalanced, 5 clubs", "south_1": "2H", "south_2": "3H", "final_contract": "3H"}
+{"profile": "Fighter", "board": 36, "run": 0, "north_open": "Pass", "north_desc": "~10 HCP, unbalanced, 5 clubs", "south_1": "1H", "south_2": "2H", "final_contract": "2H"}
+{"profile": "NT Specialist", "board": 36, "run": 0, "north_open": "Pass", "north_desc": "~10 HCP, unbalanced, 5 clubs", "south_1": "1H", "south_2": "2H", "final_contract": "2H"}
+{"profile": "Generalist", "board": 36, "run": 0, "north_open": "Pass", "north_desc": "~10 HCP, unbalanced, 5 clubs", "south_1": "1H", "south_2": "2H", "final_contract": "2H"}
+{"profile": "Monkey (random)", "board": 36, "run": 0, "north_open": "Pass", "north_desc": "~10 HCP, unbalanced, 5 clubs", "south_1": "2NT", "south_2": "6C", "final_contract": "6C"}
+{"profile": "Slam Hunter", "board": 37, "run": 0, "north_open": "Pass", "north_desc": "~5 HCP, balanced", "south_1": "2C", "south_2": "3C", "final_contract": "3C"}
+{"profile": "Insurance Player", "board": 37, "run": 0, "north_open": "Pass", "north_desc": "~5 HCP, balanced", "south_1": "1C", "south_2": "2C", "final_contract": "2C"}
+{"profile": "Fighter", "board": 37, "run": 0, "north_open": "Pass", "north_desc": "~5 HCP, balanced", "south_1": "2C", "south_2": "X", "final_contract": "2C"}
+{"profile": "NT Specialist", "board": 37, "run": 0, "north_open": "Pass", "north_desc": "~5 HCP, balanced", "south_1": "1C", "south_2": "2C", "final_contract": "2C"}
+{"profile": "Generalist", "board": 37, "run": 0, "north_open": "Pass", "north_desc": "~5 HCP, balanced", "south_1": "1C", "south_2": "2C", "final_contract": "2C"}
+{"profile": "Monkey (random)", "board": 37, "run": 0, "north_open": "Pass", "north_desc": "~5 HCP, balanced", "south_1": "3NT", "south_2": "4S", "final_contract": "4S"}
+{"profile": "Slam Hunter", "board": 38, "run": 0, "north_open": "Pass", "north_desc": "~5 HCP, balanced", "south_1": "2H", "south_2": "3H", "final_contract": "3H"}
+{"profile": "Insurance Player", "board": 38, "run": 0, "north_open": "Pass", "north_desc": "~5 HCP, balanced", "south_1": "1H", "south_2": "2H", "final_contract": "2H"}
+{"profile": "Fighter", "board": 38, "run": 0, "north_open": "Pass", "north_desc": "~5 HCP, balanced", "south_1": "1H", "south_2": "2H", "final_contract": "2H"}
+{"profile": "NT Specialist", "board": 38, "run": 0, "north_open": "Pass", "north_desc": "~5 HCP, balanced", "south_1": "1H", "south_2": "2H", "final_contract": "2H"}
+{"profile": "Generalist", "board": 38, "run": 0, "north_open": "Pass", "north_desc": "~5 HCP, balanced", "south_1": "1H", "south_2": "2H", "final_contract": "2H"}
+{"profile": "Monkey (random)", "board": 38, "run": 0, "north_open": "Pass", "north_desc": "~5 HCP, balanced", "south_1": "6S", "south_2": "7S", "final_contract": "7S"}
+{"profile": "Slam Hunter", "board": 39, "run": 0, "north_open": "Pass", "north_desc": "~7 HCP, balanced", "south_1": "2C", "south_2": "3C", "final_contract": "3C"}
+{"profile": "Insurance Player", "board": 39, "run": 0, "north_open": "Pass", "north_desc": "~7 HCP, balanced", "south_1": "1C", "south_2": "2C", "final_contract": "2C"}
+{"profile": "Fighter", "board": 39, "run": 0, "north_open": "Pass", "north_desc": "~7 HCP, balanced", "south_1": "1C", "south_2": "X", "final_contract": "1C"}
+{"profile": "NT Specialist", "board": 39, "run": 0, "north_open": "Pass", "north_desc": "~7 HCP, balanced", "south_1": "1C", "south_2": "2C", "final_contract": "2C"}
+{"profile": "Generalist", "board": 39, "run": 0, "north_open": "Pass", "north_desc": "~7 HCP, balanced", "south_1": "1C", "south_2": "2C", "final_contract": "2C"}
+{"profile": "Monkey (random)", "board": 39, "run": 0, "north_open": "Pass", "north_desc": "~7 HCP, balanced", "south_1": "4D", "south_2": "7H", "final_contract": "7H"}
+{"profile": "Slam Hunter", "board": 40, "run": 0, "north_open": "Pass", "north_desc": "~10 HCP, balanced", "south_1": "2S", "south_2": "3S", "final_contract": "3S"}
+{"profile": "Insurance Player", "board": 40, "run": 0, "north_open": "Pass", "north_desc": "~10 HCP, balanced", "south_1": "1S", "south_2": "2S", "final_contract": "2S"}
+{"profile": "Fighter", "board": 40, "run": 0, "north_open": "Pass", "north_desc": "~10 HCP, balanced", "south_1": "1S", "south_2": "2S", "final_contract": "2S"}
+{"profile": "NT Specialist", "board": 40, "run": 0, "north_open": "Pass", "north_desc": "~10 HCP, balanced", "south_1": "1S", "south_2": "2S", "final_contract": "2S"}
+{"profile": "Generalist", "board": 40, "run": 0, "north_open": "Pass", "north_desc": "~10 HCP, balanced", "south_1": "1S", "south_2": "2S", "final_contract": "2S"}
+{"profile": "Monkey (random)", "board": 40, "run": 0, "north_open": "Pass", "north_desc": "~10 HCP, balanced", "south_1": "3S", "south_2": "7S", "final_contract": "7S"}
+{"profile": "Slam Hunter", "board": 41, "run": 0, "north_open": "Pass", "north_desc": "~10 HCP, balanced", "south_1": "1H", "south_2": "2H", "final_contract": "2H"}
+{"profile": "Insurance Player", "board": 41, "run": 0, "north_open": "Pass", "north_desc": "~10 HCP, balanced", "south_1": "1H", "south_2": "2H", "final_contract": "2H"}
+{"profile": "Fighter", "board": 41, "run": 0, "north_open": "Pass", "north_desc": "~10 HCP, balanced", "south_1": "1H", "south_2": "2H", "final_contract": "2H"}
+{"profile": "NT Specialist", "board": 41, "run": 0, "north_open": "Pass", "north_desc": "~10 HCP, balanced", "south_1": "1H", "south_2": "2H", "final_contract": "2H"}
+{"profile": "Generalist", "board": 41, "run": 0, "north_open": "Pass", "north_desc": "~10 HCP, balanced", "south_1": "1H", "south_2": "2H", "final_contract": "2H"}
+{"profile": "Monkey (random)", "board": 41, "run": 0, "north_open": "Pass", "north_desc": "~10 HCP, balanced", "south_1": "4NT", "south_2": "X", "final_contract": "4NT"}
+{"profile": "Slam Hunter", "board": 42, "run": 0, "north_open": "Pass", "north_desc": "~6 HCP, unbalanced, 4 spades", "south_1": "2D", "south_2": "2H", "final_contract": "2H"}
+{"profile": "Insurance Player", "board": 42, "run": 0, "north_open": "Pass", "north_desc": "~6 HCP, unbalanced, 4 spades", "south_1": "1D", "south_2": "2D", "final_contract": "2D"}
+{"profile": "Fighter", "board": 42, "run": 0, "north_open": "Pass", "north_desc": "~6 HCP, unbalanced, 4 spades", "south_1": "1D", "south_2": "2H", "final_contract": "2H"}
+{"profile": "NT Specialist", "board": 42, "run": 0, "north_open": "Pass", "north_desc": "~6 HCP, unbalanced, 4 spades", "south_1": "1D", "south_2": "2H", "final_contract": "2H"}
+{"profile": "Generalist", "board": 42, "run": 0, "north_open": "Pass", "north_desc": "~6 HCP, unbalanced, 4 spades", "south_1": "1D", "south_2": "2D", "final_contract": "2D"}
+{"profile": "Monkey (random)", "board": 42, "run": 0, "north_open": "Pass", "north_desc": "~6 HCP, unbalanced, 4 spades", "south_1": "3S", "south_2": "X", "final_contract": "3S"}
+{"profile": "Slam Hunter", "board": 43, "run": 0, "north_open": "1S", "north_desc": "~13 HCP, unbalanced, 6 spades", "south_1": "2H", "south_2": "2S", "final_contract": "2S"}
+{"profile": "Insurance Player", "board": 43, "run": 0, "north_open": "1S", "north_desc": "~13 HCP, unbalanced, 6 spades", "south_1": "2H", "south_2": "3H", "final_contract": "3H"}
+{"profile": "Fighter", "board": 43, "run": 0, "north_open": "1S", "north_desc": "~13 HCP, unbalanced, 6 spades", "south_1": "2H", "south_2": "2S", "final_contract": "2S"}
+{"profile": "NT Specialist", "board": 43, "run": 0, "north_open": "1S", "north_desc": "~13 HCP, unbalanced, 6 spades", "south_1": "2H", "south_2": "2NT", "final_contract": "2NT"}
+{"profile": "Generalist", "board": 43, "run": 0, "north_open": "1S", "north_desc": "~13 HCP, unbalanced, 6 spades", "south_1": "2H", "south_2": "2S", "final_contract": "2S"}
+{"profile": "Monkey (random)", "board": 43, "run": 0, "north_open": "1S", "north_desc": "~13 HCP, unbalanced, 6 spades", "south_1": "5H", "south_2": "6H", "final_contract": "6H"}
+{"profile": "Slam Hunter", "board": 44, "run": 0, "north_open": "1H", "north_desc": "~12 HCP, unbalanced, 5 hearts", "south_1": "2S", "south_2": "3S", "final_contract": "3S"}
+{"profile": "Insurance Player", "board": 44, "run": 0, "north_open": "1H", "north_desc": "~12 HCP, unbalanced, 5 hearts", "south_1": "2S", "south_2": "Pass", "final_contract": "2S"}
+{"profile": "Fighter", "board": 44, "run": 0, "north_open": "1H", "north_desc": "~12 HCP, unbalanced, 5 hearts", "south_1": "2S", "south_2": "3S", "final_contract": "3S"}
+{"profile": "NT Specialist", "board": 44, "run": 0, "north_open": "1H", "north_desc": "~12 HCP, unbalanced, 5 hearts", "south_1": "2S", "south_2": "3S", "final_contract": "3S"}
+{"profile": "Generalist", "board": 44, "run": 0, "north_open": "1H", "north_desc": "~12 HCP, unbalanced, 5 hearts", "south_1": "2S", "south_2": "3S", "final_contract": "3S"}
+{"profile": "Monkey (random)", "board": 44, "run": 0, "north_open": "1H", "north_desc": "~12 HCP, unbalanced, 5 hearts", "south_1": "4S", "south_2": "4NT", "final_contract": "4NT"}
+{"profile": "Slam Hunter", "board": 45, "run": 0, "north_open": "Pass", "north_desc": "~8 HCP, unbalanced, 5 clubs", "south_1": "2S", "south_2": "4S", "final_contract": "4S"}
+{"profile": "Insurance Player", "board": 45, "run": 0, "north_open": "Pass", "north_desc": "~8 HCP, unbalanced, 5 clubs", "south_1": "1S", "south_2": "2S", "final_contract": "2S"}
+{"profile": "Fighter", "board": 45, "run": 0, "north_open": "Pass", "north_desc": "~8 HCP, unbalanced, 5 clubs", "south_1": "1S", "south_2": "2S", "final_contract": "2S"}
+{"profile": "NT Specialist", "board": 45, "run": 0, "north_open": "Pass", "north_desc": "~8 HCP, unbalanced, 5 clubs", "south_1": "1S", "south_2": "2S", "final_contract": "2S"}
+{"profile": "Generalist", "board": 45, "run": 0, "north_open": "Pass", "north_desc": "~8 HCP, unbalanced, 5 clubs", "south_1": "1S", "south_2": "2S", "final_contract": "2S"}
+{"profile": "Monkey (random)", "board": 45, "run": 0, "north_open": "Pass", "north_desc": "~8 HCP, unbalanced, 5 clubs", "south_1": "3H", "south_2": "6NT", "final_contract": "6NT"}
+{"profile": "Slam Hunter", "board": 46, "run": 0, "north_open": "Pass", "north_desc": "~5 HCP, unbalanced, 6 diamonds", "south_1": "2C", "south_2": "2H", "final_contract": "2H"}
+{"profile": "Insurance Player", "board": 46, "run": 0, "north_open": "Pass", "north_desc": "~5 HCP, unbalanced, 6 diamonds", "south_1": "1C", "south_2": "2C", "final_contract": "2C"}
+{"profile": "Fighter", "board": 46, "run": 0, "north_open": "Pass", "north_desc": "~5 HCP, unbalanced, 6 diamonds", "south_1": "1C", "south_2": "2C", "final_contract": "2C"}
+{"profile": "NT Specialist", "board": 46, "run": 0, "north_open": "Pass", "north_desc": "~5 HCP, unbalanced, 6 diamonds", "south_1": "1C", "south_2": "2D", "final_contract": "2D"}
+{"profile": "Generalist", "board": 46, "run": 0, "north_open": "Pass", "north_desc": "~5 HCP, unbalanced, 6 diamonds", "south_1": "1C", "south_2": "2C", "final_contract": "2C"}
+{"profile": "Monkey (random)", "board": 46, "run": 0, "north_open": "Pass", "north_desc": "~5 HCP, unbalanced, 6 diamonds", "south_1": "4NT", "south_2": "5NT", "final_contract": "5NT"}
+{"profile": "Slam Hunter", "board": 47, "run": 0, "north_open": "Pass", "north_desc": "~11 HCP, unbalanced, 5 hearts", "south_1": "3C", "south_2": "4C", "final_contract": "4C"}
+{"profile": "Insurance Player", "board": 47, "run": 0, "north_open": "Pass", "north_desc": "~11 HCP, unbalanced, 5 hearts", "south_1": "3C", "south_2": "Pass", "final_contract": "3C"}
+{"profile": "Fighter", "board": 47, "run": 0, "north_open": "Pass", "north_desc": "~11 HCP, unbalanced, 5 hearts", "south_1": "2C", "south_2": "X", "final_contract": "2C"}
+{"profile": "NT Specialist", "board": 47, "run": 0, "north_open": "Pass", "north_desc": "~11 HCP, unbalanced, 5 hearts", "south_1": "2C", "south_2": "3C", "final_contract": "3C"}
+{"profile": "Generalist", "board": 47, "run": 0, "north_open": "Pass", "north_desc": "~11 HCP, unbalanced, 5 hearts", "south_1": "2C", "south_2": "3C", "final_contract": "3C"}
+{"profile": "Monkey (random)", "board": 47, "run": 0, "north_open": "Pass", "north_desc": "~11 HCP, unbalanced, 5 hearts", "south_1": "7C", "south_2": "7H", "final_contract": "7H"}
+{"profile": "Slam Hunter", "board": 48, "run": 0, "north_open": "1H", "north_desc": "~14 HCP, unbalanced, 5 hearts", "south_1": "2H", "south_2": "2S", "final_contract": "2S"}
+{"profile": "Insurance Player", "board": 48, "run": 0, "north_open": "1H", "north_desc": "~14 HCP, unbalanced, 5 hearts", "south_1": "2H", "south_2": "3H", "final_contract": "3H"}
+{"profile": "Fighter", "board": 48, "run": 0, "north_open": "1H", "north_desc": "~14 HCP, unbalanced, 5 hearts", "south_1": "2H", "south_2": "Pass", "final_contract": "2H"}
+{"profile": "NT Specialist", "board": 48, "run": 0, "north_open": "1H", "north_desc": "~14 HCP, unbalanced, 5 hearts", "south_1": "2H", "south_2": "Pass", "final_contract": "2H"}
+{"profile": "Generalist", "board": 48, "run": 0, "north_open": "1H", "north_desc": "~14 HCP, unbalanced, 5 hearts", "south_1": "1S", "south_2": "2H", "final_contract": "2H"}
+{"profile": "Monkey (random)", "board": 48, "run": 0, "north_open": "1H", "north_desc": "~14 HCP, unbalanced, 5 hearts", "south_1": "7C", "south_2": "X", "final_contract": "7C"}
+{"profile": "Slam Hunter", "board": 49, "run": 0, "north_open": "Pass", "north_desc": "~5 HCP, balanced", "south_1": "1D", "south_2": "2D", "final_contract": "2D"}
+{"profile": "Insurance Player", "board": 49, "run": 0, "north_open": "Pass", "north_desc": "~5 HCP, balanced", "south_1": "1D", "south_2": "2D", "final_contract": "2D"}
+{"profile": "Fighter", "board": 49, "run": 0, "north_open": "Pass", "north_desc": "~5 HCP, balanced", "south_1": "1D", "south_2": "2D", "final_contract": "2D"}
+{"profile": "NT Specialist", "board": 49, "run": 0, "north_open": "Pass", "north_desc": "~5 HCP, balanced", "south_1": "1D", "south_2": "2H", "final_contract": "2H"}
+{"profile": "Generalist", "board": 49, "run": 0, "north_open": "Pass", "north_desc": "~5 HCP, balanced", "south_1": "1D", "south_2": "2D", "final_contract": "2D"}
+{"profile": "Monkey (random)", "board": 49, "run": 0, "north_open": "Pass", "north_desc": "~5 HCP, balanced", "south_1": "4C", "south_2": "4S", "final_contract": "4S"}
+{"profile": "Slam Hunter", "board": 50, "run": 0, "north_open": "Pass", "north_desc": "~10 HCP, unbalanced, 5 spades", "south_1": "2H", "south_2": "3H", "final_contract": "3H"}
+{"profile": "Insurance Player", "board": 50, "run": 0, "north_open": "Pass", "north_desc": "~10 HCP, unbalanced, 5 spades", "south_1": "1H", "south_2": "2H", "final_contract": "2H"}
+{"profile": "Fighter", "board": 50, "run": 0, "north_open": "Pass", "north_desc": "~10 HCP, unbalanced, 5 spades", "south_1": "2H", "south_2": "2S", "final_contract": "2S"}
+{"profile": "NT Specialist", "board": 50, "run": 0, "north_open": "Pass", "north_desc": "~10 HCP, unbalanced, 5 spades", "south_1": "1H", "south_2": "2H", "final_contract": "2H"}
+{"profile": "Generalist", "board": 50, "run": 0, "north_open": "Pass", "north_desc": "~10 HCP, unbalanced, 5 spades", "south_1": "1H", "south_2": "2H", "final_contract": "2H"}
+{"profile": "Monkey (random)", "board": 50, "run": 0, "north_open": "Pass", "north_desc": "~10 HCP, unbalanced, 5 spades", "south_1": "3NT", "south_2": "7C", "final_contract": "7C"}
