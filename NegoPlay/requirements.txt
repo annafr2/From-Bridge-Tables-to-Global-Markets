@@ -31,3 +31,6 @@ pytest-cov>=4.1
 
 # --- Code quality ---
 ruff>=0.1
+
+# Double-dummy bridge solver (Task T-C — Nezer's perfect-play reference)
+endplay>=0.5.12
