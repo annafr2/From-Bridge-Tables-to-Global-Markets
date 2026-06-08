@@ -82,6 +82,39 @@ not the value that maximises ρ), and the trend holds across the sweep.
 
 ---
 
+## 🔬 Metric upgrade — random baseline + double-dummy (post-supervisor meeting)
+
+After a joint meeting with both supervisors, we hardened the bridge metric. Two
+ideas, one figure:
+
+1. **Random "monkey" baseline (Rami, statistician).** Add an agent with **no
+   strategy** — it makes random *legal* bids. It should lose. If it doesn't, the
+   metric is broken.
+2. **Double-dummy scoring (Nezer, bridge expert).** Score a bid by its **true
+   perfect-play result** (the outcome when all 52 cards are seen), not by a
+   coarse HCP-based proxy.
+
+The monkey immediately exposed the problem and the double-dummy metric fixed it:
+
+![Random baseline + double-dummy fix the bridge metric](docs/images/metric_fix_monkey_dd.png)
+
+**How to read it.** Each bar is a player's bridge score; the random monkey is red.
+*Left (old metric):* the monkey scores **0.54 — above every expert profile.** The
+old metric only checked the *level class* of a bid (4 coarse buckets), so random
+bidding landed near the target often enough to "win." A metric a monkey beats is
+not measuring skill. *Right (new metric):* we now score each bid by whether the
+contract **actually makes** under double-dummy play (a wild 7NT that goes down
+scores 0). The monkey drops to **0.10 — dead last**, and all five profiles beat
+it. Skill wins, as it must.
+
+**Honest note.** Double-dummy scores the *bidding* from the cards (which we have);
+it does **not** score defensive *card play* (which needs trick-by-trick data we
+don't have). The ranking also shifts under the new metric — so the cross-domain
+alignment will be re-run on this metric next (it may change the ρ story, which is
+fine: the metric is now trustworthy).
+
+---
+
 ## 🏗️ Architecture
 
 ```
