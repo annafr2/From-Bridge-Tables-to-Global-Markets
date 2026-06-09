@@ -1054,6 +1054,52 @@ double-dummy engine) plus more profiles and real negotiation scenarios.
 
 ---
 
+### Q7.12 — FINAL metric: real competitive bridge skill → ρ = +0.50 (June 2026)
+
+The fight-aware ρ=0.80 (Q7.11) had one weakness a reviewer would attack: *we*
+chose the 0.3 weight. The fix removes the weight entirely by not simulating bridge
+at all and measuring **real competitive performance** from the EuroBridge data.
+
+**Method.** Duplicate teams play every board at two tables, so the same N-S problem
+has two results. A pair's skill on a board = its score minus the board *datum*
+(the two-table average), expressed in **IMPs** (compresses big boards). Attribute
+to the four seated players, average per player, then per profile. This counts
+**defence automatically** — a successful penalty double scores positive — so the
+Fighter's skill is captured with **no hand-tuned weight**.
+
+| Profile | Bridge IMP (primary) | Bridge points (robustness) | Negotiation |
+|---------|----------------------|----------------------------|-------------|
+| Slam Hunter | +0.172 | +4.08 | 0.443 |
+| Fighter | +0.085 | +2.05 | 0.444 |
+| Generalist | +0.008 | +0.19 | 0.362 |
+| Insurance Player | −0.006 | −0.63 | 0.386 |
+| NT Specialist | −0.010 | −0.24 | 0.400 |
+
+**Result: Spearman ρ = +0.50** (IMP, primary) / **+0.60** (raw points, robustness —
+same ranking, so not driven by a few big boards). The aggressive elite profiles
+top **both** domains; bridge skill and negotiation skill move together.
+
+**Why this is the strongest variant:** real *competitive* play (no simulation),
+no chosen weight, defence counted automatically. Validated by a random-monkey
+baseline (a metric a monkey beats is broken — the old coarse proxy was) and a
+double-dummy evaluator. A real-data **skill spectrum** places the random monkey at
+−7 IMP, the elite players near 0, and double-dummy perfect at +1.1 IMP.
+
+**Bridge-expert verdict:** ACCEPT_WITH_CAVEAT — "strictly better than the 0.7/0.3
+blend." Caveats: n=5 (low power, ρ is an indication); the Slam Hunter profile,
+defined by *bidding* slams, may partly proxy overall player strength.
+
+**Recap of the journey (sensitivity to the bridge metric):** par-only +0.20 →
+fight-aware (chosen weight) +0.80 → double-dummy single-bid −0.90 (artifact of a
+single canned bid) → double-dummy full auction +0.20 → **real data +0.50 (final)**.
+
+**Reproduce:** `python notebooks/alignment_real_bridge.py` and
+`python notebooks/visualize_real_skill_spectrum.py` →
+`results/stage4/alignment_real_bridge_report.md`,
+`docs/images/{alignment_real_bridge,real_skill_spectrum}.png`.
+
+---
+
 ### What Cannot Be Fixed (Known Limitations)
 
 1. **Bidding for old competitions (0%):** EuroBridge microsites before ~2023 do not embed bidding

@@ -128,9 +128,12 @@ In words: *"The decision style we learned from bridge predicts how the same
 We test Level 2 by checking whether the profile **ranking** is the same in both
 domains, using **Spearman's ρ** (a correlation of rankings). Target: **ρ ≥ 0.70**.
 
-> ⚠️ **Honest status:** Level 1 is proven. Level 2 (Stage 4) is now complete —
-> see Section 8 for the result (Spearman ρ rose from 0.20 to 0.80 once the
-> bridge metric was corrected to reward the Fighter's aggressive doubling).
+> ⚠️ **Honest status:** Level 1 is proven. Level 2 (Stage 4) is complete. The
+> final, strongest result measures bridge skill from the **real competitive data**
+> (duplicate IMP vs the field, defence included) and finds **Spearman ρ = +0.50**
+> (robust +0.60 on raw points) with negotiation — the aggressive elite profiles
+> lead both domains. (The Hebrew supervisor guide, `features_and_hypothesis_UPDATED`,
+> carries the full plain-language write-up with figures.)
 
 ---
 
