@@ -81,7 +81,22 @@ big board dominates) between real bridge skill and simulated negotiation surplus
 elite profiles (**Slam Hunter, Fighter**) top **both** domains; the cautious
 profiles trail in both. Bridge skill and negotiation skill move together.
 
-#### Honest caveats (bridge-expert reviewed)
+**The skill spectrum (real boards).** To place everyone between a floor and a
+ceiling, we measured — on the real boards — a random *monkey* (a random contract,
+scored double-dummy from the 52 cards) and *double-dummy perfect* play (the par
+contract). Both are expressed in **IMPs** (the bridge unit for "how much you won
+a board by"):
+
+![Real-data skill spectrum: monkey floor → elite players → perfect ceiling](docs/images/real_skill_spectrum.png)
+
+*Left:* the random monkey sits at **−7 IMP** (a disaster), the real elite players
+cluster near **0** (all skilled, close to the field average), and double-dummy
+perfect play is at **+1.1 IMP** (the ceiling — even elite players leave ~1 IMP on
+the table). *Right (zoom on the profiles):* among the elite, the aggressive
+profiles (**Slam Hunter +0.17, Fighter +0.08 IMP/board**) lead — consistent with
+the result above.
+
+#### Honest caveats (expert reviewed)
 
 - **n = 5 profiles → low statistical power** (p not significant). ρ is an
   *indication*, not a proof.
