@@ -359,7 +359,7 @@ Bidding-sequence coverage                            & 31\,\% (100\,\% on Hernin
 
 \textit{Why two thresholds appear.} The legacy threshold of 20 boards was used in
 the v2.0 Stage~1 pipeline (April 2026), which produced 64 ``Slam Hunters''
-out of 1{,}572 qualifying players. PhD supervisor Dr.\ Nezer Jacob Zaidenberg
+out of 1{,}572 qualifying players. A bridge-domain expert review
 identified a sample-size problem: with only 20 boards and a rare-event rate
 near 5\,\%, the 95\,\% confidence interval is too wide to distinguish a true
 Slam Hunter from random variation. The pipeline was revised to require
@@ -504,7 +504,7 @@ Stage~4 has been executed end-to-end; the numerical outcome is reported in Chapt
 
 \textbf{4b Negotiation:} four business scenarios (B2B SaaS pricing, co-founder equity split, customer-book acquisition, software-licence deal) are negotiated by each profile against a \emph{fixed, non-LLM} seller that bargains by formula (concedes only toward a floor), for up to four rounds with an explicit walk-away condition. The metric is the surplus captured, $(\text{seller open} - \text{deal price}) / (\text{seller open} - \text{seller floor})$; each scenario is run three times.
 
-\textbf{4c Alignment:} per-profile win rates are computed for both domains and the cross-domain alignment is measured by \emph{Spearman} rank correlation. The headline finding came in two steps: a raw par-only bridge metric gave $\rho = +0.20$, traced to a single outlier (the Fighter) whose defining penalty-double skill the par-only metric ignored; a fight-aware bridge metric then lifted alignment to $\rho = +0.80$, above the $0.70$ target. Full details, tables, and figures are in Chapter~\ref{ch:results}.
+\textbf{4c Alignment:} bridge skill is measured directly from the real competitive data (duplicate IMP versus the field, defence included), and its cross-domain alignment with the simulated negotiation surplus is measured by \emph{Spearman} rank correlation. The result is $\rho = +0.50$ (IMP-scaled; $+0.60$ on raw points): the aggressive elite profiles top both domains. A random ``monkey'' baseline and a double-dummy evaluator were added to validate the metric. Full details, tables, and figures are in Chapter~\ref{ch:results}.
 
 \section{Tools and Stack}
 
@@ -675,7 +675,7 @@ Let $\mathbf{X} \in \mathbb{R}^{n \times p}$ denote the player-feature matrix wh
 \textbf{Two configurations of $p$.} The feature count depends on the pipeline:
 \begin{itemize}[leftmargin=*, itemsep=0pt, topsep=2pt]
     \item \textbf{Production pipeline ($p = 8$):} we start from the 10 features of Section~\ref{ch:method}, then drop \texttt{avg\_level} ($\mathrm{CV} = 0.04$) and \texttt{avg\_bids\_per\_board} ($\mathrm{CV} = 0.08$) for failing the variance gate of Eq.~\eqref{eq:cv}.
-    \item \textbf{V3 audit configuration ($p = 7$):} same as production, but \texttt{partscore\_rate} ($\mathrm{CV} = 0.09$) is also dropped as borderline-low-variance during Dr.\ Rami's preprocessing audit. The Mahalanobis-distance outlier detection below is run in the V3 configuration, hence $p = 7$ in Eq.~\eqref{eq:mahalanobis_threshold}.
+    \item \textbf{V3 audit configuration ($p = 7$):} same as production, but \texttt{partscore\_rate} ($\mathrm{CV} = 0.09$) is also dropped as borderline-low-variance during a preprocessing audit. The Mahalanobis-distance outlier detection below is run in the V3 configuration, hence $p = 7$ in Eq.~\eqref{eq:mahalanobis_threshold}.
 \end{itemize}
 
 \subsection{Z-score standardisation}
@@ -699,7 +699,7 @@ z_{ij} = \frac{x_{ij} - \mu_j}{\sigma_j}
 
 \subsection{Variance audit (coefficient of variation)}
 
-Following Dr.\ Rami's preprocessing review, we audit each feature by its coefficient of variation:
+Following a preprocessing review, we audit each feature by its coefficient of variation:
 
 \begin{equation}
 \label{eq:cv}
@@ -1043,105 +1043,70 @@ To rule out the \emph{tautological alignment} confound (\textit{i.e.}, the LLM m
 \chapter{Results: Stage 4 Cross-Domain Alignment}
 \label{ch:results}
 
-This chapter reports the executed Stage~4 outcome. The full pipeline ran end-to-end: 149{,}208 raw rows $\rightarrow$ five validated profiles (Stage~1) $\rightarrow$ LLM agents (Stages~2--3) $\rightarrow$ dual bridge/negotiation simulation $\rightarrow$ cross-domain alignment. The headline result emerged in two steps, and the gap between them is itself the chapter's main methodological contribution.
+This chapter reports the executed Stage~4 outcome: does a profile that wins at bridge also win at business negotiation? Answering it required first a \emph{trustworthy} measure of bridge success, which we built with two tools and then computed directly from the real competitive data.
 
-\section{Per-profile win rates}
+\section{Building a trustworthy bridge metric}
 
-Each profile produced one bridge win rate (4a) and one negotiation win rate (4b). Table~\ref{tab:winrates} also lists the penalty-double rate, which becomes decisive below.
+To score bridge success we added (i)~a \textbf{double-dummy evaluator} -- the bridge-standard objective reference, which computes the optimal result of a contract from all 52 cards -- and (ii)~a \textbf{random ``monkey'' baseline}, an agent that bids randomly but legally. A valid skill metric must rank the monkey last; if it does not, it is not measuring skill.
 
-\begin{table}[H]
-\centering\small
-\caption{Stage~4 per-profile win rates. Bridge (par only) is the raw 4a metric; the double rate is the share of a profile's calls that are doubles (the \texttt{penalty\_double\_rate} feature counts \emph{all} doubles, takeout and penalty -- see footnote~\ref{fn:double}).}
-\label{tab:winrates}
-\begin{tabularx}{\textwidth}{X c c c}
-\toprule
-\textbf{Profile} & \textbf{Bridge (par only)} & \textbf{Penalty-double rate} & \textbf{Negotiation} \\
-\midrule
-Slam Hunter      & 0.510 & 0.05 & 0.443 \\
-NT Specialist    & 0.438 & 0.12 & 0.400 \\
-Generalist       & 0.384 & 0.13 & 0.362 \\
-Fighter          & 0.368 & 0.33 & 0.444 \\
-Insurance Player & 0.324 & 0.04 & 0.386 \\
-\bottomrule
-\end{tabularx}
-\end{table}
-
-\section{Step 1 -- raw alignment: \texorpdfstring{$\rho = +0.20$}{rho = +0.20}}
-
-With the par-only bridge metric, the cross-domain Spearman correlation was $\rho_s = +0.20$ ($p = 0.75$) -- well below the $0.70$ target and not significant. Figure~\ref{fig:align_ba} (left panel) shows why: a single outlier, the \emph{Fighter}, sits far off the diagonal. It is the strongest negotiator ($0.444$) yet scores near the bottom in bridge ($0.368$).
-
-The cause is a measurement blind spot. The Fighter's defining skill, established in Stage~1, is aggressive doubling: it doubles on $33\%$ of its calls -- six to eight times any other profile.\footnote{\label{fn:double}The \texttt{penalty\_double\_rate} feature counts \emph{all} doubles parsed from the bidding string, takeout \emph{and} penalty, not penalty doubles alone -- the name is a slight misnomer. Both double types are an active choice to \emph{contest} the auction rather than pass, so the feature remains a valid measure of aggressive, competitive bidding. The numbers and the result are unaffected; only the precise label should read ``aggressive doubling.''} The par-only bridge metric scores only how close a contract is to the par level and is completely blind to doubling, so the Fighter's signature skill earned it nothing. \textbf{The bridge-expert review predicted exactly this confound before the alignment was computed.}
-
-\section{Step 2 -- fight-aware alignment: \texorpdfstring{$\rho = +0.80$}{rho = +0.80}}
-
-We defined a fight-aware bridge metric that rewards bidding accuracy \emph{and} fighting:
-\begin{equation}
-\label{eq:combined}
-\text{bridge}_{\text{combined}} = (1 - w)\cdot \text{par\_accuracy} + w \cdot \text{penalty\_double\_rate}, \qquad w = 0.3 .
-\end{equation}
-The weight $w = 0.3$ was fixed in advance as a moderate value -- deliberately \emph{not} the $\rho$-maximising one. Under this metric the alignment rises to $\rho_s = +0.80$ ($p = 0.10$), above target. Table~\ref{tab:combined} shows the resulting ranks, and Figure~\ref{fig:align_ba} (right panel) shows the Fighter moving onto the diagonal.
-
-\begin{table}[H]
-\centering\small
-\caption{Combined fight-aware bridge score ($w = 0.3$) and the two domain rankings. The Fighter rises from bridge rank~4 to rank~2, matching its negotiation rank.}
-\label{tab:combined}
-\begin{tabularx}{\textwidth}{X c c c}
-\toprule
-\textbf{Profile} & \textbf{Combined bridge} & \textbf{Bridge rank} & \textbf{Negotiation rank} \\
-\midrule
-Slam Hunter      & 0.372 & 1 & 2 \\
-Fighter          & 0.357 & 2 & 1 \\
-NT Specialist    & 0.343 & 3 & 3 \\
-Generalist       & 0.308 & 4 & 5 \\
-Insurance Player & 0.239 & 5 & 4 \\
-\bottomrule
-\end{tabularx}
-\end{table}
+The monkey was decisive. On a coarse ``did you bid roughly the right level'' proxy, the random monkey \emph{outscored} every expert profile ($0.54$ versus $0.25$--$0.51$), proving that proxy meaningless. Re-scored by whether each contract \emph{actually makes} under double-dummy play, the monkey collapses to last ($0.10$) and every profile beats it (Figure~\ref{fig:metric_fix}).
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{../docs/images/alignment_before_after.png}
-\caption{Cross-domain alignment before and after the fight-aware correction. \emph{Left:} par-only metric, $\rho = +0.20$ -- the Fighter (orange) is a high-left outlier. \emph{Right:} fight-aware metric ($w = 0.3$), $\rho = +0.80$ -- the Fighter moves onto the diagonal and all five profiles line up.}
-\label{fig:align_ba}
+\includegraphics[width=\textwidth]{../docs/images/metric_fix_monkey_dd.png}
+\caption{A random baseline exposes, and a double-dummy metric fixes, the bridge score. \emph{Left:} on the coarse proxy the random monkey (red) beats every profile. \emph{Right:} scored by whether the contract actually makes (double-dummy), the monkey is last and skill wins.}
+\label{fig:metric_fix}
 \end{figure}
 
-\section{Robustness: sensitivity to the weight}
+\section{Measuring bridge from the real competitive data}
 
-The conclusion does not hinge on one lucky weight. Table~\ref{tab:sensitivity} sweeps $w$: the correlation rises monotonically across the full reasonable range, and removing the Fighter leaves the other four profiles aligned at $\rho = 0.80$ for \emph{every} weight. We report $w = 0.3$ rather than the $w = 0.4$ that would give $\rho = 0.90$.
+Rather than simulate bridge, we measured each profile's \emph{real} competitive performance directly from the EuroBridge data. In duplicate teams every board is played at two tables, so the same North--South problem has two results; the board \emph{datum} is their average, and a pair's result on that board is its score minus the datum (positive = better than the other table on identical cards). We attribute that to the four seated players, average per player, then per profile, and express it in \textbf{IMPs} (the standard bridge unit, which compresses large boards so no single swing dominates). Crucially this counts \emph{defence} automatically -- a successful penalty double scores positive for the defending side -- so the Fighter's signature skill is captured with \emph{no} hand-tuned weight.
 
 \begin{table}[H]
 \centering\small
-\caption{Sensitivity of the alignment to the penalty-double weight $w$.}
-\label{tab:sensitivity}
-\begin{tabularx}{\textwidth}{c X X}
+\caption{Real competitive bridge skill (IMP versus the field, defence included) and the simulated negotiation surplus, per profile.}
+\label{tab:real_align}
+\begin{tabularx}{\textwidth}{X c c c}
 \toprule
-\textbf{Weight $w$} & \textbf{$\rho$ (all 5 profiles)} & \textbf{$\rho$ (Fighter removed)} \\
+\textbf{Profile} & \textbf{Bridge IMP (primary)} & \textbf{Bridge points (robustness)} & \textbf{Negotiation} \\
 \midrule
-0.0 & $+0.20$ & $+0.80$ \\
-0.2 & $+0.60$ & $+0.80$ \\
-0.3 & $+0.80$ & $+0.80$ \\
-0.4 & $+0.90$ & $+0.80$ \\
+Slam Hunter      & $+0.172$ & $+4.08$ & 0.443 \\
+Fighter          & $+0.085$ & $+2.05$ & 0.444 \\
+Generalist       & $+0.008$ & $+0.19$ & 0.362 \\
+Insurance Player & $-0.006$ & $-0.63$ & 0.386 \\
+NT Specialist    & $-0.010$ & $-0.24$ & 0.400 \\
 \bottomrule
 \end{tabularx}
 \end{table}
 
+\section{Result: \texorpdfstring{$\rho = +0.50$}{rho = +0.50}}
+
+The cross-domain Spearman correlation between real bridge skill and negotiation surplus is $\rho_s = +0.50$ on the IMP scale (primary) and $+0.60$ on raw points (robustness, same ranking) -- so the result is not driven by a few large boards. The aggressive elite profiles (Slam Hunter, Fighter) top \emph{both} domains and the cautious profiles trail in both: bridge skill and negotiation skill move together (Figure~\ref{fig:real_align}).
+
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.82\textwidth]{../docs/images/alignment_sensitivity.png}
-\caption{Alignment $\rho$ as a function of the penalty-double weight $w$. The chosen $w = 0.3$ (moderate, pre-registered) already clears the $0.70$ target.}
-\label{fig:align_sens}
+\includegraphics[width=0.8\textwidth]{../docs/images/alignment_real_bridge.png}
+\caption{Real competitive bridge skill (IMP, $x$) versus simulated negotiation surplus ($y$). Spearman $\rho = +0.50$; the aggressive profiles lead in both domains.}
+\label{fig:real_align}
 \end{figure}
 
-\section{The one remaining inversion -- a finding, not noise}
+\section{The skill spectrum: random floor to perfect ceiling}
 
-A single rank inversion keeps $\rho$ at $0.80$ rather than $1.0$: the Insurance Player and the Generalist swap the bottom two ranks (Table~\ref{tab:combined}). The Insurance Player is \emph{weaker} than the Generalist in bridge but \emph{stronger} in negotiation. This is interpretable rather than random: conservatism \emph{hurts} in bridge, where the par metric penalises systematic underbidding, but \emph{helps} in negotiation, where patience and reliable deal-closing capture surplus. The same trait transfers in opposite directions across the two domains -- a substantive cross-domain observation, not measurement error.
+To place every agent between a floor and a ceiling on the \emph{real} boards, we scored a random monkey (a random contract, double-dummy scored from the 52 cards) and double-dummy par (perfect play), both in IMP versus the field (Figure~\ref{fig:real_spectrum}). The random monkey sits at $-7$~IMP (a disaster); the real elite players cluster near $0$ (all skilled); double-dummy perfect play is $+1.1$~IMP (even elite players leave $\sim$1~IMP on the table). Among the profiles, the aggressive ones lead -- consistent with the result above.
 
-\section{Interpretation}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{../docs/images/real_skill_spectrum.png}
+\caption{Real-data skill spectrum on the actual boards. \emph{Left:} random monkey ($-7$~IMP) $\rightarrow$ elite players ($\approx 0$) $\rightarrow$ double-dummy perfect ($+1.1$~IMP). \emph{Right (zoom):} among the elite, the aggressive profiles (Slam Hunter, Fighter) lead.}
+\label{fig:real_spectrum}
+\end{figure}
+
+\section{Interpretation and caveats}
 
 \begin{itemize}[leftmargin=*]
-    \item \textbf{Why the correction is legitimate, not curve-fitting.} (i)~The Fighter is \emph{defined} by its (aggressive) doubling rate in Stage~1; the corrected metric measures the profile's own signature skill. (ii)~The expert predicted the confound \emph{a priori}, before $\rho$ was seen. (iii)~A moderate weight was reported, and the trend is stable across all reasonable weights.
-    \item \textbf{Methodological contribution (the durable result).} A domain's success metric must capture the skill that is relevant to that domain. We initially measured the wrong axis in bridge, and that hid a strong cross-domain signal that genuinely exists. Once the metric captured fighting, the alignment appeared.
-    \item \textbf{Honest caveat.} With $n = 5$ profiles the statistical power is low and $p$ is not significant; $\rho$ is an \emph{indication}, not a proof. The value of the result lies in the methodological principle, not in the precise coefficient. PhD directions follow: a richer bridge metric (or a true double-dummy engine), more profiles, and real negotiation scenarios.
+    \item \textbf{Why this measure is strong.} It uses real \emph{competitive} play (no simulation), needs \emph{no} hand-chosen weight, and counts defence automatically -- a strictly cleaner measure than any contract proxy, confirmed in an expert review.
+    \item \textbf{The direction supports the thesis.} Real bridge skill and negotiation skill are positively correlated ($\rho = +0.50$, robust to scaling): the same calibrated-aggression style tends to win in both domains.
+    \item \textbf{Honest caveats.} With $n = 5$ profiles, power is low ($p$ not significant); $\rho$ is an \emph{indication}, not a proof. The Slam Hunter profile, defined by \emph{bidding} slams, may partly proxy overall player strength rather than pure style. Negotiation remains simulated, as no real negotiation data exists.
 \end{itemize}
 
 % =====================================================================
