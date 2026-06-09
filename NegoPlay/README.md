@@ -36,82 +36,62 @@ negotiations using the same strategic pattern.
 This is a **proof-of-concept** in a simulated environment, not validation
 against real negotiation data.
 
-### 🏁 Result (all 4 stages complete, June 2026)
+### 🏁 Result (June 2026)
 
-The full pipeline ran end-to-end: 149K hands → 5 profiles → LLM agents → dual
-simulation → alignment. The headline finding came in two steps:
+The pipeline runs end-to-end: 149K hands → 5 profiles → LLM agents → cross-domain
+comparison. The research question: **does a profile that wins at bridge also win
+at negotiation?**
 
-- **Raw metric:** cross-domain alignment **Spearman ρ = +0.20** — weak. Traced
-  to one outlier, the *Fighter*, whose defining skill (aggressive doubling —
-  the `penalty_double_rate` feature counts *all* doubles, takeout and penalty —
-  33% of its calls) the par-only bridge metric ignored — a gap the bridge-expert
-  predicted in advance.
-- **Corrected metric:** a fight-aware bridge score (reward accuracy *and*
-  aggressive doubling, weight 0.3) lifts alignment to **Spearman ρ = +0.80** —
-  above the 0.70 target. A sensitivity sweep confirms the trend is robust.
+#### Step 1 — building a *trustworthy* bridge metric
 
-So a strong cross-domain signal was hidden behind one domain's metric being
-blind to one profile's defining skill. The **foundation is also strong**:
-profile discovery + validation are statistically robust (Cohen's d 2.1–4.6, all
-p < 0.05). Caveat: n=5 gives low power, so ρ is an indication; the durable
-contribution is the methodological principle (*a success metric must capture the
-skill relevant to its domain*). See `docs/features_and_hypothesis.md` §8,
-`results/stage4/alignment_corrected_report.md`, and `alignment_sensitivity.png`.
+To answer the question we first needed a measure of bridge success we could
+trust. We added two tools:
 
-**Before vs. after the metric correction** — same scatter, two panels. Each dot
-is a profile: bridge win rate (x) vs. negotiation win rate (y); the dashed line
-is perfect agreement.
+1. A **double-dummy evaluator** — scores a contract by its true perfect-play
+   result (the outcome when all 52 cards are visible). This is the bridge-standard
+   objective reference, replacing a coarse "did you bid roughly the right level"
+   proxy.
+2. A **random "monkey" baseline** — an agent that bids randomly (but legally). It
+   *must* lose; if it doesn't, the metric isn't measuring skill.
 
-![Alignment before vs. after the fight-aware correction](docs/images/alignment_before_after.png)
+The monkey was decisive. On the coarse proxy it **beat the expert profiles** —
+which means that proxy was not measuring skill at all. Scoring instead by whether
+the contract **actually makes** (double-dummy), the monkey collapses to last:
 
-*Left (raw, ρ=+0.20):* the **Fighter** sits far off the diagonal — strong in
-negotiation but scored low in bridge, because the par-only metric ignored its
-defining aggressive-doubling skill. *Right (fight-aware, ρ=+0.80):* once the bridge
-metric rewards the Fighter's doubling (w=0.3), the Fighter moves onto the diagonal and
-all five profiles line up. The single remaining inversion — Insurance vs.
-Generalist swapping the bottom two ranks — is itself a finding: conservatism
-*hurts* in bridge (systematic underbidding) but *helps* in negotiation
-(patience), so that one trait transfers in the opposite direction.
+![A random baseline + double-dummy expose and fix the bridge metric](docs/images/metric_fix_monkey_dd.png)
 
-**Robustness — how ρ moves with the weight:**
+*Left (coarse proxy):* the random monkey (red) scores **0.54 — above every
+profile**. *Right (double-dummy):* the monkey drops to **0.10, dead last**, and
+every profile beats it. Skill now wins, as it must.
 
-![Sensitivity of alignment to the penalty-double weight](docs/images/alignment_sensitivity.png)
+#### Step 2 — measuring bridge from the REAL competitive data
 
-ρ climbs smoothly as the weight rises; w=0.3 was chosen for honesty (moderate,
-not the value that maximises ρ), and the trend holds across the sweep.
+The cleanest measure needs no simulation at all: the EuroBridge data already
+contains real *competitive* auctions and real outcomes. So we score each profile
+by its **actual competitive performance** — how its players did versus the other
+table on the identical deal (duplicate scoring). This **counts defense
+automatically** (a successful penalty double scores positive), with **no
+hand-tuned weight** to choose.
 
----
+![Real bridge results vs. negotiation](docs/images/alignment_real_bridge.png)
 
-## 🔬 Metric upgrade — random baseline + double-dummy (post-supervisor meeting)
+**Result: Spearman ρ = +0.60** between real bridge skill and simulated
+negotiation surplus — **robust** (+0.50 under IMP scaling, so it is not driven by
+a few big boards). The aggressive elite profiles (**Slam Hunter, Fighter**) top
+**both** domains; the cautious profiles trail in both. Bridge skill and
+negotiation skill move together.
 
-After a joint meeting with both supervisors, we hardened the bridge metric. Two
-ideas, one figure:
+#### Honest caveats
 
-1. **Random "monkey" baseline (Rami, statistician).** Add an agent with **no
-   strategy** — it makes random *legal* bids. It should lose. If it doesn't, the
-   metric is broken.
-2. **Double-dummy scoring (Nezer, bridge expert).** Score a bid by its **true
-   perfect-play result** (the outcome when all 52 cards are seen), not by a
-   coarse HCP-based proxy.
+- **n = 5 profiles → low statistical power** (p ≈ 0.29). ρ is a strong
+  *indication*, not a significant proof.
+- **Negotiation is simulated** — no real negotiation data exists to validate
+  against; this is a proof-of-concept.
+- **The foundation is solid:** profile discovery is statistically robust
+  (Cohen's d 2.1–4.6, all p < 0.05).
 
-The monkey immediately exposed the problem and the double-dummy metric fixed it:
-
-![Random baseline + double-dummy fix the bridge metric](docs/images/metric_fix_monkey_dd.png)
-
-**How to read it.** Each bar is a player's bridge score; the random monkey is red.
-*Left (old metric):* the monkey scores **0.54 — above every expert profile.** The
-old metric only checked the *level class* of a bid (4 coarse buckets), so random
-bidding landed near the target often enough to "win." A metric a monkey beats is
-not measuring skill. *Right (new metric):* we now score each bid by whether the
-contract **actually makes** under double-dummy play (a wild 7NT that goes down
-scores 0). The monkey drops to **0.10 — dead last**, and all five profiles beat
-it. Skill wins, as it must.
-
-**Honest note.** Double-dummy scores the *bidding* from the cards (which we have);
-it does **not** score defensive *card play* (which needs trick-by-trick data we
-don't have). The ranking also shifts under the new metric — so the cross-domain
-alignment will be re-run on this metric next (it may change the ρ story, which is
-fine: the metric is now trustworthy).
+See `notebooks/alignment_real_bridge.py`, `results/stage4/alignment_real_bridge_report.md`,
+and `docs/features_and_hypothesis.md`.
 
 ---
 
@@ -123,7 +103,7 @@ fine: the metric is now trustworthy).
 │  • 8 features per player (after variance + correlation filter)│
 │  • Extreme-percentile profiling → 4 profiles + Generalist  │
 │  • Finding: elite players form a continuum, not clusters    │
-│  • Continuum confirmed across 5 pipeline configs (Dr. Rami) │
+│  • Continuum confirmed across 5 pipeline configs (review)   │
 └─────────────────────────────────────────────────────────────┘
                             ↓
 ┌─────────────────────────────────────────────────────────────┐
@@ -143,7 +123,7 @@ fine: the metric is now trustworthy).
 │  STAGE 4: DUAL SIMULATION + ALIGNMENT           ✅ DONE     │
 │  • 50 bridge deals × 5 profiles × 3 runs                    │
 │  • 4 negotiation scenarios × 5 profiles × 3 runs            │
-│  • Spearman ρ: 0.20 (raw) → 0.80 (fight-aware metric)       │
+│  • Spearman ρ = +0.60 (real bridge results vs negotiation) │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -165,7 +145,7 @@ After building 15 behavioural features per player from 149K boards, we identifie
 
 1. **Continuum, not clusters.** K-Means, HDBSCAN, and GMM all failed (best silhouette = **0.24**, across 5 preprocessing configurations; a real cluster structure needs ≥ 0.5). Elite players form a statistical continuum, not discrete groups. The extreme-percentile approach identifies the behavioural tails of this continuum. (See the two diagnostic charts below for *why* clustering fails.)
 
-2. **Sample size matters (added May 2026 after expert review).** An earlier version of this pipeline used `min_boards=20` and reported 64 Slam Hunters with a 2.8× ratio. Expert bridge advisor Nezer (PhD supervisor) noted that 20 declared boards is too few to estimate rare-event rates like slam (≈4% baseline) — small samples produce false positives. The revised pipeline:
+2. **Sample size matters (added May 2026 after expert review).** An earlier version of this pipeline used `min_boards=20` and reported 64 Slam Hunters with a 2.8× ratio. A bridge-domain expert review noted that 20 declared boards is too few to estimate rare-event rates like slam (≈4% baseline) — small samples produce false positives. The revised pipeline:
    - Raises minimum to **≥50 declared boards AND ≥50 bidding boards**
    - Adds a one-sided binomial test at **p < 0.05** vs population baseline
    - Result: 20 Slam Hunters instead of 64, but each is statistically robust
