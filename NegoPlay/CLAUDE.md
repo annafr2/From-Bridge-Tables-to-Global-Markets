@@ -37,18 +37,22 @@ the **empirical baseline** for Paper 1 of Anna's PhD.
 **Important:** Bridge is the *laboratory*. The research target is *business
 negotiation*. Frame discussions accordingly.
 
-**Project status (June 2026): all 4 stages COMPLETE end-to-end.** Headline
-result in two steps: raw cross-domain alignment Spearman ρ = +0.20 (par-only
-bridge metric) → **ρ = +0.80** once the bridge metric was made fight-aware
-(reward accuracy + penalty doubles, weight 0.3), above the 0.70 target. The
-*Fighter* was the outlier — strong in negotiation but invisible to the par-only
-proxy that ignores its defining penalty-double skill (the bridge-expert
-predicted this). Foundation is strong too: profile discovery + validation are
-robust (Cohen's d 2.1–4.6, all p < 0.05). Caveat: n=5 → low power, ρ is an
-indication; the durable contribution is the methodological principle (a success
-metric must capture the skill relevant to its domain). Full write-up:
-`docs/features_and_hypothesis.md` §8, `RESEARCH_INSIGHTS.md` Q7.10–Q7.11,
-`results/stage4/alignment_corrected_report.md`.
+**Project status (June 2026): all 4 stages COMPLETE end-to-end.** Final headline
+result: **cross-domain alignment Spearman ρ = +0.50** (IMP-scaled; +0.60 on raw
+points) between **real competitive bridge skill** and simulated negotiation
+surplus. Bridge skill is measured DIRECTLY from the EuroBridge data (duplicate
+IMP vs the field, defence included) — no simulation, no hand-chosen weight, and
+the Fighter's penalty-double skill is captured automatically. The aggressive
+elite profiles (Slam Hunter, Fighter) top BOTH domains. To get a trustworthy
+metric we added a random "monkey" baseline (a metric a monkey beats is broken)
+and a double-dummy evaluator. The earlier simulated metrics (par-only ρ=+0.20,
+fight-aware ρ=+0.80 with a chosen weight, double-dummy single-bid ρ=−0.90
+artifact) are documented as the journey, but the **real-data ρ=+0.50 is the
+defensible result** (expert-reviewed). Foundation is strong: profile discovery +
+validation are robust (Cohen's d 2.1–4.6, all p < 0.05). Caveat: n=5 → low power
+(p not significant), ρ is an indication. Full write-up:
+`notebooks/alignment_real_bridge.py`, `results/stage4/alignment_real_bridge_report.md`,
+`docs/features_and_hypothesis.md` §8, `RESEARCH_INSIGHTS.md` Q7.10–Q7.12.
 
 ---
 

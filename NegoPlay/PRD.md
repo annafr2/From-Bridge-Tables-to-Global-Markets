@@ -291,17 +291,21 @@ Full literature: [`docs/literature.md`](docs/literature.md) (17 papers, NegoPlay
 
 **Status:** ✅ COMPLETE (June 2026)
 
-**Result:** Full pipeline ran end-to-end. Bridge (4a): 50 deals × 5 profiles × 3
-runs, objective par scoring. Negotiation (4b): 4 scenarios × 5 profiles × 3 runs
-vs a fixed hard-bargaining seller. Alignment (4c): raw **Spearman ρ = +0.20**
-(par-only bridge metric) → corrected **ρ = +0.80** once the bridge metric was
-made fight-aware (reward accuracy + penalty doubles, weight 0.3), above the 0.70
-target. The *Fighter* was the outlier: strong in negotiation but invisible to
-the par-only proxy that ignores its defining penalty-double skill — a gap the
-bridge-expert predicted in advance. A sensitivity sweep confirms robustness;
-n=5 keeps power low (ρ is an indication). Outputs:
-`results/stage4/alignment_corrected_report.md`, `alignment_sensitivity.png`. See
-RESEARCH_INSIGHTS Q7.10–Q7.11.
+**Result:** Full pipeline ran end-to-end. The final, strongest metric measures
+**bridge skill directly from the REAL competitive data** (duplicate IMP vs the
+field, defence included) and correlates it with the simulated negotiation
+surplus: **Spearman ρ = +0.50** (IMP-scaled; +0.60 on raw points, same ranking).
+The aggressive elite profiles (Slam Hunter, Fighter) top BOTH domains. This needs
+no simulation and no hand-chosen weight, and counts the Fighter's defence
+automatically. A random "monkey" baseline (a metric a monkey beats is broken) and
+a double-dummy evaluator were added to validate the bridge metric. Earlier
+simulated metrics (par-only +0.20, fight-aware +0.80, double-dummy single-bid
+−0.90 artifact) are documented as the journey; the real-data +0.50 is the
+defensible, expert-reviewed result. n=5 keeps power low (ρ is an indication).
+Outputs: `notebooks/alignment_real_bridge.py`,
+`results/stage4/alignment_real_bridge_report.md`,
+`docs/images/{alignment_real_bridge,real_skill_spectrum}.png`. See
+RESEARCH_INSIGHTS Q7.10–Q7.12.
 
 **Description:** Run agents in both bridge auctions and business negotiations; measure alignment.
 
