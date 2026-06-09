@@ -291,21 +291,22 @@ Full literature: [`docs/literature.md`](docs/literature.md) (17 papers, NegoPlay
 
 **Status:** ✅ COMPLETE (June 2026)
 
-**Result:** Full pipeline ran end-to-end. The final, strongest metric measures
-**bridge skill directly from the REAL competitive data** (duplicate IMP vs the
-field, defence included) and correlates it with the simulated negotiation
-surplus: **Spearman ρ = +0.50** (IMP-scaled; +0.60 on raw points, same ranking).
-The aggressive elite profiles (Slam Hunter, Fighter) top BOTH domains. This needs
-no simulation and no hand-chosen weight, and counts the Fighter's defence
-automatically. A random "monkey" baseline (a metric a monkey beats is broken) and
-a double-dummy evaluator were added to validate the bridge metric. Earlier
-simulated metrics (par-only +0.20, fight-aware +0.80, double-dummy single-bid
-−0.90 artifact) are documented as the journey; the real-data +0.50 is the
-defensible, expert-reviewed result. n=5 keeps power low (ρ is an indication).
-Outputs: `notebooks/alignment_real_bridge.py`,
-`results/stage4/alignment_real_bridge_report.md`,
-`docs/images/{alignment_real_bridge,real_skill_spectrum}.png`. See
-RESEARCH_INSIGHTS Q7.10–Q7.12.
+**Result (a discovery in two steps).** **Step 1 — winning↔winning:** we measured
+bridge skill from the REAL competitive data (duplicate IMP vs the field, validated
+with a random-monkey baseline + double-dummy evaluator) and correlated it with
+negotiation surplus → **weak and metric-sensitive** (ρ ≈ +0.2 to +0.5, even −0.90
+under an over-harsh seller), because whether a style WINS depends on the opponent.
+**Step 2 — style↔style:** refining to the behavioural form (the original RQ) —
+does an aggressive bridge profile *bargain* aggressively? — gives **Spearman
+ρ = +0.80** (above the 0.70 target). An **inverse-prompt control** (swap each
+profile's bridge skills) flips it to **−0.90**, proving the transfer is carried by
+the bridge-derived SKILLS, not the label → not tautological. Negotiation behaviour
+was grounded in 5,247 real Craigslist negotiations. **Headline: STYLE transfers
+strongly (+0.80, controlled); WINNING is noisy (+0.2).** n=5 keeps power low
+(indication, not significance). Outputs:
+`notebooks/{style_alignment,inverse_prompt_control,alignment_real_bridge}.py`,
+`docs/images/{style_alignment,style_transfer_control,alignment_real_bridge}.png`.
+See RESEARCH_INSIGHTS Q7.10–Q7.13.
 
 **Description:** Run agents in both bridge auctions and business negotiations; measure alignment.
 

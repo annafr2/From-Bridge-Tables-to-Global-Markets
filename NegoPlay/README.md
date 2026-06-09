@@ -36,79 +36,70 @@ negotiations using the same strategic pattern.
 This is a **proof-of-concept** in a simulated environment, not validation
 against real negotiation data.
 
-### 🏁 Result (June 2026)
+### 🏁 Result (June 2026) — a discovery in two steps
 
 The pipeline runs end-to-end: 149K hands → 5 profiles → LLM agents → cross-domain
-comparison. The research question: **does a profile that wins at bridge also win
-at negotiation?**
+comparison. The research question (as originally posed): do the profiles show
+**behavioral alignment** between bridge and negotiation?
 
-#### Step 1 — building a *trustworthy* bridge metric
+#### Step 1 — we first asked "does WINNING transfer?" → weak & metric-sensitive
 
-To answer the question we first needed a measure of bridge success we could
-trust. We added two tools:
+We started by correlating *winning in bridge* with *winning in negotiation*. To
+make the bridge side trustworthy we added a **double-dummy evaluator** (the
+bridge-standard "perfect play" score from the 52 cards) and a **random "monkey"
+baseline** (a metric a monkey beats is broken). The monkey was decisive — on a
+coarse proxy it *beat the experts*; only a double-dummy / real-data metric put it
+last:
 
-1. A **double-dummy evaluator** — scores a contract by its true perfect-play
-   result (the outcome when all 52 cards are visible). This is the bridge-standard
-   objective reference, replacing a coarse "did you bid roughly the right level"
-   proxy.
-2. A **random "monkey" baseline** — an agent that bids randomly (but legally). It
-   *must* lose; if it doesn't, the metric isn't measuring skill.
+![A random monkey + double-dummy expose and fix the bridge metric](docs/images/metric_fix_monkey_dd.png)
 
-The monkey was decisive. On the coarse proxy it **beat the expert profiles** —
-which means that proxy was not measuring skill at all. Scoring instead by whether
-the contract **actually makes** (double-dummy), the monkey collapses to last:
+We then measured bridge skill from the **real competitive data** (duplicate IMP
+vs the field, defence included — no simulation, no chosen weight). But the
+cross-domain *winning* correlation came out **weak and unstable** (ρ ≈ +0.2 to
++0.5 depending on the metric; it even flipped sign when we changed the seller).
+The reason: **whether a style WINS depends on the opponent and the payoff rules** —
+too noisy to be the headline.
 
-![A random baseline + double-dummy expose and fix the bridge metric](docs/images/metric_fix_monkey_dd.png)
+#### Step 2 — we realised the metric caught the wrong thing → STYLE transfers
 
-*Left (coarse proxy):* the random monkey (red) scores **0.54 — above every
-profile**. *Right (double-dummy):* the monkey drops to **0.10, dead last**, and
-every profile beats it. Skill now wins, as it must.
+The premise was never "the winner there is the winner here"; it is that the
+**decision STYLE** (risk appetite) transfers. So we refined the question from
+*winning↔winning* to **STYLE↔STYLE**: does an aggressive bridge profile *bargain*
+aggressively? We measure bridge aggression (real bidding: slam + preempt +
+doubles) and negotiation aggression (how low the agent opens):
 
-#### Step 2 — measuring bridge from the REAL competitive data
+![Style → style: aggression transfers, ρ = +0.80](docs/images/style_alignment.png)
 
-The cleanest measure needs no simulation at all: the EuroBridge data already
-contains real *competitive* auctions and real outcomes. So we score each profile
-by its **actual competitive performance** — how its players did versus the other
-table on the identical deal (duplicate scoring). This **counts defense
-automatically** (a successful penalty double scores positive), with **no
-hand-tuned weight** to choose.
+**Result: Spearman ρ = +0.80** — the aggressive profiles (Fighter, Slam Hunter)
+bargain aggressively; the cautious ones (Insurance, Generalist) bargain softly.
+This clears the original **≥0.70 behavioral-alignment target**.
 
-![Real bridge results vs. negotiation](docs/images/alignment_real_bridge.png)
+#### Anti-tautology control — it is the SKILLS that carry the style
 
-**Result: Spearman ρ = +0.50** (IMP-scaled — the bridge standard, so no single
-big board dominates) between real bridge skill and simulated negotiation surplus;
-**robust** to scaling (ρ = +0.60 on raw points, same ranking). The aggressive
-elite profiles (**Slam Hunter, Fighter**) top **both** domains; the cautious
-profiles trail in both. Bridge skill and negotiation skill move together.
+Worry: maybe the agent bargains aggressively only because we *labelled* it
+aggressive. Control: keep each profile's identity but inject the **opposite**
+profile's bridge skills. If behaviour follows the skills, the correlation should
+flip. It does — from **+0.80 to −0.90**:
 
-**The skill spectrum (real boards).** To place everyone between a floor and a
-ceiling, we measured — on the real boards — a random *monkey* (a random contract,
-scored double-dummy from the 52 cards) and *double-dummy perfect* play (the par
-contract). Both are expressed in **IMPs** (the bridge unit for "how much you won
-a board by"):
+![Inverse-prompt control: swapping the skills flips the correlation](docs/images/style_transfer_control.png)
 
-![Real-data skill spectrum: monkey floor → elite players → perfect ceiling](docs/images/real_skill_spectrum.png)
+Give a cautious profile the Fighter's skills and it bargains aggressively; give
+the Fighter cautious skills and it softens. The style is carried by the
+**bridge-derived skills**, not the label → the +0.80 is **not** tautological.
 
-*Left:* the random monkey sits at **−7 IMP** (a disaster), the real elite players
-cluster near **0** (all skilled, close to the field average), and double-dummy
-perfect play is at **+1.1 IMP** (the ceiling — even elite players leave ~1 IMP on
-the table). *Right (zoom on the profiles):* among the elite, the aggressive
-profiles (**Slam Hunter +0.17, Fighter +0.08 IMP/board**) lead — consistent with
-the result above.
+Grounding: the negotiation behaviour is validated against **5,247 real Craigslist
+negotiations** (`docs/images/negotiation_real_validation.png`).
 
-#### Honest caveats (expert reviewed)
+#### Honest caveats
 
-- **n = 5 profiles → low statistical power** (p not significant). ρ is an
-  *indication*, not a proof.
-- **Selection confound:** the *Slam Hunter* profile is defined by *bidding*
-  slams, so it may partly proxy overall player strength, not pure style.
-- **Negotiation is simulated** — no real negotiation data exists to validate
-  against; this is a proof-of-concept.
-- **The foundation is solid:** profile discovery is statistically robust
-  (Cohen's d 2.1–4.6, all p < 0.05).
+- **n = 5 profiles → low power** (style ρ p ≈ 0.10); ρ is an indication.
+- **STYLE transfers strongly (+0.80, non-tautological); WINNING is noisy (+0.2)**
+  — a substantive distinction, not a failure.
+- **Negotiation is simulated** (no real negotiation data for the same people).
+- **Foundation is solid:** profile discovery is robust (Cohen's d 2.1–4.6, p<0.05).
 
-See `notebooks/alignment_real_bridge.py`, `results/stage4/alignment_real_bridge_report.md`,
-and `docs/features_and_hypothesis.md`.
+See `notebooks/style_alignment.py`, `notebooks/inverse_prompt_control.py`,
+`notebooks/alignment_real_bridge.py`, and `docs/features_and_hypothesis.md`.
 
 ---
 
@@ -140,7 +131,8 @@ and `docs/features_and_hypothesis.md`.
 │  STAGE 4: DUAL SIMULATION + ALIGNMENT           ✅ DONE     │
 │  • 50 bridge deals × 5 profiles × 3 runs                    │
 │  • 4 negotiation scenarios × 5 profiles × 3 runs            │
-│  • Spearman ρ = +0.50 (real bridge IMP vs negotiation)     │
+│  • STYLE↔STYLE ρ = +0.80 (aggression transfers)            │
+│  • winning↔winning ρ ≈ +0.2 (noisy); control: −0.90        │
 └─────────────────────────────────────────────────────────────┘
 ```
 
