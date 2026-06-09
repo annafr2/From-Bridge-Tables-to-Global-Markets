@@ -54,11 +54,19 @@ last:
 ![A random monkey + double-dummy expose and fix the bridge metric](docs/images/metric_fix_monkey_dd.png)
 
 We then measured bridge skill from the **real competitive data** (duplicate IMP
-vs the field, defence included — no simulation, no chosen weight). But the
-cross-domain *winning* correlation came out **weak and unstable** (ρ ≈ +0.2 to
-+0.5 depending on the metric; it even flipped sign when we changed the seller).
-The reason: **whether a style WINS depends on the opponent and the payoff rules** —
-too noisy to be the headline.
+vs the field, defence included — no simulation, no chosen weight) and placed every
+agent on a **skill spectrum**, from the random monkey (floor) to double-dummy
+perfect play (ceiling):
+
+![Real-data skill spectrum: monkey (−7 IMP) → elite players (≈0) → perfect (+1.1)](docs/images/real_skill_spectrum.png)
+
+The random monkey sits at **−7 IMP**, the real elite profiles cluster near **0**
+(all skilled), and double-dummy perfect is **+1.1 IMP** — a rock-solid,
+monkey-proof, data-grounded bridge metric. **But** the cross-domain *winning*
+correlation still came out **weak and unstable** (ρ ≈ +0.2 to +0.5 depending on
+the metric; it even flipped sign when we changed the seller). The reason:
+**whether a style WINS depends on the opponent and the payoff rules** — too noisy
+to be the headline.
 
 #### Step 2 — we realised the metric caught the wrong thing → STYLE transfers
 
