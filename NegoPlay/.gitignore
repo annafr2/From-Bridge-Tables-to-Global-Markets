@@ -45,3 +45,4 @@ reports/*.fdb_latexmk
 # OS
 .DS_Store
 Thumbs.db
+NegoPlay/data/external/

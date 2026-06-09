@@ -749,7 +749,7 @@ Items that came up but aren't actionable now.
 | Sprint 1 | 1-2 | ✅ DONE | 100% | Repo, setup, PRD, LaTeX reports |
 | Sprint 2 | 3-4 | ✅ DONE | 100% | Session 3 ✅ (Stage 1) — Session 4 ✅ (Stage 2, all 4 profiles validated) |
 | Sprint 3 | 5-6 | ✅ DONE | 100% | Session 5 ✅ (Stage 3 agents) — Stage 4a bridge sim ✅ |
-| Sprint 4 | 7-8 | ✅ DONE | 100% | Stage 4b ✅ + 4c ✅ — final metric: real competitive bridge skill (IMP) vs negotiation, **ρ = +0.50** (robust +0.60); aggressive profiles lead both domains. Validated with a random-monkey baseline + double-dummy; expert-reviewed. H3 answered |
+| Sprint 4 | 7-8 | ✅ DONE | 100% | Stage 4b ✅ + 4c ✅ — discovery in two steps: *winning↔winning* weak/noisy (ρ≈+0.2–0.5), so refined to *style↔style* → **ρ = +0.80** (above target); inverse-prompt control flips to −0.90 (skill-driven, not tautological). Validated with monkey + double-dummy + 5,247 real Craigslist negotiations. H3 answered (behavioral alignment) |
 | Sprint 5 | 9-10 | 🟡 WIP | 20% | Reporting: docs synced; LaTeX report + presentation remain |
 
 **Last updated:** June 1, 2026

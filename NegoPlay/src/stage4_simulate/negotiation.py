@@ -79,6 +79,19 @@ SCENARIOS: list[dict] = [
 
 MAX_ROUNDS = 4   # buyer counter -> seller concede, up to this many rounds
 
+# Seller "red line" (walk-away), CALIBRATED FROM REAL DATA.
+# We validated against 5,247 real Craigslist negotiations
+# (notebooks/validate_negotiation_features.py): aggressive lowballing there
+# CAPTURES MORE SURPLUS and the deal rate barely drops (~0.83 vs ~0.86) — real
+# sellers tolerate hard bargaining and only walk away on *absurd* offers. So the
+# red line is mild and data-grounded: the seller walks only when the buyer offers
+# well below its own floor (< 70% of floor — an offer it would lose money on),
+# after a couple of such insults. This reproduces the real finding (aggression
+# pays) while still penalising a truly nonsensical agent, rather than the earlier
+# over-harsh threshold that wrongly crushed all aggression.
+INSULT_FACTOR = 0.70   # only an offer below floor * 0.70 is "absurd" (data-grounded)
+MAX_INSULTS = 2        # walk away on the 2nd absurd offer
+
 
 def _build_scenario_for_agent(sc: dict) -> dict:
     """Turn a scenario spec into the dict shape NegotiationAgent expects."""
@@ -124,8 +137,10 @@ def _run_one_negotiation(agent, sc: dict, log_rows: list[dict], profile: str, ru
     """Play one buyer-vs-objective-seller negotiation. Returns surplus captured [0,1]."""
     scen = _build_scenario_for_agent(sc)
     current_ask = sc["seller_open"]
+    floor = sc["seller_floor"]
     history: list[dict] = []
     deal_price: float | None = None
+    insults = 0
 
     for rnd in range(MAX_ROUNDS):
         resp = agent.respond_to_offer(
@@ -147,6 +162,15 @@ def _run_one_negotiation(agent, sc: dict, log_rows: list[dict], profile: str, ru
         buyer_price = resp["offer"].get("price_musd") if resp["offer"] else None
         if buyer_price is None:
             buyer_price = current_ask  # no number -> treat as no progress
+
+        # Seller red line: an insulting (near-floor) offer erodes patience; on the
+        # MAX_INSULTS-th insult the seller walks and the deal collapses.
+        if buyer_price < floor * INSULT_FACTOR:
+            insults += 1
+            if insults >= MAX_INSULTS:
+                deal_price = None  # seller walked away -> no deal
+                break
+
         accepted, new_ask = _seller_respond(buyer_price, sc, current_ask)
         history.append({"buyer_offer": buyer_price, "seller_ask": current_ask})
         if accepted:

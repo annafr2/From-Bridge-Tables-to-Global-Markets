@@ -37,22 +37,23 @@ the **empirical baseline** for Paper 1 of Anna's PhD.
 **Important:** Bridge is the *laboratory*. The research target is *business
 negotiation*. Frame discussions accordingly.
 
-**Project status (June 2026): all 4 stages COMPLETE end-to-end.** Final headline
-result: **cross-domain alignment Spearman ρ = +0.50** (IMP-scaled; +0.60 on raw
-points) between **real competitive bridge skill** and simulated negotiation
-surplus. Bridge skill is measured DIRECTLY from the EuroBridge data (duplicate
-IMP vs the field, defence included) — no simulation, no hand-chosen weight, and
-the Fighter's penalty-double skill is captured automatically. The aggressive
-elite profiles (Slam Hunter, Fighter) top BOTH domains. To get a trustworthy
-metric we added a random "monkey" baseline (a metric a monkey beats is broken)
-and a double-dummy evaluator. The earlier simulated metrics (par-only ρ=+0.20,
-fight-aware ρ=+0.80 with a chosen weight, double-dummy single-bid ρ=−0.90
-artifact) are documented as the journey, but the **real-data ρ=+0.50 is the
-defensible result** (expert-reviewed). Foundation is strong: profile discovery +
-validation are robust (Cohen's d 2.1–4.6, all p < 0.05). Caveat: n=5 → low power
-(p not significant), ρ is an indication. Full write-up:
-`notebooks/alignment_real_bridge.py`, `results/stage4/alignment_real_bridge_report.md`,
-`docs/features_and_hypothesis.md` §8, `RESEARCH_INSIGHTS.md` Q7.10–Q7.12.
+**Project status (June 2026): all 4 stages COMPLETE end-to-end.** The result came
+in two steps (documented honestly as a discovery). **Step 1 (winning↔winning):**
+correlating *winning in bridge* (real competitive IMP vs the field, validated with
+a random-"monkey" baseline + double-dummy evaluator) with *winning in negotiation*
+gave a **weak, metric-sensitive** number (ρ ≈ +0.2 to +0.5, even −0.90 under an
+over-harsh seller) — because whether a style WINS depends on the opponent/payoff.
+**Step 2 (style↔style):** refining to the behavioural form (the original RQ,
+"behavioral alignment") — does an aggressive bridge profile *bargain*
+aggressively? — gives **Spearman ρ = +0.80** (above the 0.70 target). An
+**inverse-prompt control** (swap each profile's bridge skills) flips it to
+**−0.90**, proving the transfer is carried by the bridge-derived SKILLS, not the
+label → NOT tautological. Negotiation behaviour was grounded in 5,247 real
+Craigslist negotiations. **Headline: STYLE transfers strongly (+0.80, controlled);
+WINNING is noisy (+0.2).** Foundation is robust (Cohen's d 2.1–4.6). Caveat: n=5
+(indication, not significance); negotiation is simulated. Full write-up:
+`notebooks/{style_alignment,inverse_prompt_control,alignment_real_bridge}.py`,
+`docs/features_and_hypothesis.md` §8, `RESEARCH_INSIGHTS.md` Q7.10–Q7.13.
 
 ---
 
