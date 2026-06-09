@@ -75,16 +75,18 @@ hand-tuned weight** to choose.
 
 ![Real bridge results vs. negotiation](docs/images/alignment_real_bridge.png)
 
-**Result: Spearman ρ = +0.60** between real bridge skill and simulated
-negotiation surplus — **robust** (+0.50 under IMP scaling, so it is not driven by
-a few big boards). The aggressive elite profiles (**Slam Hunter, Fighter**) top
-**both** domains; the cautious profiles trail in both. Bridge skill and
-negotiation skill move together.
+**Result: Spearman ρ = +0.50** (IMP-scaled — the bridge standard, so no single
+big board dominates) between real bridge skill and simulated negotiation surplus;
+**robust** to scaling (ρ = +0.60 on raw points, same ranking). The aggressive
+elite profiles (**Slam Hunter, Fighter**) top **both** domains; the cautious
+profiles trail in both. Bridge skill and negotiation skill move together.
 
-#### Honest caveats
+#### Honest caveats (bridge-expert reviewed)
 
-- **n = 5 profiles → low statistical power** (p ≈ 0.29). ρ is a strong
-  *indication*, not a significant proof.
+- **n = 5 profiles → low statistical power** (p not significant). ρ is an
+  *indication*, not a proof.
+- **Selection confound:** the *Slam Hunter* profile is defined by *bidding*
+  slams, so it may partly proxy overall player strength, not pure style.
 - **Negotiation is simulated** — no real negotiation data exists to validate
   against; this is a proof-of-concept.
 - **The foundation is solid:** profile discovery is statistically robust
@@ -123,7 +125,7 @@ and `docs/features_and_hypothesis.md`.
 │  STAGE 4: DUAL SIMULATION + ALIGNMENT           ✅ DONE     │
 │  • 50 bridge deals × 5 profiles × 3 runs                    │
 │  • 4 negotiation scenarios × 5 profiles × 3 runs            │
-│  • Spearman ρ = +0.60 (real bridge results vs negotiation) │
+│  • Spearman ρ = +0.50 (real bridge IMP vs negotiation)     │
 └─────────────────────────────────────────────────────────────┘
 ```
 
