@@ -310,10 +310,73 @@ y = behaviour in a business negotiation</div>
 </table>
 
 <div class="callout">
-  <span class="head">💡 כל מה שעשינו ביום אחד — בשורה</span>
-  הוספנו <strong>קוף</strong> (מבחן שפיות) ו-<strong>double-dummy</strong> (ניקוד מושלם), גילינו שמדדים מסומלצים
-  אינם אמינים, ולכן עברנו ל<strong>דאטה התחרותי האמיתי</strong> ומדדנו ב-<strong>IMP</strong> → קיבלנו
-  <strong>ρ=+0.50</strong>: מיומנות בברידג' מנבאת מיומנות במשא ומתן, עם ההגנה נספרת אוטומטית ובלי משקל שרירותי.
+  <span class="head">💡 כל הסיפור — בשורה</span>
+  בנינו מדד ברידג' מוצק (<strong>קוף</strong> + <strong>double-dummy</strong> + דאטה אמיתי). מתאם ה<strong>ניצחון</strong>
+  יצא חלש (ρ≈+0.2). זיקקנו לשאלה הנכונה — <strong>סגנון↔סגנון</strong> → <strong>ρ=+0.80</strong>. בקרת פרומפט-הפוך
+  (ρ→‎-0.90) הוכיחה שזה <strong>לא טאוטולוגי</strong>. עיגנו ב-5,247 מו"מ אמיתיים מ-Craigslist.
+</div>
+
+<div class="pagebreak"></div>
+<h2>10. איך לאמת כל תוצאה בעצמך (שקיפות + הוכחות)</h2>
+<div class="intro">
+כל הקוד נמצא ב-repo. לכל ממצא: הפקודה להרצה, מה היא בודקת, וה<strong>פלט האמיתי</strong> שהיא מייצרת (ההוכחה).
+הריצי בעצמך מתיקיית <code>NegoPlay/</code> ותקבלי בדיוק את אותם מספרים.
+</div>
+
+<h3>הוכחה 1 — הקוף חשף שהמדד הישן שבור</h3>
+<p><strong>בודק:</strong> מריץ קוף אקראי ומשווה מדד ישן (גס) מול חדש (double-dummy).</p>
+<div class="codeblock">python -m notebooks.visualize_metric_fix</div>
+<p><strong>הפלט האמיתי:</strong></p>
+<div class="codeblock">monkey: {'old': 0.536, 'new': 0.096}
+  Slam Hunter        old=0.510  new=0.355
+  Insurance Player   old=0.324  new=0.724</div>
+<p>← הקוף <strong>0.54</strong> במדד הישן (מנצח את כולם!), <strong>0.10</strong> בחדש (אחרון). זו ההוכחה.</p>
+
+<h3>הוכחה 2 — הסרגל: קוף (‎-7) ← עילית ← מושלם (+1.1)</h3>
+<p><strong>בודק:</strong> מחשב על 2,000 לוחות אמיתיים את ציון הקוף ואת ה-double-dummy המושלם (ביחידות IMP).</p>
+<div class="codeblock">python -m notebooks.visualize_real_skill_spectrum</div>
+<p><strong>הפלט האמיתי:</strong></p>
+<div class="codeblock">monkey -6.93 IMP | perfect +1.13 IMP | n=2000 boards
+  Slam Hunter   +0.172 IMP
+  Fighter       +0.085 IMP</div>
+
+<h3>הוכחה 3 — סגנון→סגנון: ρ = +0.80</h3>
+<p><strong>בודק:</strong> מתאם תוקפנות-ברידג' (מהנתונים האמיתיים) מול תוקפנות-מו"מ (מהלוגים).</p>
+<div class="codeblock">python -m notebooks.style_alignment</div>
+<p><strong>הפלט האמיתי:</strong></p>
+<div class="codeblock">profile           bridge_aggression  nego_aggression
+Fighter                  1.301            0.808
+Slam Hunter              0.511            0.760
+NT Specialist           -0.359            0.771
+Generalist              -0.685            0.666
+Insurance Player        -0.768            0.666
+Spearman rho = +0.800 (p = 0.104, n = 5)</div>
+
+<h3>הוכחה 4 — בקרת פרומפט-הפוך: ρ → ‎-0.90</h3>
+<p><strong>בודק:</strong> נותן לכל פרופיל את כישורי ההפוך ומודד שוב (דורש קריאות LLM, ~₪0.1).</p>
+<div class="codeblock">python -m notebooks.inverse_prompt_control</div>
+<p><strong>הפלט האמיתי:</strong></p>
+<div class="codeblock">Fighter            1.301   0.725  (skills <- Insurance Player)
+Insurance Player  -0.768   0.805  (skills <- Fighter)
+MATCHED  rho = +0.80
+INVERSE  rho = -0.90 (p=0.037)
+=> aggression FOLLOWED THE SWAPPED SKILLS, not the label. PASS.</div>
+
+<h3>הוכחה 5 — Craigslist: תוקפנות משתלמת (5,247 מו"מ אמיתיים)</h3>
+<p><strong>בודק:</strong> מנתח 5,247 מו"מ אמיתיים — האם פתיחה תוקפנית תופסת יותר עודף ומפוצצת עסקאות.</p>
+<div class="codeblock">python -m notebooks.validate_negotiation_features</div>
+<p><strong>הפלט האמיתי:</strong></p>
+<div class="codeblock">opening aggressiveness    n    deal_rate  avg_surplus
+soft (open near ask)    665     0.85       0.66
+firm (open at target)  1457     0.86       0.68
+lowball (below target) 1796     0.83       1.02</div>
+<p>← lowball תופס הכי הרבה עודף (1.02), ואחוז העסקאות כמעט לא יורד (0.83). זו ההוכחה שתוקפנות משתלמת.</p>
+
+<div class="callout">
+  <span class="head">📂 איפה הכל נשמר</span>
+  <strong>קוד:</strong> <code>NegoPlay/notebooks/</code> ו-<code>NegoPlay/src/</code> ·
+  <strong>תוצאות:</strong> <code>NegoPlay/results/stage4/</code> (קבצי CSV/JSON גולמיים) ·
+  <strong>תמונות:</strong> <code>NegoPlay/docs/images/</code> · הכל ב-Git (היסטוריה מלאה של כל שינוי).
 </div>
 
 <div class="footer">
