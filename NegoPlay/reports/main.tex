@@ -1037,6 +1037,8 @@ To rule out the \emph{tautological alignment} confound (\textit{i.e.}, the LLM m
 
 \noindent\textbf{Falsifiability criterion:} if $\rho_{\text{inverse}} \geq 0.70$, the original alignment is a prompt-following artefact, not a true behavioural transfer, and H3 must be rejected even when the main $\rho_s$ is above threshold.
 
+\noindent\textbf{Executed (June 2026):} the control was run on the style measure and gave $\rho_{\text{inverse}} = -0.90$ -- far below the artefact threshold, i.e.\ the test \emph{passed} (see Chapter~\ref{ch:results}).
+
 % =====================================================================
 % CHAPTER -- RESULTS
 % =====================================================================
@@ -1178,7 +1180,7 @@ The project is decomposed into seven work packages (WP). Each WP groups related 
 \textbf{Tasks:} (T5.1) \texttt{BaseAgent} abstract class; (T5.2) \texttt{BridgeAgent.make\_bid}; (T5.3) \texttt{NegotiationAgent.respond}; (T5.4) prompt library in \texttt{shared/prompts.py}; (T5.5) manual sanity tests confirming behavioral variance $> 30\,\%$.
 
 \section*{WP6 -- Stage 4: simulation and alignment}
-\textbf{Sessions:} 7--8.\quad \textbf{Deliverables:} 50 bridge deals $\times$ 3 runs, 4 negotiation scenarios $\times$ 5 profiles $\times$ 3 runs, alignment report (\emph{the key result}: $\rho = 0.20 \rightarrow 0.80$, Chapter~\ref{ch:results}).\\
+\textbf{Sessions:} 7--8.\quad \textbf{Deliverables:} bridge + negotiation simulations, real-data bridge metric, alignment report (\emph{the key result}: style$\leftrightarrow$style $\rho = +0.80$ with an inverse-prompt control at $-0.90$, Chapter~\ref{ch:results}).\\
 \textbf{Tasks:} (T6.1) \texttt{bridge\_game.py} runner; (T6.2) \texttt{negotiation.py} runner; (T6.3) outcome scoring; (T6.4) optional BEN-engine adapter; (T6.5) \texttt{alignment.py} -- Spearman correlation + permutation test; (T6.6) final scatter plot.
 
 \section*{WP7 -- Polish and defense}

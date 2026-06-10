@@ -49,7 +49,7 @@
 
 ### ⚠️ Hard data limitation to state honestly
 - DD **par contract/result** from the 52 cards → **computable** (we have card holdings). Upgrades the *bidding* metric. ✅
-- DD **defensive play quality** → **NOT computable** — needs trick-by-trick play data we do **not** have (EuroBridge = auction only). So DD complements but does **not** replace the fight-aware (doubling) term, and the Fighter's *defensive play* skill stays out of reach until we add play-by-play data (BBO/LIN — future scrape). ⚠️
+- DD **defensive play quality** → **NOT computable** — needs trick-by-trick play data we do **not** have (EuroBridge = auction only). In the end this was solved differently: the **real-data IMP metric** counts defensive *outcomes* automatically (a successful double scores positive), though defensive *card-play quality* still needs play-by-play data (BBO/LIN — future scrape). ⚠️
 
 ### 📋 Tasks (executed — June 2026)
 
