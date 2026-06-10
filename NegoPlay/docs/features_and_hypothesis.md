@@ -128,12 +128,12 @@ In words: *"The decision style we learned from bridge predicts how the same
 We test Level 2 by checking whether the profile **ranking** is the same in both
 domains, using **Spearman's ρ** (a correlation of rankings). Target: **ρ ≥ 0.70**.
 
-> ⚠️ **Honest status:** Level 1 is proven. Level 2 (Stage 4) is complete. The
-> final, strongest result measures bridge skill from the **real competitive data**
-> (duplicate IMP vs the field, defence included) and finds **Spearman ρ = +0.50**
-> (robust +0.60 on raw points) with negotiation — the aggressive elite profiles
-> lead both domains. (The Hebrew supervisor guide, `features_and_hypothesis_UPDATED`,
-> carries the full plain-language write-up with figures.)
+> ⚠️ **Honest status:** Level 1 is proven. Level 2 (Stage 4) is complete, in two
+> steps: *winning↔winning* came out weak and metric-sensitive (ρ ≈ +0.2 to +0.5),
+> so we refined to the behavioural form — **style↔style: Spearman ρ = +0.80**
+> (above the 0.70 target), with an inverse-prompt control flipping it to −0.90
+> (skill-mediated, not tautological). Full story in Section 8 and in the Hebrew
+> supervisor guide (`features_and_hypothesis_UPDATED_v9.pdf`).
 
 ---
 
@@ -236,85 +236,80 @@ the four validated profiles.
 
 ---
 
-# 8. תוצאות שלב 4 — התשובה למחקר (עברית פשוטה)
+# 8. Stage 4 results — the discovery, in two steps
 
-> זה החלק הסופי: נתנו לסוכנים לשחק גם ברידג' וגם משא ומתן, ובדקנו אם מי שמנצח
-> בברידג' מנצח גם במשא ומתן. זו שאלת המחקר המרכזית (H3).
+> The final part. The research question (as originally posed): do the profiles
+> show **behavioral alignment** between bridge and negotiation?
+> **The full plain-language walkthrough, with all figures and a glossary, lives
+> in the Hebrew supervisor guide** (`reports/features_and_hypothesis_UPDATED_v9.pdf`,
+> built from `reports/guide_build/index.html`). This section is the English summary.
 
-## מה עשינו בשלב 4
+## Step 1 — we first asked "does WINNING transfer?" → weak & metric-sensitive
 
-| תת-שלב | מה עשינו | המדד |
-|--------|----------|------|
-| **4a — ברידג'** | 5 הפרופילים הכריזו על 50 ידיים זהות | קרבה ל"חוזה הנכון" לפי כוח היד |
-| **4b — משא ומתן** | 5 הפרופילים ניהלו 4 עסקאות מול "מוכר" קשוח קבוע | כמה הורידו את המחיר |
-| **4c — היישור** | השוואת הדירוג בשני התחומים | **Spearman ρ** |
+To make the bridge side trustworthy we added a **double-dummy evaluator** (the
+perfect-play score from the 52 cards) and a **random "monkey" baseline** — a
+metric a monkey beats is broken, and the monkey indeed exposed the first coarse
+metric (it outscored every profile; double-dummy scoring put it last):
 
-> 🟡 **Spearman ρ** = מספר בין ‎-1 ל-1 שמודד אם **סדר** הפרופילים זהה בשני
-> התחומים. ρ=1 → סדר זהה (אישוש). ρ=0 → אין קשר. היעד שהוגדר מראש: **ρ ≥ 0.70**.
+![Monkey + double-dummy fix the bridge metric](images/metric_fix_monkey_dd.png)
 
-## התוצאה — בשני שלבים
+We then measured bridge skill from the **real competitive data** (duplicate IMP
+vs the field, defence included — no simulation, no chosen weight) and placed
+everyone on a skill spectrum (monkey −7 IMP → elite ≈0 → perfect +1.1):
 
-### שלב ראשון: ρ = +0.20 (חלש) — אבל גילינו למה
+![Real-data skill spectrum](images/real_skill_spectrum.png)
 
-![Cross-domain alignment scatter](../results/stage4/alignment.png)
+But the *winning↔winning* correlation stayed **weak and unstable** (ρ ≈ +0.2 to
++0.5 by metric choice; it even flipped sign under an over-harsh seller). The
+reason is structural: **whether a style WINS depends on the opponent and the
+payoff rules.** We were measuring the wrong quantity.
 
-במדידה הראשונה היישור יצא חלש. הסיבה הייתה **חריג אחד — ה-Fighter**: הוא יצא
-חלש בברידג' אבל **הכי טוב** במשא ומתן, וזה "שבר" את הקשר.
+## Step 2 — the refined question: does the STYLE transfer? → ρ = +0.80
 
-**למה?** הכישור המגדיר של ה-Fighter הוא **דאבלים תוקפניים** —
-הוא עשה דאבל ב-33% מהכרזותיו, פי 6-8 מכל פרופיל אחר! אבל מדד הברידג' שלנו
-(שמודד רק "גובה חוזה") היה **עיוור** לדאבלים. אז הוא נראה חלש בברידג' למרות
-שהוא לוחם מצוין. **מומחה הברידג' חזה את זה מראש.**
+The original hypothesis is about **behavioral alignment**, so we measured it
+directly: bridge aggression (real bidding — slam + preempt + doubles, z-scored)
+vs negotiation aggression (how low the agent opens):
 
-> ⚠️ **הערת דיוק (חשובה לפני הפגישה):** התכונה `penalty_double_rate` סופרת
-> בפועל את **כל הדאבלים** — גם דאבל הזמנה (takeout) וגם דאבל עונשין — לא רק
-> עונשין. שני הסוגים הם בחירה *להיכנס ולהילחם* במכרז במקום לפסוח, ולכן זה מדד
-> תקף ל**תחרותיות אגרסיבית**. השם המדויק יותר הוא "דאבלר תוקפני", לא "מעניש".
-> זה לא משנה את המספרים ולא את ρ — רק את הפרשנות המילולית.
+![Style → style](images/style_alignment.png)
 
-### שלב שני: תיקנו את המדד → ρ = +0.80 (מעל היעד!)
+**Spearman ρ = +0.80** (p = 0.10, n = 5) — above the pre-registered 0.70 target.
+Aggressive bridge profiles bargain aggressively; cautious ones bargain softly.
 
-בנינו מדד ברידג' **משולב** שמתגמל גם דיוק בהכרזה **וגם** לחימה (הכפלות):
-`ציון = 0.7 × דיוק_חוזה + 0.3 × שיעור_הכפלות`. וה-ρ **קפץ ל-0.80** — מעל היעד!
+## The anti-tautology control — the SKILLS carry the style
 
-**השוואה לפני/אחרי** (אותה תמונה בדיוק, רק עם המדד המתוקן):
+Objection: "the agent is aggressive only because you labelled it aggressive."
+Control: keep each profile's identity but inject the **opposite** profile's
+bridge skills. The correlation **flips to ρ = −0.90** (p = 0.037) — behaviour
+follows the injected bridge-derived skills, not the label:
 
-![Before vs after correction](../results/stage4/alignment_before_after.png)
+![Inverse-prompt control](images/style_transfer_control.png)
 
-תראו את ה-Fighter (כתום): **לפני** הוא חריג שיושב גבוה-משמאל (מקום 4 בברידג');
-**אחרי** הוא זז ימינה למקום 2, וכל הנקודות מתיישרות על הקו האלכסוני. ברגע שהמדד
-התחיל לתגמל את ההכפלות שלו — הקשר הופיע.
+Negotiation behaviour was additionally grounded in **5,247 real Craigslist
+negotiations** (aggressive opening captures more surplus; sellers rarely walk),
+which also calibrated the simulated seller:
 
-**וגם ניתוח רגישות** — כדי להראות שזה לא תלוי במשקל בודד:
+![Real negotiation validation](images/negotiation_real_validation.png)
 
-![Sensitivity analysis](../results/stage4/alignment_sensitivity.png)
+## Headline and caveats
 
-ככל שנותנים יותר משקל ללחימה, ה-ρ עולה (0.20 → 0.60 → 0.80 → 0.90). בחרנו משקל
-**מתון (0.3)**, לא את המקסימלי — כדי שזה לא ייראה כמו "תפירה" לתוצאה.
+> **STYLE transfers strongly (ρ = +0.80, validated non-tautological); WINNING is
+> noisy (ρ ≈ +0.2).** An aggressive bridge player *behaves* aggressively in
+> negotiation — whether that *wins* depends on the domain's payoff rules.
 
-## למה זה תיקון לגיטימי (ולא רמאות)
+- **n = 5 profiles → low power** (style p ≈ 0.10); ρ is an indication.
+- **Negotiation is simulated** (no real same-person negotiation data); the
+  simulation is calibrated to real human negotiations.
+- **Foundation is solid:** profile discovery is robust (Cohen's d 2.1–4.6).
+- Possible **selection confound**: the Slam Hunter profile (defined by *bidding*
+  slams) may partly proxy overall strength.
 
-1. ה-Fighter **מוגדר** ע"י הכפלות כבר משלב 1 — לא המצאנו זאת עכשiו.
-2. המומחה חזה את הבעיה **מראש**, לפני שראינו את ρ.
-3. בחרנו משקל מתון (0.3), והקשר יציב בכל משקל סביר.
-
-> 🎯 **המסקנה המתודולוגית (התרומה האמיתית):** מדד ההצלחה בכל תחום חייב לתפוס את
-> הכישור הרלוונטי לאותו תחום. מדדנו את הציר הלא-נכון בברידג', וזה הסתיר קשר חזק
-> שבאמת קיים. ברגע שהמדד תפס את הלחימה — היישור הופיע.
-
-## מה זה אומר לדוקטורט
-
-זהו **proof-of-concept מוצלח**: היסוד (זיהוי הפרופילים, H1) חזק ומובהק (Cohen's
-d 2.1–4.6). שלב 4 (H3) הראה שהקשר קיים (ρ=0.80) אך מתחבא מאחורי בעיית מדידה
-ממוקדת שזיהינו והבנו. כיווני העבודה לדוקטורט: מדד ברידג' עשיר יותר (או מנוע
-double-dummy אמיתי), יותר פרופילים, ותרחישי מו"מ אמיתיים.
-
-> ⚠️ **הסתייגות:** n=5 פרופילים → כוח סטטיסטי נמוך (p לא מובהק). ρ הוא
-> **אינדיקציה**, לא הוכחה. הערך הוא בעיקרון המתודולוגי, לא במספר המדויק.
+**Reproduce:** `python -m notebooks.style_alignment`,
+`python -m notebooks.inverse_prompt_control`,
+`python -m notebooks.alignment_real_bridge`,
+`python -m notebooks.validate_negotiation_features`.
 
 ---
 
 *Generated as a supervisor-facing reference. Source data: 149,208 EuroBridge
-rows (2016–2025); 563 qualifying players; 8 clustering features. Figures:
-`python notebooks/visualize_clustering_failure.py` and
-`python -m src.stage4_simulate.alignment`.*
+rows (2016–2025); 563 qualifying players; 8 clustering features. External
+validation: 5,247 real Craigslist negotiations.*
