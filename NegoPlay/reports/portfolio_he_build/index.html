@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>NegoPlay — תיק פרויקט סופי (עברית)</title>
+<style>
+  @page { size: A4; margin: 2cm 1.8cm; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { font-family: 'Segoe UI','Arial',sans-serif; color:#1f2933; line-height:1.75; font-size:11.5pt; direction:rtl; text-align:right; }
+  h1 { font-size:20pt; color:#16324f; border-bottom:3px solid #16324f; padding-bottom:10px; margin-bottom:8px; }
+  h2 { font-size:14.5pt; color:#16324f; margin-top:26px; padding-right:12px; border-right:5px solid #2c5f8a; }
+  h3 { font-size:12pt; color:#2c5f8a; margin-top:18px; }
+  p { margin:7px 0; }
+  code { font-family:'Consolas','Courier New',monospace; background:#eef1f4; color:#b4317a; padding:1px 5px; border-radius:3px; font-size:9.5pt; direction:ltr; display:inline-block; }
+  .codeblock { background:#f4f6f8; border:1px solid #dde3e9; border-radius:4px; padding:10px 14px; direction:ltr; text-align:left; font-family:'Consolas',monospace; font-size:9pt; white-space:pre; margin:10px 0; }
+  .intro { background:#f2f4f6; border-radius:6px; padding:14px 18px; font-style:italic; color:#52606d; margin:14px 0 6px; }
+  .callout { background:#eaf2fb; border-right:5px solid #4a90d9; border-radius:4px; padding:12px 16px; margin:14px 0; }
+  .callout .head { font-weight:700; color:#2c5f8a; display:block; margin-bottom:4px; }
+  .warn { background:#fdf6e3; border-right:5px solid #d9a441; border-radius:4px; padding:12px 16px; margin:14px 0; }
+  .warn .head { font-weight:700; color:#a6791f; display:block; margin-bottom:4px; }
+  .result { background:#eafaf1; border-right:5px solid #36a36b; border-radius:4px; padding:12px 16px; margin:14px 0; }
+  .result .head { font-weight:700; color:#1f7a4d; display:block; margin-bottom:4px; }
+  table { border-collapse:collapse; width:100%; margin:12px 0; font-size:10.5pt; }
+  th { background:#e8eef4; color:#16324f; border:1px solid #c5d3e0; padding:7px 10px; text-align:right; }
+  td { border:1px solid #d8e0e8; padding:6px 10px; text-align:right; vertical-align:top; }
+  tr:nth-child(even) td { background:#f6f9fc; }
+  figure { margin:14px 0; text-align:center; page-break-inside:avoid; }
+  figure img { max-width:96%; border:1px solid #e0e6ec; border-radius:4px; }
+  figcaption { font-size:9.5pt; color:#6b7785; margin-top:5px; }
+  ul,ol { padding-right:22px; padding-left:0; }
+  li { margin:5px 0; }
+  .pagebreak { page-break-before:always; }
+  .ltr { direction:ltr; display:inline-block; }
+  .footer { margin-top:26px; padding-top:12px; border-top:1px solid #d8e0e8; font-size:9pt; color:#8a949e; font-style:italic; }
+  /* cover */
+  .cover { text-align:center; padding-top:3.2cm; }
+  .cover .rule { border-top:2px solid #16324f; margin:0 0 1.4cm 0; }
+  .cover h1.title { font-size:34pt; border:none; margin:0.2cm 0; }
+  .cover .subtitle { font-size:14pt; color:#374b5e; margin-bottom:1.2cm; }
+  .cover .doctype { font-size:13pt; font-weight:700; color:#16324f; margin:1.4cm 0 0.2cm; }
+  .cover .parts { font-size:11pt; color:#52606d; margin-bottom:1.6cm; }
+  .cover table { width:auto; margin:0 auto; font-size:11.5pt; }
+  .cover td { border:none; padding:5px 12px; }
+  .cover td.k { font-weight:700; color:#16324f; }
+  .toc td { border:none; padding:4px 8px; }
+  .toc { width:100%; }
+</style>
+</head>
+<body>
+
+<!-- ===================== עמוד 1: כותרת ===================== -->
+<div class="cover">
+  <div class="rule"></div>
+  <h1 class="title">NegoPlay</h1>
+  <div class="subtitle">משולחן הברידג' אל שולחן המשא ומתן:<br>האם סגנון קבלת-החלטות עובר בין תחומים?</div>
+  <div class="doctype">תיק פרויקט סופי — גרסה עברית</div>
+  <div class="parts">דו"ח סיכום &middot; (הדו"ח המכין והתוכנית העסקית — בתיק האנגלי המלא)</div>
+  <table>
+    <tr><td class="k">מגישה:</td><td>אנה בן-שושן</td></tr>
+    <tr><td class="k">מרצה הקורס:</td><td>ד"ר יורם סגל</td></tr>
+    <tr><td class="k">מנחה הדוקטורט:</td><td>ד"ר נצר יעקב זיידנברג</td></tr>
+    <tr><td class="k">קורס:</td><td>AI Development Expert</td></tr>
+    <tr><td class="k">מוסד:</td><td>TESI — The External Studies Institute</td></tr>
+    <tr><td class="k">תאריך הגשה:</td><td>14 ביוני 2026</td></tr>
+  </table>
+</div>
+
+<!-- ===================== עמוד 2: תקציר ===================== -->
+<div class="pagebreak"></div>
+<h1>תקציר מנהלים</h1>
+<p>נתוני משא ומתן בעולם האמיתי הם סודיים ובלתי-מדידים, ולכן כמעט בלתי אפשרי לחקור התנהגות
+משא ומתן בקנה מידה. <strong>NegoPlay</strong> משתמש בברידג' תחרותי כמעבדה מדידה לאותן החלטות
+בדיוק — סיכון, לחץ, והחלפת מידע — ושואל האם <em>סגנון קבלת-ההחלטות</em> של שחקן עובר
+מהברידג' אל משא ומתן עסקי.</p>
+<p>מתוך 149,208 רשומות תחרות (563 שחקנים כשירים), צינור למידה לא-מונחית גילה חמישה פרופילי
+החלטה מאומתים סטטיסטית (Cohen's d בין 2.1 ל-4.6, כולם p&lt;0.05). כל פרופיל הומר לסוכן
+מבוסס מודל-שפה שכרטיס-האופי שלו מכיל <em>אך ורק</em> כישורים שנגזרו מהברידג', והסוכנים
+ניהלו משא ומתן עסקי מול מוכר שכויל על 5,247 משא-ומתנים אמיתיים מ-Craigslist.</p>
+<p>העברת <em>ניצחון</em> התבררה כחלשה ורגישה למדד (ρ ≈ +0.2); זיקוק השאלה לצורתה ההתנהגותית
+המקורית הראה ש<strong>הסגנון עובר חזק</strong>: תוקפנות בברידג' ותוקפנות במשא ומתן מתואמות
+ב-<strong>Spearman ρ = +0.80</strong>, מעל יעד ה-0.70 שהוגדר מראש. בקרת פרומפט-הפוך הופכת את
+המתאם ל-‎-0.90 — הוכחה שההעברה נישאת על-ידי הכישורים שנגזרו מהברידג', ולא על-ידי תוויות.
+מדד הברידג' עצמו אומת באמצעות מבחן בסיס-אקראי ("קוף") ומעריך double-dummy. המערכת ניתנת
+לשחזור מלא: נקודת כניסה אחת (SDK), 100+ בדיקות יחידה, סימולציות עם seed קבוע, ותיעוד עלות
+לכל קריאה (סך הוצאות LLM ≈ 1.70$).</p>
+
+<!-- ===================== עמוד 3: תודות ===================== -->
+<div class="pagebreak"></div>
+<h1>תודות</h1>
+<p>ברצוני להודות לאנשים שליוו את הפרויקט הזה מרעיון למערכת עובדת.</p>
+<p><strong>ד"ר יורם סגל</strong> — על מסגרת הפרויקט ההנדסית שעיצבה את העבודה: משמעת
+ה-SDK האחיד, הדרישה לתוצרים מדידים, והסטנדרט שגם אב-טיפוס מחקרי צריך להיות תוכנה
+בנויה היטב.</p>
+<p><strong>ד"ר נצר יעקב זיידנברג</strong> — מנחה הדוקטורט שלי, על מומחיות בתחום הברידג' —
+מתיקוני גודל-מדגם בגילוי הפרופילים ועד עוגן ה-double-dummy שביסס את מדד המיומנות — ועל
+הליווי האקדמי שבתוכו הפרויקט הזה משמש בסיס אמפירי.</p>
+<p><strong>ד"ר רמי</strong> — על הנחיה מתודולוגית חדה: הדרישה לקווי-בסיס, ביקורות עיבוד-מקדים
+ויושרה סטטיסטית דחפה את הפרויקט לאמת כל מספר שהוא מדווח — כולל מבחן הבסיס-האקראי ששינה
+את מדד הברידג'.</p>
+<p>ולבסוף — למשפחתי, על הסבלנות בלילות של ריצות סימולציה, ועל שהעמידו פנים שהכפלות-עונשין
+זה נושא מרתק.</p>
+
+<!-- ===================== עמוד 4: תוכן עניינים ===================== -->
+<div class="pagebreak"></div>
+<h1>תוכן עניינים</h1>
+<table class="toc">
+  <tr><td><strong>1. סקירת הפרויקט</strong> — הבעיה, הרעיון, הצינור, הנתונים</td></tr>
+  <tr><td><strong>2. תוצאות מרכזיות</strong> — מדד אמין (קוף + double-dummy) · הגילוי: סגנון עובר, ניצחון לא · בקרת האנטי-טאוטולוגיה · מגבלות</td></tr>
+  <tr><td><strong>3. שכבת ה-AI: סוכני LLM והנדסת כישורים</strong> — ארכיטקטורת סוכן · חילוץ כישורים · פרומפטים כקונפיגורציה · אי-דטרמיניזם · לקוח LLM ניטרלי-ספק</td></tr>
+  <tr><td><strong>4. הנדסת תוכנה</strong> — ארכיטקטורת SDK · תבניות עיצוב · בדיקות · הנדסת אמינות · שחזוריות · איכות קוד ועלות</td></tr>
+  <tr><td><strong>5. מסקנות והמשך</strong></td></tr>
+  <tr><td><em>חלקים II–III (דו"ח מכין מלא, 51 עמ' + תוכנית עסקית, 20 עמ') — בתיק האנגלי: final_portfolio.pdf</em></td></tr>
+</table>
+
+<!-- ===================== פרק 1 ===================== -->
+<div class="pagebreak"></div>
+<h1>1. סקירת הפרויקט</h1>
+
+<h2>הבעיה והרעיון</h2>
+<p>משא ומתן עסקי הוא אחת המיומנויות המשפיעות ביותר בתעשייה — אך כמעט בלתי אפשרי לחקור
+אותו כמותית: תמלילים חסויים, תוצאות לא מתוקננות, ואין שום מאגר ציבורי שמקשר בין סגנון
+ההחלטה של אדם להתנהגותו במשא ומתן. ברידג' תחרותי פותח דרך עוקפת: כל חלוקה היא רצף
+החלטות מתועדות תחת אי-ודאות — כמה גבוה להתחייב, מתי להסתכן, מתי להילחם — ולכל החלטה
+תוצאה מדידה. NegoPlay מתייחס לברידג' כ<strong>מעבדה התנהגותית</strong>: לגלות פרופילי
+קבלת-החלטות בנתוני ברידג', לגלם אותם בסוכני LLM, ולבדוק אם הסגנון שהם מקודדים עובר
+לתחום אסטרטגי אחר.</p>
+
+<h2>צינור המערכת</h2>
+<ol>
+  <li><strong>גילוי פרופילים (ML):</strong> 149,208 רשומות ← 8 תכונות התנהגות לשחקן ←
+      פרופיילינג אחוזון-קיצון עם אימות בינומי ← 5 פרופילים (צייד סלאמים, שחקן ביטוח,
+      לוחם, מומחה NT, כללי).</li>
+  <li><strong>חילוץ כישורים (LLM):</strong> ידיים אמיתיות של כל פרופיל נשלחות למודל השפה,
+      שמחזיר 5–7 כישורים מאפיינים כ-JSON מובנה.</li>
+  <li><strong>בניית סוכנים:</strong> כל פרופיל הופך לסוכן שכרטיס-האופי שלו מכיל
+      <em>רק</em> את הכישורים שנגזרו מהברידג' — לעולם לא שמות-תואר של אישיות
+      (כלל האנטי-טאוטולוגיה).</li>
+  <li><strong>סימולציה כפולה ויישור:</strong> הסוכנים מכריזים בברידג' ומנהלים משא ומתן
+      עסקי; ההתנהגות והתוצאות בשני התחומים מתואמות זו מול זו.</li>
+</ol>
+
+<h2>נתונים</h2>
+<ul>
+  <li><strong>ברידג':</strong> 149,208 רשומות-לוח ממאגר האליפויות האירופי הציבורי
+      (2016–2025), שנאספו בצינור גירוד-נתונים שנכתב עבור הפרויקט; 563 שחקנים עוברים את
+      סף האמינות (≥50 לוחות).</li>
+  <li><strong>משא ומתן (אימות חיצוני):</strong> 5,247 משא-ומתני מחיר אמיתיים בין בני אדם
+      (קורפוס Craigslist של סטנפורד) — לאימות תכונות ההתנהגות ולכיול המוכר המדומה.</li>
+</ul>
+
+<!-- ===================== פרק 2 ===================== -->
+<div class="pagebreak"></div>
+<h1>2. תוצאות מרכזיות</h1>
+
+<h2>מדד ברידג' אמין (קוף + double-dummy)</h2>
+<p>מדד מיומנות חייב לדרג סוכן אקראי במקום האחרון. המדד הגס הראשון שלנו נכשל במבחן —
+"קוף" שמכריז אקראית <em>עקף</em> את כל פרופילי המומחים (0.54 מול 0.25–0.51). ניקוד מחדש
+של כל חוזה לפי השאלה האם הוא <em>באמת מצליח</em> בהערכת double-dummy (משחק מושלם) הפיל
+את הקוף למקום האחרון (0.10):</p>
+<figure>
+  <img src="metric_fix_monkey_dd.png" alt="תיקון המדד">
+  <figcaption>הבסיס האקראי חושף (שמאל) ומדד ה-double-dummy מתקן (ימין) את ציון הברידג'.</figcaption>
+</figure>
+<p>את מיומנות הברידג' מדדנו אז מהתוצאות התחרותיות <em>האמיתיות</em> (IMP מול השדה בשיטת
+duplicate, כולל הגנה). על הסולם הזה הקוף האקראי יושב על ‎-7 IMP ללוח, פרופילי העילית
+מתקבצים סביב 0, ומשחק מושלם מסמן את התקרה ב-+1.1:</p>
+<figure>
+  <img src="real_skill_spectrum.png" alt="סרגל מיומנות">
+  <figcaption>סרגל המיומנות על הלוחות האמיתיים: רצפה אקראית ← שחקני עילית ← תקרת משחק-מושלם.</figcaption>
+</figure>
+
+<h2>הגילוי: הסגנון עובר — הניצחון לא</h2>
+<p>מתאם של <em>ניצחון</em> בין התחומים התברר כחלש ורגיש למדד (ρ ≈ +0.2 עד +0.5), כי האם
+סגנון מנצח תלוי ביריב ובחוקי התגמול. זיקוק השאלה לצורתה ההתנהגותית המקורית — האם פרופיל
+תוקפני בברידג' <em>מתמקח</em> בתוקפנות? — נותן <strong>Spearman ρ = +0.80</strong>:</p>
+<figure>
+  <img src="style_alignment.png" alt="סגנון מול סגנון">
+  <figcaption>סגנון↔סגנון: תוקפנות בברידג' (הכרזות אמיתיות) מול תוקפנות במו"מ (כמה נמוך הסוכן פותח), ρ=+0.80.</figcaption>
+</figure>
+
+<h2>בקרת האנטי-טאוטולוגיה</h2>
+<p>כדי לשלול את הטענה "הסוכן תוקפני כי תייגתם אותו תוקפני", כל פרופיל שמר על זהותו אך קיבל
+את כישורי הברידג' של הפרופיל <em>ההפוך</em>. המתאם התהפך מ-+0.80 ל-<strong>‎-0.90</strong>
+(p=0.037) — ההתנהגות עוקבת אחרי הכישורים המוזרקים שנגזרו מהברידג', לא אחרי התווית:</p>
+<figure>
+  <img src="style_transfer_control.png" alt="בקרת פרומפט הפוך">
+  <figcaption>כישורים תואמים (שמאל, +0.80) מול כישורים מוחלפים (ימין, ‎-0.90): הכישורים נושאים את הסגנון.</figcaption>
+</figure>
+
+<h2>מגבלות — בכנות</h2>
+<p>עם n=5 פרופילים, מתאם הסגנון הוא אינדיקציה (p≈0.10) ולא מובהקות; המשא ומתן מדומה
+(מכויל על משא-ומתנים אנושיים אמיתיים, אך אין נתוני מו"מ של אותם אנשים); ופרופיל
+"צייד הסלאמים", שמוגדר לפי <em>הכרזת</em> סלאמים, עשוי לשקף חלקית עוצמת-משחק כללית.
+הכל מתועד, לא מוסתר.</p>
+
+<!-- ===================== פרק 3 ===================== -->
+<div class="pagebreak"></div>
+<h1>3. שכבת ה-AI: סוכני LLM והנדסת כישורים</h1>
+
+<h2>ארכיטקטורת סוכן</h2>
+<p>כל הסוכנים יורשים ממחלקה אבסטרקטית <code>BaseAgent</code> שמחזיקה את חתימת הפרופיל,
+את לקוח ה-LLM, ו<strong>נקודת-חנק החלטה אחת</strong>. אף סוכן לא קורא ל-SDK של ספק
+ישירות — כל החלטה זורמת דרך מתודה אחת, שמרכזת ניסיונות-חוזרים, פירוק JSON, מדיניות
+טמפרטורה ותיעוד עלות:</p>
+<div class="codeblock">class BaseAgent(ABC):
+    def _decide(self, user_prompt, response_schema, purpose) -> dict:
+        """The ONLY path to the LLM: schema-enforced, logged, retried."""
+        response = self.client.generate(
+            system=self.system_prompt, user=user_prompt,
+            purpose=purpose, temperature=self.temperature,
+            response_schema=response_schema)
+        return response.json or json.loads(response.text)</div>
+<p>שני סוכנים קונקרטיים מממשים את התחומים: <code>BridgeAgent.make_bid()</code>
+(טמפרטורה 0 לשחזוריות; כל הכרזה מאומתת בבודק-חוקיות מקומי ללא LLM, עם נפילה ל-Pass
+אם אינה חוקית) ו-<code>NegotiationAgent.respond_to_offer()</code> (טמפרטורה 0.7;
+מחזיר counter/accept/walk_away עם מחיר חסום לטווח החוקי של התרחיש).</p>
+
+<h2>חילוץ כישורים וכלל האנטי-טאוטולוגיה</h2>
+<p>שלב 2 הופך ידיים גולמיות ל<em>פרופיל כישורים</em>: הידיים נחתכות לחבילות (20–30
+לקריאה), נשלחות עם סכמת JSON קשיחה (<code>response_mime_type="application/json"</code>),
+ומאוחדות בין החבילות. הכלל ההנדסי המרכזי: לסוכנים <strong>לעולם</strong> לא נותנים
+שמות-תואר של אישיות. בכרטיס של ה"לוחם" כתוב <em>"מכפיל יריבים בקצב של פי 6–8
+מהממוצע"</em> — עובדה שחולצה מהמכרזים האמיתיים של שחקניו — ולא <em>"תהיה תוקפני"</em>.
+כל התנהגות חוצת-תחומים חייבת אפוא <em>לצמוח</em> מכישורי הברידג'. בקרת הפרומפט-ההפוך
+(פרק 2) היא המבחן הביצועי של הכלל: החלפת הכישורים מחליפה את ההתנהגות
+(ρ: ‎+0.80 ← ‎-0.90).</p>
+
+<h2>הנדסת פרומפטים כקונפיגורציה</h2>
+<p>הפרומפטים הם ארטיפקטים מבוקרי-קוד, לא מחרוזות אד-הוק: ספרייה מרכזית
+(<code>shared/prompts.py</code>) בונה כל כרטיס-אופי מאותה תבנית — שורת זהות, 5–7
+כישורים שחולצו, חוקי התחום, סכמת פלט קשיחה ודוגמת few-shot. טמפרטורה, סכמה וספק הם
+פרמטרים — כך שניסוי הוא שינוי קונפיגורציה, לא שכתוב.</p>
+
+<h2>הנדסה מול אי-דטרמיניזם</h2>
+<p>מודלי שפה אינם דטרמיניסטיים אפילו בטמפרטורה 0 (ריצה מקבילית על GPU). לכן השחזוריות
+מטופלת ברמת ה<em>מדגם</em>: כל (פרופיל, חלוקה) רץ שלוש פעמים עם הכרעת-רוב; כל תשובה
+גולמית נשמרת ל-JSONL לפני כל עיבוד; וכל הניתוחים ניתנים לחישוב-מחדש מהקבצים השמורים
+ללא קריאות API חדשות. החלוקות עצמן נוצרות ממחולל עם seed קבוע, כך שכל הניסוי משוחזר
+ביט-אחר-ביט עד גבול ה-LLM.</p>
+
+<h2>לקוח LLM ניטרלי-ספק</h2>
+<p><code>LLMClient</code> אחד עוטף את Gemini (ברירת מחדל), Claude ו-OpenAI מאחורי ממשק
+אחיד (תבנית Adapter). הוא מממש ניסיונות-חוזרים עם השהיה מעריכית, timeout של 60 שניות
+לכל בקשה (סוקט תקוע עצר פעם אצווה של 1,500 קריאות — ה-timeout הופך תקיעות לכשלים
+ניתנים-לניסיון-חוזר), ויומן עלויות JSONL לכל קריאה (ספק, מודל, טוקנים, השהיה, דולר).
+סך הוצאות ה-LLM של הפרויקט: ≈ 1.70$.</p>
+
+<!-- ===================== פרק 4 ===================== -->
+<div class="pagebreak"></div>
+<h1>4. הנדסת תוכנה</h1>
+
+<h2>ארכיטקטורה: נקודת כניסה אחת (SDK)</h2>
+<p>בסיס הקוד נשמע למשמעת facade קפדנית: כל פעולה ציבורית נגישה דרך
+<code>src/sdk.py</code>, ואף פונקציה לא חיה רק במחברת או בסקריפט. המודולים מאורגנים
+לפי שלבי הצינור:</p>
+<div class="codeblock">src/
+  sdk.py                  # facade: the single public contract
+  stage1_clustering/      # features, profiling, validation
+  stage2_skills/          # chunker, extractor, aggregator
+  stage3_agents/          # BaseAgent, BridgeAgent, NegotiationAgent
+  stage4_simulate/        # bridge_game, bridge_auction, negotiation,
+                          # monkey_agent, alignment
+  features/double_dummy.py  # DDS perfect-play evaluator (endplay)
+  shared/                 # llm_client, prompts, data_loader, logger</div>
+<p>תבניות עיצוב בשימוש פעיל: <strong>Facade</strong> (<code>sdk.py</code>),
+<strong>Template Method</strong> (<code>BaseAgent._decide()</code>),
+<strong>Adapter</strong> (לקוח ה-LLM הניטרלי), ו-<strong>Strategy</strong>
+(סוכני פרופיל מתחלפים — כולל סוכן ה"קוף", שמותאם-ממשק כך שהוא נכנס לכל runner ללא
+שינוי קוד).</p>
+
+<h2>בדיקות</h2>
+<p>הפרויקט כולל 100+ בדיקות <code>pytest</code>: יחידות לוגיקה טהורה (יצירת חלוקות,
+ניקוד, חוקיות מכרז — 28 בדיקות למנוע הברידג' לבדו), סוכן הבסיס-האקראי (חוקיות כל
+הכרזה אקראית, שחזוריות תחת seed קבוע), מעריך ה-double-dummy (קיבועים ידועים: חלוקת
+12 לקיחות חייבת לתת 6NT=1.0 ו-7NT=0.0), והשכבות תלויות-ה-LLM נבדקות באמצעות
+<em>הזרקת לקוח מדומה (mock)</em> — בלי רשת, בלי מפתח API, בלי עלות:</p>
+<div class="codeblock">def test_monkey_bids_are_always_legal_over_many_auctions():
+    monkey = MonkeyAgent(seed=1)
+    for auction in AUCTION_FIXTURES:
+        for _ in range(50):
+            out = monkey.make_bid(HAND, auction)
+            assert is_legal_call(out["bid"], auction)</div>
+
+<h2>הנדסת אמינות</h2>
+<p>ריצות הסימולציה הארוכות מהונדסות לשרוד את מצבי-הכשל שנצפו בפועל במהלך הפרויקט:
+timeout לכל בקשת HTTP (תקיעה ← ניסיון חוזר), ניסיון-חוזר <em>אטומי</em> לכל לוח עם
+השהיות (גולש מעל עומסי 503 של הספק בלי לאבד את האצווה), ושמירת JSONL מצטברת עם
+<code>flush()</code> אחרי כל לוח — ריצה שנהרגה שומרת את כל העבודה שהושלמה, וההתקדמות
+נצפית ממערכת הקבצים.</p>
+
+<h2>שחזוריות ומשמעת נתונים</h2>
+<p>זרעים קבועים (<code>random_state=42</code>) בכל scikit-learn ובמחולל החלוקות; נתוני
+הגלם בלתי-ניתנים-לשינוי (<code>data/raw</code> לקריאה בלבד); כל מספר נגזר ניתן למעקב עד
+ארטיפקט שמור; וההיסטוריה המלאה ב-Git תחת משמעת conventional-commits. כל איור בתיק הזה
+נוצר על-ידי סקריפט שב-Git — שום דבר לא צויר ביד, כך שהתיעוד לא יכול לסטות מהנתונים.</p>
+
+<h2>איכות קוד ועלות כתקציב הנדסי</h2>
+<p>סגנון וטיפוסים נאכפים עם <code>ruff</code>, רמזי-טיפוס ותיעוד בסגנון Google בכל
+הפונקציות הציבוריות. עלות LLM מנוהלת כתקציב הנדסי: בחירת המודל אמפירית
+(<code>gemini-2.5-flash-lite</code> נמצא מהיר פי 10 מברירת המחדל לעומס הזה), כל קריאה
+נמדדת, והפרויקט כולו — כולל כל הריצות החוזרות — עלה ≈ 1.70$.</p>
+
+<!-- ===================== פרק 5 ===================== -->
+<div class="pagebreak"></div>
+<h1>5. מסקנות והמשך</h1>
+
+<div class="result">
+<span class="head">מסקנות</span>
+<ol>
+  <li>שחקני ברידג' בכירים יוצרים <strong>רצף התנהגותי</strong>, לא אשכולות; פרופילים
+      מאומתים סטטיסטית חיים בזנבות הקיצוניים שלו.</li>
+  <li><strong>מדד שסוכן אקראי יכול לנצח בו — שבור.</strong> מבחן הבסיס-האקראי שינה
+      בפועל את המדידות של הפרויקט.</li>
+  <li><strong>סגנון ההחלטה עובר בין תחומים</strong> (ρ=+0.80, לא-טאוטולוגי לפי בקרת
+      פרומפט-הפוך שבוצעה); <strong>ניצחון אינו עובר נקי</strong>, כי ניצחון הוא תכונה
+      של הזוג (סגנון × סביבה).</li>
+</ol>
+</div>
+
+<div class="callout">
+<span class="head">המשך</span>
+יותר פרופילים (חלוקה עדינה יותר של 563 השחקנים) לכוח סטטיסטי; מדידת סגנון-מו"מ
+רב-ממדית (קצב ויתור, נטיית-נטישה); שכפול חוצה-מודלים (Claude/GPT); הפרדת סגנון
+מעוצמת-משחק; ולבסוף — נתוני משא ומתן אמיתיים של אותם אנשים.
+</div>
+
+<div class="warn">
+<span class="head">היכן שאר התיק</span>
+התיק המלא להגשה הוא <code>final_portfolio.pdf</code> (87 עמ', אנגלית): עמודי הפתיחה לפי
+ההנחיות, דו"ח הסיכום (המקביל למסמך זה), הדו"ח המכין המלא (51 עמ') והתוכנית העסקית
+(20 עמ'). המסמך הנוכחי הוא הגרסה העברית של דו"ח הסיכום — לקריאה ולמעבר נוח.
+</div>
+
+<div class="footer">
+NegoPlay · תיק פרויקט סופי — גרסה עברית · נתונים: 149,208 רשומות EuroBridge (2016–2025),
+563 שחקנים, 5 פרופילים · אימות חיצוני: 5,247 משא-ומתנים אמיתיים · כל האיורים נוצרו
+מסקריפטים שב-Git.
+</div>
+
+</body>
+</html>
