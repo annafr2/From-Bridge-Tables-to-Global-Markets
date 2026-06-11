@@ -62,7 +62,7 @@ Final Summary Report \,\textperiodcentered\, Preparatory Report \,\textperiodcen
 \textbf{Course lecturer:} & Dr.\ Yoram Segal \\[6pt]
 \textbf{PhD supervisor:} & Dr.\ Nezer Jacob Zaidenberg \\[6pt]
 \textbf{Course:} & AI Development Expert \\[6pt]
-\textbf{Institution:} & TESI --- The External Studies Institute \\[6pt]
+\textbf{Institution:} & TESI - The External Studies Institute \\[6pt]
 \textbf{Submission date:} & June 14, 2026 \\
 \end{tabular}\\[2.0cm]
 {\color{navy}\rule{\textwidth}{1.2pt}}
@@ -77,8 +77,8 @@ Final Summary Report \,\textperiodcentered\, Preparatory Report \,\textperiodcen
 
 Real-world negotiation data is proprietary and unmeasured, which makes
 negotiation behaviour nearly impossible to study at scale. \textbf{NegoPlay}
-uses competitive bridge as a measurable laboratory for the same decisions ---
-risk, pressure, and information exchange --- and asks whether a player's
+uses competitive bridge as a measurable laboratory for the same decisions - 
+risk, pressure, and information exchange - and asks whether a player's
 \emph{decision-making style} transfers from bridge to business negotiation.
 
 From 149{,}208 tournament records (563 qualifying players), an unsupervised
@@ -97,7 +97,9 @@ to $-0.90$, proving the transfer is carried by the bridge-derived skills
 rather than profile labels. The bridge metric itself was validated with a
 random-baseline (``monkey'') test and a double-dummy evaluator. The system is
 fully reproducible: a single SDK entry point, $100{+}$ unit tests, seeded
-simulations, and per-call cost logging (total LLM spend ${\approx}\$1.70$).
+simulations, and per-call cost logging ($4{,}644$ logged calls cost
+${\approx}\$1.69$; total development spend, including pre-logging
+experimentation and retried runs, ${\approx}30$ ILS / ${\approx}\$8$).
 
 % =====================================================================
 % PAGE 3 — ACKNOWLEDGMENTS
@@ -112,28 +114,26 @@ working system.
 
 \vspace{0.4cm}
 \textbf{Dr.\ Yoram Segal}, for the engineering-first project framework that
-shaped this work --- the single-SDK discipline, the insistence on measurable
+shaped this work (the single-SDK discipline, the insistence on measurable
 deliverables, and the standard that a research prototype should still be a
-well-built piece of software.
-
-\vspace{0.3cm}
-\textbf{Dr.\ Rami}, for sharp methodological guidance: the demand for
-baselines, preprocessing audits, and statistical honesty pushed this project
-to validate every number it reports --- including the random-baseline test
-that reshaped the bridge metric.
+well-built piece of software) and for sharp methodological guidance: the
+demand for baselines, preprocessing audits, and statistical honesty pushed
+this project to validate every number it reports, including the
+random-baseline test that reshaped the bridge metric.
 
 \vspace{0.3cm}
 \textbf{Prof.\ Jari H\"am\"al\"ainen} (LUT University), my PhD supervisor,
 for the academic home in which this project serves as the empirical baseline.
 
 \vspace{0.3cm}
-\textbf{Dr.\ Nezer Jacob Zaidenberg}, for bridge-domain expertise --- from
+\textbf{Dr.\ Nezer Jacob Zaidenberg}, for bridge-domain expertise: from
 sample-size corrections in profile discovery to the double-dummy reference
 that anchored the skill metric.
 
 \vspace{0.3cm}
-And finally, my family --- for the patience during late-night simulation runs
-and for pretending to find penalty doubles interesting.
+And finally, my family, for their patience with me throughout this journey:
+for the many hours I was absent, immersed in studies and in building this
+project. Thank you for the understanding and support that made it possible.
 
 % =====================================================================
 % PAGE 4 — TABLE OF CONTENTS
@@ -155,7 +155,7 @@ it is nearly impossible to study quantitatively: transcripts are confidential,
 outcomes are not standardised, and no public dataset links a person's
 decision style to their negotiation behaviour. Competitive bridge offers a
 way around this. Every deal is a sequence of recorded decisions under
-uncertainty --- how high to commit, when to take a risk, when to fight ---
+uncertainty - how high to commit, when to take a risk, when to fight - 
 and every decision has a measurable outcome. NegoPlay treats bridge as a
 \emph{behavioural laboratory}: discover decision-making profiles in bridge
 data, embody them in LLM agents, and test whether the style they encode
@@ -167,15 +167,22 @@ connected by persisted file artefacts:
 
 \begin{enumerate}[leftmargin=*]
   \item \textbf{Profile discovery (ML).} 149{,}208 EuroBridge records
-        $\rightarrow$ 8 behavioural features per player $\rightarrow$
-        extreme-percentile profiling with binomial validation
+        $\rightarrow$ 8 behavioural features per player. We first ran the
+        standard unsupervised pipeline (scikit-learn
+        \texttt{StandardScaler} $\rightarrow$ \texttt{PCA} $\rightarrow$
+        K-Means, cross-checked with HDBSCAN and a Gaussian mixture),
+        but the silhouette score never exceeded $0.15$: elite players form
+        a smooth \emph{continuum}, not separable blobs. We therefore assign
+        profiles by \textbf{extreme-percentile thresholding} (top $P\%$ on a
+        profile's defining axis) gated by a one-sided binomial significance
+        test ($p<0.05$ versus the population baseline, \texttt{scipy.stats.\allowbreak binomtest})
         $\rightarrow$ 5 profiles (Slam Hunter, Insurance Player, Fighter,
         NT Specialist, Generalist).
   \item \textbf{Skill extraction (LLM).} Real hands per profile are chunked
         and sent to the LLM, which returns 5--7 characteristic skills as
         structured JSON.
   \item \textbf{Agent construction.} Each profile becomes an agent whose
-        character card contains \emph{only} the bridge-derived skills ---
+        character card contains \emph{only} the bridge-derived skills - 
         never personality adjectives (the anti-tautology rule).
   \item \textbf{Dual simulation and alignment.} The agents bid bridge deals
         and negotiate business scenarios; behaviour and outcomes in the two
@@ -198,10 +205,14 @@ connected by persisted file artefacts:
 
 \section{A trustworthy bridge metric (monkey + double-dummy)}
 A skill metric must rank a random agent last. Our first, coarse bridge proxy
-failed this test --- a random ``monkey'' bidder \emph{outscored} every expert
-profile (0.54 vs.\ 0.25--0.51). Re-scoring each contract by whether it
-\emph{actually makes} under double-dummy (perfect-play) evaluation collapses
-the monkey to last place (0.10):
+(a \emph{par-proxy}: it scored a bid by how close its contract level sat to a
+heuristic ``par'' derived from the partnership's high-card points, rewarding
+sensible-looking aggression but never checking whether the contract would
+actually succeed) failed this test: a random ``monkey'' bidder
+\emph{outscored} every expert profile (0.54 vs.\ 0.25--0.51), because random
+bids still land near the heuristic par often enough. Re-scoring each contract
+by whether it \emph{actually makes} under double-dummy (perfect-play)
+evaluation of the real 52 cards collapses the monkey to last place (0.10):
 
 \begin{figure}[H]
 \centering
@@ -210,10 +221,16 @@ the monkey to last place (0.10):
 (right) the bridge score.}
 \end{figure}
 
-Bridge skill was then measured from the \emph{real} competitive results
-(duplicate IMP versus the field, defence included). On this scale the random
-monkey sits at $-7$~IMP per board, the elite profiles cluster near $0$, and
-double-dummy perfect play marks the ceiling at $+1.1$:
+Bridge skill was then measured from the \emph{real} competitive results.
+In duplicate bridge the same deal is played at two tables, so a pair's result
+can be compared against everyone else who held the identical cards: the
+average raw score across the field is the \emph{datum}, and the difference is
+converted to IMPs (the standard non-linear bridge scale). This is a like-for-like
+skill measure (defence is captured automatically, since a poor defender simply
+concedes IMPs to the field). On this scale the random monkey sits at
+$-7$~IMP per board (it loses heavily to the real players who held its cards),
+the elite profiles cluster near $0$ (they roughly match the field, as expected
+for top players), and double-dummy perfect play marks the ceiling at $+1.1$:
 
 \begin{figure}[H]
 \centering
@@ -226,8 +243,8 @@ $\rightarrow$ perfect-play ceiling.}
 Correlating \emph{winning} across domains proved weak and metric-sensitive
 ($\rho \approx +0.2$ to $+0.5$), because whether a style wins depends on the
 opponent and the payoff rules. Refining the question to its original
-behavioural form --- does an aggressive bridge profile \emph{bargain}
-aggressively? --- yields \textbf{Spearman $\rho = +0.80$}:
+behavioural form - does an aggressive bridge profile \emph{bargain}
+aggressively? - yields \textbf{Spearman $\rho = +0.80$}:
 
 \begin{figure}[H]
 \centering
@@ -240,7 +257,7 @@ negotiation aggression (how low the agent opens), $\rho = +0.80$.}
 To rule out ``the agent is aggressive because we labelled it aggressive,''
 each profile kept its identity but received the \emph{opposite} profile's
 bridge skills. The correlation flipped from $+0.80$ to $\mathbf{-0.90}$
-($p = 0.037$) --- behaviour follows the injected bridge-derived skills, not
+($p = 0.037$) - behaviour follows the injected bridge-derived skills, not
 the label:
 
 \begin{figure}[H]
@@ -263,7 +280,7 @@ overall playing strength. These are documented, not hidden.
 \section{Agent architecture}
 All agents inherit from an abstract \texttt{BaseAgent} that owns the profile
 signature, the LLM client, and a single decision choke-point. No agent calls
-a provider SDK directly --- every decision flows through one method, which
+a provider SDK directly - every decision flows through one method, which
 centralises retries, JSON parsing, temperature policy, and cost logging:
 
 \begin{lstlisting}
@@ -281,8 +298,12 @@ Two concrete agents implement the domains: \texttt{BridgeAgent.make\_bid()}
 (temperature $0$ for reproducibility; every returned call is validated by a
 local, non-LLM legality checker and falls back to \texttt{Pass} if illegal)
 and \texttt{NegotiationAgent.respond\_to\_offer()} (temperature $0.7$;
-returns \texttt{counter}/\texttt{accept}/\texttt{walk\_away} with a price
-clamped to the scenario's legal range).
+returns one of three actions, \texttt{counter}/\texttt{accept}/\texttt{walk\_away},
+together with a counter-price). Because the LLM occasionally proposes a number
+outside the deal's plausible band, that price is \emph{clamped} to the
+scenario's legal range, i.e.\ forced to lie between the seller's floor and its
+opening ask, so a malformed reply cannot corrupt the downstream
+aggressiveness measurement.
 
 \section{Skill extraction and the anti-tautology rule}
 Stage 2 turns raw hands into a \emph{skill profile}: hands are chunked
@@ -290,8 +311,8 @@ Stage 2 turns raw hands into a \emph{skill profile}: hands are chunked
 (\texttt{response\_mime\_type="application/json"}), and aggregated across
 chunks. The cardinal engineering rule: agents are \textbf{never} given
 personality adjectives. The Fighter's card says \emph{``doubles opponents at
-6--8$\times$ the field rate''} --- a fact extracted from its players' real
-auctions --- not \emph{``be aggressive.''} Any cross-domain behaviour must
+6--8$\times$ the field rate''} - a fact extracted from its players' real
+auctions - not \emph{``be aggressive.''} Any cross-domain behaviour must
 therefore \emph{emerge} from bridge-derived skills. The inverse-prompt
 control (Chapter~\ref{ch:keyresults}) is the executable test of this rule:
 swapping the skills swaps the behaviour ($\rho: +0.80 \rightarrow -0.90$).
@@ -299,7 +320,7 @@ swapping the skills swaps the behaviour ($\rho: +0.80 \rightarrow -0.90$).
 \section{Prompt engineering as configuration}
 Prompts are code-reviewed artefacts, not ad-hoc strings: a central library
 (\texttt{shared/prompts.py}) builds every character card from the same
-template --- identity line, 5--7 extracted skills, domain rules, a strict
+template - identity line, 5--7 extracted skills, domain rules, a strict
 output schema, and a few-shot example. Temperature, schema, and provider are
 parameters, so an experiment is a configuration change, not a rewrite.
 
@@ -312,13 +333,31 @@ recomputable from the persisted artefacts without new API calls. Deals
 themselves come from a seeded generator, so the entire experiment replays
 bit-identically up to the LLM boundary.
 
+\section{A domain-expert validation skill}
+Because an LLM can produce fluent but bridge-illegal or statistically
+implausible output, the project ships a dedicated
+\texttt{BridgeValidator} skill (\texttt{src/shared/bridge\_validator.py},
+also exposed as the \texttt{/bridge-expert} slash command). It acts as an
+automated bridge expert that checks every reported game statistic against
+the duplicate-bridge rulebook and against the project's empirical baselines
+(slam ${\approx}5.5\%$, partscore ${\approx}57\%$, NT ${\approx}28\%$,
+penalty double ${\approx}8.5\%$), and against Nezer's minimum sample size
+($n \geq 50$ declared boards). Each claim is returned under a fixed
+four-part schema (Legality $\rightarrow$ Probability $\rightarrow$ Expert
+analysis $\rightarrow$ Verdict), so a profile assignment such as
+``slam\_rate $=0.20$ over $20$ boards'' is automatically flagged as
+small-sample and rejected. This turns expert bridge judgement into a
+reusable, testable software component rather than a manual review step.
+
 \section{Provider-neutral LLM client}
 A single \texttt{LLMClient} wraps Gemini (default), Claude, and OpenAI behind
 one interface (an Adapter pattern). It implements exponential-backoff
 retries, a per-request 60-second HTTP timeout (a hung socket once stalled a
-1{,}500-call batch --- the timeout converts hangs into retryable failures),
+1{,}500-call batch - the timeout converts hangs into retryable failures),
 and a JSONL cost log per call (provider, model, tokens, latency, USD).
-Total project LLM spend: ${\approx}\$1.70$.
+The cost log records ${\approx}\$1.69$ across $4{,}644$ logged calls; actual
+out-of-pocket spend during development, including pre-logging experiments and
+retried runs, was ${\approx}30$ ILS (${\approx}\$8$).
 
 \chapter{Software Engineering}
 \label{ch:se}
@@ -349,11 +388,11 @@ unchanged).
 
 \section{Testing}
 The project ships $100{+}$ \texttt{pytest} tests: pure-logic units (deal
-generation, scoring, auction legality --- 28 tests for the bridge engine
+generation, scoring, auction legality - 28 tests for the bridge engine
 alone), the random-baseline agent (legality of every random call,
 reproducibility under a fixed seed), the double-dummy evaluator (known
 fixtures: a 12-trick deal must score $6$NT${}=1.0$ and $7$NT${}=0.0$), and
-the LLM-dependent layers tested by \emph{injecting a mocked client} --- no
+the LLM-dependent layers tested by \emph{injecting a mocked client} - no
 network, no API key, no cost:
 
 \begin{lstlisting}
@@ -370,7 +409,7 @@ The long simulation runs are engineered to survive real-world failure modes
 observed during the project: a per-request HTTP timeout (hangs
 $\rightarrow$ retries), per-board \emph{atomic} retry with pauses (rides out
 provider 503 load spikes without losing the batch), and incremental JSONL
-checkpointing with \texttt{flush()} after every board --- a killed run keeps
+checkpointing with \texttt{flush()} after every board - a killed run keeps
 all completed work and progress is observable from the file system.
 
 \section{Reproducibility and data discipline}
@@ -379,7 +418,7 @@ generator; raw data immutable (\texttt{data/raw} is read-only by
 convention); every derived number traceable to a persisted artefact; and the
 full history in Git under conventional-commit discipline
 (\texttt{feat(stage4): ...}, \texttt{docs(guide): ...}). Every figure in
-this portfolio is generated by a committed script --- nothing is hand-drawn,
+this portfolio is generated by a committed script - nothing is hand-drawn,
 so documentation cannot drift from the data.
 
 \section{Code quality and cost as an engineering budget}
@@ -387,14 +426,16 @@ Style and typing are enforced with \texttt{ruff}, type hints, and
 Google-style docstrings on all public functions. LLM cost is treated as an
 engineering budget: model selection is empirical
 (\texttt{gemini-2.5-flash-lite} proved $10\times$ faster than the default
-for this workload), every call is metered, and the complete project ---
-all stages, reruns included --- cost ${\approx}\$1.70$.
+for this workload), and every call is metered. The logged production calls
+cost ${\approx}\$1.69$; counting development iterations and retried runs, the
+actual spend was ${\approx}30$ ILS (${\approx}\$8$), still well under the
+\$50 cap.
 
 \chapter{Conclusions and Future Work}
 
 \textbf{Conclusions.} (1)~Elite bridge players form a behavioural continuum,
 not clusters; statistically validated profiles live in its extreme tails.
-(2)~A skill metric that a random agent can beat is broken --- the
+(2)~A skill metric that a random agent can beat is broken - the
 random-baseline test materially changed this project's measurements.
 (3)~Decision \emph{style} transfers across domains ($\rho = +0.80$,
 non-tautological by an executed inverse-prompt control); \emph{winning} does
