@@ -395,13 +395,25 @@ After variance and correlation filtering (Chapter~\ref{ch:tech}, Eq.~\eqref{eq:c
 
 \section{Stage 2 -- Skill Extraction (LLM)}
 
-For each of the four extreme profiles we sampled five players and sent their
-actual played boards to \textbf{Gemini~2.5~Flash} in chunks of up to 25 boards,
-with a strict JSON schema. Each call returns 5--7 decision-making skills, each
-with a confidence label and supporting board references. A profile-specific
-guidance prompt (\texttt{PROFILE\_GUIDANCE}) requires at least two skills to lie
-on the profile's defining axis; without it, an unguided prompt returned the
-generic ``aggressive competitive bidding'' for every profile.
+For each of the four extreme profiles we sampled five players (20 players in
+total) and sent their actual played boards to \textbf{Gemini~2.5~Flash} in
+chunks of up to 25 boards, with a strict JSON schema. Each call returns 5--7
+decision-making skills, each with a confidence label and supporting board
+references. A profile-specific guidance prompt (\texttt{PROFILE\_GUIDANCE})
+requires at least two skills to lie on the profile's defining axis; without it,
+an unguided prompt returned the generic ``aggressive competitive bidding'' for
+every profile.
+
+This representative-sampling choice is deliberate, not a data shortage. The
+extreme profiles are, by construction, statistically homogeneous: every member
+sits in the same tail of the same defining axis (the extreme-percentile
+assignment), so a small representative sample captures the shared style rather than averaging
+across heterogeneous players. Critically, the skill signatures are only used to
+\emph{author} the agent prompts; the resulting behaviour is then validated
+against the full cohort with Mann--Whitney $U$ tests and against an
+inverse-prompt control, so the downstream evidence does not rest on the 20-player
+sample. Scaling extraction across more of the 563 players (e.g.\ batched or via
+retrieval) is a documented Year-2 robustness direction.
 
 \subsection*{Semantic aggregation}
 Raw skill names vary in wording (e.g.\ ``initiates slam exploration with
@@ -987,7 +999,7 @@ w_k^D = \frac{1}{N_D} \sum_{g = 1}^{N_D} \mathbf{1}[\text{agent}_{P_k} \text{ wo
     \item[$w_k^D$] win-rate of profile $k$ in domain $D \in \{\text{bridge}, \text{negotiation}\}$, $w_k^D \in [0, 1]$.
     \item[$N_D$] number of games in domain $D$ ($N_{\text{bridge}} = N_{\text{negotiation}} = 50$ in Phase~1).
     \item[{$\mathbf{1}[\cdot]$}] indicator function: $1$ if the inner condition is true, $0$ otherwise.
-    \item[$P_k$] one of the four behavioural profiles ($k \in \{1, \ldots, 4\}$), excluding the Generalist baseline.
+    \item[$P_k$] one of the five behavioural profiles ($k \in \{1, \ldots, 5\}$), including the Generalist baseline (the cross-domain rank correlations are computed over all five profiles, matching the points plotted in the alignment figures).
 \end{itemize}
 
 \subsection{Spearman rank correlation}
@@ -1002,7 +1014,7 @@ The main outcome measure of NegoPlay. Let $r_k^{br}$ and $r_k^{ng}$ be the ranks
 \noindent\textbf{Parameters:}
 \begin{itemize}[leftmargin=2.2cm, itemsep=0pt, topsep=2pt]
     \item[$\rho_s$] Spearman rank correlation, $\rho_s \in [-1, +1]$. Value $+1$ means perfect rank agreement; $-1$ means perfect rank inversion; $0$ means no correlation.
-    \item[$K$] number of profiles compared ($K = 4$).
+    \item[$K$] number of profiles compared ($K = 5$).
     \item[$d_k$] difference in ranks of profile $k$ between bridge and negotiation.
 \end{itemize}
 
@@ -1015,7 +1027,7 @@ The general formula (which handles ties correctly) is the Pearson correlation ap
 \noindent\textbf{Parameters:}
 \begin{itemize}[leftmargin=2.2cm, itemsep=0pt, topsep=2pt]
     \item[$r_k^{br}, r_k^{ng}$] ranks of profile $k$ in bridge and negotiation respectively.
-    \item[$\bar{r}^{br}, \bar{r}^{ng}$] mean ranks (always $(K+1)/2 = 2.5$ for $K=4$).
+    \item[$\bar{r}^{br}, \bar{r}^{ng}$] mean ranks (always $(K+1)/2 = 3$ for $K=5$).
 \end{itemize}
 
 \noindent\textbf{Decision rule:} $\rho_s \geq 0.70 \Rightarrow$ support for H3 (alignment hypothesis); $0.50 \leq \rho_s < 0.70 \Rightarrow$ partial support; $\rho_s < 0.50 \Rightarrow$ null result. Significance is tested by a two-sided permutation test with $10{,}000$ random permutations of the negotiation win-rate vector. Implemented as \texttt{scipy.stats.spearmanr}.
@@ -1335,9 +1347,9 @@ Cross-domain Spearman alignment (Stage 4c) & $\geq 0.70$ & Correlation of per-pr
 
 \subsection*{Data artefacts}
 \begin{itemize}[leftmargin=*]
-    \item \texttt{data/processed/player\_features.csv} (1{,}572 rows $\times$ 5 features).
-    \item \texttt{data/processed/player\_clusters.csv} (with cluster labels and centroids).
-    \item \texttt{data/processed/skill\_profiles.json} (4 named profiles, 5--7 skills each).
+    \item \texttt{data/processed/player\_features.csv} (1{,}421 rows $\times$ 6 features, plus the \texttt{player\_name} key) -- the broad explore cohort before the $\geq 50$-board cut.
+    \item \texttt{data/processed/player\_profiles.csv} (563 rows) -- the analysis cohort actually used by Stage~1, with the assigned profile per player.
+    \item \texttt{results/stage2\_sample\_v2\_focused\_prompt/skill\_profiles\_reagg\_t040.json} (the 4 extreme profiles, 5--7 skills each, extracted from 20 sampled players).
 \end{itemize}
 
 \subsection*{Reports and figures}
@@ -1531,7 +1543,10 @@ Your decision-making is characterised by:
   {skill_n}
 
 Bridge rules you must obey:
-  - Bids strictly ascend (e.g., 1NT < 2C < 2D < ... < 7NT).
+  - Strain rank: C < D < H < S < NT.  Level rank: 1 < 2 < ... < 7.
+  - Each new contract bid must be HIGHER than the last contract bid:
+    a higher level, or the same level and a higher strain
+    (e.g. 1C < 1D < 1H < 1S < 1NT < 2C < ... < 7NT).
   - Double (X) is legal only over an opponent's contract bid.
   - Pass is always legal.
 
