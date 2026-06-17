@@ -123,7 +123,7 @@ def make_figure() -> None:
     mk, pf = anchors["monkey"], anchors["perfect"]
     axL.axvspan(mk - 0.6, mk + 0.6, color="#f6d5d2", alpha=0.5)
     axL.scatter([mk], [0], s=300, color="#c0392b", edgecolors="black", zorder=3)
-    axL.text(mk, 0.5, "random monkey\n(random contract)", ha="center", fontsize=10,
+    axL.text(mk, 0.5, "zero-intelligence (ZI-C)\n(random contract)", ha="center", fontsize=10,
              color="#c0392b", fontweight="bold")
     axL.axvline(pf, color="#1f7a4d", ls="--", lw=2)
     axL.text(pf, 0.5, "double-dummy\nperfect play", ha="center", fontsize=10,

@@ -1,13 +1,11 @@
 % =====================================================================
-% NegoPlay — FINAL PROJECT PORTFOLIO (תיק פרויקט)
-% Structure per course submission guidelines:
-%   p.1 title page · p.2 executive abstract (~200 words) ·
-%   p.3 acknowledgments · p.4 table of contents · p.5+ full body
-% Body = Part I Final Summary Report (incl. the requested AI-agents
-% chapter and a software-engineering chapter) + Part II the full
-% Preparatory Report (included PDF) + Part III the Business Plan
-% (included PDF).
-% Build: xelatex final_portfolio.tex (twice)
+% NegoPlay — FINAL PROJECT PORTFOLIO — PhD-LEVEL EDITION
+% This is the doctoral-grade revision of final_portfolio.tex. It keeps the
+% experimental results unchanged but upgrades terminology, formalises the
+% methodology mathematically, anchors every stage in the peer-reviewed
+% literature, and adds a generative-AI disclosure + publication roadmap, per
+% the academic-review recommendations (June 2026).
+% Build: xelatex final_portfolio_phd.tex (twice)
 % =====================================================================
 \documentclass[11pt, a4paper, oneside, openany]{report}
 
@@ -21,6 +19,8 @@
 \usepackage{xcolor}
 \usepackage{listings}
 \usepackage{titlesec}
+\usepackage{amsmath}
+\usepackage{amssymb}
 \usepackage[hidelinks]{hyperref}
 
 \definecolor{navy}{HTML}{16324F}
@@ -53,7 +53,9 @@
 {\color{navy}\rule{\textwidth}{1.2pt}}\\[1.2cm]
 {\Huge\bfseries\color{navy} NegoPlay\\[0.45cm]}
 {\Large From Bridge Tables to the Negotiation Table:\\
-Do Decision-Making Styles Transfer Across Domains?\\[1.0cm]}
+Do Decision-Making Styles Transfer Across Domains?\\[0.6cm]}
+{\normalsize\itshape An empirical study of cross-domain behavioural
+consistency in game-derived LLM agents\\[1.0cm]}
 {\color{navy}\rule{0.6\textwidth}{0.6pt}}\\[1.4cm]
 {\large \textbf{Final Project Portfolio}\\
 Final Summary Report \,\textperiodcentered\, Preparatory Report \,\textperiodcentered\, Business Plan\\[1.8cm]}
@@ -70,7 +72,7 @@ Final Summary Report \,\textperiodcentered\, Preparatory Report \,\textperiodcen
 \end{titlepage}
 
 % =====================================================================
-% PAGE 2 — EXECUTIVE ABSTRACT (~200 words)
+% PAGE 2 — EXECUTIVE ABSTRACT (~200 words, deliberately plain-language)
 % =====================================================================
 \chapter*{Executive Abstract}
 \addcontentsline{toc}{chapter}{Executive Abstract}
@@ -135,7 +137,40 @@ for the many hours I was absent, immersed in studies and in building this
 project. Thank you for the understanding and support that made it possible.
 
 % =====================================================================
-% PAGE 4 — TABLE OF CONTENTS
+% USE OF GENERATIVE AI (LUT disclosure requirement)
+% =====================================================================
+\clearpage
+\chapter*{Use of Generative AI}
+\addcontentsline{toc}{chapter}{Use of Generative AI}
+
+In accordance with LUT University's guidelines on the use of generative
+artificial intelligence in research and theses (effective 1 June 2024), the
+author discloses the following.
+
+\vspace{0.3cm}
+\textbf{As an object of study (methodology).} Large language models are the
+very subject of this project. Google Gemini (Flash~2.x) is the default
+provider for the NegoPlay agents, with Anthropic Claude and OpenAI available
+for cross-provider validation. This use is an integral, documented part of the
+experimental design (Chapter~\ref{ch:ai}) -- it is the system under
+investigation, not a writing aid.
+
+\vspace{0.3cm}
+\textbf{As a writing and engineering assistant.} Generative AI tools
+(Google Gemini and Anthropic Claude) were additionally used to assist with
+language polishing, proofreading, improving semantic transitions, refining the
+academic style of the English text, and as a coding assistant for software
+implementation and document typesetting.
+
+\vspace{0.3cm}
+\textbf{Author's declaration.} All scientific content of this work --
+the research questions, the experimental design, the empirical analyses, the
+algorithms, the interpretation of results, and the conclusions -- is the
+author's own independent work. Generative AI was not used to produce original
+research findings or scientific claims.
+
+% =====================================================================
+% TABLE OF CONTENTS
 % =====================================================================
 % Make an EMPTY \numberline{} (used by the bundled sub-reports, whose TOC
 % entries carry no master chapter number) collapse to zero width, so their
@@ -163,11 +198,16 @@ it is nearly impossible to study quantitatively: transcripts are confidential,
 outcomes are not standardised, and no public dataset links a person's
 decision style to their negotiation behaviour. Competitive bridge offers a
 way around this. Every deal is a sequence of recorded decisions under
-uncertainty - how high to commit, when to take a risk, when to fight - 
+uncertainty - how high to commit, when to take a risk, when to fight -
 and every decision has a measurable outcome. NegoPlay treats bridge as a
 \emph{behavioural laboratory}: discover decision-making profiles in bridge
 data, embody them in LLM agents, and test whether the style they encode
-transfers to a different strategic domain.
+transfers to a different strategic domain. Methodologically this mirrors the
+testbed logic of modern game AI \cite{silver2017} -- a structured game is used
+to study a general capability -- and it builds on a line of work that learns
+explicit behavioural profiles from gameplay telemetry \cite{talwadker2022} and
+treats unknown counterparts as mixtures of a few cardinal strategy types
+\cite{lockett2007}.
 
 \section{System pipeline}
 The system is a four-stage hybrid pipeline (classical ML $\rightarrow$ LLM),
@@ -180,19 +220,26 @@ connected by persisted file artefacts:
         \texttt{StandardScaler} $\rightarrow$ \texttt{PCA} $\rightarrow$
         K-Means, cross-checked with HDBSCAN and a Gaussian mixture),
         but the silhouette score never exceeded $0.15$: elite players form
-        a smooth \emph{continuum}, not separable blobs. We therefore assign
-        profiles by \textbf{extreme-percentile thresholding} (top $P\%$ on a
-        profile's defining axis) gated by a one-sided binomial significance
-        test ($p<0.05$ versus the population baseline, \texttt{scipy.stats.\allowbreak binomtest})
-        $\rightarrow$ 5 profiles (Slam Hunter, Insurance Player, Fighter,
-        NT Specialist, Generalist).
+        a smooth \emph{continuum}, not separable blobs. This is a substantive
+        finding, not a clustering failure (Chapter~\ref{ch:formal}): we
+        therefore treat the five profiles as behavioural \emph{archetypes} --
+        the extreme points of that continuum -- and assign them by
+        \textbf{extreme-percentile thresholding} (top $P\%$ on a profile's
+        defining axis) gated by a one-sided binomial significance test
+        ($p<0.05$ versus the population baseline,
+        \texttt{scipy.stats.\allowbreak binomtest}) $\rightarrow$ 5 profiles:
+        four behavioural archetypes (Slam Hunter, Insurance Player, Fighter,
+        NT Specialist) plus a Generalist baseline -- the population centroid
+        the archetypes are measured against. All five ($K=5$) are carried into
+        the cross-domain analysis.
   \item \textbf{Skill extraction (LLM).} Real hands per profile are chunked
         and sent to the LLM, which returns 5--7 characteristic skills as
         structured JSON.
   \item \textbf{Agent construction.} Each profile becomes an agent whose
-        character card contains \emph{only} the bridge-derived skills - 
-        never personality adjectives (the anti-tautology rule, i.e.\ an
-        identity-disentangled crossover control).
+        character card contains \emph{only} the bridge-derived skills -
+        never personality adjectives (the anti-tautology rule, formalised in
+        Chapter~\ref{ch:formal} as an \emph{identity-disentangled crossover
+        control}).
   \item \textbf{Dual simulation and alignment.} The agents bid bridge deals
         and negotiate business scenarios; behaviour and outcomes in the two
         domains are correlated.
@@ -204,31 +251,207 @@ connected by persisted file artefacts:
         championship database (2016--2025), scraped with a custom Python
         pipeline; 563 players pass the $\geq 50$-board reliability threshold.
   \item \textbf{Negotiation (external validation):} 5{,}247 real human
-        price negotiations (Stanford Craigslist Bargains corpus), used to
-        validate the behavioural features and to calibrate the simulated
-        seller.
+        price negotiations (Stanford Craigslist Bargains corpus
+        \cite{he2018}), used to validate the behavioural features and to
+        calibrate the simulated seller.
 \end{itemize}
+
+% =====================================================================
+% NEW CHAPTER — FORMAL FRAMEWORK AND POSITIONING
+% =====================================================================
+\chapter{Formal Framework and Positioning in the Literature}
+\label{ch:formal}
+
+This chapter states the project's claims in formal terms and anchors each stage
+of the pipeline in the peer-reviewed literature, so that the empirical results
+of Chapter~\ref{ch:keyresults} can be read against established methodology.
+
+\section{From ``style transfer'' to cross-domain behavioural consistency}
+The phenomenon this project measures is best named
+\textbf{cross-domain behavioural consistency} (CDBC), or equivalently
+\emph{dispositional policy alignment}: the degree to which the decision
+dispositions a player exhibits under uncertainty -- represented as a strategic
+policy -- are preserved when the agent is moved to a semantically different
+environment.\footnote{We deliberately avoid the bare term \emph{style transfer}.
+In machine learning that phrase denotes a specific family of
+convolutional-network techniques for recombining the artistic style and visual
+content of images; it does not describe the transfer of a decision-making
+policy between strategic environments.} The colloquial phrasing ``style
+transfers'' is retained only as an intuition.
+
+The premise that an LLM can internalise an abstract strategic disposition from
+structured interaction and carry it into a different setting is supported by
+recent work: Tennant et al.\ \cite{tennant2025} show that LLM agents
+acquire stable cooperative-versus-self-interested dispositions from
+game-theoretic play and exhibit them across game types. Their mechanism is
+reward-based fine-tuning, whereas NegoPlay induces the disposition purely at
+the prompt level through bridge-derived skills, with no fine-tuning -- a
+lighter-weight route to the same kind of cross-context consistency.
+
+\section{Profiles as behavioural archetypes}
+The low silhouette score is itself a result: elite players do not fall into
+disjoint clusters but populate a smooth, near-optimal behavioural continuum.
+The appropriate framing is therefore \textbf{archetypal boundary profiling}:
+rather than partitioning the population, we identify the extreme points
+(archetypes) of the behavioural space, of which every real player is
+effectively a blend. This is the logic of archetypal analysis
+\cite{cutler1994}, in which observations are expressed as convex combinations
+of a few extremal archetypes, and it parallels the practice of modelling an
+unknown opponent as a mixture over a small set of \emph{cardinal} strategies
+\cite{lockett2007}. The five NegoPlay profiles are exactly such a cardinal set:
+a low-dimensional basis with which any counterpart's decision profile can be
+described. The unsupervised discovery of behavioural profiles from raw gameplay
+records also follows established practice in skill-gaming analytics
+\cite{talwadker2022}.
+
+Sampling the \emph{tails} of the behavioural distribution rather than its
+dense centre is a deliberate design choice, not merely a small sample. The
+archetypes are the most behaviourally distinct players, so concentrating on
+them maximises the stylistic signal available for the cross-domain test; the
+price is statistical power, which is reported honestly as a limitation
+(Chapter~\ref{ch:keyresults}). Establishing the effect on these representative
+extremes first, then widening to the continuum, is the natural order for a
+proof of concept.
+
+\section{The zero-intelligence baseline}
+A skill metric is only meaningful if a non-strategic agent scores poorly under
+it. We therefore include a \textbf{zero-intelligence agent with constraints}
+(ZI-C) -- informally, a ``random monkey'' bidder -- which selects uniformly at
+random from the set of \emph{legal} actions in each state. This is the
+classical zero-intelligence construction of Gode and Sunder
+\cite{godesunder1993}, whose central result is that much of the apparent
+efficiency of a market (or, here, of a scoring proxy) can be an artefact of the
+constraints rather than of intelligent play. The ZI-C agent thus establishes a
+principled lower bound that separates the influence of the game's rules from
+genuine skill.
+
+\section{Identity-disentangled crossover control}
+The cardinal engineering rule -- that agents are described only by extracted
+bridge skills, never by personality labels -- is enforced and tested by an
+\textbf{identity-disentangled crossover control}. Each profile retains its
+semantic identity label but is given the operative decision rules (skills) of
+the \emph{opposite} profile. Because the behavioural outcome follows the
+injected skills rather than the label (Chapter~\ref{ch:keyresults}), this
+disentangles the effect of the operative policy from any attribution bias of
+the language model, ruling out the tautology ``the agent is aggressive because
+we called it aggressive.''
+
+\section{Modelling the negotiation domain}
+The negotiation side follows the standard separation of strategic intent from
+surface language in negotiation dialogue systems \cite{he2018}: the agent first
+decides a coarse act (counter / accept / walk away) and a target price, and the
+seller is an objective, fixed counterpart calibrated on the same Craigslist
+Bargains corpus \cite{he2018}. This keeps the measured quantity -- how
+aggressively each profile opens -- a property of the agent's disposition, not
+of a variable opponent.
+
+% =====================================================================
+% NEW CHAPTER — MATHEMATICAL FORMULATION
+% =====================================================================
+\chapter{Mathematical Formulation}
+\label{ch:math}
+
+This chapter gives the formal definition of each pipeline stage. All constants
+below are the values actually used in the implementation.
+
+\section{Feature standardisation and variance filtering}
+Let $X \in \mathbb{R}^{n \times p}$ be the raw feature matrix, where
+$n = 563$ is the number of players passing the reliability threshold
+($\geq 50$ declared boards). For player $i$ and feature $j$, the standardised
+score is
+\begin{equation}
+z_{ij} = \frac{x_{ij} - \mu_j}{\sigma_j},
+\qquad
+\mu_j = \frac{1}{n}\sum_{i=1}^{n} x_{ij},
+\qquad
+\sigma_j = \sqrt{\frac{1}{n}\sum_{i=1}^{n}\left(x_{ij}-\mu_j\right)^2}.
+\end{equation}
+Features whose coefficient of variation falls below a fixed threshold are
+removed, as they carry no discriminative signal:
+\begin{equation}
+\mathrm{CV}_j = \frac{\sigma_j}{\lvert \mu_j \rvert} \;\geq\; 0.10 .
+\end{equation}
+In the empirical data this rule dropped \texttt{avg\_level}
+($\mathrm{CV}=0.04$ -- almost everyone bids near level $3$) and
+\texttt{avg\_bids\_per\_board} ($\mathrm{CV}=0.08$), leaving the
+discriminative behavioural features.
+
+\section{Archetype assignment via a one-sided binomial test}
+A player $i$ is assigned to the archetype defined by axis $j$ only if two
+conditions hold: the player lies in the top decile of that axis
+($z_{ij} \geq z_{\text{thr}}$, with the extreme fraction set to the top
+$10\%$), \emph{and} the behaviour is unlikely under chance. Let $n_i$ be the
+player's operative denominator (e.g.\ declared boards) and $k_i$ the count of
+the defining event (e.g.\ slam attempts for the Slam Hunter). Under the null
+hypothesis that the player acts at the population base rate $p_0$, the
+one-sided $p$-value is
+\begin{equation}
+p\text{-value}_i \;=\; \sum_{m=k_i}^{n_i}\binom{n_i}{m}\,p_0^{\,m}\,(1-p_0)^{\,n_i-m},
+\qquad\text{assign iff } p\text{-value}_i < 0.05 .
+\end{equation}
+This is the sample-size guard recommended by the domain expert: a player with,
+e.g., a $20\%$ slam rate over only $20$ boards is rejected as small-sample.
+
+\section{The zero-intelligence policy}
+Let $A_{\text{legal}}(s)$ be the set of legal calls in auction state $s$, as
+defined by the laws of duplicate bridge. The ZI-C baseline policy draws
+uniformly from the legal actions only:
+\begin{equation}
+\pi_{\text{ZI-C}}(a \mid s) =
+\begin{cases}
+\dfrac{1}{\lvert A_{\text{legal}}(s)\rvert} & a \in A_{\text{legal}}(s),\\[1.2ex]
+0 & a \notin A_{\text{legal}}(s).
+\end{cases}
+\end{equation}
+
+\section{Cross-domain metrics and rank correlation}
+\textbf{Bridge skill.} In duplicate bridge a deal is played at two tables, so a
+pair's raw score $S_k(b)$ on board $b$ is compared against the field datum
+$D(b)$ (the mean score of everyone holding the same cards) and converted to
+international match points through the standard non-linear map $f_{\text{IMP}}$:
+\begin{equation}
+\mathrm{IMP}_k(b) = f_{\text{IMP}}\!\left(S_k(b) - D(b)\right).
+\end{equation}
+
+\textbf{Negotiation aggression.} For a buyer agent $k$ facing a seller that
+opens at $P_{\text{ask}}$ with reservation price (floor) $P_{\text{floor}}$,
+let $P_{\text{open}}$ be the agent's first counter-offer. The demand depth is
+\begin{equation}
+\theta_k = \frac{P_{\text{ask}} - P_{\text{open}}}{P_{\text{ask}} - P_{\text{floor}}},
+\end{equation}
+i.e.\ how far down the seller's full concession range the agent opens.
+
+\textbf{Cross-domain consistency.} With $K=5$ profiles, dispositional policy
+alignment is the Spearman rank correlation between the bridge-aggression
+ranking (a weighted composite of slam, penalty-double, and pre-empt rates) and
+the negotiation demand-depth ranking:
+\begin{equation}
+\rho_s = 1 - \frac{6\sum_{k=1}^{K} d_k^2}{K\,(K^2-1)},
+\end{equation}
+where $d_k$ is the difference in $k$'s rank between the two domains. The
+measured value is $\rho_s = +0.80$; the identity-disentangled control inverts
+it to $\rho_s = -0.90$ (Chapter~\ref{ch:keyresults}).
 
 \chapter{Key Results}
 \label{ch:keyresults}
 
 \section{A trustworthy bridge metric (ZI-C baseline + double-dummy)}
-A skill metric must rank a random agent last. Our first, coarse bridge proxy
-(a \emph{par-proxy}: it scored a bid by how close its contract level sat to a
-heuristic ``par'' derived from the partnership's high-card points, rewarding
-sensible-looking aggression but never checking whether the contract would
-actually succeed) failed this test: the zero-intelligence (ZI-C, random
-``monkey'') bidder \emph{outscored} every expert profile (0.54 vs.\ 0.25--0.51),
-because random bids still land near the heuristic par often enough. Re-scoring
-each contract by whether it \emph{actually makes} under double-dummy
-(perfect-play) evaluation of the real 52 cards collapses the ZI-C agent to last
-place (0.10):
+A skill metric must rank a non-strategic agent last. Our first, coarse bridge
+proxy (a \emph{par-proxy}: it scored a bid by how close its contract level sat
+to a heuristic ``par'' derived from the partnership's high-card points,
+rewarding sensible-looking aggression but never checking whether the contract
+would actually succeed) failed this test: the zero-intelligence (ZI-C, random
+``monkey'') bidder \emph{outscored} every expert profile (0.54 vs.\
+0.25--0.51), because random bids still land near the heuristic par often
+enough. Re-scoring each contract by whether it \emph{actually makes} under
+double-dummy (perfect-play) evaluation of the real 52 cards collapses the ZI-C
+agent to last place (0.10):
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{../docs/images/metric_fix_monkey_dd.png}
-\caption{The zero-intelligence (ZI-C) baseline exposes (left) and the double-dummy metric fixes
-(right) the bridge score.}
+\caption{The zero-intelligence (ZI-C) baseline exposes (left) and the
+double-dummy metric fixes (right) the bridge score.}
 \end{figure}
 
 Bridge skill was then measured from the \emph{real} competitive results.
@@ -245,8 +468,8 @@ for top players), and double-dummy perfect play marks the ceiling at $+1.1$:
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{../docs/images/real_skill_spectrum.png}
-\caption{Real-data skill spectrum: zero-intelligence floor $\rightarrow$ elite players
-$\rightarrow$ perfect-play ceiling.}
+\caption{Real-data skill spectrum: zero-intelligence floor $\rightarrow$ elite
+players $\rightarrow$ perfect-play ceiling.}
 \end{figure}
 
 \section{The discovery: style transfers, winning does not}
@@ -254,31 +477,34 @@ Correlating \emph{winning} across domains proved weak and metric-sensitive
 ($\rho \approx +0.2$ to $+0.5$), because whether a style wins depends on the
 opponent and the payoff rules. Refining the question to its original
 behavioural form - does an aggressive bridge profile \emph{bargain}
-aggressively? - yields \textbf{Spearman $\rho = +0.80$}:
+aggressively? - yields cross-domain behavioural consistency of
+\textbf{Spearman $\rho = +0.80$}:
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.78\textwidth]{../docs/images/style_alignment.png}
-\caption{Style$\leftrightarrow$style: bridge aggression (real bidding) vs.\
-negotiation aggression (how low the agent opens), $\rho = +0.80$.}
+\caption{Cross-domain behavioural consistency: bridge aggression (real bidding)
+vs.\ negotiation aggression (demand depth, how low the agent opens),
+$\rho = +0.80$.}
 \end{figure}
 
-\section{The identity-disentangled crossover control}
+\section{The identity-disentangled crossover control (robustness to label bias)}
 To rule out ``the agent is aggressive because we labelled it aggressive,''
 each profile kept its identity but received the \emph{opposite} profile's
-bridge skills. The correlation flipped from $+0.80$ to $\mathbf{-0.90}$
-($p = 0.037$) - behaviour follows the injected bridge-derived skills, not
-the label:
+bridge skills (the identity-disentangled crossover control of
+Chapter~\ref{ch:formal}). The correlation flipped from $+0.80$ to
+$\mathbf{-0.90}$ ($p = 0.037$) - behaviour follows the injected bridge-derived
+skills, not the label:
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{../docs/images/style_transfer_control.png}
 \caption{Matched skills (left, $+0.80$) vs.\ swapped skills (right, $-0.90$):
-the skills carry the style.}
+the bridge-derived skills carry the disposition.}
 \end{figure}
 
 \section{Honest limitations}
-With $n = 5$ profiles the style correlation is indicative
+With $n = 5$ profiles the consistency correlation is indicative
 ($p \approx 0.10$), not significant; negotiation is simulated (calibrated on
 real human negotiations, but no same-person negotiation data exists); and the
 Slam Hunter profile, defined by \emph{bidding} slams, may partly proxy
@@ -309,11 +535,18 @@ Two concrete agents implement the domains: \texttt{BridgeAgent.make\_bid()}
 local, non-LLM legality checker and falls back to \texttt{Pass} if illegal)
 and \texttt{NegotiationAgent.respond\_to\_offer()} (temperature $0.7$;
 returns one of three actions, \texttt{counter}/\texttt{accept}/\texttt{walk\_away},
-together with a counter-price). Because the LLM occasionally proposes a number
-outside the deal's plausible band, that price is \emph{clamped} to the
-scenario's legal range, i.e.\ forced to lie between the seller's floor and its
-opening ask, so a malformed reply cannot corrupt the downstream
-aggressiveness measurement.
+together with a counter-price).
+
+\section{Clamping as a bounded-rationality constraint}
+Because the LLM occasionally proposes a number outside the deal's plausible
+band, that price is \emph{clamped} to the scenario's legal range -- forced to
+lie between the seller's floor and its opening ask. This is best read not as a
+``code workaround'' but as a formal \textbf{bounded-rationality} constraint in
+the sense of Simon \cite{simon1955}: the environment imposes feasibility
+limits on an otherwise free-form agent, preventing nonsensical pricing and
+ensuring that a malformed reply cannot corrupt the downstream aggressiveness
+measurement. The clamp affects only out-of-range outliers; it does not alter
+the relative ordering of the profiles that the analysis depends on.
 
 \section{Skill extraction and the identity-disentangled rule}
 Stage 2 turns raw hands into a \emph{skill profile}: hands are chunked
@@ -323,9 +556,9 @@ chunks. The cardinal engineering rule: agents are \textbf{never} given
 personality adjectives. The Fighter's card says \emph{``doubles opponents at
 6--8$\times$ the field rate''} - a fact extracted from its players' real
 auctions - not \emph{``be aggressive.''} Any cross-domain behaviour must
-therefore \emph{emerge} from bridge-derived skills. The inverse-prompt
-control (Chapter~\ref{ch:keyresults}) is the executable test of this rule:
-swapping the skills swaps the behaviour ($\rho: +0.80 \rightarrow -0.90$).
+therefore \emph{emerge} from bridge-derived skills. The identity-disentangled
+crossover control (Chapter~\ref{ch:keyresults}) is the executable test of this
+rule: swapping the skills swaps the behaviour ($\rho: +0.80 \rightarrow -0.90$).
 
 \section{Prompt engineering as configuration}
 Prompts are code-reviewed artefacts, not ad-hoc strings: a central library
@@ -384,7 +617,7 @@ src/
   stage2_skills/          # chunker, extractor, aggregator
   stage3_agents/          # BaseAgent, BridgeAgent, NegotiationAgent
   stage4_simulate/        # bridge_game, bridge_auction, negotiation,
-                          # monkey_agent, alignment
+                          # monkey_agent (ZI-C), alignment
   features/double_dummy.py  # DDS perfect-play evaluator (endplay)
   shared/                 # llm_client, prompts, data_loader, logger
 \end{lstlisting}
@@ -393,13 +626,13 @@ Design patterns in active use: \textbf{Facade} (\texttt{sdk.py}),
 \textbf{Template Method} (\texttt{BaseAgent.\_decide()}),
 \textbf{Adapter} (provider-neutral \texttt{LLMClient}),
 and \textbf{Strategy} (interchangeable profile agents, including the
-\texttt{MonkeyAgent} baseline, which is duck-typed to drop into every runner
-unchanged).
+zero-intelligence \texttt{MonkeyAgent} baseline, which is duck-typed to drop
+into every runner unchanged).
 
 \section{Testing}
 The project ships $100{+}$ \texttt{pytest} tests: pure-logic units (deal
 generation, scoring, auction legality - 28 tests for the bridge engine
-alone), the random-baseline agent (legality of every random call,
+alone), the zero-intelligence baseline agent (legality of every random call,
 reproducibility under a fixed seed), the double-dummy evaluator (known
 fixtures: a 12-trick deal must score $6$NT${}=1.0$ and $7$NT${}=0.0$), and
 the LLM-dependent layers tested by \emph{injecting a mocked client} - no
@@ -444,19 +677,96 @@ actual spend was ${\approx}30$ ILS (${\approx}\$8$), still well under the
 \chapter{Conclusions and Future Work}
 
 \textbf{Conclusions.} (1)~Elite bridge players form a behavioural continuum,
-not clusters; statistically validated profiles live in its extreme tails.
+not clusters; statistically validated archetypes live in its extreme tails.
 (2)~A skill metric that a zero-intelligence agent can beat is broken - the
 ZI-C baseline test materially changed this project's measurements.
-(3)~Decision \emph{style} transfers across domains ($\rho = +0.80$,
-non-tautological by an executed inverse-prompt control); \emph{winning} does
-not transfer cleanly, because winning is a property of the
-(style~$\times$~environment) pair.
+(3)~Decision \emph{style} transfers across domains as cross-domain behavioural
+consistency ($\rho = +0.80$, non-tautological by an executed
+identity-disentangled crossover control); \emph{winning} does not transfer
+cleanly, because winning is a property of the (style~$\times$~environment) pair.
 
-\textbf{Future work.} More profiles (finer partitioning of the 563 players)
+\textbf{Future work.} More archetypes (finer partitioning of the 563 players)
 for statistical power; multi-dimensional negotiation-style measurement
 (concession speed, walk-away propensity); cross-model replication
 (Claude/GPT); separating style from playing strength; and ultimately real
 same-person negotiation data.
+
+\section*{Path to an article-based dissertation}
+\addcontentsline{toc}{section}{Path to an article-based dissertation}
+Under LUT University's regulations a doctoral dissertation may be article-based,
+comprising several peer-reviewed papers plus an introductory summary. NegoPlay
+is positioned as the empirical baseline (Paper~I) of such a dissertation, with
+two planned extensions that build directly on the existing SDK:
+
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Paper~I (this study).} Empirical proof of concept for
+        cross-domain behavioural consistency via bridge profiles and
+        LLM-based negotiation agents.
+  \item \textbf{Paper~II (algorithmic extension).} Replace hand-engineered
+        features in Stage~1 with learned hand representations
+        (BridgeHand2Vec \cite{sztyber2023}, a DDS-grounded embedding of the
+        13-card hand) to sharpen the archetypal boundary profiling.
+  \item \textbf{Paper~III (cross-platform human validation).} Calibrate the
+        NegoPlay simulators against real human negotiation data and run live
+        human-subject studies to validate the predictive accuracy of the
+        profiled agents.
+\end{itemize}
+
+% =====================================================================
+% REFERENCES (for Part I — the Final Summary Report)
+% =====================================================================
+\clearpage
+% Let thebibliography emit its own chapter heading (report class does this
+% automatically); rename it to "References" and register it in the master TOC.
+\renewcommand{\bibname}{References}
+\begin{thebibliography}{9}
+\addcontentsline{toc}{chapter}{References}
+
+\bibitem{cutler1994}
+Cutler, A., \& Breiman, L. (1994). Archetypal Analysis.
+\emph{Technometrics}, 36(4), 338--347.
+
+\bibitem{godesunder1993}
+Gode, D.~K., \& Sunder, S. (1993). Allocative Efficiency of Markets with
+Zero-Intelligence Traders: Market as a Partial Substitute for Individual
+Rationality. \emph{Journal of Political Economy}, 101(1), 119--137.
+
+\bibitem{he2018}
+He, H., Chen, D., Balakrishnan, A., \& Liang, P. (2018). Decoupling Strategy
+and Generation in Negotiation Dialogues. In \emph{Proceedings of EMNLP 2018}.
+
+\bibitem{lockett2007}
+Lockett, A.~J., Chen, C.~L., \& Miikkulainen, R. (2007). Evolving Explicit
+Opponent Models in Game Playing. In \emph{Proceedings of the Genetic and
+Evolutionary Computation Conference (GECCO 2007)}.
+
+\bibitem{rong2019}
+Rong, J., Qin, T., \& An, B. (2019). Competitive Bridge Bidding with Deep
+Neural Networks. In \emph{Proceedings of AAMAS 2019}.
+
+\bibitem{silver2017}
+Silver, D., et al. (2017). Mastering the Game of Go without Human Knowledge.
+\emph{Nature}, 550, 354--359.
+
+\bibitem{simon1955}
+Simon, H.~A. (1955). A Behavioral Model of Rational Choice.
+\emph{The Quarterly Journal of Economics}, 69(1), 99--118.
+
+\bibitem{sztyber2023}
+Sztyber-Betley, A., Ko{\l}odziej, F., Betley, J., \& Duszak, P. (2023).
+BridgeHand2Vec: Bridge Hand Representation. In \emph{Proceedings of ECAI 2023}
+(FAIA, vol.~372). arXiv:2310.06624.
+
+\bibitem{talwadker2022}
+Talwadker, R., et al. (2022). CognitionNet: A Collaborative Neural Network for
+Play Style Discovery in Online Skill Gaming Platform. In \emph{Proceedings of
+KDD 2022}.
+
+\bibitem{tennant2025}
+Tennant, E., Hailes, S., \& Musolesi, M. (2025). Moral Alignment for LLM
+Agents. In \emph{Proceedings of ICLR 2025}.
+
+\end{thebibliography}
 
 % =====================================================================
 % PART II — PREPARATORY REPORT (full, included)

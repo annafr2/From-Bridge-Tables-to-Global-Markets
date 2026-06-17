@@ -132,65 +132,24 @@
 % =====================================================================
 \begin{document}
 
-% ---------------- Cover Page ----------------
-\begin{titlepage}
-\centering
-\vspace*{1.5cm}
-
-{\Large\bfseries AI Development Expert -- Final Project\par}
-\vspace{0.4cm}
-{\large Preliminary Report\par}
-\vspace{2.0cm}
-
-\rule{\textwidth}{1.5pt}\\[0.6cm]
-{\Huge\bfseries NegoPlay\par}
-\vspace{0.5cm}
-{\Large\itshape Strategic Profiles from Bridge to Business:\\[0.2cm]
-An Empirical Investigation of Decision-Making Styles\\[0.2cm] using LLM Agents\par}
-\rule{\textwidth}{1.5pt}\\[1.5cm]
-
-\vfill
-
-{\large
-\begin{tabular}{rl}
-\textbf{Student:}      & Anna Ben-Shushan \\[0.25cm]
-\textbf{Supervisor:}   & Dr. Yoram Segal  \\[0.25cm]
-\textbf{Course:}       & AI Development Expert \\[0.25cm]
-\textbf{Document:}     & Preliminary Project Report \\[0.25cm]
-\textbf{Version:}      & 1.0 \\[0.25cm]
-\textbf{Date:}         & \today \\
-\end{tabular}
-}
-
-\vspace{1.5cm}
-\end{titlepage}
-
-% ---------------- Dedication / Acknowledgements ----------------
-\thispagestyle{empty}
-\vspace*{4cm}
-\begin{center}
-{\Large\bfseries Acknowledgements}
-\end{center}
-\vspace{1cm}
-\noindent
-I would like to thank \textbf{Dr.\ Yoram Segal}, my project supervisor, for his structured methodology framework -- in particular the requirement of clearly identified anchor papers, single-SDK architecture, and explicit baseline comparisons. These principles shaped this project from the first day.
-
-\vspace{0.6cm}
-\noindent
-This project is also the empirical baseline for my PhD research at LUT University (Finland), under the supervision of \textbf{Prof.\ Jari H\"am\"al\"ainen}. I gratefully acknowledge \textbf{Dr.\ Nezer Jacob Zaidenberg}, my PhD supervisor and advisor on bridge and cybersecurity matters, for ongoing discussions throughout this work.
-
-\vspace{0.6cm}
-\noindent
-The 149{,}208-row dataset used in this work was collected from the public EuroBridge database (European Bridge League, 2016--2025) and processed using a custom Python pipeline developed during the first weeks of 2026.
-
-\clearpage
+% ---------------- Cover Page + Acknowledgements ----------------
+% Removed: this report is bundled as Part II of final_portfolio.tex, which
+% already carries the single title page and the Acknowledgments for the whole
+% document, plus a "Part II - Preparatory Report" divider. Keeping them here
+% duplicated the front matter, so the bundled report now opens straight at
+% Chapter 1.
 
 % ---------------- TOC, LoF, LoT ----------------
-\tableofcontents
-\clearpage
-\listoffigures
-\listoftables
-\clearpage
+% No visible table of contents here (this report is bundled as Part II of
+% final_portfolio.tex, which carries the single unified TOC). We DO, however,
+% force the .toc file to be generated so the master portfolio can read each
+% chapter's real page number. Note: \chapter only writes to .toc while the file
+% is open, and \tableofcontents is what normally opens it -- so we open it
+% explicitly here without printing anything.
+\makeatletter
+\@ifundefined{tf@toc}{\newwrite\tf@toc}{}
+\immediate\openout\tf@toc\jobname.toc\relax
+\makeatother
 
 % =====================================================================
 % CHAPTER 1 -- INTRODUCTION
@@ -462,6 +421,15 @@ the verdict ``proceed to Stage~3''. The human-readable profile names are
 \emph{Slam Hunter}, \emph{Insurance Player}, \emph{Fighter}, and
 \emph{NT Specialist}.
 
+\textbf{On the count of profiles ($K=5$).} These four are the behavioural
+\emph{archetypes} -- the extreme tails of the distribution -- and they are
+measured \emph{against} a fifth profile, the \emph{Generalist baseline} (the
+dense population centroid). All five are carried forward as the cardinal set,
+so every cross-domain rank correlation in Chapter~\ref{ch:results} is computed
+over $K=5$ profiles (the four archetypes plus the Generalist baseline). Where
+this report says ``the four profiles'' it means the four archetypes that
+separate from that baseline; ``five profiles'' always includes the Generalist.
+
 \subsection*{Methodological note}
 The Fighter metric was initially measured per call (doubles $\div$ total calls),
 which gave a weak, overlapping signal and was rejected on expert review.
@@ -492,7 +460,7 @@ the four profiles forming the behavioural tails (panel c).
 
 \section{Stage 3 -- Agent Construction}
 
-Each profile becomes an LLM agent through a structured system prompt (``character card'') that contains: identity (profile name), the 5--7 skills extracted in Stage~2, domain rules (bridge \textit{or} negotiation), a strict JSON output schema, and one few-shot example. Crucially, the skills injected are the \emph{bridge-derived} ones from Stage~2 (e.g.\ ``Aggressive Penalty Doubling''), never hand-written personality words such as ``be aggressive''. This is the anti-tautology safeguard: any cross-domain alignment measured in Stage~4 must \emph{emerge} from bridge behaviour rather than from a personality label we supplied.
+Each profile becomes an LLM agent through a structured system prompt (``character card'') that contains: identity (profile name), the 5--7 skills extracted in Stage~2, domain rules (bridge \textit{or} negotiation), a strict JSON output schema, and one few-shot example. Crucially, the skills injected are the \emph{bridge-derived} ones from Stage~2 (e.g.\ ``Aggressive Penalty Doubling''), never hand-written personality words such as ``be aggressive''. This is the \emph{identity-disentangled} safeguard (informally, the anti-tautology rule): any cross-domain alignment measured in Stage~4 must \emph{emerge} from bridge behaviour rather than from a personality label we supplied.
 
 \subsection*{Architecture}
 A shared abstract \texttt{BaseAgent} holds the profile signature, the LLM client, and a single decision choke-point \texttt{\_decide()} through which every call passes (centralising cost logging, JSON parsing, and retries). Two concrete agents inherit from it:
@@ -516,7 +484,7 @@ Stage~4 has been executed end-to-end; the numerical outcome is reported in Chapt
 
 \textbf{4b Negotiation:} four business scenarios (B2B SaaS pricing, co-founder equity split, customer-book acquisition, software-licence deal) are negotiated by each profile against a \emph{fixed, non-LLM} seller that bargains by formula (concedes only toward a floor), for up to four rounds with an explicit walk-away condition. The metric is the surplus captured, $(\text{seller open} - \text{deal price}) / (\text{seller open} - \text{seller floor})$; each scenario is run three times.
 
-\textbf{4c Alignment:} \emph{winning}$\leftrightarrow$\emph{winning} alignment is weak and metric-sensitive ($\rho \approx +0.2$ to $+0.5$), because whether a style wins depends on the opponent. Refining to the behavioural form -- \emph{style}$\leftrightarrow$\emph{style} (bridge aggression vs negotiation aggression) -- gives \textbf{$\rho = +0.80$}, above the $0.70$ target; an inverse-prompt control (swap each profile's skills) flips it to $-0.90$, proving the transfer is skill-mediated, not tautological. A random ``monkey'' baseline and a double-dummy evaluator validated the bridge metric. Full details and figures are in Chapter~\ref{ch:results}.
+\textbf{4c Alignment:} \emph{winning}$\leftrightarrow$\emph{winning} alignment is weak and metric-sensitive ($\rho \approx +0.2$ to $+0.5$), because whether a style wins depends on the opponent. Refining to the behavioural form -- \emph{style}$\leftrightarrow$\emph{style} (bridge aggression vs negotiation aggression) -- gives \textbf{$\rho = +0.80$}, above the $0.70$ target; an inverse-prompt control (swap each profile's skills) flips it to $-0.90$, proving the transfer is skill-mediated, not tautological. A zero-intelligence (ZI-C, random ``monkey'') baseline and a double-dummy evaluator validated the bridge metric. Full details and figures are in Chapter~\ref{ch:results}.
 
 \section{Tools and Stack}
 
@@ -1061,14 +1029,14 @@ This chapter reports the executed Stage~4 outcome, and it is honest about a refi
 
 \section{Step 1 (winning): building a trustworthy bridge metric}
 
-To score bridge success we added (i)~a \textbf{double-dummy evaluator} -- the bridge-standard objective reference, which computes the optimal result of a contract from all 52 cards -- and (ii)~a \textbf{random ``monkey'' baseline}, an agent that bids randomly but legally. A valid skill metric must rank the monkey last; if it does not, it is not measuring skill.
+To score bridge success we added (i)~a \textbf{double-dummy evaluator} -- the bridge-standard objective reference, which computes the optimal result of a contract from all 52 cards -- and (ii)~a \textbf{zero-intelligence baseline} (ZI-C; informally, a random ``monkey''), an agent that bids randomly but only legally. A valid skill metric must rank the ZI-C agent last; if it does not, it is not measuring skill.
 
-The monkey was decisive. On a coarse ``did you bid roughly the right level'' proxy, the random monkey \emph{outscored} every expert profile ($0.54$ versus $0.25$--$0.51$), proving that proxy meaningless. Re-scored by whether each contract \emph{actually makes} under double-dummy play, the monkey collapses to last ($0.10$) and every profile beats it (Figure~\ref{fig:metric_fix}).
+The ZI-C baseline was decisive. On a coarse ``did you bid roughly the right level'' proxy, the ZI-C agent \emph{outscored} every expert profile ($0.54$ versus $0.25$--$0.51$), proving that proxy meaningless. Re-scored by whether each contract \emph{actually makes} under double-dummy play, the ZI-C agent collapses to last ($0.10$) and every profile beats it (Figure~\ref{fig:metric_fix}).
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{../docs/images/metric_fix_monkey_dd.png}
-\caption{A random baseline exposes, and a double-dummy metric fixes, the bridge score. \emph{Left:} on the coarse proxy the random monkey (red) beats every profile. \emph{Right:} scored by whether the contract actually makes (double-dummy), the monkey is last and skill wins.}
+\caption{A zero-intelligence (ZI-C) baseline exposes, and a double-dummy metric fixes, the bridge score. \emph{Left:} on the coarse proxy the ZI-C agent (red) beats every profile. \emph{Right:} scored by whether the contract actually makes (double-dummy), the ZI-C agent is last and skill wins.}
 \label{fig:metric_fix}
 \end{figure}
 
@@ -1106,12 +1074,12 @@ The cross-domain Spearman correlation between real bridge skill and negotiation 
 
 \section{The skill spectrum: random floor to perfect ceiling}
 
-To place every agent between a floor and a ceiling on the \emph{real} boards, we scored a random monkey (a random contract, double-dummy scored from the 52 cards) and double-dummy par (perfect play), both in IMP versus the field (Figure~\ref{fig:real_spectrum}). The random monkey sits at $-7$~IMP (a disaster); the real elite players cluster near $0$ (all skilled); double-dummy perfect play is $+1.1$~IMP (even elite players leave $\sim$1~IMP on the table). Among the profiles, the aggressive ones lead -- consistent with the result above.
+To place every agent between a floor and a ceiling on the \emph{real} boards, we scored a zero-intelligence (ZI-C) agent (a random but legal contract, double-dummy scored from the 52 cards) and double-dummy par (perfect play), both in IMP versus the field (Figure~\ref{fig:real_spectrum}). The ZI-C agent sits at $-7$~IMP (a disaster); the real elite players cluster near $0$ (all skilled); double-dummy perfect play is $+1.1$~IMP (even elite players leave $\sim$1~IMP on the table). Among the profiles, the aggressive ones lead -- consistent with the result above.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{../docs/images/real_skill_spectrum.png}
-\caption{Real-data skill spectrum on the actual boards. \emph{Left:} random monkey ($-7$~IMP) $\rightarrow$ elite players ($\approx 0$) $\rightarrow$ double-dummy perfect ($+1.1$~IMP). \emph{Right (zoom):} among the elite, the aggressive profiles (Slam Hunter, Fighter) lead.}
+\caption{Real-data skill spectrum on the actual boards. \emph{Left:} zero-intelligence agent ($-7$~IMP) $\rightarrow$ elite players ($\approx 0$) $\rightarrow$ double-dummy perfect ($+1.1$~IMP). \emph{Right (zoom):} among the elite, the aggressive profiles (Slam Hunter, Fighter) lead.}
 \label{fig:real_spectrum}
 \end{figure}
 
@@ -1126,7 +1094,7 @@ We refine the question to the behavioural form. \textbf{Bridge aggression} is a 
 \label{fig:style}
 \end{figure}
 
-\section{Anti-tautology control}
+\section{Identity-disentangled crossover control}
 
 A natural objection: the agent may bargain aggressively only because it was \emph{labelled} an aggressive profile. We test this with an inverse-prompt control: keep each profile's identity but inject the \emph{opposite} profile's bridge skills, then re-measure. If behaviour follows the (bridge-derived) skills, the correlation should flip. It does -- from $+0.80$ to $\rho = -0.90$ ($p = 0.037$): the Fighter given the Insurance Player's skills bargains \emph{less} aggressively, the Insurance Player given the Fighter's skills bargains \emph{more} aggressively (Figure~\ref{fig:style}, right). The style is therefore carried by the \emph{skills extracted from real bridge play}, not by the profile name -- so the $+0.80$ alignment is \textbf{not} tautological. The negotiation behaviour and the seller's mild walk-away were additionally calibrated against 5{,}247 real Craigslist negotiations.
 
@@ -1134,13 +1102,16 @@ A natural objection: the agent may bargain aggressively only because it was \emp
 
 \begin{itemize}[leftmargin=*]
     \item \textbf{Style transfers; winning is noisy.} The decision \emph{style} transfers strongly ($\rho = +0.80$, controlled), while \emph{winning} transfers weakly ($\rho \approx +0.2$). This is a substantive distinction, not a failure: an aggressive bridge player \emph{behaves} aggressively in negotiation, but whether that wins depends on the domain's payoff rules.
-    \item \textbf{The behavioral-alignment hypothesis is supported}, and the anti-tautology control shows the effect is mediated by bridge-derived skills rather than labels.
+    \item \textbf{The behavioral-alignment hypothesis is supported}, and the identity-disentangled crossover control (the inverse-prompt/skill-swap test) shows the effect is mediated by bridge-derived skills rather than labels.
     \item \textbf{Honest caveats.} With $n = 5$ profiles, power is low ($p$ not significant); $\rho$ is an \emph{indication}. The Slam Hunter profile, defined by \emph{bidding} slams, may partly proxy overall strength. Negotiation is simulated -- no real same-person negotiation data exists; a scaled inverse-prompt control and real negotiation data are Year-2 directions.
 \end{itemize}
 
 % =====================================================================
-% CHAPTER 5 -- SCHEDULE
+% CHAPTER -- SCHEDULE  (REMOVED per the PhD-edition review: operational
+% timelines are superseded by the publication roadmap in Part I of the
+% portfolio. Source preserved but disabled via \iffalse ... \fi.)
 % =====================================================================
+\iffalse
 \chapter{Schedule}
 \label{ch:schedule}
 
@@ -1162,9 +1133,10 @@ The project runs for five weeks (ten sessions, two per week). Each week correspo
 \bottomrule
 \end{tabularx}
 \end{table}
+\fi % --- end of removed Schedule chapter ---
 
 % =====================================================================
-% CHAPTER 5 -- WORK PACKAGES
+% CHAPTER -- WORK PACKAGES
 % =====================================================================
 \chapter{Work Packages}
 \label{ch:wp}
@@ -1200,8 +1172,10 @@ The project is decomposed into seven work packages (WP). Each WP groups related 
 \textbf{Tasks:} (T7.1) business-plan section (TAM/SAM/SOM, token economics); (T7.2) 12--15 slide deck; (T7.3) 60--90 second promo video; (T7.4) README polish; (T7.5) Q\&A document.
 
 % =====================================================================
-% CHAPTER 6 -- GANTT
+% CHAPTER -- GANTT  (REMOVED per the PhD-edition review; see the Schedule
+% note above. Source preserved but disabled via \iffalse ... \fi.)
 % =====================================================================
+\iffalse
 \chapter{Gantt Chart and Dependencies}
 \label{ch:gantt}
 
@@ -1310,9 +1284,10 @@ WP7 Polish \& defense   &                     &                    &            
 \hline
 \end{tabular}
 \end{table}
+\fi % --- end of removed Gantt chapter ---
 
 % =====================================================================
-% CHAPTER 7 -- DELIVERABLES & SUCCESS CRITERIA
+% CHAPTER -- DELIVERABLES & SUCCESS CRITERIA
 % =====================================================================
 \chapter{Deliverables and Success Criteria}
 \label{ch:deliv}
@@ -1348,7 +1323,7 @@ Cross-domain Spearman alignment (Stage 4c) & $\geq 0.70$ & Correlation of per-pr
 \subsection*{Data artefacts}
 \begin{itemize}[leftmargin=*]
     \item \texttt{data/processed/player\_features.csv} (1{,}421 rows $\times$ 6 features, plus the \texttt{player\_name} key) -- the broad explore cohort before the $\geq 50$-board cut.
-    \item \texttt{data/processed/player\_profiles.csv} (563 rows) -- the analysis cohort actually used by Stage~1, with the assigned profile per player.
+    \item \texttt{data/processed/player\_profiles.csv} (563 rows $\times$ 20 columns) -- the analysis cohort actually used by Stage~1, with the assigned profile per player.
     \item \texttt{results/stage2\_sample\_v2\_focused\_prompt/skill\_profiles\_reagg\_t040.json} (the 4 extreme profiles, 5--7 skills each, extracted from 20 sampled players).
 \end{itemize}
 

@@ -32,7 +32,7 @@ PARTNER_HCP = [("1C", 13), ("1NT", 16), ("2C", 22)]   # cycles by board (as in r
 JSONL = Path("results/stage4/bridge_simulations.jsonl")
 OUT = Path("docs/images/metric_fix_monkey_dd.png")
 
-MONKEY = "Monkey (random)"
+MONKEY = "ZI-C (random)"
 
 
 def _partnership_hcp(board: int) -> int:
@@ -80,9 +80,9 @@ def make_figure() -> None:
     fig, axes = plt.subplots(1, 2, figsize=(13, 6))
     panels = [
         ("old", "OLD metric: par-level proxy (4 coarse classes)",
-         "The random monkey BEATS the experts → metric is broken", axes[0]),
+         "The ZI-C agent BEATS the experts → metric is broken", axes[0]),
         ("new", "NEW metric: double-dummy (true perfect-play result)",
-         "The monkey is LAST → skill wins, as it must", axes[1]),
+         "The ZI-C agent is LAST → skill wins, as it must", axes[1]),
     ]
 
     for key, title, subtitle, ax in panels:
@@ -109,8 +109,8 @@ def make_figure() -> None:
         ax.grid(axis="x", alpha=0.3)
 
     fig.suptitle(
-        "Why we added a random baseline + double-dummy: fixing the bridge metric",
-        fontsize=13, fontweight="bold", color="#16324f")
+        "Why we added a zero-intelligence (ZI-C) baseline + double-dummy: fixing the bridge metric",
+        fontsize=12, fontweight="bold", color="#16324f")
     fig.tight_layout(rect=[0, 0, 1, 0.95])
     OUT.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(OUT, dpi=150, bbox_inches="tight")

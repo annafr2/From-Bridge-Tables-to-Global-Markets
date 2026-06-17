@@ -65,43 +65,19 @@
 \begin{document}
 
 % -------------------- Cover Page --------------------
-\begin{titlepage}
-\centering
-\vspace*{1.5cm}
-{\Large\bfseries AI Development Expert -- Final Project\par}
-\vspace{0.4cm}
-{\large Business Plan\par}
-\vspace{2cm}
-
-\rule{\textwidth}{1.5pt}\\[0.6cm]
-{\Huge\bfseries NegoPlay\par}
-\vspace{0.4cm}
-{\Large\itshape Strategic Profiles from Bridge to Business:\\[0.2cm]
-A B2B AI-Powered Negotiation Intelligence Platform\par}
-\rule{\textwidth}{1.5pt}\\[1.5cm]
-
-\begin{tcolorbox}[colback=accentblue!10, colframe=accentblue, boxrule=1pt]
-\centering\large
-\textbf{Tagline:} \emph{``Know your counterpart before you walk into the room.''}
-\end{tcolorbox}
-
-\vfill
-
-{\large
-\begin{tabular}{rl}
-\textbf{Founder:}     & Anna Ben-Shushan \\[0.25cm]
-\textbf{Supervisor:}  & Dr.\ Yoram Segal \\[0.25cm]
-\textbf{Course:}      & AI Development Expert \\[0.25cm]
-\textbf{Document:}    & Business Plan v1.0 \\[0.25cm]
-\textbf{Date:}        & \today \\
-\end{tabular}
-}
-\vspace{1.5cm}
-\end{titlepage}
+% Removed: bundled as Part III of final_portfolio.tex, which already carries
+% the single title page for the whole document plus a "Part III - Business
+% Plan" divider. The bundled plan now opens straight at Chapter 1.
 
 % -------------------- TOC --------------------
-\tableofcontents
-\clearpage
+% No visible TOC here (bundled as Part III of final_portfolio.tex). We still
+% force the .toc file open so the master portfolio can read real page numbers;
+% \chapter only writes to .toc while it is open (\tableofcontents normally
+% opens it), so we open it explicitly without printing anything.
+\makeatletter
+\@ifundefined{tf@toc}{\newwrite\tf@toc}{}
+\immediate\openout\tf@toc\jobname.toc\relax
+\makeatother
 
 % =====================================================================
 % CHAPTER 1 — EXECUTIVE SUMMARY
