@@ -1,0 +1,11 @@
+<svg width="680" height="200" viewBox="0 0 680 200" xmlns="http://www.w3.org/2000/svg" role="img">
+<title>NegoPlay logo</title>
+<desc>Navy rounded-square tile with a white spade and a play-triangle cut, beside the NegoPlay wordmark and the tagline bridge to negotiation AI.</desc>
+<rect x="150" y="48" width="104" height="104" rx="22" fill="#16324F"/>
+<g transform="translate(167,60) scale(0.70)">
+  <path d="M50,12 C50,12 88,46 88,68 C88,84 74,92 64,86 C58,82 56,80 56,80 C56,80 58,96 66,104 L34,104 C42,96 44,80 44,80 C44,80 42,82 36,86 C26,92 12,84 12,68 C12,46 50,12 50,12 Z" fill="#FFFFFF"/>
+  <path d="M40,44 L40,76 L66,60 Z" fill="#16324F"/>
+</g>
+<text x="280" y="120" font-family="Segoe UI,Arial,sans-serif" font-weight="700" font-size="62" letter-spacing="-1" fill="#16324F">Nego<tspan fill="#2C5F8A">Play</tspan></text>
+<text x="282" y="150" font-family="Segoe UI,Arial,sans-serif" font-weight="400" font-size="18" letter-spacing="3" fill="#6B7785">BRIDGE → NEGOTIATION AI</text>
+</svg>
