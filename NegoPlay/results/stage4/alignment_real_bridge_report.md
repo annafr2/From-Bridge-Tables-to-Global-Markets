@@ -1,17 +1,17 @@
 # Cross-domain alignment — REAL competitive bridge results (final metric)
 
-**Spearman ρ = +0.500** (IMP-scaled, primary) — p = 0.391, n = 5 → **WEAK**
-Raw-points robustness: ρ = +0.600 (same ranking).
+**Spearman ρ = +0.200** (IMP-scaled, primary) — p = 0.747, n = 5 → **WEAK**
+Raw-points robustness: ρ = +0.500 (same ranking).
 
 Bridge skill is measured from REAL EuroBridge competitive results: each board is replayed at two tables, so a pair's IMP versus the other table (defense included) is genuine teams scoring — no simulation and no hand-chosen weight. The bridge-expert recommended the IMP scale as primary so a single large swing cannot dominate. Negotiation is the simulated surplus.
 
 | Profile | Bridge IMP (primary) | Bridge points (robustness) | Negotiation |
 |---------|----------------------|----------------------------|-------------|
-| Slam Hunter | +0.172 | +4.08 | 0.443 |
-| Fighter | +0.085 | +2.05 | 0.444 |
-| Generalist | +0.008 | +0.19 | 0.362 |
-| Insurance Player | -0.006 | -0.63 | 0.386 |
-| NT Specialist | -0.010 | -0.24 | 0.400 |
+| Slam Hunter | +0.172 | +4.08 | 0.360 |
+| Fighter | +0.085 | +2.05 | 0.381 |
+| Generalist | +0.008 | +0.19 | 0.315 |
+| Insurance Player | -0.006 | -0.63 | 0.308 |
+| NT Specialist | -0.010 | -0.24 | 0.360 |
 
 ## Why this is the strongest metric
 - Real *competitive* auctions (~14.5k with real doubles) — the Fighter doubles real opponents.
