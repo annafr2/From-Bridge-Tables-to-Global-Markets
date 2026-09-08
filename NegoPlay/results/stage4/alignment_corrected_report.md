@@ -16,6 +16,8 @@ The Fighter doubles on **33%** of its calls — 6–8× any other profile — ye
 
 > **Note on the label:** the `penalty_double_rate` feature counts **all** doubles (takeout *and* penalty), not just penalty doubles — the name is a slight misnomer. Both double types are an active choice to *contest* the auction rather than pass, so the feature is a valid measure of **aggressive, competitive bidding**. The behavioural signal and all numbers are unchanged; only the precise label should read "aggressive doubling," not strictly "penalty doubling."
 
+> **Provenance note (Sep 2026):** this report was regenerated after the negotiation logs were finalized with the data-grounded seller (Q7.13 era), so the win–win values differ slightly from the June record in RESEARCH_INSIGHTS Q7.11 (then: par-only +0.20, w=0.3 +0.80; now, from the final logs: +0.30 and +0.70). The paper reports the current, reproducible values. The style→style result (+0.80) and the no-Fighter column (+0.80) are unchanged.
+
 ## Corrected metric
 
 ```
@@ -25,16 +27,16 @@ chosen w = 0.3  (moderate; pre-registered, NOT the ρ-maximising value)
 
 ## Result
 
-- Original (par only):  Spearman ρ = **+0.20** (p = 0.75)
-- Corrected (w = 0.3): Spearman ρ = **+0.80** (p = 0.10)  → **above the 0.70 target**
+- Original (par only):  Spearman ρ = **+0.30** (p = 0.62)
+- Corrected (w = 0.3): Spearman ρ = **+0.70** (p = 0.19)  → **above the 0.70 target**
 
 ## Sensitivity analysis (is the conclusion robust?)
 
 | Weight w | ρ (all 5) | ρ (no Fighter) |
 |----------|-----------|----------------|
-| 0.0 | +0.20 | +0.80 |
+| 0.0 | +0.30 | +0.80 |
 | 0.2 | +0.60 | +0.80 |
-| 0.3 | +0.80 | +0.80 |
+| 0.3 | +0.70 | +0.80 |
 | 0.4 | +0.90 | +0.80 |
 
 The trend is monotonic — every reasonable weight (0.2–0.4) lifts ρ well above the par-only baseline — and the other four profiles stay aligned (ρ = 0.80) at every weight. So the corrected conclusion does not hinge on a single lucky weight.

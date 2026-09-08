@@ -200,10 +200,10 @@ COUNT YOUR OWN CARDS before describing your hand:
 
 _BRIDGE_EXAMPLE = """\
 EXAMPLE (for format only):
-Hand: S:AKQ72 H:K4 D:A83 C:Q92  (17 HCP, 5 spades)
+Hand: S:AKQ72 H:K4 D:A83 C:Q92  (18 HCP, 5 spades)
 Auction so far: [Partner: 1S, Opponent: Pass]
 A Slam Hunter, holding strong values and a fit, might explore higher:
-{"bid": "3S", "reasoning": "Strong raise with 4-card support and slam interest."}"""
+{"bid": "3S", "reasoning": "Strong raise with 5-card support and slam interest."}"""
 
 _BRIDGE_SCHEMA_HINT = """\
 OUTPUT: return ONLY valid JSON with exactly these keys:

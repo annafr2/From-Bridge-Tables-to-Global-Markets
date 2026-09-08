@@ -45,9 +45,9 @@ TEST_CASES: list[dict] = [
     {
         "label": "Strong balanced-ish, partner opened 1S (slam-interest hand)",
         "hand": {"S": "AKQ72", "H": "AK4", "D": "A83", "C": "Q2"},
-        "hcp": 20,
+        "hcp": 22,  # A=4 K=3 Q=2: spades 9 + hearts 7 + diamonds 4 + clubs 2
         "auction": ["1S", "Pass"],
-        "note": "20 HCP with a spade fit — slam exploration is reasonable; "
+        "note": "22 HCP with a spade fit — slam exploration is reasonable; "
                 "a cautious player signs off in 4S.",
     },
     {
