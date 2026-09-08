@@ -46,3 +46,7 @@ reports/*.fdb_latexmk
 .DS_Store
 Thumbs.db
 NegoPlay/data/external/
+
+# Word lock/temp files
+~$*
+**/~$*
