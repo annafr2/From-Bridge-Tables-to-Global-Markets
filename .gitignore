@@ -43,3 +43,18 @@ logs/
 *.toc
 *.lof
 *.lot
+
+# Private working files — never public
+THIS_WEEK.md
+scratch_cells.txt
+ADVISOR_ROADMAP.md
+PHD_LITERATURE.md
+CLAUDE.md
+TASKS.md
+NegoPlay/CLAUDE.md
+NegoPlay/TASKS.md
+NegoPlay/*.txt
+NegoPlay/papers/paper1/*.docx
+NegoPlay/papers/paper1/build_paper1_docs.js
+NegoPlay/reports/*.docx
+NegoPlay/reports/build_prep_doc.js
