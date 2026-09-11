@@ -89,8 +89,10 @@ def main() -> None:
     for _, r in df.iterrows():
         ax.scatter(r["bridge_aggression"], r["nego_aggression"], s=210,
                    color=COLORS.get(r["profile"], "#333"), edgecolors="black", zorder=3)
+        # Insurance Player and Generalist share y=0.666; drop one label below
+        off = {"Insurance Player": (8, -16)}.get(r["profile"], (8, 5))
         ax.annotate(r["profile"], (r["bridge_aggression"], r["nego_aggression"]),
-                    xytext=(8, 5), textcoords="offset points", fontsize=10)
+                    xytext=off, textcoords="offset points", fontsize=10)
     ax.set_xlabel("Bridge aggression  (real bidding: slam + preempt + doubles, z-score)", fontsize=11)
     ax.set_ylabel("Negotiation aggression  (how low the agent opens/offers)", fontsize=11)
     ax.set_title(f"STYLE -> STYLE: does aggression transfer?\nSpearman ρ = {rho:+.2f}",

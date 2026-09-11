@@ -50,3 +50,5 @@ NegoPlay/data/external/
 # Word lock/temp files
 ~$*
 **/~$*
+~WRL*.tmp
+**/~WRL*.tmp

@@ -66,9 +66,10 @@ by a one-sided binomial significance test, obtaining four behaviorally
 distinct extreme profiles plus a Generalist baseline (Cohen's $d$
 between $2.13$ and $4.62$, all $p<0.05$). A large language model then
 reads a fixed-seed sample of each profiled player's raw deals (the
-cards held, the full auction, and the result; never the profile label
-or the engineered features) and extracts observable skills, from which we build
-profile-conditioned agents. The agents play both bridge and simulated
+cards held, the full auction, and the result), directed to the
+profile's defining behavioral axis but never shown the engineered
+feature values, and extracts observable skills with deal-level
+evidence, from which we build profile-conditioned agents. The agents play both bridge and simulated
 multi-round business negotiations against fixed, rule-based
 counterparts. The negotiation counterpart is calibrated on 5{,}247
 human--human bargaining dialogues grounded in real Craigslist listings.
@@ -131,7 +132,7 @@ Fig.~\ref{fig:control}) and report both a positive result and an
 instructive negative one.
 
 \paragraph{Contributions.}
-\begin{enumerate}[leftmargin=1.4em, itemsep=2pt]
+\begin{enumerate}
   \item \textbf{A continuum, not clusters.} Across five escalating
   preprocessing configurations and three algorithm families (K-Means,
   Gaussian mixtures, HDBSCAN), elite championship players show no
@@ -146,12 +147,16 @@ instructive negative one.
   at $p<0.05$ (Sec.~\ref{sec:profiles}). We document how expert review
   exposed a small-sample artefact in our first version and how the gate
   repairs it: a reusable recipe for rare-event behavioral profiling.
-  \item \textbf{Identity-disentangled skill extraction.} A large
+  \item \textbf{Evidence-grounded skill extraction.} A large
   language model (LLM) reads a seeded sample of each profiled player's
   raw deals (cards, auction, result) and writes observable skills with
-  per-deal evidence. The LLM never sees the profile label or the engineered
-  features, so downstream behavior cannot simply echo a label
-  (Sec.~\ref{sec:stage2}).
+  per-deal evidence citations. The LLM is directed to the profile's
+  defining behavioral axis but never shown the engineered feature
+  values or any comparative statistics, so every skill must be
+  verifiable from the cited deals (Sec.~\ref{sec:stage2}); whether
+  downstream behavior follows the skill \emph{content} rather than the
+  profile identity is then tested, not assumed, by the inverse-prompt
+  control.
   \item \textbf{A validated cross-domain testbed.} Profile-conditioned
   agents play bridge and negotiate against \emph{fixed} rule-based
   counterparts. The bridge metric is validated with a zero-intelligence
@@ -238,7 +243,7 @@ human self-report evidence indicates substantial domain-specificity
 \cite{weber2002domain}. These findings calibrate the scope of our claim:
 we measure the cross-domain consistency of \emph{profile-conditioned
 agents}; whether the same consistency holds for the underlying human
-players is a distinct, open question that our Year-2 plan addresses with
+players is a distinct, open question left for future work with
 trait-annotated human negotiation data (Sec.~\ref{sec:conclusion}).
 
 \paragraph{LLMs as behavioral simulacra.} LLMs conditioned on personas
@@ -248,8 +253,9 @@ risks are documented. The first is \emph{tautology}: an agent told it
 is aggressive will act aggressively. The second is the converse, \emph{non-enactment}: role-playing agents can state a persona's beliefs
 yet fail to behave accordingly \cite{mannekote2025roleplaying}, so
 persona conditioning cannot simply be assumed to work. Our design
-answers both empirically: skills are extracted from raw hands without
-labels (Sec.~\ref{sec:stage2}), and an inverse-prompt control swaps
+answers both empirically: skills are extracted from raw hands under a
+deal-level evidence requirement (Sec.~\ref{sec:stage2}), and an
+inverse-prompt control swaps
 skills between identities and measures whether behavior follows
 (Sec.~\ref{sec:control}), precisely the belief-vs-behavior
 consistency check this literature calls for.
@@ -283,8 +289,9 @@ Total & 149{,}208 & 99.9\% & 54\% & 31\% (46{,}230 sequences)\\
 \end{table}
 
 Older EBL microsites do not expose machine-readable auctions, so
-bidding-dependent features use the 46K rows of Herning~2024 and
-Poznan~2025, while contract/outcome features use all 149K rows. Each
+bidding-dependent features use the 46{,}230 rows (31\%,
+Table~\ref{tab:data}) of Herning~2024 and Poznan~2025, while
+contract/outcome features use all 149K rows. Each
 board is played in two rooms by different pairs, the duplicate
 structure that later yields an opponent-controlled skill metric
 (Sec.~\ref{sec:bridgemetric}). All data are public tournament records of
@@ -345,8 +352,9 @@ defining axes are the player's own actions.
 
 \subsection{Finding 1: a continuum, not clusters}\label{sec:continuum}
 
-Following a challenge by a methodological reviewer (``if clustering fails, suspect the preprocessing''), we ran a five-configuration audit
-before accepting any negative result: (V1) StandardScaler only; (V2)
+To ensure that the absence of cluster structure is not an artefact of
+inadequate preprocessing, we ran a five-configuration audit before
+accepting any negative result: (V1) StandardScaler only; (V2)
 StandardScaler + PCA(3) \cite{jolliffe2002principal}; (V3a--c)
 RobustScaler + cv-filter + correlation pruning + Mahalanobis outlier
 removal ($\alpha=0.01$) + PCA(5), feeding K-Means \cite{lloyd1982least},
@@ -411,7 +419,7 @@ downstream depends on the name (Sec.~\ref{sec:control} tests this).
 Our first release (v2.0) used $n_{\mathrm{declared}}\ge20$ and the
 percentile gate alone, yielding 807 players and 64 Slam Hunters with a
 mean slam rate $2.8\times$ baseline. Expert review by a national-level
-bridge player (co-supervisor) flagged a rare-event artefact: with a
+bridge player flagged a rare-event artefact: with a
 $\sim$4--6\% slam baseline, a player with 20 boards and 2 slams shows a
 10\% rate whose exact 95\% confidence interval, $[1.2\%,\,31.7\%]$
 (Clopper--Pearson \cite{clopper1934use}), is indistinguishable from
@@ -492,14 +500,14 @@ on its own defining axis, and only mildly deviant elsewhere.}
 partnership game: part of an elevated slam rate may reflect an
 aggressive partner rather than the individual. The NT rate partly
 reflects the pair's bidding system (e.g.\ Precision opens 1NT on wider
-ranges). The Insurance signal is the weakest ($1.20\times$) and may
-partly reflect hand-distribution variance. The Fighter is
+ranges). The Insurance Player signal is the weakest ($1.20\times$) and
+may partly reflect hand-distribution variance. The Fighter is
 methodologically the cleanest profile: doubling is a deliberate
 individual act, its denominator counts both sides of the table, and its
 base rate ($\sim$8.5\%) narrows confidence intervals quickly.
 
 % ==================================================================
-\section{Stage 2: Identity-Disentangled Skill Extraction}\label{sec:stage2}
+\section{Stage 2: Evidence-Grounded Skill Extraction}\label{sec:stage2}
 
 For each profiled player we sample up to 50 boards (deterministic,
 seed 42) and format them in chunks of 25 boards per LLM call. Each board
@@ -518,23 +526,36 @@ JSON-schema output) is instructed to act as a bridge expert and return 3--5
 \emph{observable, falsifiable} skills, each with a name, a one-sentence
 behavioral description, per-board evidence citations, and a confidence
 grade; personality adjectives are explicitly forbidden. A
-profile-context block tells the model which behavioral \emph{axis} to
-attend to (e.g.\ ``this player is in the top decile of slam bidders;
-at least two skills must concern slam bidding''), but the model never
-receives the engineered feature values, the z-scores, or any comparative
-statistics: everything it asserts must be read off the raw deals.
+profile-context block deliberately directs the model's attention to the
+profile's defining behavioral \emph{axis} (e.g.\ ``this player is in
+the top decile of slam bidders; at least two skills must concern slam
+bidding''); without such direction, rare defining behaviors drown under
+generic competitive-bidding observations. The model never receives the
+engineered feature values, the z-scores, or any comparative statistics:
+everything it asserts must cite specific deals as evidence, and
+Sec.~\ref{sec:validation} established, independently of any LLM, that
+the directed-to behaviors are genuinely present in these players'
+records. Whether downstream behavior follows skill content rather than
+profile identity is tested separately by the inverse-prompt control
+(Sec.~\ref{sec:control}).
 Skills are aggregated across chunks and players into a per-profile
 signature by TF--IDF cosine matching with a merge threshold of 0.40
 (at 0.30, unrelated skills merged falsely; the threshold sweep is in the
-repository). Typical extracted skills: \emph{``uses Roman Key Card
+repository). TF--IDF is preferred over neural embeddings deliberately:
+at this scale (dozens of short, domain-specific skill names) lexical
+overlap is the relevant signal, and the aggregation stays deterministic
+and auditable, in line with the reproducibility goals. Typical extracted skills: \emph{``uses Roman Key Card
 Blackwood to drive to slam with fitting hands''} (Slam Hunter);
 \emph{``doubles opponents' partscores for penalty with trump stacks''}
 (Fighter); \emph{``declines game invitations with borderline values''}
 (Insurance Player).
 
-This design carries the paper's anti-tautology burden: the downstream
-agents are conditioned on \emph{what the player demonstrably did with
-the cards}, not on a label we invented.
+This design carries the first half of the paper's anti-tautology
+burden: the downstream agents are conditioned on \emph{what the player
+demonstrably did with the cards}, not on adjectives we invented. The
+second half, that agent behavior follows this content rather than the
+profile's name, is carried by the inverse-prompt control
+(Sec.~\ref{sec:control}).
 
 % ==================================================================
 \section{Stage 3: Profile-Conditioned Agents}\label{sec:stage3}
@@ -542,9 +563,13 @@ the cards}, not on a label we invented.
 Each of the five agents (four profiles + Generalist control) is an LLM
 (\texttt{gemini-2.5-flash}) with a system prompt assembled from: (i) an
 identity line naming the profile and its one-line essence; (ii) the
-Stage-2 skill list, the only profile-specific content; (iii) domain
-rule constraints; and (iv) a mandatory JSON output schema with a
-free-text rationale field. Bridge agents run at temperature 0.3
+Stage-2 skill list, the only content derived from the player's actual
+record; (iii) domain rule constraints; and (iv) a mandatory JSON output
+schema with a free-text rationale field. The identity line does name
+the profile; whether measured behavior is driven by that name or by the
+skill content is exactly what the inverse-prompt control of
+Sec.~\ref{sec:control} tests, by swapping only the skills while leaving
+every identity line in place. Bridge agents run at temperature 0.3
 (later 0.0), negotiation agents at 0.7.
 
 \paragraph{Mechanism check (one hand, five agents).} All five agents
@@ -636,7 +661,8 @@ aggressive lowballing captures more surplus while the deal rate barely
 drops ($\approx0.83$ vs $0.86$): human sellers tolerate hard bargaining
 and abandon only absurd offers. An
 earlier, harsher walk-away rule reversed the results by punishing all
-aggression; we document that sensitivity below. The negotiation outcome
+aggression; we document that sensitivity in
+Sec.~\ref{sec:winning}. The negotiation outcome
 is the \emph{surplus captured},
 $\sigma = (P_{\mathrm{ask}}-P_{\mathrm{deal}})/
 (P_{\mathrm{ask}}-P_{\mathrm{floor}})\in[0,1]$, zero if no deal. All
@@ -661,6 +687,28 @@ value \$9M, floor \$8M; real run-0 offer trajectories). Aggressive
 bridge profiles anchor low and hold; cautious profiles concede upward.}
 \label{fig:nego}
 \end{figure}
+
+% ==================================================================
+\section{Implementation and Software Engineering}\label{sec:engineering}
+
+The pipeline is engineered as a single research software product rather
+than a collection of scripts, a choice worth stating explicitly given
+this volume's software-tools theme. All public operations flow through
+one SDK entry point (\texttt{src/sdk.py}); no function lives only in a
+notebook. LLM access is routed through a provider-agnostic client
+(\texttt{src/shared/llm\_client.py}) that logs model, token counts,
+latency, and cost for every call and enforces a budget guard (alert at
+\$20, hard cap at \$50); swapping the model provider is a one-argument
+change, which is how the cross-provider replication planned as future
+work is already wired. The code is typed, linted, and documented, with
+data hygiene enforced by convention: raw inputs are read-only, and all
+derived artifacts live under separate processed and results trees. A
+pytest suite of 178 tests covers the feature engineering, the profiling
+gates, the statistical validators, and the agents; LLM-dependent
+components are tested by injecting a mocked client, so the full suite
+runs without network access or cost. These practices are what make the
+reproduction protocol of Appendix~\ref{app:protocol} executable by a
+stranger rather than aspirational.
 
 % ==================================================================
 \section{Results}\label{sec:results}
@@ -740,6 +788,19 @@ softly (Fig.~\ref{fig:style}). The one rank inversion (NT Specialist
 above Slam Hunter on $\theta$) is what caps $\rhoS$ at $0.80$ rather than $1.0$; this is expected, since the NT axis is stylistic rather than
 directly risk-graded.
 
+A note on inference is due here rather than in the limitations. With
+$K=5$, the permutation null admits only $5!=120$ orderings, so the
+smallest attainable two-sided $p$ is $0.017$, and only near-perfect
+rankings ($|\rhoS|\ge0.9$) clear the conventional $0.05$ threshold; the
+observed $+0.80$ sits exactly one adjacent rank swap short of that, at
+$p=0.10$. We therefore make no significance claim for the alignment
+itself and read $+0.80$ as an effect-size indication whose inferential
+support comes from converging evidence: the profile foundations are
+individually significant (Table~\ref{tab:cohend}, and every assignment
+gate of Eq.~\ref{eq:gate} holds at $p<0.05$), and the inverse-prompt
+control (Sec.~\ref{sec:control}) is nominally significant on its own
+($p=0.037$).
+
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.8\textwidth]{style_alignment.png}
@@ -792,20 +853,24 @@ wins.
 bridge: (i) the significance-gated tail-profiling recipe for
 low-base-rate behaviors (Eq.~\ref{eq:gate}); (ii) metric falsification
 by constrained-random baseline (a ZI-C agent must rank last, an oracle
-first) before any cross-domain claim; (iii) the identity-disentangled
-prompt design plus inverse-prompt control as an anti-tautology standard
+first) before any cross-domain claim; (iii) evidence-grounded skill
+extraction plus an inverse-prompt control as an anti-tautology standard
 for LLM-persona experiments.
 
-\paragraph{Limitations.} $K=5$ profiles cannot yield conventional
-significance for the alignment itself ($p=0.10$); the result is an
-indication, and scaling the number of profiles (finer tail slices,
+\paragraph{Limitations.} With $K=5$ profiles, only near-perfect rank
+orderings ($|\rhoS|\ge0.9$) can clear $p<0.05$
+(Sec.~\ref{sec:style}); the observed alignment ($p=0.10$) is therefore
+an indication, and scaling the number of profiles (finer tail slices,
 per-player agents) is the direct fix. The negotiation domain is
 simulated: the counterpart is rule-based (though data-calibrated), the
 scenarios are single-issue price negotiations, and surplus is the sole
 outcome. Bridge-side confounds remain (partnership effects on
 \texttt{slam\_rate}; convention systems on \texttt{nt\_rate}). The skill
-extractor and the agents share a model family (Gemini); cross-provider
-replication is prepared in the codebase but not yet reported. Finally,
+extractor and the agents share one model family (Gemini), so
+provider-specific behavior cannot yet be ruled out; the
+provider-agnostic client of Sec.~\ref{sec:engineering} makes
+cross-provider replication (Claude, GPT) a one-argument change, and it
+is the first robustness item of future work. Finally,
 elite players are a selected population; transfer from amateur play is
 untested.
 
@@ -833,7 +898,7 @@ optimization problem with heterogeneous preference structures, and connects dire
 On the bridge side, the natural deepening is a learned
 estimation--policy architecture (ENN/PNN \cite{rong2019bridge}) over the
 full corpus, and per-player (rather than per-profile) agents to raise
-$K$ from 5 to hundreds. On the negotiation side, Year-2 work targets
+$K$ from 5 to hundreds. On the negotiation side, future work targets
 real human negotiation data. A concrete first step is the CaSiNo corpus
 \cite{chawla2021casino}: 1{,}030 multi-issue human negotiations in
 which each negotiator carries measured Big-Five and social-value-orientation scores: exactly the trait$\to$behavior linkage this paper constructs
@@ -890,7 +955,7 @@ reproducible (Sec.~\ref{sec:stage3}); the raw model outputs of our runs
 ship in the repository, so steps 8--9 and 11 can be reproduced
 \emph{exactly} from the archive without re-querying any model.
 
-\begin{enumerate}[leftmargin=1.6em, itemsep=3pt]
+\begin{enumerate}
   \item \textbf{Environment.} Clone
   \url{https://github.com/annafr2/From-Bridge-Tables-to-Global-Markets};
   create a Python~3.11 virtual environment; \texttt{pip install -r

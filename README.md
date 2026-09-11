@@ -3,7 +3,32 @@
 **Researcher:** Anna Ben Shushan
 **PhD Program:** LUT University, Finland
 **Thesis:** "From Bridge Tables to Global Markets: AI and Optimization Models of Cooperation, Competition, and Negotiation on Digital Platforms"
-**Last Updated:** May 2026
+**Last Updated:** September 2026
+
+---
+
+## 📄 Paper 1 — start here if you arrived from the manuscript
+
+> **"From Bridge Tables to the Negotiation Table: Cross-Domain Behavioral
+> Consistency of Game-Derived Decision-Making Profiles"** (submitted to the
+> Springer OP80 volume *Recent Advances on Scientific Computing, AI, and
+> Other Software Tools*).
+
+Everything the paper reports lives under [`NegoPlay/`](NegoPlay/):
+
+| What | Where |
+|---|---|
+| Manuscript (PDF + LaTeX source) | [`NegoPlay/papers/paper1/`](NegoPlay/papers/paper1/) |
+| **Step-by-step reproduction protocol** | Appendix A of the paper; scripts under [`NegoPlay/notebooks/`](NegoPlay/notebooks/) |
+| Pipeline code (4 stages, single SDK entry point) | [`NegoPlay/src/`](NegoPlay/src/) |
+| Player profiles output (563 players) | `NegoPlay/data/processed/player_profiles.csv` |
+| Archived experiment outputs (raw LLM logs, reports) | [`NegoPlay/results/`](NegoPlay/results/) |
+| Calibration corpora (CraigslistBargain, CaSiNo) | `NegoPlay/data/external/` |
+| Test suite (178 tests, runs offline with a mocked LLM) | [`NegoPlay/tests/`](NegoPlay/tests/) |
+
+Deterministic analyses reproduce exactly from the archived outputs; the
+LLM-dependent stages reproduce distributionally (see the paper's
+Reproducibility Statement).
 
 ---
 
