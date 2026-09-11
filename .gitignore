@@ -60,3 +60,4 @@ NegoPlay/reports/*.docx
 NegoPlay/reports/build_prep_doc.js
 NegoPlay/*.txt
 !NegoPlay/requirements.txt
+NegoPlay/reports/
