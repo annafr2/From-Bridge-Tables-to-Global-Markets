@@ -14,7 +14,7 @@ than the field on identical cards.
   - Double-dummy perfect: the par contract from the real cards (the ceiling).
 
 Result: real elite players sit FAR above the random monkey but still short of
-perfect, and among them the aggressive profiles (Slam Hunter, Fighter) lead —
+perfect, and among them the aggressive profiles (Slam Hunter, Fighter) lead,
 consistent with the real-data finding. No LLM cost.
 
 Output: docs/images/real_skill_spectrum.png
@@ -116,55 +116,61 @@ def make_figure() -> None:
     res = build_alignment()
     prof = res["df"][["profile", "bridge_imp"]].sort_values("bridge_imp")
 
-    fig, (axL, axR) = plt.subplots(1, 2, figsize=(12.5, 5.2),
-                                   gridspec_kw={"width_ratios": [1.25, 1]})
+    # Stacked panels sized for print (LNCS text width 4.8 in): fonts are at
+    # their final size (>= 7.5 pt), so nothing is scaled down on the page.
+    fig, (axL, axR) = plt.subplots(2, 1, figsize=(4.8, 5.4),
+                                   gridspec_kw={"height_ratios": [1, 1.15]})
 
     # ── Panel A: the full spectrum, monkey -> players -> perfect ──────────────
     mk, pf = anchors["monkey"], anchors["perfect"]
     axL.axvspan(mk - 0.6, mk + 0.6, color="#f6d5d2", alpha=0.5)
-    axL.scatter([mk], [0], s=300, color="#c0392b", edgecolors="black", zorder=3)
-    axL.text(mk, 0.5, "zero-intelligence (ZI-C)\n(random contract)", ha="center", fontsize=10,
-             color="#c0392b", fontweight="bold")
-    axL.axvline(pf, color="#1f7a4d", ls="--", lw=2)
-    axL.text(pf, 0.5, "double-dummy\nperfect play", ha="center", fontsize=10,
-             color="#1f7a4d", fontweight="bold")
-    axL.scatter([0], [0], s=120, color="#444", zorder=3)
-    axL.text(0, -0.6, "real elite players\n(all 5 profiles, ≈ average)", ha="center",
-             fontsize=9.5)
+    axL.scatter([mk], [0], s=140, color="#c0392b", edgecolors="black", zorder=3)
+    axL.text(mk, 0.45, "zero-intelligence (ZI-C)\n(random contract)", ha="center",
+             fontsize=8, color="#c0392b", fontweight="bold")
+    axL.axvline(pf, color="#1f7a4d", ls="--", lw=1.6)
+    _bb = dict(facecolor="white", edgecolor="none", pad=1.0)   # text stays legible over lines
+    axL.text(pf - 0.12, 0.45, "double-dummy\nperfect play", ha="right", fontsize=8,
+             color="#1f7a4d", fontweight="bold", bbox=_bb)
+    axL.scatter([0], [0], s=60, color="#444", zorder=3)
+    axL.text(0, -0.55, "real elite players\n(all 5 profiles, ≈ average)", ha="center",
+             va="top", fontsize=8, bbox=_bb)
     axL.annotate("", xy=(0.25, 0), xytext=(0.05, 0),
                  arrowprops=dict(arrowstyle="-[,widthB=0.6", color="#444"))
     axL.axhline(0, color="#bbb", lw=1, zorder=1)
-    axL.set_ylim(-1.4, 1.4)
+    axL.set_xlim(mk - 1.2, pf + 0.7)
+    axL.set_ylim(-1.5, 1.4)
     axL.set_yticks([])
-    axL.set_xlabel("Bridge skill: average IMP vs the field (real boards)", fontsize=11)
+    axL.tick_params(labelsize=8)
+    axL.set_xlabel("Bridge skill: average IMP vs the field (real boards)", fontsize=8.5)
     axL.set_title("Real skill spectrum: random → elite → perfect",
-                  fontweight="bold", fontsize=12)
+                  fontweight="bold", fontsize=9.5)
     axL.spines[["top", "right", "left"]].set_visible(False)
     axL.grid(axis="x", alpha=0.3)
 
     # ── Panel B: zoom on the real profiles (they cluster near 0) ──────────────
     for i, (_, r) in enumerate(prof.iterrows()):
         c = COLORS.get(r["profile"], "#444")
-        axR.plot([0, r["bridge_imp"]], [i, i], color=c, lw=2.5, zorder=2)
-        axR.scatter(r["bridge_imp"], i, s=220, color=c, edgecolors="black", zorder=3)
-        axR.text(r["bridge_imp"] + 0.004, i, f"{r['profile']}  ({r['bridge_imp']:+.2f})",
-                 va="center", fontsize=10)
+        axR.plot([0, r["bridge_imp"]], [i, i], color=c, lw=2, zorder=2)
+        axR.scatter(r["bridge_imp"], i, s=100, color=c, edgecolors="black", zorder=3)
+        axR.text(r["bridge_imp"] + 0.012, i, f"{r['profile']}  ({r['bridge_imp']:+.2f})",
+                 va="center", fontsize=8)
     axR.axvline(0, color="#999", ls=":", lw=1.2)
-    axR.text(0, -0.85, "average pair", ha="center", fontsize=9, color="#777")
+    axR.text(0, -0.85, "average pair", ha="center", fontsize=7.5, color="#777")
     axR.set_yticks([])
-    axR.set_xlim(-0.05, 0.25)
+    axR.set_xlim(-0.05, 0.36)   # right margin leaves room for the labels
     axR.set_ylim(-1.3, len(prof) - 0.4)
-    axR.set_xlabel("average IMP vs the field (zoom on the 5 profiles)", fontsize=11)
+    axR.tick_params(labelsize=8)
+    axR.set_xlabel("average IMP vs the field (zoom on the 5 profiles)", fontsize=8.5)
     axR.set_title("Among the elite: aggressive profiles lead",
-                  fontweight="bold", fontsize=12)
+                  fontweight="bold", fontsize=9.5)
     axR.spines[["top", "right", "left"]].set_visible(False)
     axR.grid(axis="x", alpha=0.3)
 
-    fig.suptitle("Real-data skill spectrum — measured on the actual EuroBridge boards",
-                 fontsize=13.5, fontweight="bold")
-    fig.tight_layout(rect=[0, 0, 1, 0.95])
+    fig.suptitle("Real-data skill spectrum, measured on the actual EuroBridge boards",
+                 fontsize=9.5, fontweight="bold")
+    fig.tight_layout(rect=[0, 0, 1, 0.965])
     OUT.parent.mkdir(parents=True, exist_ok=True)
-    fig.savefig(OUT, dpi=150, bbox_inches="tight")
+    fig.savefig(OUT, dpi=300, bbox_inches="tight")
     print(f"saved {OUT}")
     print(f"  monkey {anchors['monkey']:+.2f} IMP | perfect {anchors['perfect']:+.2f} IMP "
           f"| n={anchors['n']} boards")

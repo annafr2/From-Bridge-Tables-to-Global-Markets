@@ -1,9 +1,9 @@
 % =====================================================================
-% Paper 1 — NegoPlay — SPRINGER SUBMISSION VERSION (LNCS template)
+% Paper 1 (NegoPlay): SPRINGER SUBMISSION VERSION (LNCS template)
 % "From Bridge Tables to the Negotiation Table"
 % Target: Springer edited volume
 %   "Recent Advances on Scientific Computing, AI, and Other Software
-%    Tools — a Commemorative Volume Dedicated to the 80th Jubilee of
+%    Tools: a Commemorative Volume Dedicated to the 80th Jubilee of
 %    Prof. Olivier Pironneau" (OP80, Jyväskylä, 26–27 March 2026)
 % Template: Springer Proceedings LaTeX2e package (llncs.cls),
 %   downloaded 08 Sep 2026 from the official guidelines page.
@@ -20,6 +20,12 @@
 \usepackage[colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue]{hyperref}
 
 \graphicspath{{./}}
+
+% Print-size figures are tall; let LaTeX place them at the top of a page
+% with text below instead of deferring them to the end of the paper.
+\renewcommand{\topfraction}{0.9}
+\renewcommand{\textfraction}{0.07}
+\renewcommand{\floatpagefraction}{0.75}
 
 \newcommand{\rhoS}{\rho_{\mathrm{S}}}
 
@@ -54,33 +60,22 @@ every action is recorded and scored, and the same player is observed
 across hundreds of comparable decision problems. From 149{,}208
 board-level records of five European championships (2016--2025) we show,
 first, that elite players form a statistical \emph{continuum} of styles
-rather than discrete clusters (silhouette $\le 0.24$; HDBSCAN detects
-zero clusters across five preprocessing configurations). We therefore
-profile the \emph{tails} of this continuum with a percentile rule gated
-by a one-sided binomial significance test, obtaining four behaviorally
-distinct extreme profiles plus a Generalist baseline (Cohen's $d$
-between $2.13$ and $4.62$, all $p<0.05$). A large language model then
-reads a fixed-seed sample of each profiled player's raw deals (the
-cards held, the full auction, and the result), directed to the
-profile's defining behavioral axis but never shown the engineered
-feature values, and extracts observable skills with deal-level
-evidence, from which we build profile-conditioned agents. The agents play both bridge and simulated
-multi-round business negotiations against fixed, rule-based
-counterparts. The negotiation counterpart is calibrated on 5{,}247
-human--human bargaining dialogues grounded in real Craigslist listings.
-Whether a profile \emph{wins} in both
-domains proves weak and metric-sensitive (Spearman
-$\rhoS \approx +0.2$ to $+0.5$). Whether a profile \emph{behaves
-consistently} across domains is strong: bridge-side aggression and
-negotiation-side demand depth (how far below the asking price an agent
-pushes its offers) align at $\rhoS = +0.80$, and an inverse-prompt control
-that swaps the extracted skills between the profiles flips the
-correlation to $\rhoS = -0.90$, showing the transfer is carried by the
-game-derived skills rather than by the profile label.
-All thresholds, prompts, seeds, and outputs are released for full
-reproducibility. The results are an indication ($K=5$ profiles), not a
-proof; they establish a validated, reproducible pipeline for studying
-cross-domain transfer of decision-making styles.
+rather than discrete clusters. We therefore identify the extremes of
+this continuum as four statistically validated decision-making
+profiles, and we turn each profile into an autonomous software agent
+whose behavior is grounded in the skills that a language model reads
+from that player's actual deals. The agents then play bridge and
+negotiate simulated business deals against fixed counterparts. Two
+findings emerge. Whether a profile wins in one domain says little about
+whether it wins in the other: winning depends on the opponent and on
+the rules of the game. How a profile behaves, however, carries over
+strongly: profiles that take risks at the bridge table make bolder
+demands at the negotiation table, and a control experiment that swaps
+the underlying skills between profiles reverses this relationship,
+showing that the behavior comes from the game-derived skills and not
+from the profile's name. The study is a validated feasibility result
+rather than a proof, and all data, code, and outputs are released so
+that every number in the paper can be reproduced.
 
 \keywords{Decision-making under uncertainty \and Contract bridge \and
 Negotiation \and Large language model agents \and Behavioral profiling
@@ -125,67 +120,79 @@ We answer it with a four-stage pipeline (Fig.~\ref{fig:radar} through
 Fig.~\ref{fig:control}) and report both a positive result and an
 instructive negative one.
 
-\paragraph{Contributions.}
-\begin{enumerate}
-  \item \textbf{A continuum, not clusters.} Across five escalating
-  preprocessing configurations and three algorithm families (K-Means,
-  Gaussian mixtures, HDBSCAN), elite championship players show no
-  discrete cluster structure (Sec.~\ref{sec:continuum}). This negative
-  result redirects the methodology and is, to our knowledge, the first
-  systematic demonstration of style-space continuity at championship
-  level.
-  \item \textbf{Statistically gated tail profiling.} We profile
-  the \emph{tails} of the continuum: a player is assigned to a profile
-  only if they are in the top decile of the profile's defining axis
-  \emph{and} a one-sided binomial test rejects the population baseline
-  at $p<0.05$ (Sec.~\ref{sec:profiles}). We document how expert review
-  exposed a small-sample artefact in our first version and how the gate
-  repairs it: a reusable recipe for rare-event behavioral profiling.
-  \item \textbf{Evidence-grounded skill extraction.} A large
-  language model (LLM) reads a seeded sample of each profiled player's
-  raw deals (cards, auction, result) and writes observable skills with
-  per-deal evidence citations. The LLM is directed to the profile's
-  defining behavioral axis but never shown the engineered feature
-  values or any comparative statistics, so every skill must be
-  verifiable from the cited deals (Sec.~\ref{sec:stage2}); whether
-  downstream behavior follows the skill \emph{content} rather than the
-  profile identity is then tested, not assumed, by the inverse-prompt
-  control.
-  \item \textbf{A validated cross-domain testbed.} Profile-conditioned
-  agents play bridge and negotiate against \emph{fixed} rule-based
-  counterparts. The bridge metric is validated with a zero-intelligence
-  baseline \cite{gode1993zi} and a double-dummy reference
-  \cite{ginsberg2001gib}; the negotiation counterpart is calibrated on
-  5{,}247 real negotiations \cite{he2018decoupling}
-  (Sec.~\ref{sec:stage4}).
-  \item \textbf{Principal findings.} Decision \emph{style} transfers
-  strongly (behavioral alignment $\rhoS=+0.80$), and an inverse-prompt
-  control flips it to $\rhoS=-0.90$, demonstrating skill-mediated
-  transfer. Whether a style \emph{wins} in both domains is weak and
-  metric-dependent ($\rhoS\approx+0.2$ to $+0.5$): winning depends on
-  the opponent and payoff structure, behaving does not
-  (Sec.~\ref{sec:results}).
-\end{enumerate}
+The paper makes five contributions, stated here in the order in which
+the reader meets them. The first is a negative result about the data
+itself: across five escalating preprocessing configurations and three
+algorithm families, elite championship players show no discrete cluster
+structure; they form a \emph{continuum} of styles
+(Sec.~\ref{sec:continuum}). To our knowledge this is the first
+systematic demonstration of style-space continuity at championship
+level, and it redirects the methodology. The second contribution
+follows from it: we profile the \emph{tails} of the continuum with a
+statistically gated rule, under which a player is assigned to a profile
+only if they lie in the top decile of the profile's defining axis and a
+one-sided binomial test rejects the population baseline
+(Sec.~\ref{sec:profiles}). We also document how expert review exposed a
+small-sample artefact in our first version and how the gate repairs it,
+a reusable recipe for profiling rare behaviors. The third contribution
+is an \emph{evidence-grounded} way of turning a profile into an agent: a
+large language model (LLM) reads a seeded sample of each profiled
+player's raw deals and writes observable skills with per-deal evidence
+citations; it is directed to the profile's defining axis but never shown
+the engineered feature values, so every skill must be verifiable from
+the cited deals (Sec.~\ref{sec:stage2}). Fourth, we build a
+\emph{validated cross-domain testbed} in which profile-conditioned
+agents play bridge and negotiate against fixed, rule-based
+counterparts; the bridge metric is validated with a zero-intelligence
+baseline \cite{gode1993zi} and a double-dummy reference
+\cite{ginsberg2001gib}, and the negotiation counterpart is calibrated
+on 5{,}247 human bargaining dialogues \cite{he2018decoupling}
+(Sec.~\ref{sec:stage4}). The fifth contribution is the principal
+finding. Decision \emph{style} transfers strongly (behavioral alignment
+$\rhoS=+0.80$), and an inverse-prompt control that swaps the extracted
+skills between profiles flips the correlation to $\rhoS=-0.90$,
+demonstrating that the transfer is carried by the skills. Whether a
+style \emph{wins} in both domains is weak and metric-dependent
+($\rhoS\approx+0.2$ to $+0.5$): winning depends on the opponent and the
+payoff structure, behaving does not (Sec.~\ref{sec:results}).
 
 Throughout, we adhere to two methodological principles: every
 experimental condition needed to reproduce the study is stated
-explicitly (the Reproducibility Statement and
-Appendix~\ref{app:protocol} map each reported number to a runnable
-script), and evaluation scenarios are ordered from \emph{trivial}, where
-the reader can predict which profile should prevail and so builds trust
-in the instrument, to non-trivial.
+explicitly (Appendix~\ref{app:protocol} maps each reported number to a
+runnable script), and evaluation scenarios are ordered from
+\emph{trivial}, where the reader can predict which profile should
+prevail and so builds trust in the instrument, to non-trivial.
+
+The rest of the paper is organized as follows.
+Section~\ref{sec:related} places the work in the literature on bridge
+AI, negotiating agents, and the psychology of behavioral consistency.
+Section~\ref{sec:data} describes the corpus. The pipeline is then
+presented in four stages, each a section of its own: Stage~1
+(Sec.~\ref{sec:stage1}) derives behavioral features from the records
+and discovers the decision-making profiles; Stage~2
+(Sec.~\ref{sec:stage2}) has a language model read each profiled
+player's deals and write down the observable skills; Stage~3
+(Sec.~\ref{sec:stage3}) builds an agent from each profile; and Stage~4
+(Sec.~\ref{sec:stage4}) evaluates the agents in bridge and in
+negotiation. Section~\ref{sec:engineering} describes how the pipeline
+is engineered as research software. Section~\ref{sec:results} reports
+the results, Section~\ref{sec:discussion} interprets them and states
+the limitations, and Section~\ref{sec:conclusion} concludes with future
+work. Everything needed to reproduce the results is collected in
+Appendix~\ref{app:protocol}.
 
 % ==================================================================
 \section{Related Work}\label{sec:related}
 
-\paragraph{Bridge as an AI benchmark.} Ginsberg's GIB introduced
-double-dummy analysis as an objective reference for bridge decisions
-\cite{ginsberg2001gib}; Rong et al.\ trained estimation and policy
-networks for competitive bidding on $\sim$1M deals
-\cite{rong2019bridge}. These works optimize \emph{play strength}; we
-instead treat the human record as behavioral data.
+Bridge has long served as an \emph{AI benchmark}. Ginsberg's GIB
+introduced double-dummy analysis as an objective reference for bridge
+decisions \cite{ginsberg2001gib}, and Rong et al.\ trained estimation
+and policy networks for competitive bidding on about one million deals
+\cite{rong2019bridge}. These works optimize play strength; we instead
+treat the human record as behavioral data.
 
-\paragraph{Games, negotiation, and agents.} Self-play systems master
+A second line of work builds \emph{game-playing and negotiating
+agents}. Self-play systems master
 perfect-information games \cite{silver2018general}; Diplomacy work
 combines language and strategic reasoning and studies honesty and
 sanctioning in negotiation-like play
@@ -208,27 +215,28 @@ behavior. Our contribution is orthogonal to all of these: we do not
 train or benchmark a negotiator; we test whether a profile derived from
 \emph{real cross-domain human data} persists in another domain.
 
-\paragraph{Zero-intelligence baselines.} Gode and Sunder showed that
-budget-constrained random traders (``ZI-C'') achieve high allocative
-efficiency, making them the canonical null model for market behavior
-\cite{gode1993zi}. We adopt a ZI-C bidder as the falsification baseline
-for our bridge skill metric: any metric a constrained random agent can
-top is measuring structure, not skill.
+The \emph{zero-intelligence} tradition supplies our null model. Gode
+and Sunder showed that budget-constrained random traders (``ZI-C'')
+achieve high allocative efficiency, making them the canonical null
+model for market behavior \cite{gode1993zi}. We adopt a ZI-C-style
+bidder as the falsification baseline for our bridge skill metric: any
+metric that a constrained random agent can top is measuring structure,
+not skill.
 
-\paragraph{Styles, archetypes, and behavioral economics.} Archetypal
-analysis represents data by its extreme points rather than central
-prototypes \cite{cutler1994archetypal}; our tail profiling is related in
-spirit but operates on individual, interpretable behavioral axes with an
-explicit significance gate, rather than fitting a convex-combination
-factorization. Prospect theory motivates why payoff structure shapes
-risk appetite \cite{kahneman1979prospect}, and coopetition frames the
-simultaneous cooperation/competition that bridge partnerships embody
-\cite{brandenburger1996coopetition}. Classical negotiation analysis
-provides the surplus-splitting lens
+Our profiling method is a relative of \emph{archetypal analysis}, which
+represents data by its extreme points rather than by central prototypes
+\cite{cutler1994archetypal}; our tail profiling operates on individual,
+interpretable behavioral axes with an explicit significance gate,
+rather than fitting a convex-combination factorization. From
+behavioral economics, prospect theory motivates why payoff structure
+shapes risk appetite \cite{kahneman1979prospect}, coopetition frames
+the simultaneous cooperation and competition that bridge partnerships
+embody \cite{brandenburger1996coopetition}, and classical negotiation
+analysis provides the surplus-splitting lens
 \cite{raiffa1982art,nash1950bargaining}.
 
-\paragraph{Cross-situational consistency of style.} Whether behavioral
-dispositions persist across situations is a classical question in
+Whether behavioral dispositions persist across situations, the question
+of \emph{cross-situational consistency}, is a classical one in
 personality psychology: consistency emerges reliably only when behavior
 is \emph{aggregated} over many observations \cite{epstein1979stability},
 and stable dispositional signatures coexist with systematic situational
@@ -240,8 +248,9 @@ agents}; whether the same consistency holds for the underlying human
 players is a distinct, open question left for future work with
 trait-annotated human negotiation data (Sec.~\ref{sec:conclusion}).
 
-\paragraph{LLMs as behavioral simulacra.} LLMs conditioned on personas
-can reproduce human-like behavioral distributions
+Finally, language models are increasingly used as \emph{behavioral
+simulacra}: conditioned on personas, they can reproduce human-like
+behavioral distributions
 \cite{park2023generative,argyle2023out,aher2023using}. Two validity
 risks are documented. The first is \emph{tautology}: an agent told it
 is aggressive will act aggressively. The second is the converse, \emph{non-enactment}: role-playing agents can state a persona's beliefs
@@ -255,13 +264,20 @@ skills between identities and measures whether behavior follows
 consistency check this literature calls for.
 
 % ==================================================================
-\section{Data}\label{sec:data}
+\section{Data: 149{,}208 Boards from Five European Championships}\label{sec:data}
 
-We scraped the public tournament archive of the European Bridge League
-(EBL) for five championships. Each record is one board (deal) in one
-room, with identity, deal, auction, and result fields. The corpus
-contains \textbf{149{,}208 board-room records} ($\times$48 columns) and
-$\sim$2{,}500 named players.
+The corpus was scraped from the public tournament archive of the
+European Bridge League (EBL) for five championships: Budapest 2016,
+Ostend 2018, Madeira 2022, Herning 2024, and Poznan 2025, each with
+Open, Women, and Senior categories, and a Mixed category from 2022
+onward. The unit of record is one board (deal) played in one room. In
+team play every board is played twice, in an Open and a Closed room, by
+different pairs holding the same cards, so each deal yields two
+independent auctions and results; this duplicate structure is what
+later gives us an opponent-controlled skill measure
+(Sec.~\ref{sec:bridgemetric}). The corpus holds \textbf{149{,}208
+board-room records} with 48 fields each and about 2{,}500 named
+players (Table~\ref{tab:data}).
 
 \begin{table}[h]
 \centering\small
@@ -282,15 +298,33 @@ Total & 149{,}208 & 99.9\% & 54\% & 31\% (46{,}230 sequences)\\
 \end{tabular}
 \end{table}
 
-Older EBL microsites do not expose machine-readable auctions, so
-bidding-dependent features use the 46{,}230 rows (31\%,
-Table~\ref{tab:data}) of Herning~2024 and Poznan~2025, while
-contract/outcome features use all 149K rows. Each
-board is played in two rooms by different pairs, the duplicate
-structure that later yields an opponent-controlled skill metric
-(Sec.~\ref{sec:bridgemetric}). All data are public tournament records of
-named professional players published by the EBL; we collect no private
-or demographic information.
+Each record carries four groups of fields: identity (championship,
+category, match, round, board, room); the four players seated in that
+room, recovered from the published seating diagrams; the deal itself,
+that is, the 52 cards by seat, where the EBL published them; and the
+auction as a seat-labeled string (for example \texttt{S:1C W:1D N:1S
+S:2C N:3NT}), followed by the contract, the declarer, a doubled marker,
+the number of tricks taken, and the score. To give one concrete record:
+on Board~10 of a Round-5 match at Herning~2024, North declared 3NT
+after exactly that auction, took nine tricks, and scored $+600$. Two
+quality flags mark whether the auction and the cards are present, and
+every analysis filters on the flag it needs rather than discarding
+partial records.
+
+Coverage differs by championship for reasons of publication, not of
+play. Older EBL microsites do not expose machine-readable auctions, so
+bidding-dependent features use the 46{,}230 records (31\%,
+Table~\ref{tab:data}) of Herning~2024 and Poznan~2025, while contract
+and outcome features use all 149{,}208; card holdings are published
+for 54\% of boards. Cleaning is light and mechanical: contract strings
+are parsed into level, strain, and doubled status; a contract is
+scored as made when the tricks taken reach the level plus six; and the
+declarer's name is resolved from seat and room. Three things the corpus
+does not contain are worth stating, because they bound what the paper
+can claim: the card-by-card play of each hand, the time taken over each
+call, and the partnership's bidding system. All data are public
+tournament records of named professional players published by the EBL;
+we collect no private or demographic information.
 
 % ==================================================================
 \section{Stage 1: Discovering Decision-Making Profiles}\label{sec:stage1}
@@ -317,7 +351,7 @@ Features with coefficient of variation $\mathrm{cv}<0.10$ across players
 (e.g.\ mean contract level, calls per board) carry almost no
 between-player signal and are excluded from structure analysis.}
 \label{tab:features}
-\begin{tabular}{llp{7.3cm}}
+\begin{tabular}{llp{6.6cm}}
 \toprule
 Family & Feature & Definition (per-player rate)\\
 \midrule
@@ -409,7 +443,8 @@ Fighter axis). Players failing either gate are \emph{Generalists}, retained as t
 human-chosen domain labels for ``extreme on axis $a$''; nothing
 downstream depends on the name (Sec.~\ref{sec:control} tests this).
 
-\paragraph{Why the binomial gate exists: an expert-review episode.}
+The binomial gate exists because of an \emph{expert-review episode}
+that is worth recording.
 Our first release (v2.0) used $n_{\mathrm{declared}}\ge20$ and the
 percentile gate alone, yielding 807 players and 64 Slam Hunters with a
 mean slam rate $2.8\times$ baseline. Expert review by a national-level
@@ -481,16 +516,17 @@ NT Specialist    & \texttt{nt\_rate}              & 1.27$\times$ & 4.62 & 0.004\
 \end{tabular}
 \end{table}
 
-\begin{figure}[t]
+\begin{figure}[tbp]
 \centering
-\includegraphics[width=0.78\textwidth]{radar_profiles.png}
+\includegraphics[width=0.9\textwidth]{radar_profiles.png}
 \caption{Behavioral fingerprints of the four extreme profiles against
-the Generalist baseline (all features z-scored). Each profile is extreme
+the Generalist baseline (each feature min--max normalized to $[0,1]$
+across all players). Each profile is extreme
 on its own defining axis, and only mildly deviant elsewhere.}
 \label{fig:radar}
 \end{figure}
 
-\paragraph{Known confounds (retained as limitations).} Bridge is a
+Several \emph{known confounds} are retained as limitations. Bridge is a
 partnership game: part of an elevated slam rate may reflect an
 aggressive partner rather than the individual. The NT rate partly
 reflects the pair's bidding system (e.g.\ Precision opens 1NT on wider
@@ -511,7 +547,8 @@ auction with seats labeled, the final contract, and the numeric result:
 \begin{quote}\small\ttfamily
 Board 12 (Dealer N, Vul: NS)\\
 You are S (Declarer). Your hand: $\spadesuit$AKQ74 $\heartsuit$A8 $\diamondsuit$KQ95 $\clubsuit$K3\\
-Bidding: N:1D E:Pass S:1S W:Pass | N:3S E:Pass S:4NT W:Pass | N:5H E:Pass S:6S W:Pass ...\\
+Bidding: N:1D E:Pass S:1S W:Pass | N:3S E:Pass S:4NT W:Pass |\\
+\hspace*{4.5em}N:5H E:Pass S:6S W:Pass ...\\
 Result: 6S by S, made 12 tricks, NS +1430
 \end{quote}
 
@@ -554,8 +591,8 @@ profile's name, is carried by the inverse-prompt control
 % ==================================================================
 \section{Stage 3: Profile-Conditioned Agents}\label{sec:stage3}
 
-Each of the five agents (four profiles + Generalist control) is an LLM
-(\texttt{gemini-2.5-flash}) with a system prompt assembled from: (i) an
+Each of the five agents (four profiles plus the Generalist control) is
+an LLM (\texttt{gemini-2.5-flash}) whose system prompt is assembled from: (i) an
 identity line naming the profile and its one-line essence; (ii) the
 Stage-2 skill list, the only content derived from the player's actual
 record; (iii) domain rule constraints; and (iv) a mandatory JSON output
@@ -566,7 +603,7 @@ Sec.~\ref{sec:control} tests, by swapping only the skills while leaving
 every identity line in place. Bridge agents run at temperature 0.3
 (later 0.0), negotiation agents at 0.7.
 
-\paragraph{Mechanism check (one hand, five agents).} All five agents
+As a \emph{mechanism check}, all five agents
 received the same strong responding hand ($\spadesuit$AKQ72
 $\heartsuit$AK4 $\diamondsuit$A83 $\clubsuit$Q2, 22 HCP) after partner
 opened 1$\spadesuit$:
@@ -595,7 +632,8 @@ seat awareness, self-count of HCP) and re-ran: the mechanical errors
 disappeared while profile-consistent choices persisted. Both prompt
 versions are in the repository.
 
-\paragraph{Reproducibility of LLM agents.} Even at temperature 0 the
+A note on the \emph{reproducibility of LLM agents} is due here. Even at
+temperature 0 the
 API is not bit-reproducible (parallel floating-point reduction flips
 borderline decisions). We therefore (a) persist every raw model output,
 so all analyses are exactly reproducible from the archived JSON even if
@@ -631,9 +669,9 @@ $0$, and a double-dummy oracle \cite{ginsberg2001gib} at $+1.1$
 (Fig.~\ref{fig:spectrum}); the metric now orders random $<$ human
 $<$ omniscient, as any valid skill measure must.
 
-\begin{figure}[t]
+\begin{figure}[tbp]
 \centering
-\includegraphics[width=0.8\textwidth]{real_skill_spectrum.png}
+\includegraphics[width=\textwidth]{real_skill_spectrum.png}
 \caption{The validated skill spectrum: the ZI-C random baseline loses
 $\sim$7 IMP/board to the field; elite profiles cluster near the datum;
 the double-dummy oracle gains $+1.1$. A metric that cannot reproduce
@@ -673,9 +711,9 @@ anchor near the floor and hold; the cautious profiles drift up toward
 the seller. The instrument behaves as expected, which is what
 licenses its use on the non-trivial cross-domain question.
 
-\begin{figure}[t]
+\begin{figure}[tbp]
 \centering
-\includegraphics[width=0.85\textwidth]{negotiation_example.png}
+\includegraphics[width=\textwidth]{negotiation_example.png}
 \caption{One negotiation, five buyers (SaaS scenario: ask \$13M, fair
 value \$9M, floor \$8M; real run-0 offer trajectories). Aggressive
 bridge profiles anchor low and hold; cautious profiles concede upward.}
@@ -795,9 +833,9 @@ gate of Eq.~\ref{eq:gate} holds at $p<0.05$), and the inverse-prompt
 control (Sec.~\ref{sec:control}) is nominally significant on its own
 ($p=0.037$).
 
-\begin{figure}[t]
+\begin{figure}[tbp]
 \centering
-\includegraphics[width=0.8\textwidth]{style_alignment.png}
+\includegraphics[width=\textwidth]{style_alignment.png}
 \caption{Behavioral alignment: bridge-derived aggression (x) vs.\
 negotiation demand depth (y), $\rhoS=+0.80$.}
 \label{fig:style}
@@ -817,9 +855,9 @@ $\rhoS=\mathbf{-0.90}$ (two-sided $p=0.037$; Fig.~\ref{fig:control}). The
 $+0.80$ alignment is therefore \emph{skill-mediated}: it is carried by
 behavior extracted from real hands, not by the profile's name.
 
-\begin{figure}[t]
+\begin{figure}[tbp]
 \centering
-\includegraphics[width=0.8\textwidth]{style_transfer_control.png}
+\includegraphics[width=\textwidth]{style_transfer_control.png}
 \caption{Inverse-prompt control. Swapping each profile's bridge-derived
 skills (labels unchanged) flips the alignment from $+0.80$ to $-0.90$:
 the behavior follows the skills, not the label.}
@@ -829,7 +867,7 @@ the behavior follows the skills, not the label.}
 % ==================================================================
 \section{Discussion}\label{sec:discussion}
 
-\paragraph{Reading the pair of results.} The two findings are two sides
+The two findings are two sides
 of one coin. Decision \emph{style}, how much risk you demand and how hard you hold a position, is a property of the decision-maker and survives
 domain transfer ($+0.80$, controlled). \emph{Winning} is a property of
 the decision-maker \emph{jointly with} the environment's payoff
@@ -843,7 +881,28 @@ counterpart's style from observable past behavior is feasible and
 predictive of \emph{how} they will negotiate, not necessarily of who
 wins.
 
-\paragraph{Methodological exports.} Three components are reusable beyond
+What do these findings mean beyond the laboratory? First, the
+continuum result argues that elite decision-making style is
+\emph{dimensional} rather than typological: expert players differ by
+degree along a few interpretable axes, not by membership in discrete
+types. This parallels the move in personality psychology from types to
+traits, and it suggests that behavioral profiling in other expert
+domains should be built on graded axes with explicit significance
+gates rather than on clustering. Second, the transfer result says that
+what persists across domains is the \emph{shape} of a decision-maker's
+risk preference, how much is demanded and how firmly a position is
+held, rather than its payoff. For decision support this is the useful
+direction: a counterpart's past behavior in a structured, recorded
+domain is informative about how they will open and concede, even when
+it says little about who will win. Third, the control result shows
+that a language-model agent carries such a preference structure
+faithfully when, and only when, it is given behavioral content
+extracted from real records; the name of the profile contributed
+nothing measurable. That is both a methodological warning and an
+opportunity: persona-based simulations are only as good as the
+evidence behind the persona.
+
+Three components are \emph{methodological exports}, reusable beyond
 bridge: (i) the significance-gated tail-profiling recipe for
 low-base-rate behaviors (Eq.~\ref{eq:gate}); (ii) metric falsification
 by constrained-random baseline (a ZI-C agent must rank last, an oracle
@@ -851,7 +910,8 @@ first) before any cross-domain claim; (iii) evidence-grounded skill
 extraction plus an inverse-prompt control as an anti-tautology standard
 for LLM-persona experiments.
 
-\paragraph{Limitations.} With $K=5$ profiles, only near-perfect rank
+Several \emph{limitations} bound these conclusions. With $K=5$
+profiles, only near-perfect rank
 orderings ($|\rhoS|\ge0.9$) can clear $p<0.05$
 (Sec.~\ref{sec:style}); the observed alignment ($p=0.10$) is therefore
 an indication, and scaling the number of profiles (finer tail slices,
@@ -871,15 +931,19 @@ untested.
 % ==================================================================
 \section{Conclusions and Future Work}\label{sec:conclusion}
 
-We built and validated, end to end, a reproducible pipeline that turns
-149{,}208 real tournament records into statistically gated
-decision-making profiles, disentangles their behavioral content from
-their labels, instantiates them as LLM agents, and measures their
-behavior in a second, unrelated domain. The empirical yield: elite
-decision styles form a continuum whose tails are behaviorally real
-(Cohen's $d$ 2.1--4.6); their \emph{style} persists across domains
-($\rhoS=+0.80$; inverse control $-0.90$); their \emph{success} does not
-persist cleanly ($\rhoS\approx+0.2$ to $+0.5$).
+This paper asked whether a decision-making profile derived from a
+person's real bridge record persists when that profile, instantiated
+as an autonomous agent, negotiates in a business setting. Within the
+limits of a five-profile study, the answer is that the \emph{style}
+persists and the \emph{success} does not. Along the way the bridge
+record itself yielded a finding: elite decision styles form a
+continuum whose tails are behaviorally real (Cohen's $d$ 2.1--4.6).
+Those tails, once instantiated as agents, keep their risk signature in
+a new domain ($\rhoS=+0.80$; inverse control $-0.90$), while their
+winning record does not carry over cleanly ($\rhoS\approx+0.2$ to
+$+0.5$). The pipeline that produced these results, from 149{,}208
+tournament records to agents evaluated in two domains, is released in
+full so that the findings can be checked and extended.
 
 Three extensions are planned. \emph{Team negotiations:} multi-agent
 teams mixing profiles (e.g.\ a Fighter--Insurance buying team) to study
@@ -903,30 +967,9 @@ supplies the multi-criteria scenarios for the extension above, closing
 the loop the laboratory opened.
 
 % ==================================================================
-\section*{Reproducibility Statement}\label{sec:repro}
 
-All code, prompts, thresholds, seeds, and archived model outputs are at
-\url{https://github.com/annafr2/From-Bridge-Tables-to-Global-Markets}.
-Fixed constants: qualification $n\ge50$ declared and $\ge50$ bidding
-boards; percentile gate top 10\%; binomial gate $\alpha=0.05$
-(one-sided, SciPy \texttt{binomtest} \cite{virtanen2020scipy});
-cv-filter $0.10$; K-Means/GMM/HDBSCAN via scikit-learn
-\cite{pedregosa2011scikit} with \texttt{random\_state}=42; LLM chunking
-25 boards/call, $\le50$ boards/player, sampling seed 42; skill-merge
-TF--IDF threshold 0.40; temperatures 0.3 (extraction), 0.3/0.0 (bridge),
-0.7 (negotiation); seller rule: accept $\ge0.95\,P_{\mathrm{ask}}$,
-concede 15\% of gap/round, floor-bounded, $\le4$ rounds, walk-away after
-2 offers below $0.70\,P_{\mathrm{floor}}$. Result-to-script map: profiles (\texttt{src/stage1\_clustering/}); audit (\texttt{notebooks/preprocessing\_comparison.py}); validation (\texttt{notebooks/validate\_base\_rates.py}); skill spectrum and metrics (\texttt{notebooks/alignment\_real\_bridge.py}, \texttt{visualize\_real\_skill\_spectrum.py}); style alignment and control (\texttt{notebooks/style\_alignment.py}, \texttt{inverse\_prompt\_control.py}); negotiation calibration (\texttt{notebooks/validate\_negotiation\_features.py}). Environment:
-Python~3.11; scikit-learn, SciPy~1.11, pandas (versions pinned in
-\texttt{requirements.txt}); all LLM stages use
-\texttt{gemini-2.5-flash} through a single provider-agnostic client.
-Every LLM call is logged with model, token counts, and cost (total
-compute cost of all experiments: under \$10).
-Appendix~\ref{app:protocol} gives the numbered, end-to-end reproduction
-protocol.
-
-\section*{Acknowledgments}
-
+\begin{credits}
+\subsubsection*{\ackname}
 The author thanks her doctoral supervisors, Prof.\ Jari
 H\"am\"al\"ainen and Prof.\ Pekka Neittaanm\"aki (LUT University) and
 Dr.\ Nezer Jacob Zaidenberg, for their continuous guidance on the
@@ -940,71 +983,10 @@ object of study in Stages 2--4 and were additionally used for language
 polishing and as coding assistants; all scientific content, design
 choices, analyses, and conclusions are the author's own.
 
-% ==================================================================
-\appendix
-\section{Step-by-Step Reproduction Protocol}\label{app:protocol}
-
-The protocol below reproduces every table and figure in this paper.
-Steps 1--5 are fully deterministic (no API key, no cost). Steps 6--7
-and 10 call the LLM and are therefore \emph{distributionally}
-reproducible (Sec.~\ref{sec:stage3}); the raw model outputs of our runs
-ship in the repository, so steps 8--9 and 11 can be reproduced
-\emph{exactly} from the archive without re-querying any model.
-
-\begin{enumerate}
-  \item \textbf{Environment.} Clone
-  \url{https://github.com/annafr2/From-Bridge-Tables-to-Global-Markets};
-  create a Python~3.11 virtual environment; \texttt{pip install -r
-  requirements.txt}. For steps 6--7 only, set \texttt{GOOGLE\_API\_KEY}
-  in \texttt{.env}.
-  \item \textbf{Data check.} Load the corpus via
-  \texttt{src/shared/data\_loader.py}. Expected: 149{,}208 board-room
-  records; per-championship coverage as in Table~\ref{tab:data}.
-  \item \textbf{Stage 1: features and profiles.} Run the Stage-1
-  pipeline (\texttt{src/stage1\_clustering/}: \texttt{features.py} with
-  \texttt{MIN\_BOARDS}=50, then \texttt{extreme\_profiles.py} with
-  top-10\% cutoff and $\alpha=0.05$). Expected output:
-  \texttt{data/processed/player\_profiles.csv} with 563 rows and profile
-  counts 20/21/37/17/468 (Table~\ref{tab:profiles}).
-  \item \textbf{Cluster-structure audit.} \texttt{python -m
-  notebooks.preprocessing\_comparison}. Expected: the five
-  configurations of Table~\ref{tab:audit} (max silhouette 0.24; HDBSCAN
-  0 clusters) and \texttt{results/preprocessing.xlsx}.
-  \item \textbf{Profile validation.} \texttt{python -m
-  notebooks.validate\_base\_rates}. Expected: the effect sizes and
-  $p$-values of Table~\ref{tab:cohend}.
-  \item \textbf{Stage 2: skill extraction} (LLM; $\approx$\$1). Run
-  the extractor over all profiled players
-  (\texttt{src/stage2\_skills/}; chunks of 25 boards, $\le$50
-  boards/player, sampling seed 42, temperature 0.3,
-  \texttt{gemini-2.5-flash}); aggregate with TF--IDF merge threshold
-  0.40. Output: the per-profile skill signatures JSON.
-  \item \textbf{Stages 3--4: dual-domain simulation} (LLM;
-  $<$\$5). \texttt{python -m src.stage4\_simulate.bridge\_runner} and
-  \texttt{python -m src.stage4\_simulate.negotiation}. All raw agent
-  outputs are persisted under \texttt{results/stage4/}.
-  \item \textbf{Bridge skill metric and spectrum.} \texttt{python -m
-  notebooks.alignment\_real\_bridge} and \texttt{python -m
-  notebooks.visualize\_real\_skill\_spectrum}. Expected:
-  Fig.~\ref{fig:spectrum} and the win--win row of
-  Table~\ref{tab:sensitivity} ($\rhoS=+0.20$ on IMPs, $+0.50$ on raw
-  points).
-  \item \textbf{Style alignment.} \texttt{python -m
-  notebooks.style\_alignment}, recomputed from the archived Stage-4
-  logs with no new simulation. Expected, \emph{exactly}:
-  Table~\ref{tab:style} and Fig.~\ref{fig:style} ($\rhoS=+0.80$).
-  \item \textbf{Inverse-prompt control} (LLM; $<$\$1). \texttt{python
-  -m notebooks.inverse\_prompt\_control} re-runs the swapped-skill
-  negotiations with live model calls, so it reproduces
-  distributionally; the archived outputs behind Fig.~\ref{fig:control}
-  ($\rhoS=-0.90$) ship in the repository.
-  \item \textbf{Seller calibration.} \texttt{python -m
-  notebooks.validate\_negotiation\_features} against the
-  CraigslistBargain training split under \texttt{data/external/}.
-  Expected: 4{,}334 usable dialogues; aggressive opening captures more
-  surplus at a deal rate of $\approx0.83$ vs $0.86$
-  (Sec.~\ref{sec:nego}).
-\end{enumerate}
+\subsubsection*{\discintname}
+The author has no competing interests to declare that are relevant
+to the content of this article.
+\end{credits}
 
 % ==================================================================
 \begin{thebibliography}{99}\small
@@ -1233,5 +1215,107 @@ binomial.
 Biometrika \textbf{26}(4), 404--413 (1934)
 
 \end{thebibliography}
+
+% ==================================================================
+\appendix
+\section{Reproducibility of Results}\label{app:protocol}
+
+This appendix collects everything a reader needs to reproduce the
+numbers in the paper: the fixed constants and the software environment
+(Sec.~\ref{app:constants}), and a numbered, end-to-end protocol that
+maps each table and figure to the script that produces it and states
+the expected output of every step (Sec.~\ref{app:steps}).
+
+\subsection{Fixed Constants and Environment}\label{app:constants}
+
+All code, prompts, thresholds, seeds, and archived model outputs are in
+the public repository:
+\begin{center}\small
+\url{https://github.com/annafr2/From-Bridge-Tables-to-Global-Markets}
+\end{center}
+
+The fixed constants are: qualification $n\ge50$ declared and $\ge50$
+bidding boards; percentile gate top 10\%; binomial gate $\alpha=0.05$
+(one-sided, SciPy \texttt{binomtest} \cite{virtanen2020scipy});
+cv-filter $0.10$; K-Means/GMM/HDBSCAN via scikit-learn
+\cite{pedregosa2011scikit} with \texttt{random\_state}=42; LLM chunking
+25 boards/call, $\le50$ boards/player, sampling seed 42; skill-merge
+TF--IDF threshold 0.40; temperatures 0.3 (extraction), 0.3/0.0 (bridge),
+0.7 (negotiation); seller rule: accept $\ge0.95\,P_{\mathrm{ask}}$,
+concede 15\% of gap/round, floor-bounded, $\le4$ rounds, walk-away after
+2 offers below $0.70\,P_{\mathrm{floor}}$.
+
+The environment is Python~3.11 with scikit-learn, SciPy~1.11, and
+pandas (versions pinned in \texttt{requirements.txt}); all LLM stages
+use \texttt{gemini-2.5-flash} through a single provider-agnostic
+client. Every LLM call is logged with model, token counts, and cost;
+the total compute cost of all experiments was under \$10.
+
+\subsection{Step-by-Step Protocol}\label{app:steps}
+
+The protocol below reproduces every table and figure in this paper.
+Steps 1--5 are fully deterministic (no API key, no cost). Steps 6--7
+and 10 call the LLM and are therefore \emph{distributionally}
+reproducible (Sec.~\ref{sec:stage3}); the raw model outputs of our runs
+ship in the repository, so steps 8--9 and 11 can be reproduced
+\emph{exactly} from the archive without re-querying any model. Every
+command is run from the repository root.
+
+\begin{enumerate}
+  \item \textbf{Environment.} Clone the repository (URL in
+  Sec.~\ref{app:constants}); create a Python~3.11 virtual environment;
+  run \texttt{pip install -r requirements.txt}. For steps 6--7 and 10
+  only, set \texttt{GOOGLE\_API\_KEY} in \texttt{.env}.
+  \item \textbf{Data check.} Load the corpus via
+  \texttt{src/shared/data\_loader.py}.\\
+  Expected: 149{,}208 board-room records; per-championship coverage as
+  in Table~\ref{tab:data}.
+  \item \textbf{Stage 1: features and profiles.}\\
+  Run the Stage-1 pipeline in \texttt{src/stage1\_clustering/}: first
+  \texttt{features.py} (with \texttt{MIN\_BOARDS} $=50$), then
+  \texttt{extreme\_profiles.py} (top-10\% cutoff, $\alpha=0.05$).\\
+  Expected: \texttt{data/processed/player\_profiles.csv} with 563 rows
+  and profile counts 20/21/37/17/468 (Table~\ref{tab:profiles}).
+  \item \textbf{Cluster-structure audit.}\\
+  \texttt{python -m notebooks.preprocessing\_comparison}\\
+  Expected: the five configurations of Table~\ref{tab:audit} (max
+  silhouette 0.24; HDBSCAN 0 clusters) and
+  \texttt{results/preprocessing.xlsx}.
+  \item \textbf{Profile validation.}\\
+  \texttt{python -m notebooks.validate\_base\_rates}\\
+  Expected: the effect sizes and $p$-values of Table~\ref{tab:cohend}.
+  \item \textbf{Stage 2: skill extraction} (LLM; $\approx$\$1).\\
+  Run the extractor in \texttt{src/stage2\_skills/} over all profiled
+  players: chunks of 25 boards, at most 50 boards per player, sampling
+  seed 42, temperature 0.3, and the model \texttt{gemini-2.5-flash};
+  then aggregate with the TF--IDF merge threshold 0.40.\\
+  Output: the per-profile skill signatures JSON.
+  \item \textbf{Stages 3--4: dual-domain simulation} (LLM; $<$\$5).\\
+  \texttt{python -m src.stage4\_simulate.bridge\_runner}\\
+  \texttt{python -m src.stage4\_simulate.negotiation}\\
+  All raw agent outputs are persisted under \texttt{results/stage4/}.
+  \item \textbf{Bridge skill metric and spectrum.}\\
+  \texttt{python -m notebooks.alignment\_real\_bridge}\\
+  \texttt{python -m notebooks.visualize\_real\_skill\_spectrum}\\
+  Expected: Fig.~\ref{fig:spectrum} and the win--win row of
+  Table~\ref{tab:sensitivity} ($\rhoS=+0.20$ on IMPs, $+0.50$ on raw
+  points).
+  \item \textbf{Style alignment.}\\
+  \texttt{python -m notebooks.style\_alignment}\\
+  Recomputed from the archived Stage-4 logs with no new simulation.
+  Expected, \emph{exactly}: Table~\ref{tab:style} and
+  Fig.~\ref{fig:style} ($\rhoS=+0.80$).
+  \item \textbf{Inverse-prompt control} (LLM; $<$\$1).\\
+  \texttt{python -m notebooks.inverse\_prompt\_control}\\
+  Re-runs the swapped-skill negotiations with live model calls, so it
+  reproduces distributionally; the archived outputs behind
+  Fig.~\ref{fig:control} ($\rhoS=-0.90$) ship in the repository.
+  \item \textbf{Seller calibration.}\\
+  \texttt{python -m notebooks.validate\_negotiation\_features}\\
+  Runs against the CraigslistBargain training split under
+  \texttt{data/external/}. Expected: 4{,}334 usable dialogues;
+  aggressive opening captures more surplus at a deal rate of
+  $\approx0.83$ vs $0.86$ (Sec.~\ref{sec:nego}).
+\end{enumerate}
 
 \end{document}

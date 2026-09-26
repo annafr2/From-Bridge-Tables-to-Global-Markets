@@ -9,7 +9,7 @@ outcome-based), we correlate the **behavioural STYLE** directly:
   - Bridge aggression  = how aggressively the profile's real players bid
       (composite z-score of slam_rate + preempt_rate + penalty_double_rate).
   - Negotiation aggression = how aggressively the profile's AGENT bargains
-      (how low it opens/offers, from the saved negotiation logs — no LLM cost).
+      (how low it opens/offers, from the saved negotiation logs; no LLM cost).
 
 The thesis premise is that the *risk style* transfers: an aggressive bridge
 profile should bargain aggressively. This is a cleaner, lower-noise test than the
@@ -85,22 +85,27 @@ def main() -> None:
     }).sort_values("bridge_aggression", ascending=False).reset_index(drop=True)
     rho, p = spearmanr(df["bridge_aggression"], df["nego_aggression"])
 
-    fig, ax = plt.subplots(figsize=(9, 7))
+    # Sized for print: the paper places this at the LNCS text width (4.8 in),
+    # so fonts are set at their final size (>= 7.5 pt, Springer minimum 6 pt).
+    fig, ax = plt.subplots(figsize=(4.8, 3.9))
     for _, r in df.iterrows():
-        ax.scatter(r["bridge_aggression"], r["nego_aggression"], s=210,
+        ax.scatter(r["bridge_aggression"], r["nego_aggression"], s=90,
                    color=COLORS.get(r["profile"], "#333"), edgecolors="black", zorder=3)
         # Insurance Player and Generalist share y=0.666; drop one label below
-        off = {"Insurance Player": (8, -16)}.get(r["profile"], (8, 5))
+        off = {"Insurance Player": (6, -12)}.get(r["profile"], (6, 4))
         ax.annotate(r["profile"], (r["bridge_aggression"], r["nego_aggression"]),
-                    xytext=off, textcoords="offset points", fontsize=10)
-    ax.set_xlabel("Bridge aggression  (real bidding: slam + preempt + doubles, z-score)", fontsize=11)
-    ax.set_ylabel("Negotiation aggression  (how low the agent opens/offers)", fontsize=11)
-    ax.set_title(f"STYLE -> STYLE: does aggression transfer?\nSpearman ρ = {rho:+.2f}",
-                 fontweight="bold", fontsize=13)
+                    xytext=off, textcoords="offset points", fontsize=8)
+    ax.set_xlabel("Bridge aggression\n(real bidding: slam + preempt + doubles, z-score)",
+                  fontsize=8.5)
+    ax.set_ylabel("Negotiation aggression\n(how low the agent opens/offers)", fontsize=8.5)
+    ax.set_title(f"Style → style: does aggression transfer?\nSpearman ρ = {rho:+.2f}",
+                 fontweight="bold", fontsize=9.5)
+    ax.tick_params(labelsize=8)
+    ax.margins(x=0.15, y=0.12)   # keep the corner points' labels inside the axes
     ax.grid(alpha=0.3)
     fig.tight_layout()
     OUT.parent.mkdir(parents=True, exist_ok=True)
-    fig.savefig(OUT, dpi=150, bbox_inches="tight")
+    fig.savefig(OUT, dpi=300, bbox_inches="tight")
 
     print(df.round(3).to_string(index=False))
     print(f"\nStyle->style Spearman rho = {rho:+.3f} (p = {p:.3f}, n = {len(df)})")

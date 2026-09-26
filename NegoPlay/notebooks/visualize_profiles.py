@@ -4,11 +4,11 @@ notebooks/visualize_profiles.py
 Generate visualizations showing how players cluster into profiles.
 
 Produces 5 images saved to docs/images/:
-  1. pca_scatter.png    — PCA 2D scatter, coloured by profile
-  2. radar_profiles.png — Radar chart comparing the 5 profiles
-  3. feature_bars.png   — Side-by-side bar chart of key features
-  4. tsne_scatter.png   — t-SNE 2D scatter (visualization only — NOT evidence of clusters)
-  5. pca_variance.png   — PCA scree plot: how much variance each component explains
+  1. pca_scatter.png    : PCA 2D scatter, coloured by profile
+  2. radar_profiles.png : Radar chart comparing the 5 profiles
+  3. feature_bars.png   : Side-by-side bar chart of key features
+  4. tsne_scatter.png   : t-SNE 2D scatter (visualization only, NOT evidence of clusters)
+  5. pca_variance.png   : PCA scree plot: how much variance each component explains
 """
 
 import sys
@@ -63,9 +63,12 @@ PROFILE_MARKERS = {
 
 print("Loading data...")
 df = load_matches(DATA_PATH)
-features = compute_player_features(df, min_bidding_boards=20)
+# Same qualification as the paper (n >= 50 declared AND >= 50 bidding boards),
+# so the figures show exactly the 563-player profile set of Table 5.
+features = compute_player_features(df, min_bidding_boards=50)
 profiles = assign_extreme_profiles(features)
 print(f"Players: {len(profiles)}")
+print(profiles["profile"].value_counts().to_string())
 
 
 # ── 1. PCA scatter ────────────────────────────────────────────────────────────
@@ -94,16 +97,16 @@ for profile in order:
     )
 
 ax.set_xlabel(
-    f"PC1 — Bidding Height  ({pca.explained_variance_ratio_[0]*100:.0f}% variance)",
+    f"PC1: Bidding Height  ({pca.explained_variance_ratio_[0]*100:.0f}% variance)",
     fontsize=11,
 )
 ax.set_ylabel(
-    f"PC2 — Bidding Activity ({pca.explained_variance_ratio_[1]*100:.0f}% variance)",
+    f"PC2: Bidding Activity ({pca.explained_variance_ratio_[1]*100:.0f}% variance)",
     fontsize=11,
 )
 ax.set_title(
     "Elite Bridge Player Profiles in Behaviour Space\n"
-    "(PCA of 10 behavioural features, 807 players)",
+    f"(PCA of {len(FEATURE_COLS)} behavioural features, {len(profiles)} players)",
     fontsize=13, fontweight="bold", pad=12,
 )
 ax.legend(loc="upper right", fontsize=9, framealpha=0.9)
@@ -144,13 +147,15 @@ N = len(radar_features)
 angles = np.linspace(0, 2 * np.pi, N, endpoint=False).tolist()
 angles += angles[:1]   # close the polygon
 
-fig, ax = plt.subplots(figsize=(7, 7), subplot_kw={"polar": True})
+# Sized for print (the paper places it at ~4.3 in width): fonts are at their
+# final size, and the legend sits below the chart so the image stays square.
+fig, ax = plt.subplots(figsize=(4.6, 5.0), subplot_kw={"polar": True})
 fig.patch.set_facecolor("#FAFAFA")
 ax.set_facecolor("#FAFAFA")
 
 for profile in PROFILE_NAMES:
     values = means[profile] + means[profile][:1]
-    lw = 1.5 if profile == "Generalist" else 2.5
+    lw = 1.2 if profile == "Generalist" else 2.0
     ls = "--" if profile == "Generalist" else "-"
     ax.plot(angles, values, color=PROFILE_COLORS[profile],
             linewidth=lw, linestyle=ls, label=profile)
@@ -158,17 +163,18 @@ for profile in PROFILE_NAMES:
             alpha=0.08 if profile == "Generalist" else 0.15)
 
 ax.set_xticks(angles[:-1])
-ax.set_xticklabels(radar_labels, fontsize=10)
+ax.set_xticklabels(radar_labels, fontsize=9)
 ax.set_yticklabels([])
 ax.set_title(
     "Behavioural Fingerprints of 5 Player Profiles\n"
     "(values normalised to [0,1])",
-    fontsize=12, fontweight="bold", pad=20,
+    fontsize=10, fontweight="bold", pad=16,
 )
-ax.legend(loc="upper right", bbox_to_anchor=(1.3, 1.1), fontsize=9)
+ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.04), ncol=3,
+          fontsize=8, frameon=False)
 plt.tight_layout()
 path2 = os.path.join(OUT_DIR, "radar_profiles.png")
-plt.savefig(path2, dpi=150, bbox_inches="tight")
+plt.savefig(path2, dpi=300, bbox_inches="tight")
 plt.close()
 print(f"  Saved: {path2}")
 
@@ -263,7 +269,7 @@ ax.set_xlabel("t-SNE dimension 1", fontsize=11)
 ax.set_ylabel("t-SNE dimension 2", fontsize=11)
 ax.set_title(
     "t-SNE Visualization of Player Profiles\n"
-    "⚠️  For visualization only — not evidence of clusters",
+    "⚠️  For visualization only: not evidence of clusters",
     fontsize=13, fontweight="bold", pad=12,
 )
 ax.legend(loc="upper right", fontsize=9, framealpha=0.9)
@@ -322,7 +328,7 @@ ax1.text(3.6, max(explained) * 0.9, "← 3 components used",
          color="#27AE60", fontsize=9)
 
 ax1.set_title(
-    "PCA Scree Plot — How Much Variance Each Component Explains",
+    "PCA Scree Plot: How Much Variance Each Component Explains",
     fontsize=12, fontweight="bold", pad=10,
 )
 ax1.set_xticks(range(1, n_comp + 1))
@@ -339,8 +345,8 @@ print(f"  Saved: {path5}")
 
 
 print("\nDone! All 5 images saved to docs/images/")
-print(f"  1. pca_scatter.png   — PCA coloured by profile")
-print(f"  2. radar_profiles.png — behavioural fingerprints")
-print(f"  3. feature_bars.png  — key feature comparison")
-print(f"  4. tsne_scatter.png  — t-SNE layout (visualization only)")
-print(f"  5. pca_variance.png  — scree plot: variance per component")
+print("  1. pca_scatter.png   : PCA coloured by profile")
+print("  2. radar_profiles.png : behavioural fingerprints")
+print("  3. feature_bars.png  : key feature comparison")
+print("  4. tsne_scatter.png  : t-SNE layout (visualization only)")
+print("  5. pca_variance.png  : scree plot: variance per component")
