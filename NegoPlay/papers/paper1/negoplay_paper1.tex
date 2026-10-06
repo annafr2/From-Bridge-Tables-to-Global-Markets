@@ -131,8 +131,8 @@ profile's behavioral signature persist when the agent negotiates in a
 business setting?}
 \end{quote}
 
-We answer it with a four-stage pipeline (Fig.~\ref{fig:radar} through
-Fig.~\ref{fig:control}) and report both a positive result and an
+We answer it with a four-stage pipeline (Secs.~\ref{sec:stage1}
+to~\ref{sec:stage4}) and report both a positive result and an
 instructive negative one.
 
 The paper makes five contributions, stated here in the order in which
@@ -283,9 +283,10 @@ consistency check this literature calls for.
 
 The corpus was scraped from the public tournament archive of the
 European Bridge League (EBL) for five championships: Budapest 2016,
-Ostend 2018, Madeira 2022, Herning 2024, and Poznan 2025, each with
-Open, Women, and Senior categories, and a Mixed category from 2022
-onward. The unit of record is one board (deal) played in one room. In
+Ostend 2018, Madeira 2022, Herning 2024, and Poznan 2025. The
+categories covered are Open, Women, and Senior in 2016 and 2018; Open,
+Women, Senior, and Mixed in 2022 and 2024; and Open and Mixed in the
+2025 archive. The unit of record is one board (deal) played in one room. In
 team play every board is played twice, in an Open and a Closed room, by
 different pairs holding the same cards, so each deal yields two
 independent auctions and results; this duplicate structure is what
@@ -317,14 +318,23 @@ Each record carries four groups of fields: identity (championship,
 category, match, round, board, room); the four players seated in that
 room, recovered from the published seating diagrams; the deal itself,
 that is, the 52 cards by seat, where the EBL published them; and the
-auction as a seat-labeled string (for example \texttt{S:1C W:1D N:1S
-S:2C N:3NT}), followed by the contract, the declarer, a doubled marker,
-the number of tricks taken, and the score. To give one concrete record:
-on Board~10 of a Round-5 match at Herning~2024, North declared 3NT
-after exactly that auction, took nine tricks, and scored $+600$. Two
-quality flags mark whether the auction and the cards are present, and
-every analysis filters on the flag it needs rather than discarding
-partial records.
+auction as a seat-labeled string, four calls to a row starting from
+West, with \texttt{-} marking the seats before the dealer and
+\texttt{x} a double, followed by the contract, the declarer, a doubled
+marker, the number of tricks taken, and the score. One record, taken
+verbatim from the corpus, reads (dealer East, all vulnerable):
+
+\begin{quote}\small\ttfamily
+W:- N:- E:Pass S:1C | W:1D N:1S E:Pass S:2C |\\
+W:Pass N:3NT E:Pass S:Pass | W:Pass
+\end{quote}
+
+\noindent This is Board~10 of a Round-5 match in the Mixed category
+at Herning~2024, Open Room: South opened 1$\clubsuit$, West overcalled
+1$\diamondsuit$, North declared 3NT, took nine tricks, and scored
+$+600$. Two quality flags mark whether the auction and the cards are
+present, and every analysis filters on the flag it needs rather than
+discarding partial records.
 
 Coverage differs by championship for reasons of publication, not of
 play. Older EBL microsites do not expose machine-readable auctions, so
@@ -344,7 +354,7 @@ we collect no private or demographic information.
 % ==================================================================
 \section{Stage 1: Discovering Decision-Making Profiles}\label{sec:stage1}
 
-\subsection{Behavioral features}\label{sec:features}
+\subsection{Behavioral Features}\label{sec:features}
 
 For every player we compute per-player rates from two complementary
 families: \emph{outcome} features, derived from the final contract the
@@ -371,12 +381,12 @@ between-player signal and are excluded from structure analysis.}
 Family & Feature & Definition (per-player rate)\\
 \midrule
 A (outcome) & \texttt{slam\_rate}      & declared contracts at level 6--7\\
-A & \texttt{partscore\_rate} & declared contracts at levels 1--3 (safe stops)\\
+A & \texttt{partscore\_rate} & declared contracts at levels 1--3 (stopping low; a level-based proxy that counts 3NT as a stop)\\
 A & \texttt{nt\_rate}        & declared contracts in no-trump\\
 A & \texttt{double\_rate}    & own declared contracts doubled by opponents\\
 \midrule
 B (process) & \texttt{opening\_rate}      & boards where the player opened the auction\\
-B & \texttt{preempt\_rate}       & openings at level $\ge 2$ (obstructive)\\
+B & \texttt{preempt\_rate}       & openings at level $\ge 2$ (obstructive; also counts the strong 2$\clubsuit$ and 2NT openings)\\
 B & \texttt{intervention\_rate}  & entries into the opponents' auction\\
 B & \texttt{penalty\_double\_rate} & boards where the player doubled the
 opponents\footnotemark\\
@@ -393,7 +403,7 @@ opponent-dependent (being doubled requires the opponents' decision) and
 is therefore \emph{not} used as a profile-defining axis below; all four
 defining axes are the player's own actions.
 
-\subsection{Finding 1: a continuum, not clusters}\label{sec:continuum}
+\subsection{Finding 1: A Continuum, Not Clusters}\label{sec:continuum}
 
 To ensure that the absence of cluster structure is not an artefact of
 inadequate preprocessing, we ran a five-configuration audit before
@@ -436,7 +446,7 @@ styles, consistent with expertise research on maximal adaptation to task
 constraints among top performers \cite{ericsson1996expert}. Partitioning
 such data is the wrong operation; profiling its \emph{tails} is not.
 
-\subsection{Extreme-percentile profiling with a significance gate}\label{sec:profiles}
+\subsection{Extreme-Percentile Profiling with a Significance Gate}\label{sec:profiles}
 
 Let $x_{a}(i)$ be player $i$'s rate on defining axis $a$, with
 population mean $\mu_a$, standard deviation $s_a$, and z-score
@@ -497,7 +507,7 @@ Generalist       & 468 (83.1\%) & (baseline) & n/a & n/a & n/a & 117\\
 \end{tabular}
 \end{table}
 
-\subsection{Behavioral validation of the profiles}\label{sec:validation}
+\subsection{Behavioral Validation of the Profiles}\label{sec:validation}
 
 Are the profiles real behavior or a pipeline artefact? For each profile
 we measured its defining rate directly from the raw records (no clustering, no LLM) for a validation sample of five players per
@@ -544,9 +554,16 @@ on its own defining axis, and only mildly deviant elsewhere.}
 Several \emph{known confounds} are retained as limitations. Bridge is a
 partnership game: part of an elevated slam rate may reflect an
 aggressive partner rather than the individual. The NT rate partly
-reflects the pair's bidding system (e.g.\ Precision opens 1NT on wider
-ranges). The Insurance Player signal is the weakest ($1.20\times$) and
-may partly reflect hand-distribution variance. The Fighter is
+reflects the pair's bidding system (strong-club systems such as
+Precision open 1NT on a different point range). Two features are
+level-based proxies rather than strict bridge categories, and we keep
+them as computed for reproducibility: \texttt{partscore\_rate} counts
+3NT, a game contract, among the low stops, and \texttt{preempt\_rate}
+counts the strong 2$\clubsuit$ and 2NT openings, about a quarter of
+all openings at the two level or higher in this corpus, alongside the
+obstructive ones. The Insurance Player signal is the weakest
+($1.20\times$) and may partly reflect hand-distribution variance. The
+Fighter is
 methodologically the cleanest profile: doubling is a deliberate
 individual act, its denominator counts both sides of the table, and its
 base rate ($\sim$8.5\%) narrows confidence intervals quickly.
@@ -557,13 +574,16 @@ base rate ($\sim$8.5\%) narrows confidence intervals quickly.
 For each profiled player we sample up to 50 boards (deterministic,
 seed 42) and format them in chunks of 25 boards per LLM call. Each board
 is rendered as four compact lines, showing the player's 13 cards, the full
-auction with seats labeled, the final contract, and the numeric result:
+auction with seats labeled, the final contract, and the numeric result.
+A real board from the corpus (Herning~2024, Women, Round~19, Board~28)
+renders as:
 
 \begin{quote}\small\ttfamily
-Board 12 (Dealer N, Vul: NS)\\
-You are S (Declarer). Your hand: $\spadesuit$AKQ74 $\heartsuit$A8 $\diamondsuit$KQ95 $\clubsuit$K3\\
-Bidding: N:1D E:Pass S:1S W:Pass | N:3S E:Pass S:4NT W:Pass |\\
-\hspace*{4.5em}N:5H E:Pass S:6S W:Pass ...\\
+Board 28 (Dealer West, Vul: N-S)\\
+You are S (Declarer). Your hand: $\spadesuit$AK752 $\heartsuit$6 $\diamondsuit$AKQ $\clubsuit$QT74\\
+Bidding: W:Pass N:Pass E:Pass S:1S | W:Pass N:4C E:Pass S:4NT |\\
+\hspace*{4.5em}W:Pass N:5C E:x S:Pass | W:Pass N:5H E:Pass S:6C |\\
+\hspace*{4.5em}W:Pass N:6H E:Pass S:6S | W:Pass N:Pass E:Pass\\
 Result: 6S by S, made 12 tricks, NS +1430
 \end{quote}
 
@@ -618,34 +638,54 @@ Sec.~\ref{sec:control} tests, by swapping only the skills while leaving
 every identity line in place. Bridge agents run at temperature 0.3
 (later 0.0), negotiation agents at 0.7.
 
-As a \emph{mechanism check}, all five agents
-received the same strong responding hand ($\spadesuit$AKQ72
-$\heartsuit$AK4 $\diamondsuit$A83 $\clubsuit$Q2, 22 HCP) after partner
-opened 1$\spadesuit$:
+As a \emph{mechanism check}, all five agents received the same two
+hands under the final prompts (Table~\ref{tab:samehand}; the archived
+outputs are in \texttt{experiments/}). The first is a flat 12-point
+hand ($\spadesuit$KJ95 $\heartsuit$Q72 $\diamondsuit$KQ4
+$\clubsuit$J83) after the right-hand opponent opens 1$\heartsuit$: a
+competitive decision with no textbook answer. Here the call tracks the
+profile. The Insurance Player passes (``the safest option''), as does
+the Generalist (``not enough for a 1NT overcall, no five-card suit''),
+while the Fighter overcalls 1$\spadesuit$ on a four-card suit,
+``prioritizing competitive presence over strict suit-length
+requirements'', and the Slam Hunter and the NT Specialist also act.
+The second is a 22-point hand with five-card support ($\spadesuit$AKQ72
+$\heartsuit$AK4 $\diamondsuit$A83 $\clubsuit$Q2) after partner opens
+1$\spadesuit$, where the rules of the game leave little room: four of
+the five agents make the textbook game-forcing raise (Jacoby 2NT), and
+only the Generalist stops in 3NT. Where the rules decide, the profiles
+leave little trace; where they do not, the profile decides. That is
+the intended behavior of an agent built as rules first, style second.
 
 \begin{table}[h]
 \centering\small
-\caption{Same hand, five agents: the bid tracks the profile.}
+\caption{Same hands, five agents (final prompts). Where the rules
+leave room (left), the call tracks the profile; where they do not
+(right), the agents converge.}
 \label{tab:samehand}
-\begin{tabular}{lll}
+\begin{tabular}{lcc}
 \toprule
-Agent & Bid & Rationale gist (agent's own output)\\
+Agent & 12 HCP, after RHO's 1$\heartsuit$ & 22 HCP, after partner's 1$\spadesuit$\\
 \midrule
-Slam Hunter      & 4$\clubsuit$ & slam try; drives toward 6$\spadesuit$\\
-Fighter          & 2NT (Jacoby) & game-force, keeps slam in view\\
-NT Specialist    & 3NT          & prefers no-trump despite the fit\\
-Generalist       & 3NT          & standard value bid, no slam push\\
-Insurance Player & 4$\spadesuit$ & signs off in the safe game\\
+Slam Hunter      & 1$\spadesuit$ & 2NT (Jacoby)\\
+Fighter          & 1$\spadesuit$ & 2NT (Jacoby)\\
+NT Specialist    & 1$\spadesuit$ & 2NT (Jacoby)\\
+Generalist       & Pass          & 3NT\\
+Insurance Player & Pass          & 2NT (Jacoby)\\
 \bottomrule
 \end{tabular}
 \end{table}
 
-An expert pass over early outputs exposed bridge-mechanics errors
-(a ``splinter'' announced on a doubleton; a 1NT overcall on 12 HCP). We
-hardened the prompts with three rule blocks (convention correctness,
-seat awareness, self-count of HCP) and re-ran: the mechanical errors
-disappeared while profile-consistent choices persisted. Both prompt
-versions are in the repository.
+An expert pass over the \emph{first} outputs on these hands had
+exposed bridge-mechanics errors: on the slam hand the Slam Hunter
+announced a ``splinter'' (a bid that promises a singleton) while
+holding a doubleton, and on the competitive hand an agent overcalled
+1NT on 12 HCP. We hardened the prompts with three rule blocks
+(convention correctness, seat awareness, self-count of HCP) and
+re-ran. The convention-level errors disappeared; the price is the
+convergence visible on the slam hand, where the hardened agents all
+find the same correct call. Both prompt versions and all outputs are
+in the repository.
 
 A note on the \emph{reproducibility of LLM agents} is due here. Even at
 temperature 0 the
@@ -663,7 +703,7 @@ reproducibility}.
 Both domains use \emph{fixed, deterministic} counterparts, so that all
 between-agent variation is attributable to the profiles.
 
-\subsection{Bridge: metric falsification and a real-data skill measure}\label{sec:bridgemetric}
+\subsection{Bridge: Metric Falsification and a Real-Data Skill Measure}\label{sec:bridgemetric}
 
 Our first bridge score rewarded bidding the level implied by combined
 high-card points. We falsified it with a \textbf{ZI-C--style baseline}
@@ -694,7 +734,7 @@ this ordering is measuring the wrong thing.}
 \label{fig:spectrum}
 \end{figure}
 
-\subsection{Negotiation: protocol, calibration, and a trivial example first}\label{sec:nego}
+\subsection{Negotiation: Protocol, Calibration, and a Trivial Example First}\label{sec:nego}
 
 Each agent, acting as \emph{buyer}, negotiates four business scenarios (acquiring a SaaS startup; buying out a co-founder's equity; acquiring a competitor's customer book; and a multi-year enterprise licence), three runs each, against one fixed rule-based seller. The
 seller opens at its ask $P_{\mathrm{ask}}$, accepts any offer
@@ -760,7 +800,7 @@ stranger rather than aspirational.
 % ==================================================================
 \section{Results}\label{sec:results}
 
-\subsection{Winning does not transfer cleanly}\label{sec:winning}
+\subsection{Winning Does Not Transfer Cleanly}\label{sec:winning}
 
 We first correlated per-profile \emph{winning} in bridge with winning in
 negotiation (Spearman rank correlation over the $K=5$ profiles). The
@@ -792,7 +832,7 @@ style wins depends on the opponent and the payoff rules}: an over-harsh seller i
 winning$\leftrightarrow$winning is the wrong invariant to chase across
 domains.
 
-\subsection{Style transfers: behavioral alignment $\rhoS = +0.80$}\label{sec:style}
+\subsection{Style Transfers: Behavioral Alignment $\rhoS = +0.80$}\label{sec:style}
 
 The research question was always \emph{behavioral} alignment. Define
 bridge-side aggression of a profile as the mean composite z-score of its
@@ -856,7 +896,7 @@ negotiation demand depth (y), $\rhoS=+0.80$.}
 \label{fig:style}
 \end{figure}
 
-\subsection{The inverse-prompt control: $\rhoS = -0.90$}\label{sec:control}
+\subsection{The Inverse-Prompt Control: $\rhoS = -0.90$}\label{sec:control}
 
 Could the agents simply be acting out their names? Control: keep every
 identity line intact but inject the \emph{opposite} profile's Stage-2
