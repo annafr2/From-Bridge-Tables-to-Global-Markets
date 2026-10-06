@@ -303,10 +303,15 @@ Each record carries four groups of fields: identity (championship,
 category, match, round, board, room); the four players seated in that
 room, recovered from the published seating diagrams; the deal itself,
 that is, the 52 cards by seat, where the EBL published them; and the
-auction as a seat-labeled string, four calls to a row starting from
-West, with \texttt{-} marking the seats before the dealer and
-\texttt{x} a double, followed by the contract, the declarer, a doubled
-marker, the number of tricks taken, and the score. One record, taken
+auction, followed by the contract, the declarer, a doubled marker, the
+number of tricks taken, and the score. The auction is stored as a
+string of seat-labeled calls. Each item reads \texttt{seat:call}, where
+the seat is N, E, S, or W and the call is \texttt{Pass}, a bid (a
+level from 1 to 7 followed by the suit: \texttt{C} clubs, \texttt{D}
+diamonds, \texttt{H} hearts, \texttt{S} spades, or \texttt{NT} for no
+trump), or \texttt{x} for a double. Calls are listed four to a row
+starting from West, rows are separated by \texttt{|}, and \texttt{-}
+marks a seat whose turn came before the dealer's. One record, taken
 verbatim from the corpus, reads (dealer East, all vulnerable):
 
 \begin{quote}\small\ttfamily
@@ -314,12 +319,15 @@ W:- N:- E:Pass S:1C | W:1D N:1S E:Pass S:2C |\\
 W:Pass N:3NT E:Pass S:Pass | W:Pass
 \end{quote}
 
-\noindent This is Board~10 of a Round-5 match in the Mixed category
-at Herning~2024, Open Room: South opened 1$\clubsuit$, West overcalled
-1$\diamondsuit$, North declared 3NT, took nine tricks, and scored
-$+600$. Two quality flags mark whether the auction and the cards are
-present, and every analysis filters on the flag it needs rather than
-discarding partial records.
+\noindent Read from left to right: East passed, South opened one club
+(\texttt{1C}), West overcalled one diamond (\texttt{1D}), North bid
+one spade, East passed, South rebid two clubs, West passed, North
+jumped to three no trump (\texttt{3NT}), and the other three players
+passed, which ends the auction. This is Board~10 of a Round-5 match
+in the Mixed category at Herning~2024, Open Room: North played 3NT,
+took nine tricks, and scored $+600$. Two quality flags mark whether
+the auction and the cards are present, and every analysis filters on
+the flag it needs rather than discarding partial records.
 
 Coverage differs by championship for reasons of publication, not of
 play. Older EBL microsites do not expose machine-readable auctions, so
