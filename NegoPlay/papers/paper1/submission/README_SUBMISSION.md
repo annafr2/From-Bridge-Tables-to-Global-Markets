@@ -2,7 +2,9 @@
 
 **Chapter:** *From Bridge Tables to the Negotiation Table: Cross-Domain
 Behavioral Consistency of Game-Derived Decision-Making Profiles*
-**Author:** Anna Ben-Shushan (LUT University)
+**Authors:** Anna Ben-Shushan and Jari Hämäläinen (LUT University, Department
+of Computational Engineering); Pekka Neittaanmäki and Nezer Zaidenberg
+pending (asked 17 Oct 2026)
 **Volume:** *Recent Advances on Scientific Computing, AI, and Other
 Software Tools: a Commemorative Volume Dedicated to the 80th Jubilee of
 Prof. Olivier Pironneau* (OP80, Jyväskylä, 26–27 March 2026)
