@@ -22,11 +22,12 @@ the five profiles.
 
 **Fig. 2 (real_skill_spectrum.png)**
 Two stacked panels sharing one measure, average IMPs per board relative
-to the two-table datum. Top panel: a horizontal spectrum in which the
-random ZI-C-style baseline sits at the far left at about minus 7 IMP per
-board, the real elite players sit at zero, and the double-dummy oracle
-sits at the right at plus 1.1 IMP per board; the ordering random, then
-human, then omniscient validates the metric. Bottom panel: a zoom on the
+to the other table on the same board. Top panel: a horizontal spectrum
+in which the random ZI-C-style baseline sits at the far left at about
+minus 8 IMP per board, the real elite players sit at zero, and the
+double-dummy oracle sits at the right at plus 1.8 IMP per board; the
+ordering random, then human, then omniscient is the check the metric
+must pass. Bottom panel: a zoom on the
 five profiles, drawn as horizontal bars from zero: Slam Hunter plus 0.17,
 Fighter plus 0.08, Generalist plus 0.01, Insurance Player minus 0.01, NT
 Specialist minus 0.01.

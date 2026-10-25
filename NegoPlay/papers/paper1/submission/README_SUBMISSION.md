@@ -16,7 +16,7 @@ Prof. Olivier Pironneau* (OP80, Jyväskylä, 26–27 March 2026)
 | File | What it is |
 |---|---|
 | `negoplay_paper1_lncs.tex` | Manuscript source, Springer proceedings template (llncs) |
-| `negoplay_paper1_lncs.pdf` | Compiled PDF (24 pp., draft v3.1) |
+| `negoplay_paper1_lncs.pdf` | Compiled PDF (27 pp., draft v3.2) |
 | `llncs.cls`, `splncs04.bst` | Official Springer class files (from the Proceedings LaTeX2e package, v8) |
 | `radar_profiles.png` | Fig. 1 (separate file, as required) |
 | `real_skill_spectrum.png` | Fig. 2 |
@@ -33,6 +33,7 @@ text width; Springer's minimum is 6 pt) and saved at 300 dpi.
 ## Build
 
 ```
+python ../sync_lncs.py              (copies the text from ../negoplay_paper1.tex)
 xelatex negoplay_paper1_lncs.tex   (run 2–3 times for references)
 ```
 
@@ -47,7 +48,7 @@ xelatex negoplay_paper1_lncs.tex   (run 2–3 times for references)
    `\orcidID{...}` to the author line (see TODO comment in the .tex).
    Register free at orcid.org if not.
 3. **Page limit:** set by the volume editors, not Springer; confirm
-   with Tero/Jari that 24 template pages is acceptable.
+   with Tero/Jari that 27 template pages is acceptable.
 4. **Open access:** default (no fee) unless LUT wants to fund OA; if
    so, the volume editor must be told as early as possible.
 5. The License to Publish form will be provided by the volume editor;
@@ -62,7 +63,7 @@ xelatex negoplay_paper1_lncs.tex   (run 2–3 times for references)
 >
 > Please find attached my contribution to the OP80 commemorative volume,
 > prepared with the Springer proceedings LaTeX template: the manuscript
-> source, the compiled PDF (24 pages), all five figures as separate
+> source, the compiled PDF (27 pages), all five figures as separate
 > files, and alternative-text descriptions for the figures per the
 > accessibility guidelines. All figures and tables are the author's own
 > work; the chapter contains no third-party material requiring

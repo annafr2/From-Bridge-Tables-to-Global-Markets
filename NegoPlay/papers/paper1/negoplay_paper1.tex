@@ -68,29 +68,37 @@ Cross-Domain Behavioral Consistency of\\ Game-Derived Decision-Making Profiles}}
 Business negotiation is one of the most consequential forms of
 decision-making under uncertainty, yet it is difficult to study
 empirically: real negotiations are private, and no public dataset links
-how a person makes decisions in general to how they negotiate. We
+a long record of a person's actual decisions to how they negotiate. We
 propose contract bridge as a measurable laboratory. Bridge bidding is a
 structured sequence of decisions under incomplete information in which
 every action is recorded and scored, and the same player is observed
 across hundreds of comparable decision problems. From 149{,}208
-board-level records of five European championships (2016--2025) we show,
-first, that elite players form a statistical \emph{continuum} of styles
-rather than discrete clusters. We therefore identify the extremes of
-this continuum as four statistically validated decision-making
-profiles, and we turn each profile into an autonomous software agent
-whose behavior is grounded in the skills that a language model reads
-from that player's actual deals. The agents then play bridge and
-negotiate simulated business deals against fixed counterparts. Two
-findings emerge. Whether a profile wins in one domain says little about
-whether it wins in the other: winning depends on the opponent and on
-the rules of the game. How a profile behaves, however, carries over
-strongly: profiles that take risks at the bridge table make bolder
-demands at the negotiation table, and a control experiment that swaps
-the underlying skills between profiles reverses this relationship,
-showing that the behavior comes from the game-derived skills and not
-from the profile's name. The study is a validated feasibility result
-rather than a proof, and all data, code, and outputs are released so
-that every number in the paper can be reproduced.
+board-level records of five European championships (2016--2025) we
+find, first, that the behavioral features of elite players show no
+clearly separated clusters under any of five preprocessing
+configurations; styles are better described as a \emph{continuum}. We
+therefore identify the extremes of each behavioral axis as four
+decision-making profiles; a held-out test shows that these extremes
+are only weakly stable within a player's own record, so we treat the
+profiles as extreme records rather than as fixed traits. We turn each
+profile into an autonomous software agent whose behavior is grounded
+in the skills that a language model reads from the actual deals of
+players in that profile. The
+agents then play bridge and negotiate simulated business deals against
+fixed counterparts. Two findings emerge. Whether a profile wins in one
+domain says little about whether it wins in the other: winning depends
+on the opponent and on the rules of the game. How a profile behaves,
+however, is consistent across the two domains: agents of profiles whose
+players took more risks at the bridge table make bolder demands at the
+negotiation table, and a control experiment that swaps the underlying
+skills between profiles reverses this relationship, indicating that the
+behavior is carried by the game-derived skills rather than by the
+profile's name. These findings concern profile-conditioned software
+agents, not the human players themselves, and with five profiles they
+are effect-size indications rather than statistically significant
+results. The study is a feasibility result rather than a proof, and all
+data, code, and outputs are released so that every number in the paper
+can be reproduced.
 \end{abstract}
 
 \vspace{0.5em}
@@ -108,8 +116,11 @@ economic weight, negotiation behavior is hard to study at the level of
 the \emph{individual decision-maker}. Real negotiations are private and
 rarely recorded; the transcripts that are public (teaching cases,
 mediation examples) are edited and anonymized; and, most importantly, no
-public dataset links the \emph{same person's} general decision-making
-style to their observed negotiation behavior.
+public dataset links the \emph{same person's} decision-making style, as
+revealed by a long record of their actual decisions, to their observed
+negotiation behavior. The closest resource, the CaSiNo corpus, pairs
+negotiation dialogues with questionnaire-based personality scores rather
+than with behavioral records (Sec.~\ref{sec:related}).
 
 Contract bridge offers a way around this measurement problem. Bridge
 bidding is a formal negotiation-like protocol: partners exchange
@@ -139,11 +150,13 @@ instructive negative one.
 The paper makes five contributions, stated here in the order in which
 the reader meets them. The first is a negative result about the data
 itself: across five escalating preprocessing configurations and three
-algorithm families, elite championship players show no discrete cluster
-structure; they form a \emph{continuum} of styles
-(Sec.~\ref{sec:continuum}). To our knowledge this is the first
-systematic demonstration of style-space continuity at championship
-level, and it redirects the methodology. The second contribution
+algorithm families, the behavioral features of elite championship
+players show no clearly separated cluster structure
+(Sec.~\ref{sec:continuum}). We therefore treat style space as a
+\emph{continuum} for the purpose of profiling; the absence of detected
+clusters does not by itself prove that the underlying structure is
+continuous, but it redirects the methodology away from partitioning.
+The second contribution
 follows from it: we profile the \emph{tails} of the continuum with a
 statistically gated rule, under which a player is assigned to a profile
 only if they lie in the top decile of the profile's defining axis and a
@@ -157,20 +170,24 @@ player's raw deals and writes observable skills with per-deal evidence
 citations; it is directed to the profile's defining axis but never shown
 the engineered feature values, so every skill must be verifiable from
 the cited deals (Sec.~\ref{sec:stage2}). Fourth, we build a
-\emph{validated cross-domain testbed} in which profile-conditioned
-agents play bridge and negotiate against fixed, rule-based
-counterparts; the bridge metric is validated with a zero-intelligence
-baseline \cite{gode1993zi} and a double-dummy reference
-\cite{ginsberg2001gib}, and the negotiation counterpart is calibrated
-on 5{,}247 human bargaining dialogues \cite{he2018decoupling}
+\emph{cross-domain testbed} in which profile-conditioned agents play
+bridge and negotiate against fixed, rule-based counterparts; the bridge
+metric is checked against a zero-intelligence baseline
+\cite{gode1993zi} and a double-dummy reference \cite{ginsberg2001gib},
+and the shape of the negotiation counterpart is grounded in 5{,}247
+human bargaining dialogues \cite{he2018decoupling}
 (Sec.~\ref{sec:stage4}). The fifth contribution is the principal
-finding. Decision \emph{style} transfers strongly (behavioral alignment
-$\rhoS=+0.80$), and an inverse-prompt control that swaps the extracted
-skills between profiles flips the correlation to $\rhoS=-0.90$,
-demonstrating that the transfer is carried by the skills. Whether a
-style \emph{wins} in both domains is weak and metric-dependent
-($\rhoS\approx+0.2$ to $+0.5$): winning depends on the opponent and the
-payoff structure, behaving does not (Sec.~\ref{sec:results}).
+finding, which concerns the agents and not the human players: the
+agents' behavioral \emph{style} is consistent across the two domains
+(rank correlation $\rhoS=+0.80$ over the five profiles, an effect-size
+indication that cannot reach statistical significance with five
+points), and an inverse-prompt control that swaps the extracted skills
+between profiles reverses the relationship ($\rhoS=-0.90$), indicating
+that the consistency is carried by the skills rather than by the
+profile label. Whether a profile \emph{wins} in both domains shows no
+stable relationship ($\rhoS\approx+0.2$ to $+0.5$ depending on the
+metric): winning depends on the opponent and the payoff structure
+(Sec.~\ref{sec:results}).
 
 Throughout, we adhere to two methodological principles: every
 experimental condition needed to reproduce the study is stated
@@ -235,9 +252,9 @@ The \emph{zero-intelligence} tradition supplies our null model. Gode
 and Sunder showed that budget-constrained random traders (``ZI-C'')
 achieve high allocative efficiency, making them the canonical null
 model for market behavior \cite{gode1993zi}. We adopt a ZI-C-style
-bidder as the falsification baseline for our bridge skill metric: any
-metric that a constrained random agent can top is measuring structure,
-not skill.
+bidder as the falsification baseline for our bridge skill metric: a
+metric that a constrained random agent can top warrants scrutiny before
+it is used to measure skill.
 
 Our profiling method is a relative of \emph{archetypal analysis}, which
 represents data by its extreme points rather than by central prototypes
@@ -307,7 +324,7 @@ Championship & Rows & Player names & Card holdings & Bidding sequences\\
 Budapest 2016 & 38{,}240 & 100\% & 56\% & 0\%\\
 Ostend 2018   & 32{,}384 & 100\% & 53\% & 0\%\\
 Madeira 2022  & 32{,}256 & 100\% & 51\% & 0\%\\
-Herning 2024  & 34{,}048 & 100\% & 56\% & 100\%\\
+Herning 2024  & 34{,}048 & 100\% & 56\% & 99.7\%\\
 Poznan 2025   & 12{,}280 & 100\% & 51\% & 100\%\\
 \midrule
 Total & 149{,}208 & 99.9\% & 54\% & 31\% (46{,}230 sequences)\\
@@ -347,10 +364,12 @@ the flag it needs rather than discarding partial records.
 
 Coverage differs by championship for reasons of publication, not of
 play. Older EBL microsites do not expose machine-readable auctions, so
-bidding-dependent features use the 46{,}230 records (31\%,
-Table~\ref{tab:data}) of Herning~2024 and Poznan~2025, while contract
-and outcome features use all 149{,}208; card holdings are published
-for 54\% of boards. Cleaning is light and mechanical: contract strings
+bidding-dependent features use the 46{,}230 records of Herning~2024
+and Poznan~2025 that carry an auction (31\% of the corpus,
+Table~\ref{tab:data}; 98 Herning records, 0.3\%, were published with a
+result but without an auction and enter the outcome features only),
+while contract and outcome features use all 149{,}208; card holdings
+are published for 54\% of boards. Cleaning is light and mechanical: contract strings
 are parsed into level, strain, and doubled status; a contract is
 scored as made when the tricks taken reach the level plus six; and the
 declarer's name is resolved from seat and room. Three things the corpus
@@ -412,7 +431,7 @@ opponent-dependent (being doubled requires the opponents' decision) and
 is therefore \emph{not} used as a profile-defining axis below; all four
 defining axes are the player's own actions.
 
-\subsection{Finding 1: A Continuum, Not Clusters}\label{sec:continuum}
+\subsection{Finding 1: No Clearly Separated Clusters}\label{sec:continuum}
 
 To ensure that the absence of cluster structure is not an artefact of
 inadequate preprocessing, we ran a five-configuration audit before
@@ -449,11 +468,16 @@ density-based HDBSCAN, free of K-Means' convexity assumptions, labels \emph{all}
 (V2$\to$V3a: $0.24\to0.17$): outlier removal deletes precisely the
 extreme players who carry the weak signal. The PCA spectrum decays
 gradually (PC1 $=24.6\%$, PC2 $=19.1\%$, PC3 $=13.5\%$, \ldots) with no
-dominant component, the signature of a smooth distribution. We
-conclude that elite championship players occupy a \textbf{continuum} of
-styles, consistent with expertise research on maximal adaptation to task
-constraints among top performers \cite{ericsson1996expert}. Partitioning
-such data is the wrong operation; profiling its \emph{tails} is not.
+dominant component, which is compatible with a smooth distribution
+though not a proof of one. We conclude that, under the configurations
+investigated, the selected features do not separate elite championship
+players into distinct clusters, a picture consistent with expertise
+research on maximal adaptation to task constraints among top performers
+\cite{ericsson1996expert}. We therefore treat the style space as a
+\textbf{continuum} for the purpose of profiling, while noting that the
+absence of detected clusters does not by itself establish continuity.
+Partitioning such data is the wrong operation; profiling its
+\emph{tails} is a defensible alternative.
 
 \subsection{Extreme-Percentile Profiling with a Significance Gate}\label{sec:profiles}
 
@@ -491,11 +515,15 @@ declared boards. Version 2.1 raised the floor to 50 boards and added the
 binomial gate of Eq.~\eqref{eq:gate}: the cohort shrinks to 20 Slam
 Hunters whose median $n_{\mathrm{declared}}$ jumps from 42 to
 \textbf{216} and whose CI, $[6.3\%, 15.2\%]$, clears the baseline.
-Effect ratios become more conservative (e.g.\ $2.8\times\to1.84\times$), but every surviving assignment is statistically defensible. We
-report this revision openly as a reusable methodological recipe:
-\emph{for low-base-rate behaviors, a percentile cutoff alone
-manufactures false profiles; gate it with a significance test against
-the population rate.}
+Effect ratios become more conservative (e.g.\ $2.8\times\to1.84\times$),
+and every surviving assignment is individually distinguishable from the
+population rate at $p<0.05$. We report this revision openly as a
+reusable methodological recipe: \emph{for low-base-rate behaviors, a
+percentile cutoff alone manufactures false profiles; gate it with a
+significance test against the population rate.} The gate is, however,
+a per-player filter and not a corpus-level test; whether the resulting
+cohorts are stable behavior is a separate question, which
+Sec.~\ref{sec:validation} tests out of sample.
 
 \begin{table}[h]
 \centering\small
@@ -516,36 +544,73 @@ Generalist       & 468 (83.1\%) & (baseline) & n/a & n/a & n/a & 117\\
 \end{tabular}
 \end{table}
 
-\subsection{Behavioral Validation of the Profiles}\label{sec:validation}
+\subsection{Are the Profiles Stable Behavior? An Out-of-Sample Test}\label{sec:validation}
 
-Are the profiles real behavior or a pipeline artefact? For each profile
-we measured its defining rate directly from the raw records (no clustering, no LLM) for a validation sample of five players per
-profile against the Generalist baseline. Because Generalists are
-themselves elite players, this elite-vs-elite comparison is
-conservative. The ratios here differ from those of
-Table~\ref{tab:profiles} because the sample differs: there, the full
-profile cohorts; here, the five source players per profile whose hands
-feed Stage~2. All four profiles separate with very large effects
-(Table~\ref{tab:cohend}); Fig.~\ref{fig:radar} shows the behavioral
-fingerprints. Given the five-player validation samples, we read these
-$d$ values as descriptive of separation magnitude rather than as precise
-population estimates; the inferential weight is carried by the
-per-player binomial gates of Sec.~\ref{sec:profiles}.
+Are the profiles stable behavior or a selection artefact? Comparing
+profile members with Generalists on the defining measure, within the
+same data, cannot answer this: the members were selected for being
+extreme on that measure, so large separations are guaranteed by
+construction. An earlier draft reported such in-sample comparisons
+(Cohen's $d$ between 2.1 and 4.6); we withdraw them as evidence. The
+question needs data that played no part in the selection. We therefore
+split the corpus into two halves that share no board, assigned
+profiles on one half only, and measured the defining rates on the
+other half. The split is made at the level of whole matches (a seeded
+random half of the matches against the rest), which balances dealer,
+vulnerability, and opponents between the halves. A naive odd/even
+split by board number is not usable here: in duplicate bridge the
+dealer rotates with the board number, so one parity is always dealt by
+North or South and the other by East or West, which biases every
+seat-dependent rate (we verified that it produces spurious negative
+reliabilities). A player qualifies only with at least 50 declared and
+50 bidding boards in each half, the paper's own threshold, leaving 259
+players qualified in both halves.
+
+Table~\ref{tab:cohend} gives the result. On the held-out half, profile
+members exceed the Generalists by between 0 and 13 percent on their
+defining axis, with small effect sizes; only the Fighter reaches
+$p<0.05$, and the Insurance Player shows no out-of-sample difference at
+all. Profile membership is unstable: of the players assigned an extreme
+profile on one half, 4.8\% receive the same profile on the other half
+and 16.7\% any extreme profile, and 46\% of the published profile
+members are recovered from one half alone. The underlying per-player
+rates have low split-half reliability (Pearson $r$ between a player's
+rate on the two halves: slam 0.07, partscore 0.15, no-trump 0.08,
+penalty double 0.18, preempt 0.18, opening 0.23). A multiple-testing
+argument points the same way: the binomial gate is a per-player filter
+at $\alpha=0.05$, so among 563 players about 28 per axis would pass by
+chance, which is the order of the cohort sizes in
+Table~\ref{tab:profiles}. Each member's record is therefore
+individually distinguishable from the baseline, but the cohorts are not
+demonstrated stable traits of the players: they are \emph{extreme
+records} in this corpus. The 20 Stage-2 source players, whose hands
+seed the agents, are the high-volume end of the cohorts and fare
+better: all five Slam Hunters exceed the Generalist mean on both halves
+of their own boards, as do three of five Fighters and three of five NT
+Specialists, and two of five Insurance Players (the remaining players
+lack 50 boards in one half). Fig.~\ref{fig:radar} shows the in-sample
+behavioral fingerprints of the full cohorts, which are descriptive
+only. This result reframes what the rest of the paper can claim: the
+agents are grounded in real extreme records, and the findings about
+them are findings about agents, not about stable dispositions of the
+human players.
 
 \begin{table}[h]
 \centering\small
-\caption{Profile validation on raw data (one-sided Mann--Whitney U
-\cite{mann1947test}; Cohen's $d$ \cite{cohen1988statistical}; $d \ge
-0.8$ is conventionally ``large'').}
+\caption{Out-of-sample validation. Profiles are assigned on one half of
+the matches and the defining rates measured on the other half
+(one-sided Mann--Whitney U \cite{mann1947test}; Cohen's $d$
+\cite{cohen1988statistical}). $n$ counts members qualified in both
+halves; 217 Generalists form the comparison group.}
 \label{tab:cohend}
-\begin{tabular}{llccc}
+\begin{tabular}{llcccc}
 \toprule
-Profile & Defining metric & Ratio vs.\ Generalist & Cohen's $d$ & $p$\\
+Profile & Defining metric & $n$ & Ratio (held-out) & Cohen's $d$ & $p$\\
 \midrule
-Fighter          & \texttt{penalty\_double\_rate} & 1.31$\times$ & 2.13 & 0.016\\
-Insurance Player & \texttt{partscore\_rate}       & 1.24$\times$ & 3.30 & 0.004\\
-Slam Hunter      & \texttt{slam\_rate}            & 1.37$\times$ & 2.81 & 0.004\\
-NT Specialist    & \texttt{nt\_rate}              & 1.27$\times$ & 4.62 & 0.004\\
+Slam Hunter      & \texttt{slam\_rate}            & 12 & 1.11$\times$ & 0.27 & 0.11\\
+Insurance Player & \texttt{partscore\_rate}       &  7 & 1.00$\times$ & $-0.03$ & 0.43\\
+Fighter          & \texttt{penalty\_double\_rate} & 17 & 1.13$\times$ & 0.42 & 0.025\\
+NT Specialist    & \texttt{nt\_rate}              &  6 & 1.04$\times$ & 0.26 & 0.31\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -553,10 +618,11 @@ NT Specialist    & \texttt{nt\_rate}              & 1.27$\times$ & 4.62 & 0.004\
 \begin{figure}[tbp]
 \centering
 \includegraphics[width=0.9\textwidth]{radar_profiles.png}
-\caption{Behavioral fingerprints of the four extreme profiles against
-the Generalist baseline (each feature min--max normalized to $[0,1]$
-across all players). Each profile is extreme
-on its own defining axis, and only mildly deviant elsewhere.}
+\caption{In-sample behavioral fingerprints of the four extreme profiles
+against the Generalist baseline (each feature min--max normalized to
+$[0,1]$ across all players; descriptive only, see
+Sec.~\ref{sec:validation}). Each profile is extreme on its own defining
+axis, and only mildly deviant elsewhere.}
 \label{fig:radar}
 \end{figure}
 
@@ -568,11 +634,22 @@ Precision open 1NT on a different point range). Two features are
 level-based proxies rather than strict bridge categories, and we keep
 them as computed for reproducibility: \texttt{partscore\_rate} counts
 3NT, a game contract, among the low stops, and \texttt{preempt\_rate}
-counts the strong 2$\clubsuit$ and 2NT openings, about a quarter of
-all openings at the two level or higher in this corpus, alongside the
-obstructive ones. The Insurance Player signal is the weakest
-($1.20\times$) and may partly reflect hand-distribution variance. The
-Fighter is
+counts the strong 2$\clubsuit$ and 2NT openings (27.7\% of all
+openings at the two level or higher in this corpus) alongside the
+obstructive ones. We measured what changes under the strict bridge
+definitions (partscore: level 1--2, a suit contract at level 3, or
+4$\clubsuit$/4$\diamondsuit$; preempt: openings at level 2 or higher
+except 2$\clubsuit$ and 2NT; script in the repository). The Slam
+Hunter, Fighter, and NT Specialist cohorts are unchanged or nearly so
+(Jaccard overlap 1.00, 0.95, and 0.94), the bridge-aggression
+composite of Sec.~\ref{sec:style} gives the same $\rhoS=+0.80$ with the
+strict preempt definition, but the Insurance Player cohort is largely a
+different set of players under the strict partscore definition
+(overlap 0.14; four of its five Stage-2 source players lose the
+profile). The Insurance Player is therefore the fragile profile of
+this study: its signal is the weakest ($1.20\times$), it has no
+out-of-sample support (Sec.~\ref{sec:validation}), and it depends on
+the proxy definition. The Fighter is
 methodologically the cleanest profile: doubling is a deliberate
 individual act, its denominator counts both sides of the table, and its
 base rate ($\sim$8.5\%) narrows confidence intervals quickly.
@@ -580,8 +657,10 @@ base rate ($\sim$8.5\%) narrows confidence intervals quickly.
 % ==================================================================
 \section{Stage 2: Evidence-Grounded Skill Extraction}\label{sec:stage2}
 
-For each profiled player we sample up to 50 boards (deterministic,
-seed 42) and format them in chunks of 25 boards per LLM call. Each board
+Skill extraction runs on a Stage-2 sample of 20 players: five drawn at
+random (seed 42) from each of the four extreme profiles. For each of
+them we sample up to 50 boards (deterministic, seed 42) and format them
+in chunks of 25 boards per LLM call. Each board
 is rendered as four compact lines, showing the player's 13 cards, the full
 auction with seats labeled, the final contract, and the numeric result.
 A real board from the corpus (Herning~2024, Women, Round~19, Board~28)
@@ -608,9 +687,9 @@ bidding''); without such direction, rare defining behaviors drown under
 generic competitive-bidding observations. The model never receives the
 engineered feature values, the z-scores, or any comparative statistics:
 everything it asserts must cite specific deals as evidence, and
-Sec.~\ref{sec:validation} established, independently of any LLM, that
-the directed-to behaviors are genuinely present in these players'
-records. Whether downstream behavior follows skill content rather than
+Sec.~\ref{sec:validation} reports, independently of any LLM, how far
+the directed-to behaviors are present in these players' records in and
+out of sample. Whether downstream behavior follows skill content rather than
 profile identity is tested separately by the inverse-prompt control
 (Sec.~\ref{sec:control}).
 Skills are aggregated across chunks and players into a per-profile
@@ -719,27 +798,45 @@ high-card points. We falsified it with a \textbf{ZI-C--style baseline}
 in the spirit of Gode and Sunder's zero-intelligence constrained traders
 \cite{gode1993zi}: a bidder drawing uniformly from the legal calls
 \emph{beat the elite-derived agents} on this metric: the score
-rewarded stating the formula, not making the contract. Any metric a
-constrained random agent can top is broken; we discarded it.
+rewarded stating the formula, not making the contract. A metric that a
+constrained random agent can top deserves scrutiny; here the scrutiny
+showed that the score measured formula-following rather than
+contract-making, and we discarded it.
 
 The corrected measure uses the duplicate structure of the data itself
-(no simulation). Every board is played at two tables; define the board
-\emph{datum} as the cross-table mean score. A pair's skill on a board is
-its score minus the datum, converted to IMPs (the official non-linear
-scale that compresses extreme boards); player skill averages over a
-player's boards, profile skill over its players. Defensive excellence, including successful penalty doubles, scores automatically. On
-this scale the ZI-C bidder sits near $-7$ IMP/board, elite players near
-$0$, and a double-dummy oracle \cite{ginsberg2001gib} at $+1.1$
-(Fig.~\ref{fig:spectrum}); the metric now orders random $<$ human
-$<$ omniscient, as any valid skill measure must.
+(no simulation). Every board is played at two tables by different
+pairs holding the same cards. A pair's result on a board is the
+conventional team-of-four comparison: its score minus the score of the
+pair that held the same cards at the other table, converted to IMPs by
+the official scale, which compresses large swings. Scores are taken
+from the pair's own perspective, so a positive value means the pair
+did better than its counterpart on identical cards and zero means the
+two tables tied. A player's skill is the mean over the boards they
+played, a profile's skill the mean over its players. Defensive
+excellence, including successful penalty doubles, scores
+automatically. (A raw-points variant replaces the IMP conversion by
+the plain point difference from the two-table mean, that is, half the
+cross-table difference; Table~\ref{tab:sensitivity} reports both.) Two
+reference points are computed on the same 2{,}000 boards with
+published cards and scored in exactly the same way, against each real
+table and with the board's actual vulnerability: a ZI-C bidder that
+declares a uniformly random contract (any level from 1 to 7, any
+strain) and is scored at double-dummy, and a double-dummy oracle
+\cite{ginsberg2001gib} that declares the best contract available to
+the pair with full knowledge of all four hands. On this scale the ZI-C
+bidder sits at $-8.0$ IMP per board, elite players near $0$, and the
+oracle at $+1.8$ (Fig.~\ref{fig:spectrum}); the metric orders random
+$<$ human $<$ omniscient, as a skill measure must. This ordering is a
+necessary check on the metric, not a proof of its validity.
 
 \begin{figure}[tbp]
 \centering
 \includegraphics[width=\textwidth]{real_skill_spectrum.png}
-\caption{The validated skill spectrum: the ZI-C random baseline loses
-$\sim$7 IMP/board to the field; elite profiles cluster near the datum;
-the double-dummy oracle gains $+1.1$. A metric that cannot reproduce
-this ordering is measuring the wrong thing.}
+\caption{The skill spectrum used to check the metric: the ZI-C random
+baseline loses about 8 IMP per board to the real tables; elite
+profiles cluster near zero; the double-dummy oracle gains $+1.8$. A
+metric that cannot reproduce this ordering is measuring the wrong
+thing.}
 \label{fig:spectrum}
 \end{figure}
 
@@ -750,15 +847,25 @@ seller opens at its ask $P_{\mathrm{ask}}$, accepts any offer
 $\ge 0.95\,P_{\mathrm{ask}}$, otherwise concedes 15\% of the current gap
 per round, never below its floor $P_{\mathrm{floor}}$, for at most 4
 rounds; it walks away on the second ``absurd'' offer (below
-$0.70\,P_{\mathrm{floor}}$). These constants are not free parameters:
-they were calibrated on \textbf{5{,}247 human--human bargaining
-dialogues} of the CraigslistBargain corpus \cite{he2018decoupling}: crowdsourced negotiations between people over real Craigslist listings (the corpus' training split; 6{,}682 dialogues in total, of which 4{,}334 carry usable price fields). In that corpus
-aggressive lowballing captures more surplus while the deal rate barely
-drops ($\approx0.83$ vs $0.86$): human sellers tolerate hard bargaining
-and abandon only absurd offers. An
-earlier, harsher walk-away rule reversed the results by punishing all
-aggression; we document that sensitivity in
-Sec.~\ref{sec:winning}. The negotiation outcome
+$0.70\,P_{\mathrm{floor}}$). The \emph{shape} of this rule, tolerance
+of hard bargaining with walk-away reserved for absurd offers, is
+grounded in \textbf{5{,}247 human--human bargaining dialogues} of the
+CraigslistBargain corpus \cite{he2018decoupling}: crowdsourced
+negotiations between people over real Craigslist listings (the corpus'
+training split; 6{,}682 dialogues in total, of which 4{,}334 carry
+usable price fields). In that corpus aggressive lowballing captures
+more surplus while the deal rate barely drops ($\approx0.83$ vs
+$0.86$): human sellers tolerate hard bargaining and abandon only absurd
+offers. The numerical constants themselves (acceptance at 95\% of the
+ask, a 15\% concession of the remaining gap, the 0.70 floor multiple,
+two absurd offers, four rounds) are design choices held fixed for every
+agent; they are not estimated from the corpus, which concerns
+second-hand consumer goods rather than corporate acquisitions. We rely
+on the corpus only for the qualitative shape of seller tolerance, and
+all scenario quantities below are ratios, so the absolute price scale
+of a scenario plays no role. An earlier, harsher walk-away rule
+reversed the results by punishing all aggression; we document that
+sensitivity in Sec.~\ref{sec:winning}. The negotiation outcome
 is the \emph{surplus captured},
 $\sigma = (P_{\mathrm{ask}}-P_{\mathrm{deal}})/
 (P_{\mathrm{ask}}-P_{\mathrm{floor}})\in[0,1]$, zero if no deal. All
@@ -809,21 +916,27 @@ stranger rather than aspirational.
 % ==================================================================
 \section{Results}\label{sec:results}
 
-\subsection{Winning Does Not Transfer Cleanly}\label{sec:winning}
+\subsection{Winning Shows No Stable Cross-Domain Relationship}\label{sec:winning}
 
-We first correlated per-profile \emph{winning} in bridge with winning in
-negotiation (Spearman rank correlation over the $K=5$ profiles). The
-answer depends on the bridge metric
+We first correlated, per profile, the \emph{winning} record of the
+profile's human players in bridge (the real-data measure of
+Sec.~\ref{sec:bridgemetric}) with the winning of the profile's agent in
+negotiation (Spearman rank correlation over the $K=5$ profiles). This
+asks whether the human success of a profile's players predicts its
+agent's success; it does not test whether one and the same agent wins
+in both domains, since our agents do not play complete deals against
+the field. The answer depends on the bridge metric
 (Table~\ref{tab:sensitivity}): the discarded par-proxy gives
 $\rhoS=+0.30$; a fight-aware blend rises monotonically with the weight
-on doubling; the validated real-data IMP metric gives $\rhoS=+0.20$,
+on doubling; the real-data IMP metric that passed the baseline check gives $\rhoS=+0.20$,
 with $+0.50$ under a raw-points robustness variant. With
 $K=5$, none is significant.
 
 \begin{table}[h]
 \centering\small
 \caption{Winning$\leftrightarrow$winning is metric-sensitive.
-The final row is the validated metric of Sec.~\ref{sec:bridgemetric}.}
+The final row is the metric of Sec.~\ref{sec:bridgemetric} that passed
+the baseline check.}
 \label{tab:sensitivity}
 \begin{tabular}{lc}
 \toprule
@@ -831,7 +944,7 @@ Bridge-side metric & $\rhoS$ (win vs.\ win, $K=5$)\\
 \midrule
 Par-level proxy (falsified by ZI-C) & $+0.30$\\
 Fight-aware blend, weight $w=0.2 / 0.3 / 0.4$ & $+0.60\; /\; +0.70\; /\; +0.90$\\
-Real-data IMP-vs-datum (validated) & $\mathbf{+0.20}$\\
+Real-data table-vs-table IMP (passed the baseline check) & $\mathbf{+0.20}$\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -841,61 +954,83 @@ style wins depends on the opponent and the payoff rules}: an over-harsh seller i
 winning$\leftrightarrow$winning is the wrong invariant to chase across
 domains.
 
-\subsection{Style Transfers: Behavioral Alignment $\rhoS = +0.80$}\label{sec:style}
+\subsection{Behavioral Consistency of the Agents: $\rhoS = +0.80$}\label{sec:style}
 
-The research question was always \emph{behavioral} alignment. Define
-bridge-side aggression of a profile as the mean composite z-score of its
-members on the three action axes
-$\{$\texttt{slam\_rate}, \texttt{preempt\_rate},
-\texttt{penalty\_double\_rate}$\}$, and negotiation-side aggression as
-\emph{demand depth}: how far below the ask the agent's opening offer
-reaches,
+The research question was always \emph{behavioral} alignment. Three
+terms are used with fixed meanings from here on: \emph{aggression} is
+the bridge-side composite defined next, \emph{demand depth} is the
+negotiation-side measure, and \emph{style} is the pattern the two
+jointly describe; risk-taking is used only informally. Define the
+bridge-side aggression of a profile as the mean composite z-score of
+its members on the three action axes $\{$\texttt{slam\_rate},
+\texttt{preempt\_rate}, \texttt{penalty\_double\_rate}$\}$ (each
+z-scored across the five profile means), and the demand depth of an
+offer as how far below the ask it reaches,
 \begin{equation}
-\theta \;=\; \frac{P_{\mathrm{ask}} - P_{\mathrm{open}}^{\mathrm{buyer}}}
+\theta \;=\; \frac{P_{\mathrm{ask}} - P_{\mathrm{offer}}}
 {P_{\mathrm{ask}} - P_{\mathrm{floor}}}\;,
 \label{eq:theta}
 \end{equation}
-averaged over scenarios and runs (from the archived logs; no new
-simulation). Demand depth operationalizes first-offer aggressiveness,
-whose anchoring effect on negotiation outcomes is well documented
-\cite{galinsky2001first}.
+so that $\theta=0$ is an offer at the ask and $\theta=1$ an offer at the
+seller's floor. A profile's $\theta$ is the mean over every
+counter-offer its agent made in its 12 negotiations (four scenarios,
+three runs, up to four offers each), computed from the archived logs
+with no new simulation. First-offer anchoring is well documented
+\cite{galinsky2001first}; here, however, the opening offers of all five
+agents are uniformly aggressive ($\theta$ of the first offer between
+$0.85$ and $0.95$), and using the opening offer alone gives only
+$\rhoS=+0.40$. The profiles separate in how the agents hold or concede
+over the subsequent rounds, which is what the all-offer mean captures;
+we report both so that the reader can see the dependence on this
+choice.
 
 \begin{table}[h]
 \centering\small
-\caption{Style$\leftrightarrow$style alignment across domains.}
+\caption{Behavioral consistency across domains. $\theta$ is the mean
+over all offers, with the standard deviation across the profile's 12
+negotiations.}
 \label{tab:style}
 \begin{tabular}{lcc}
 \toprule
-Profile & Bridge aggression (z) & Negotiation demand depth $\theta$\\
+Profile & Bridge aggression (z) & Negotiation demand depth $\theta$ (mean $\pm$ SD)\\
 \midrule
-Fighter          & $+1.30$ & 0.808\\
-Slam Hunter      & $+0.51$ & 0.760\\
-NT Specialist    & $-0.36$ & 0.771\\
-Generalist       & $-0.69$ & 0.666\\
-Insurance Player & $-0.77$ & 0.666\\
+Fighter          & $+1.30$ & $0.808 \pm 0.114$\\
+Slam Hunter      & $+0.51$ & $0.760 \pm 0.145$\\
+NT Specialist    & $-0.36$ & $0.771 \pm 0.085$\\
+Generalist       & $-0.69$ & $0.666 \pm 0.074$\\
+Insurance Player & $-0.77$ & $0.666 \pm 0.078$\\
 \midrule
-\multicolumn{3}{c}{Spearman $\rhoS = \mathbf{+0.80}$ \; (two-sided $p=0.10$, $K=5$)}\\
+\multicolumn{3}{c}{Spearman $\rhoS = \mathbf{+0.80}$ \; (exact two-sided permutation $p=0.133$, $K=5$)}\\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Aggressive bridge profiles bargain aggressively; cautious ones bargain
-softly (Fig.~\ref{fig:style}). The one rank inversion (NT Specialist
-above Slam Hunter on $\theta$) is what caps $\rhoS$ at $0.80$ rather than $1.0$; this is expected, since the NT axis is stylistic rather than
-directly risk-graded.
+Agents of aggressive bridge profiles bargain more aggressively; agents
+of cautious ones bargain more softly (Fig.~\ref{fig:style}). The one
+rank inversion (NT Specialist above Slam Hunter on $\theta$) is what
+caps $\rhoS$ at $0.80$ rather than $1.0$; this is unsurprising, since
+the NT axis is stylistic rather than directly risk-graded. The
+between-profile differences in $\theta$ are of the same order as the
+within-profile standard deviations across negotiations, which is
+another reason to read the ranking as an indication rather than a
+precise estimate.
 
 A note on inference is due here rather than in the limitations. With
-$K=5$, the permutation null admits only $5!=120$ orderings, so the
-smallest attainable two-sided $p$ is $0.017$, and only near-perfect
-rankings ($|\rhoS|\ge0.9$) clear the conventional $0.05$ threshold; the
-observed $+0.80$ sits exactly one adjacent rank swap short of that, at
-$p=0.10$. We therefore make no significance claim for the alignment
-itself and read $+0.80$ as an effect-size indication whose inferential
-support comes from converging evidence: the profile foundations are
-individually significant (Table~\ref{tab:cohend}, and every assignment
-gate of Eq.~\ref{eq:gate} holds at $p<0.05$), and the inverse-prompt
-control (Sec.~\ref{sec:control}) is nominally significant on its own
-($p=0.037$).
+$K=5$, the permutation null admits only $5!=120$ orderings of one
+variable against the other. Enumerating all of them (ties handled by
+average ranks; the script is in the repository) gives the exact
+two-sided $p$-values: $0.017$ for a perfect ranking ($|\rhoS|=1$),
+$0.083$ for $|\rhoS|=0.9$, and $0.133$ for the observed
+$|\rhoS|=0.8$. The asymptotic approximation that statistical software
+reports by default ($p=0.10$ and $0.037$ for the two correlations of
+this paper) is not valid at this sample size, and an earlier draft of
+this paper used it. No correlation in this paper is therefore
+statistically significant on its own, including the inverse-prompt
+control of Sec.~\ref{sec:control}. We read $+0.80$ and $-0.90$ as
+effect-size indications whose weight comes from the pattern rather than
+from a $p$-value: a near-perfect ranking under the matched skills that
+reverses under swapped skills while every label stays fixed. Raising
+$K$ (finer tail slices, per-player agents) is the direct fix.
 
 \begin{figure}[tbp]
 \centering
@@ -915,9 +1050,15 @@ change; if it follows the skills, the correlation should invert. It
 inverts: the Fighter with Insurance skills softens
 ($\theta: 0.808\to0.725$), the Insurance Player with Fighter skills
 hardens ($0.666\to0.805$), and the cross-domain correlation flips to
-$\rhoS=\mathbf{-0.90}$ (two-sided $p=0.037$; Fig.~\ref{fig:control}). The
-$+0.80$ alignment is therefore \emph{skill-mediated}: it is carried by
-behavior extracted from real hands, not by the profile's name.
+$\rhoS=\mathbf{-0.90}$ (exact two-sided $p=0.083$;
+Fig.~\ref{fig:control}). The alignment is therefore mediated by the
+skill content: swapping it reverses the ranking while every label stays
+fixed. The control shows that the skill descriptions drive the measured
+behavior; it does not show that descriptions extracted from real hands
+are \emph{necessary} for it. The conditions that would test necessity,
+labels alone, generic instructions to be aggressive or cautious, and
+randomized skill lists, were not run; they are the first item of future
+work (Sec.~\ref{sec:discussion}).
 
 \begin{figure}[tbp]
 \centering
@@ -931,19 +1072,20 @@ the behavior follows the skills, not the label.}
 % ==================================================================
 \section{Discussion}\label{sec:discussion}
 
-The two findings are two sides
-of one coin. Decision \emph{style}, how much risk you demand and how hard you hold a position, is a property of the decision-maker and survives
-domain transfer ($+0.80$, controlled). \emph{Winning} is a property of
-the decision-maker \emph{jointly with} the environment's payoff
-structure and counterpart, and does not transfer stably ($+0.2$ to
-$+0.5$, sign-reversible under an unrealistic counterpart). In
-optimization terms: the agents carry a stable preference structure over
-the risk--reward trade-off into a new decision problem, while the
+The two findings are two sides of one coin. In our agents, decision
+\emph{style}, how much is demanded and how firmly a position is held,
+is consistent across the two domains ($+0.80$, with the skill-swap
+control). \emph{Winning} is a property of the decision-maker
+\emph{jointly with} the environment's payoff structure and counterpart,
+and shows no stable relationship across the domains ($+0.2$ to $+0.5$,
+sign-reversible under an unrealistic counterpart). In optimization
+terms: the agents carry a stable preference structure over the
+risk--reward trade-off into a new decision problem, while the
 \emph{value} of that preference structure depends on the objective
-landscape it meets. This distinction matters practically: profiling a
-counterpart's style from observable past behavior is feasible and
-predictive of \emph{how} they will negotiate, not necessarily of who
-wins.
+landscape it meets. If the pattern holds for humans, which this study
+does not test, profiling a counterpart's style from observable past
+behavior would be informative about \emph{how} they negotiate rather
+than about who wins.
 
 What do these findings mean beyond the laboratory? First, the
 continuum result argues that elite decision-making style is
@@ -952,37 +1094,52 @@ degree along a few interpretable axes, not by membership in discrete
 types. This parallels the move in personality psychology from types to
 traits, and it suggests that behavioral profiling in other expert
 domains should be built on graded axes with explicit significance
-gates rather than on clustering. Second, the transfer result says that
+gates rather than on clustering, and then tested out of sample, since
+in-sample separation is guaranteed by the selection itself
+(Sec.~\ref{sec:validation}). Our own out-of-sample test shows how much
+of an apparent profile can be noise when the behavior is rare and the
+record per person is a few hundred decisions. Second, the transfer result says that
 what persists across domains is the \emph{shape} of a decision-maker's
 risk preference, how much is demanded and how firmly a position is
 held, rather than its payoff. For decision support this is the useful
 direction: a counterpart's past behavior in a structured, recorded
 domain is informative about how they will open and concede, even when
 it says little about who will win. Third, the control result shows
-that a language-model agent carries such a preference structure
-faithfully when, and only when, it is given behavioral content
-extracted from real records; the name of the profile contributed
-nothing measurable. That is both a methodological warning and an
-opportunity: persona-based simulations are only as good as the
-evidence behind the persona.
+that the behavior of a language-model agent followed the behavioral
+content it was given rather than the profile label; whether content
+extracted from real records is necessary, as opposed to any
+sufficiently specific behavioral instruction, remains to be tested.
+That is both a methodological warning and an opportunity: persona-based
+simulations are only as good as the evidence behind the persona.
 
 Three components are \emph{methodological exports}, reusable beyond
 bridge: (i) the significance-gated tail-profiling recipe for
-low-base-rate behaviors (Eq.~\ref{eq:gate}); (ii) metric falsification
+low-base-rate behaviors (Eq.~\ref{eq:gate}), together with the
+out-of-sample test that must accompany it; (ii) metric falsification
 by constrained-random baseline (a ZI-C agent must rank last, an oracle
 first) before any cross-domain claim; (iii) evidence-grounded skill
 extraction plus an inverse-prompt control as an anti-tautology standard
 for LLM-persona experiments.
 
 Several \emph{limitations} bound these conclusions. With $K=5$
-profiles, only near-perfect rank
-orderings ($|\rhoS|\ge0.9$) can clear $p<0.05$
-(Sec.~\ref{sec:style}); the observed alignment ($p=0.10$) is therefore
-an indication, and scaling the number of profiles (finer tail slices,
-per-player agents) is the direct fix. The negotiation domain is
-simulated: the counterpart is rule-based (though data-calibrated), the
-scenarios are single-issue price negotiations, and surplus is the sole
-outcome. Bridge-side confounds remain (partnership effects on
+profiles no rank correlation short of a perfect one can clear $p<0.05$
+(Sec.~\ref{sec:style}); the observed alignment ($p=0.133$) and its
+reversal under the control ($p=0.083$) are therefore indications, and
+scaling the number of profiles (finer tail slices, per-player agents)
+is the direct fix. The profiles themselves are extreme records rather
+than demonstrated stable traits (Sec.~\ref{sec:validation}), and the
+Insurance Player profile in particular has no out-of-sample support
+and depends on a proxy definition. The control experiment shows that
+the skill content drives the agents' behavior but not that content
+extracted from real hands is necessary; the conditions that would test
+this (labels alone, generic aggression or caution instructions,
+randomized skill lists) were not run. The negotiation domain is
+simulated and small: a rule-based counterpart with hand-set constants
+whose shape, not whose values, is grounded in human data, four
+single-issue price scenarios with three runs each, and surplus as the
+sole outcome; the between-profile differences in demand depth are of
+the same order as the within-profile variation across negotiations.
+Bridge-side confounds remain (partnership effects on
 \texttt{slam\_rate}; convention systems on \texttt{nt\_rate}). The skill
 extractor and the agents share one model family (Gemini), so
 provider-specific behavior cannot yet be ruled out; the
@@ -998,16 +1155,23 @@ untested.
 This paper asked whether a decision-making profile derived from a
 person's real bridge record persists when that profile, instantiated
 as an autonomous agent, negotiates in a business setting. Within the
-limits of a five-profile study, the answer is that the \emph{style}
-persists and the \emph{success} does not. Along the way the bridge
-record itself yielded a finding: elite decision styles form a
-continuum whose tails are behaviorally real (Cohen's $d$ 2.1--4.6).
-Those tails, once instantiated as agents, keep their risk signature in
-a new domain ($\rhoS=+0.80$; inverse control $-0.90$), while their
-winning record does not carry over cleanly ($\rhoS\approx+0.2$ to
-$+0.5$). The pipeline that produced these results, from 149{,}208
-tournament records to agents evaluated in two domains, is released in
-full so that the findings can be checked and extended.
+limits of a five-profile study of simulated agents, the answer is that
+the \emph{style} is consistent across the two domains and the
+\emph{success} is not. Along the way the bridge record itself yielded
+two cautionary findings: the behavioral features of elite players show
+no clearly separated clusters, and the extreme profiles, although each
+member's record is individually distinguishable from the baseline, are
+only weakly stable out of sample (held-out ratios between 1.00 and
+1.13; split-half reliabilities between 0.07 and 0.23). The profiles
+are therefore extreme records that seed the agents, not demonstrated
+traits of the players. The agents built from those records show a
+consistent risk signature across domains ($\rhoS=+0.80$; inverse
+control $-0.90$; neither significant with five profiles), while the
+human winning record of the profiles does not predict the agents'
+winning in negotiation ($\rhoS\approx+0.2$ to $+0.5$). The pipeline
+that produced these results, from 149{,}208 tournament records to
+agents evaluated in two domains, is released in full so that the
+findings can be checked and extended.
 
 Three extensions are planned. \emph{Team negotiations:} multi-agent
 teams mixing profiles (e.g.\ a Fighter--Insurance buying team) to study
@@ -1321,17 +1485,19 @@ the total compute cost of all experiments was under \$10.
 \subsection{Step-by-Step Protocol}\label{app:steps}
 
 The protocol below reproduces every table and figure in this paper.
-Steps 1--5 are fully deterministic (no API key, no cost). Steps 6--7
-and 10 call the LLM and are therefore \emph{distributionally}
+Steps 1--6 are fully deterministic (no API key, no cost). Steps 7--8
+and 11 call the LLM and are therefore \emph{distributionally}
 reproducible (Sec.~\ref{sec:stage3}); the raw model outputs of our runs
-ship in the repository, so steps 8--9 and 11 can be reproduced
+ship in the repository, so steps 9--10 and 12 can be reproduced
 \emph{exactly} from the archive without re-querying any model. Every
-command is run from the repository root.
+command is run from the root of the \texttt{NegoPlay} repository; the
+version of the code that produced this paper is the Git tag
+\texttt{paper1-submitted}.
 
 \begin{enumerate}
   \item \textbf{Environment.} Clone the repository (URL in
   Sec.~\ref{app:constants}); create a Python~3.11 virtual environment;
-  run \texttt{pip install -r requirements.txt}. For steps 6--7 and 10
+  run \texttt{pip install -r requirements.txt}. For steps 7--8 and 11
   only, set \texttt{GOOGLE\_API\_KEY} in \texttt{.env}.
   \item \textbf{Data check.} Load the corpus via
   \texttt{src/shared/data\_loader.py}.\\
@@ -1348,15 +1514,29 @@ command is run from the repository root.
   Expected: the five configurations of Table~\ref{tab:audit} (max
   silhouette 0.24; HDBSCAN 0 clusters) and
   \texttt{results/preprocessing.xlsx}.
-  \item \textbf{Profile validation.}\\
+  \item \textbf{In-sample profile check.}\\
   \texttt{python -m notebooks.validate\_base\_rates}\\
-  Expected: the effect sizes and $p$-values of Table~\ref{tab:cohend}.
+  Expected: the in-sample separations mentioned in
+  Sec.~\ref{sec:validation} (Cohen's $d$ 2.1--4.6), which the paper
+  does not use as evidence.
+  \item \textbf{Out-of-sample validation and sensitivity.}\\
+  \texttt{python -m notebooks.split\_half\_validation 50 match}\\
+  \texttt{python -m notebooks.feature\_definition\_sensitivity}\\
+  Expected: Table~\ref{tab:cohend}, the split-half reliabilities and
+  membership-stability figures of Sec.~\ref{sec:validation}, and the
+  strict-definition overlaps of Sec.~\ref{sec:validation} (Jaccard
+  overlaps of 1.00, 0.14, 0.95, and 0.94, and $\rhoS=+0.80$ under the
+  strict preempt definition). Passing \texttt{parity} instead of \texttt{match}
+  reproduces the dealer-rotation artefact discussed in the text.
   \item \textbf{Stage 2: skill extraction} (LLM; $\approx$\$1).\\
-  Run the extractor in \texttt{src/stage2\_skills/} over all profiled
-  players: chunks of 25 boards, at most 50 boards per player, sampling
-  seed 42, temperature 0.3, and the model \texttt{gemini-2.5-flash};
-  then aggregate with the TF--IDF merge threshold 0.40.\\
-  Output: the per-profile skill signatures JSON.
+  Run the extractor in \texttt{src/stage2\_skills/} over the Stage-2
+  sample: five players drawn at random (seed 42) from each of the four
+  extreme profiles, 20 players in all; chunks of 25 boards, at most 50
+  boards per player, temperature 0.3, and the model
+  \texttt{gemini-2.5-flash}; then aggregate with the TF--IDF merge
+  threshold 0.40.\\
+  Output: the per-profile skill signatures JSON; the archived run used
+  in the paper is \texttt{results/stage2\_sample\_v2\_focused\_prompt/}.
   \item \textbf{Stages 3--4: dual-domain simulation} (LLM; $<$\$5).\\
   \texttt{python -m src.stage4\_simulate.bridge\_runner}\\
   \texttt{python -m src.stage4\_simulate.negotiation}\\

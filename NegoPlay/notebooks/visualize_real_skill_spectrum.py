@@ -96,16 +96,21 @@ def compute_anchors() -> dict:
         ns = pd.to_numeric(rows["ns_score"], errors="coerce").dropna()
         if len(ns) < 2:
             continue
-        datum = ns.mean()
+        # Score the anchors exactly like a real pair: with the board's actual
+        # N-S vulnerability, and compared table-against-table (the conventional
+        # team IMP of the anchor's score minus each real table's score, averaged
+        # over the two tables), the same construction used for the players in
+        # alignment_real_bridge.py.
+        vul_ns = str(rows.iloc[0].get("vulnerability")) in ("N-S", "All")
         try:
             h = _hands(rows.iloc[0])
-            best = _best_ns_points(h, False)
+            best = _best_ns_points(h, vul_ns)
             lvl, strain = rng.randint(1, 7), rng.choice(_ALL_STRAINS)
-            mk = _contract_dd_points(lvl, strain, h, False)
+            mk = _contract_dd_points(lvl, strain, h, vul_ns)
         except Exception:
             continue
-        perfect.append(_to_imp(best - datum))
-        monkey.append(_to_imp(mk - datum))
+        perfect.append(sum(_to_imp(best - s) for s in ns) / len(ns))
+        monkey.append(sum(_to_imp(mk - s) for s in ns) / len(ns))
         used += 1
     return {"monkey": sum(monkey) / len(monkey),
             "perfect": sum(perfect) / len(perfect), "n": used}
