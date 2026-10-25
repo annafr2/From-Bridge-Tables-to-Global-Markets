@@ -4,7 +4,7 @@
 Behavioral Consistency of Game-Derived Decision-Making Profiles*
 **Authors:** Anna Ben-Shushan, Jari Hämäläinen, Pekka Neittaanmäki (LUT
 University, Department of Computational Engineering) and Nezer Jacob
-Zaidenberg (affiliation line to be confirmed by him). All three
+Zaidenberg (Ariel University, Ariel, Israel). All three
 supervisors confirmed co-authorship in October 2026.
 **Volume:** *Recent Advances on Scientific Computing, AI, and Other
 Software Tools: a Commemorative Volume Dedicated to the 80th Jubilee of
