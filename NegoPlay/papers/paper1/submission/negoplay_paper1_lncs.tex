@@ -129,8 +129,8 @@ business setting?}
 \end{quote}
 
 We answer it with a four-stage pipeline (Secs.~\ref{sec:stage1}
-to~\ref{sec:stage4}) and report both a positive result and an
-instructive negative one.
+to~\ref{sec:stage4}) and report one positive result and two
+instructive negative ones.
 
 The paper makes five contributions, stated here in the order in which
 the reader meets them. The first is a negative result about the data
@@ -150,8 +150,8 @@ one-sided binomial test rejects the population baseline
 small-sample artefact in our first version and how the gate repairs it,
 a reusable recipe for profiling rare behaviors. The third contribution
 is an \emph{evidence-grounded} way of turning a profile into an agent: a
-large language model (LLM) reads a seeded sample of each profiled
-player's raw deals and writes observable skills with per-deal evidence
+large language model (LLM) reads a seeded sample of raw deals from 20
+profiled players and writes observable skills with per-deal evidence
 citations; it is directed to the profile's defining axis but never shown
 the engineered feature values, so every skill must be verifiable from
 the cited deals (Sec.~\ref{sec:stage2}). Fourth, we build a
@@ -231,7 +231,8 @@ competition finds that prompted \emph{warmth} and \emph{dominance}
 systematically shape outcomes \cite{vaccaro2026advancing}, independent evidence that prompt-carried style becomes bargaining
 behavior. Our contribution is orthogonal to all of these: we do not
 train or benchmark a negotiator; we test whether a profile derived from
-\emph{real cross-domain human data} persists in another domain.
+\emph{real human decision records} in one domain persists, in an
+agent, in another domain.
 
 The \emph{zero-intelligence} tradition supplies our null model. Gode
 and Sunder showed that budget-constrained random traders (``ZI-C'')
@@ -274,7 +275,7 @@ risks are documented. The first is \emph{tautology}: an agent told it
 is aggressive will act aggressively. The second is the converse, \emph{non-enactment}: role-playing agents can state a persona's beliefs
 yet fail to behave accordingly \cite{mannekote2025roleplaying}, so
 persona conditioning cannot simply be assumed to work. Our design
-answers both empirically: skills are extracted from raw hands under a
+addresses both empirically: skills are extracted from raw hands under a
 deal-level evidence requirement (Sec.~\ref{sec:stage2}), and an
 inverse-prompt control swaps
 skills between identities and measures whether behavior follows
@@ -379,7 +380,9 @@ auction data, leaving \textbf{563 qualifying players}. Interpreting
 per-player rates only after aggregating $\ge 50$ observations follows
 the aggregation principle of behavioral-stability research
 \cite{epstein1979stability}: single-situation behavior is noisy, but
-aggregated tendencies are stable.
+aggregated tendencies are stable. Sec.~\ref{sec:validation} shows how
+far 50 boards fall short of that ideal for rare behaviors such as
+slams.
 
 \begin{table}[h]
 \centering\small
@@ -513,7 +516,9 @@ Sec.~\ref{sec:validation} tests out of sample.
 \begin{table}[h]
 \centering\small
 \caption{Final profile assignment (v2.1; 563 players). ``Ratio'' is the
-profile's mean on its defining axis over the Generalist mean.}
+profile's mean on its defining axis over the Generalist mean, measured
+in sample and therefore large by construction (see
+Sec.~\ref{sec:validation}).}
 \label{tab:profiles}
 \begin{tabular}{lrlcccc}
 \toprule
@@ -557,8 +562,9 @@ defining axis, with small effect sizes; only the Fighter reaches
 $p<0.05$, and the Insurance Player shows no out-of-sample difference at
 all. Profile membership is unstable: of the players assigned an extreme
 profile on one half, 4.8\% receive the same profile on the other half
-and 16.7\% any extreme profile, and 46\% of the published profile
-members are recovered from one half alone. The underlying per-player
+and 16.7\% any extreme profile, and of the published profile members
+who qualify in a half (54 of 95), 46\% are assigned the same profile
+from that half alone. The underlying per-player
 rates have low split-half reliability (Pearson $r$ between a player's
 rate on the two halves: slam 0.07, partscore 0.15, no-trump 0.08,
 penalty double 0.18, preempt 0.18, opening 0.23). A multiple-testing
@@ -702,8 +708,8 @@ profile's name, is carried by the inverse-prompt control
 Each of the five agents (four profiles plus the Generalist control) is
 an LLM (\texttt{gemini-2.5-flash}) whose system prompt is assembled from: (i) an
 identity line naming the profile and its one-line essence; (ii) the
-Stage-2 skill list, the only content derived from the player's actual
-record; (iii) domain rule constraints; and (iv) a mandatory JSON output
+Stage-2 skill list, the only content derived from the players' actual
+records; (iii) domain rule constraints; and (iv) a mandatory JSON output
 schema with a free-text rationale field. The identity line does name
 the profile; whether measured behavior is driven by that name or by the
 skill content is exactly what the inverse-prompt control of
@@ -808,7 +814,8 @@ table and with the board's actual vulnerability: a ZI-C bidder that
 declares a uniformly random contract (any level from 1 to 7, any
 strain) and is scored at double-dummy, and a double-dummy oracle
 \cite{ginsberg2001gib} that declares the best contract available to
-the pair with full knowledge of all four hands. On this scale the ZI-C
+the pair with full knowledge of all four hands, or passes the board out
+when no contract makes. On this scale the ZI-C
 bidder sits at $-8.0$ IMP per board, elite players near $0$, and the
 oracle at $+1.8$ (Fig.~\ref{fig:spectrum}); the metric orders random
 $<$ human $<$ omniscient, as a skill measure must. This ordering is a
@@ -1073,23 +1080,26 @@ behavior would be informative about \emph{how} they negotiate rather
 than about who wins.
 
 What do these findings mean beyond the laboratory? First, the
-continuum result argues that elite decision-making style is
-\emph{dimensional} rather than typological: expert players differ by
-degree along a few interpretable axes, not by membership in discrete
-types. This parallels the move in personality psychology from types to
-traits, and it suggests that behavioral profiling in other expert
-domains should be built on graded axes with explicit significance
-gates rather than on clustering, and then tested out of sample, since
-in-sample separation is guaranteed by the selection itself
-(Sec.~\ref{sec:validation}). Our own out-of-sample test shows how much
-of an apparent profile can be noise when the behavior is rare and the
-record per person is a few hundred decisions. Second, the transfer result says that
-what persists across domains is the \emph{shape} of a decision-maker's
-risk preference, how much is demanded and how firmly a position is
-held, rather than its payoff. For decision support this is the useful
-direction: a counterpart's past behavior in a structured, recorded
-domain is informative about how they will open and concede, even when
-it says little about who will win. Third, the control result shows
+clustering result is compatible with a \emph{dimensional} rather than
+typological picture of elite decision-making style: expert players
+appear to differ by degree along a few interpretable axes, not by
+membership in discrete types. This parallels the move in personality
+psychology from types to traits. The out-of-sample test adds the
+necessary caution: an individual's position on those axes is measured
+with low reliability when the behavior is rare and the record per
+person is a few hundred decisions, so behavioral profiling in other
+expert domains should be built on graded axes with explicit
+significance gates rather than on clustering, and then tested out of
+sample, since in-sample separation is guaranteed by the selection
+itself (Sec.~\ref{sec:validation}). Second, the consistency
+result says that what persists across domains, in the agents, is the
+\emph{shape} of the risk preference, how much is demanded and how
+firmly a position is held, rather than its payoff. If the same holds
+for people, which remains to be tested, the useful direction for
+decision support is clear: a counterpart's past behavior in a
+structured, recorded domain would be informative about how they open
+and concede, even when it says little about who will win. Third, the
+control result shows
 that the behavior of a language-model agent followed the behavioral
 content it was given rather than the profile label; whether content
 extracted from real records is necessary, as opposed to any
