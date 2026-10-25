@@ -458,7 +458,8 @@ extreme players who carry the weak signal. The PCA spectrum decays
 gradually (PC1 $=24.6\%$, PC2 $=19.1\%$, PC3 $=13.5\%$, \ldots) with no
 dominant component, which is compatible with a smooth distribution
 though not a proof of one. We conclude that, under the configurations
-investigated, the selected features do not separate elite championship
+investigated, the selected features (including the two proxies noted
+in Table~\ref{tab:features}) do not separate elite championship
 players into distinct clusters, a picture consistent with expertise
 research on maximal adaptation to task constraints among top performers
 \cite{ericsson1996expert}. We therefore treat the style space as a
@@ -780,7 +781,9 @@ reproducibility}.
 \section{Stage 4: Dual-Domain Evaluation}\label{sec:stage4}
 
 Both domains use \emph{fixed, deterministic} counterparts, so that all
-between-agent variation is attributable to the profiles.
+between-agent variation is attributable to the profiles: a counterpart
+that is the same for every agent can scale the agents' behavior but
+cannot create differences between them.
 
 \subsection{Bridge: Metric Falsification and a Real-Data Skill Measure}\label{sec:bridgemetric}
 
@@ -1179,7 +1182,12 @@ optimization problem with heterogeneous preference structures, and connects dire
 On the bridge side, the natural deepening is a learned
 estimation--policy architecture (ENN/PNN \cite{rong2019bridge}) over the
 full corpus, and per-player (rather than per-profile) agents to raise
-$K$ from 5 to hundreds. On the negotiation side, future work targets
+$K$ from 5 to hundreds. Per-player agents are not a free lunch: the
+reliabilities of Sec.~\ref{sec:validation} show that a few hundred
+boards per player do not pin down an individual's rates, so such
+agents need records of thousands of boards per player, which online
+archives such as BBO Vugraph provide and championship archives do not.
+On the negotiation side, future work targets
 real human negotiation data. A concrete first step is the CaSiNo corpus
 \cite{chawla2021casino}: 1{,}030 multi-issue human negotiations in
 which each negotiator carries measured Big-Five and social-value-orientation scores: exactly the trait$\to$behavior linkage this paper constructs
