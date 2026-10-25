@@ -2,9 +2,10 @@
 
 **Chapter:** *From Bridge Tables to the Negotiation Table: Cross-Domain
 Behavioral Consistency of Game-Derived Decision-Making Profiles*
-**Authors:** Anna Ben-Shushan and Jari Hämäläinen (LUT University, Department
-of Computational Engineering); Pekka Neittaanmäki and Nezer Zaidenberg
-pending (asked 17 Oct 2026)
+**Authors:** Anna Ben-Shushan, Jari Hämäläinen, Pekka Neittaanmäki (LUT
+University, Department of Computational Engineering) and Nezer Jacob
+Zaidenberg (affiliation line to be confirmed by him). All three
+supervisors confirmed co-authorship in October 2026.
 **Volume:** *Recent Advances on Scientific Computing, AI, and Other
 Software Tools: a Commemorative Volume Dedicated to the 80th Jubilee of
 Prof. Olivier Pironneau* (OP80, Jyväskylä, 26–27 March 2026)
@@ -69,10 +70,10 @@ xelatex negoplay_paper1_lncs.tex   (run 2–3 times for references)
 > work; the chapter contains no third-party material requiring
 > permissions.
 >
-> The work was carried out under the supervision of Prof. Jari
-> Hämäläinen and Prof. Pekka Neittaanmäki (LUT University). Please let
-> me know if any additional files or forms are needed for the editorial
-> process.
+> The chapter is co-authored with my doctoral supervisors, Prof. Jari
+> Hämäläinen, Prof. Pekka Neittaanmäki and Dr. Nezer Jacob Zaidenberg;
+> I am the corresponding author. Please let me know if any additional
+> files or forms are needed for the editorial process.
 >
 > With best regards,
 > Anna Ben-Shushan
