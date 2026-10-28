@@ -3,9 +3,11 @@
 **Chapter:** *From Bridge Tables to the Negotiation Table: Cross-Domain
 Behavioral Consistency of Game-Derived Decision-Making Profiles*
 **Authors:** Anna Ben-Shushan, Jari Hämäläinen, Pekka Neittaanmäki (LUT
-University, Department of Computational Engineering) and Nezer Jacob
-Zaidenberg (Ariel University, Ariel, Israel). All three
-supervisors confirmed co-authorship in October 2026.
+University, Department of Computational Engineering, Lahti campus; Jari
+also Slovak University of Technology, Bratislava) and Nezer Jacob
+Zaidenberg (Ariel University, Ariel, Israel). All three supervisors
+confirmed co-authorship in October 2026; Jari approved the draft for
+submission on 27 Oct 2026 and confirmed that 27 pages is acceptable.
 **Volume:** *Recent Advances on Scientific Computing, AI, and Other
 Software Tools: a Commemorative Volume Dedicated to the 80th Jubilee of
 Prof. Olivier Pironneau* (OP80, Jyväskylä, 26–27 March 2026)
