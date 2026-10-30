@@ -779,10 +779,16 @@ temperature 0 the
 API is not bit-reproducible (parallel floating-point reduction flips
 borderline decisions). We therefore (a) persist every raw model output,
 so all analyses are exactly reproducible from the archived JSON even if
-regeneration differs; and (b) report distributions over many decisions,
-never single calls. We flag this as a general methodological requirement
-for LLM-agent experiments: \emph{sample-level, not call-level,
-reproducibility}.
+regeneration differs; (b) report distributions over many decisions,
+never single calls; and (c) pin the model version
+(\texttt{gemini-2.5-flash}, still offered by the provider at the time
+of writing). Providers retire model versions, so the archived outputs,
+not the model, are the reproducibility anchor: every downstream number
+in this paper reproduces from the archive without any model call, and
+re-running the LLM stages with a successor model tests
+distributional, not exact, reproducibility. We flag this as a general
+methodological requirement for LLM-agent experiments:
+\emph{sample-level, not call-level, reproducibility}.
 
 % ==================================================================
 \section{Stage 4: Dual-Domain Evaluation}\label{sec:stage4}
@@ -923,7 +929,8 @@ stranger rather than aspirational.
 We first correlated, per profile, the \emph{winning} record of the
 profile's human players in bridge (the real-data measure of
 Sec.~\ref{sec:bridgemetric}) with the winning of the profile's agent in
-negotiation (Spearman rank correlation over the $K=5$ profiles). This
+negotiation (Spearman rank correlation \cite{spearman1904proof} over
+the $K=5$ profiles). This
 asks whether the human success of a profile's players predicts its
 agent's success; it does not test whether one and the same agent wins
 in both domains, since our agents do not play complete deals against
@@ -1327,12 +1334,6 @@ Harvard University Press, Cambridge, MA (1982)
 Nash, J.\,F.:
 The bargaining problem.
 Econometrica \textbf{18}(2), 155--162 (1950)
-
-\bibitem{shoham2008multiagent}
-Shoham, Y., Leyton-Brown, K.:
-Multiagent Systems: Algorithmic, Game-Theoretic, and Logical
-Foundations.
-Cambridge University Press (2008)
 
 \bibitem{rousseeuw1987silhouettes}
 Rousseeuw, P.\,J.:
