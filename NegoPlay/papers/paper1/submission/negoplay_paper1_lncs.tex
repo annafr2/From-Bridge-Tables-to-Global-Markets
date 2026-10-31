@@ -496,6 +496,10 @@ denominator (declared boards for Family A axes; bidding boards for the
 Fighter axis). Players failing either gate are \emph{Generalists}, retained as the elite baseline, not discarded. Profile names are
 human-chosen domain labels for ``extreme on axis $a$''; nothing
 downstream depends on the name (Sec.~\ref{sec:control} tests this).
+The complete per-player assignment, with player names, is released
+with the data (\texttt{data/processed/player\_profiles.csv}); we do not
+reproduce names in the text, because Sec.~\ref{sec:validation} shows
+that the labels describe records in this corpus rather than persons.
 
 The binomial gate exists because of an \emph{expert-review episode}
 that is worth recording.
@@ -1060,9 +1064,15 @@ inverts: the Fighter with Insurance skills softens
 ($\theta: 0.808\to0.725$), the Insurance Player with Fighter skills
 hardens ($0.666\to0.805$), and the cross-domain correlation flips to
 $\rhoS=\mathbf{-0.90}$ (exact two-sided $p=0.083$;
-Fig.~\ref{fig:control}). The alignment is therefore mediated by the
-skill content: swapping it reverses the ranking while every label stays
-fixed. The control shows that the skill descriptions drive the measured
+Fig.~\ref{fig:control}). One caveat belongs here: the matched runs
+used \texttt{gemini-2.5-flash} and the control runs
+\texttt{gemini-2.5-flash-lite}, a lighter variant of the same model
+(Appendix~\ref{app:constants}), so the comparison spans two model
+variants as well as the skill swap; a re-run of both conditions on one
+model is the first check listed in Sec.~\ref{sec:discussion}. The
+alignment is therefore mediated by the skill content: swapping it
+reverses the ranking while every label stays fixed. The control shows
+that the skill descriptions drive the measured
 behavior; it does not show that descriptions extracted from real hands
 are \emph{necessary} for it. The conditions that would test necessity,
 labels alone, generic instructions to be aggressive or cautious, and
@@ -1153,11 +1163,14 @@ sole outcome; the between-profile differences in demand depth are of
 the same order as the within-profile variation across negotiations.
 Bridge-side confounds remain (partnership effects on
 \texttt{slam\_rate}; convention systems on \texttt{nt\_rate}). The skill
-extractor and the agents share one model family (Gemini), so
-provider-specific behavior cannot yet be ruled out; the
-provider-agnostic client of Sec.~\ref{sec:engineering} makes
-cross-provider replication (Claude, GPT) a one-argument change, and it
-is the first robustness item of future work. Finally,
+extractor and the agents share one model family (Gemini), and the
+matched and control negotiation runs used two variants of it
+(Sec.~\ref{sec:control}), so provider- and version-specific behavior
+cannot yet be ruled out; the provider-agnostic client of
+Sec.~\ref{sec:engineering} makes a same-model re-run of both
+conditions, and then cross-provider replication (Claude, GPT), a
+one-argument change, and these are the first robustness items of
+future work. Finally,
 elite players are a selected population; transfer from amateur play is
 untested.
 
@@ -1465,8 +1478,9 @@ the expected output of every step (Sec.~\ref{app:steps}).
 
 \subsection{Fixed Constants and Environment}\label{app:constants}
 
-All code, prompts, thresholds, seeds, and archived model outputs are in
-the public repository:
+All code, prompts, thresholds, seeds, the processed corpus, the
+per-player profile table, and the archived model outputs are in the
+public repository:
 \begin{center}\small
 \url{https://github.com/annafr2/From-Bridge-Tables-to-Global-Markets}
 \end{center}
@@ -1483,10 +1497,13 @@ concede 15\% of gap/round, floor-bounded, $\le4$ rounds, walk-away after
 2 offers below $0.70\,P_{\mathrm{floor}}$.
 
 The environment is Python~3.11 with scikit-learn, SciPy~1.11, and
-pandas (versions pinned in \texttt{requirements.txt}); all LLM stages
-use \texttt{gemini-2.5-flash} through a single provider-agnostic
-client. Every LLM call is logged with model, token counts, and cost;
-the total compute cost of all experiments was under \$10.
+pandas (versions pinned in \texttt{requirements.txt}). The LLM stages
+use \texttt{gemini-2.5-flash} (skill extraction, bridge agents, and the
+matched negotiation runs) and \texttt{gemini-2.5-flash-lite} (the
+inverse-prompt control runs), through a single provider-agnostic
+client; the per-call log (\texttt{results/llm\_logs/}) records the
+model of every call. Every LLM call is logged with model, token counts,
+and cost; the total compute cost of all experiments was under \$10.
 
 \subsection{Step-by-Step Protocol}\label{app:steps}
 
@@ -1505,7 +1522,10 @@ version of the code that produced this paper is the Git tag
   Sec.~\ref{app:constants}); create a Python~3.11 virtual environment;
   run \texttt{pip install -r requirements.txt}. For steps 7--8 and 11
   only, set \texttt{GOOGLE\_API\_KEY} in \texttt{.env}.
-  \item \textbf{Data check.} Load the corpus via
+  \item \textbf{Data check.} The corpus ships with the repository as
+  \texttt{data/processed/all\_matches.parquet} (2~MB, one level above
+  the \texttt{NegoPlay} folder), together with the per-player profile
+  table \texttt{data/processed/player\_profiles.csv}. Load it via
   \texttt{src/shared/data\_loader.py}.\\
   Expected: 149{,}208 board-room records; per-championship coverage as
   in Table~\ref{tab:data}.

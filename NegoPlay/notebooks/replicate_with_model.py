@@ -26,6 +26,7 @@ import itertools
 import json
 import logging
 import sys
+import time
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -81,9 +82,29 @@ def run_condition(agents: dict, out_path: Path) -> tuple[dict[str, float], dict[
 
 
 def main() -> None:
+    # usage: python -m notebooks.replicate_with_model <model> [provider]
+    #   e.g. gemini-3.7-flash            (provider defaults to gemini)
+    #        gpt-4o-mini openai          (cross-provider replication)
     model = sys.argv[1] if len(sys.argv) > 1 else "gemini-3.7-flash"
+    provider = sys.argv[2] if len(sys.argv) > 2 else "gemini"
     out_dir = Path("results/stage4") / f"replication_{model}"
-    client = LLMClient(model=model)
+    client = LLMClient(provider=provider, model=model)
+
+    # Newer Gemini models answer slowly under load (504/503 on 31 Oct 2026); the
+    # client's own 3 retries are not always enough, so wrap it in a patient
+    # outer retry with long waits rather than aborting a 120-negotiation run.
+    _orig_generate = client.generate
+
+    def _patient_generate(*args, **kwargs):
+        for attempt in range(4):
+            try:
+                return _orig_generate(*args, **kwargs)
+            except RuntimeError:
+                if attempt == 3:
+                    raise
+                time.sleep(15 * (attempt + 1))
+
+    client.generate = _patient_generate
     sigs = load_profile_signatures()
     b = bridge_aggression()
     profiles = [p for p in ORDER if p in b.index]
