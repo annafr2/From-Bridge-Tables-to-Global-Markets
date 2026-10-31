@@ -7,7 +7,7 @@ University, Department of Computational Engineering, Lahti campus; Jari
 also Slovak University of Technology, Bratislava) and Nezer Jacob
 Zaidenberg (Ariel University, Ariel, Israel). All three supervisors
 confirmed co-authorship in October 2026; Jari approved the draft for
-submission on 27 Oct 2026 and confirmed that 27 pages is acceptable.
+submission on 27 Oct 2026 and confirmed that 28 pages is acceptable.
 **Volume:** *Recent Advances on Scientific Computing, AI, and Other
 Software Tools: a Commemorative Volume Dedicated to the 80th Jubilee of
 Prof. Olivier Pironneau* (OP80, Jyväskylä, 26–27 March 2026)
@@ -19,7 +19,7 @@ Prof. Olivier Pironneau* (OP80, Jyväskylä, 26–27 March 2026)
 | File | What it is |
 |---|---|
 | `negoplay_paper1_lncs.tex` | Manuscript source, Springer proceedings template (llncs) |
-| `negoplay_paper1_lncs.pdf` | Compiled PDF (27 pp., draft v3.2) |
+| `negoplay_paper1_lncs.pdf` | Compiled PDF (28 pp., final, tag paper1-op80-final) |
 | `llncs.cls`, `splncs04.bst` | Official Springer class files (from the Proceedings LaTeX2e package, v8) |
 | `radar_profiles.png` | Fig. 1 (separate file, as required) |
 | `real_skill_spectrum.png` | Fig. 2 |
@@ -59,7 +59,7 @@ xelatex negoplay_paper1_lncs.tex   (run 2–3 times for references)
    `\orcidID{...}` to the author line (see TODO comment in the .tex).
    Register free at orcid.org if not.
 3. **Page limit:** set by the volume editors, not Springer; confirm
-   with Tero/Jari that 27 template pages is acceptable.
+   with Tero/Jari that 28 template pages is acceptable (Jari confirmed 27 on 27 Oct).
 4. **Open access:** default (no fee) unless LUT wants to fund OA; if
    so, the volume editor must be told as early as possible.
 5. The License to Publish form will be provided by the volume editor;
@@ -74,7 +74,7 @@ xelatex negoplay_paper1_lncs.tex   (run 2–3 times for references)
 >
 > Please find attached my contribution to the OP80 commemorative volume,
 > prepared with the Springer proceedings LaTeX template: the manuscript
-> source, the compiled PDF (27 pages), all five figures as separate
+> source, the compiled PDF (28 pages), all five figures as separate
 > files, and alternative-text descriptions for the figures per the
 > accessibility guidelines. All figures and tables are the author's own
 > work; the chapter contains no third-party material requiring
