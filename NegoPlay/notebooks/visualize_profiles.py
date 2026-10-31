@@ -35,10 +35,10 @@ from src.stage1_clustering.clustering import FEATURE_COLS
 
 # ── Config ───────────────────────────────────────────────────────────────────
 
-DATA_PATH = (
-    r"C:\Users\annaf\OneDrive\Desktop\דוקטורט\דוקטורט אנה"
-    r"\דוקטורט - שילוב בינה מלאכותית\collectBridgeData"
-    r"\data\processed\all_matches_full.csv"
+# The released corpus (parquet, 2 MB) lives one level above the NegoPlay
+# folder, in the collectBridgeData repository root.
+DATA_PATH = os.path.join(
+    os.path.dirname(__file__), "..", "..", "data", "processed", "all_matches.parquet"
 )
 OUT_DIR = os.path.join(os.path.dirname(__file__), "..", "docs", "images")
 os.makedirs(OUT_DIR, exist_ok=True)

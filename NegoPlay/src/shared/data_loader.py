@@ -58,11 +58,15 @@ def load_matches(path: str | Path) -> pd.DataFrame:
 
     logger.info("Loading dataset from %s ...", path)
 
-    df = pd.read_csv(
-        path,
-        encoding="utf-8-sig",   # handles BOM from Excel exports
-        low_memory=False,
-    )
+    if str(path).lower().endswith(".parquet"):
+        # The released corpus (data/processed/all_matches.parquet, 2 MB)
+        df = pd.read_parquet(path)
+    else:
+        df = pd.read_csv(
+            path,
+            encoding="utf-8-sig",   # handles BOM from Excel exports
+            low_memory=False,
+        )
 
     # --- Schema validation ---
     missing = [c for c in REQUIRED_COLUMNS if c not in df.columns]
