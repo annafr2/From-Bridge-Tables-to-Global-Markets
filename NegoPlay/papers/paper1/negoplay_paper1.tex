@@ -508,9 +508,10 @@ Fighter axis). Players failing either gate are \emph{Generalists}, retained as t
 human-chosen domain labels for ``extreme on axis $a$''; nothing
 downstream depends on the name (Sec.~\ref{sec:control} tests this).
 The complete per-player assignment, with player names, is released
-with the data (\texttt{data/processed/player\_profiles.csv}); we do not
-reproduce names in the text, because Sec.~\ref{sec:validation} shows
-that the labels describe records in this corpus rather than persons.
+with the data as the file \texttt{player\_profiles.csv}
+(Appendix~\ref{app:steps}); we do not reproduce names in the text,
+because Sec.~\ref{sec:validation} shows that the labels describe
+records in this corpus rather than persons.
 
 The binomial gate exists because of an \emph{expert-review episode}
 that is worth recording.
@@ -1509,12 +1510,13 @@ concede 15\% of gap/round, floor-bounded, $\le4$ rounds, walk-away after
 
 The environment is Python~3.11 with scikit-learn, SciPy~1.11, and
 pandas (versions pinned in \texttt{requirements.txt}). The LLM stages
-use \texttt{gemini-2.5-flash} (skill extraction, bridge agents, and the
-matched negotiation runs) and \texttt{gemini-2.5-flash-lite} (the
-inverse-prompt control runs), through a single provider-agnostic
-client; the per-call log (\texttt{results/llm\_logs/}) records the
-model of every call. Every LLM call is logged with model, token counts,
-and cost; the total compute cost of all experiments was under \$10.
+use two variants of one model family through a single
+provider-agnostic client: \texttt{gemini-2.5-flash} for skill
+extraction, the bridge agents, and the matched negotiation runs, and
+\texttt{gemini-2.5-flash-lite} for the inverse-prompt control runs.
+Every call is logged with model, token counts, latency, and cost in
+the released per-call log (folder \texttt{results/llm\_logs/}); the
+total compute cost of all experiments was under \$10.
 
 \subsection{Step-by-Step Protocol}\label{app:steps}
 
@@ -1526,18 +1528,20 @@ ship in the repository, so steps 9--10 and 12 can be reproduced
 \emph{exactly} from the archive without re-querying any model. Every
 command is run from the root of the \texttt{NegoPlay} repository; the
 version of the code that produced this paper is the Git tag
-\texttt{paper1-submitted}.
+\texttt{paper1-op80-final}.
 
 \begin{enumerate}
   \item \textbf{Environment.} Clone the repository (URL in
   Sec.~\ref{app:constants}); create a Python~3.11 virtual environment;
   run \texttt{pip install -r requirements.txt}. For steps 7--8 and 11
   only, set \texttt{GOOGLE\_API\_KEY} in \texttt{.env}.
-  \item \textbf{Data check.} The corpus ships with the repository as
-  \texttt{data/processed/all\_matches.parquet} (2~MB, one level above
-  the \texttt{NegoPlay} folder), together with the per-player profile
-  table \texttt{data/processed/player\_profiles.csv}. Load it via
-  \texttt{src/shared/data\_loader.py}.\\
+  \item \textbf{Data check.} The corpus and the per-player profile
+  table ship with the repository, in the folder
+  \texttt{data/processed/} (the corpus one level above the
+  \texttt{NegoPlay} folder, 2~MB):\\
+  \texttt{all\_matches.parquet}\\
+  \texttt{player\_profiles.csv}\\
+  Load the corpus via \texttt{src/shared/data\_loader.py}.\\
   Expected: 149{,}208 board-room records; per-championship coverage as
   in Table~\ref{tab:data}.
   \item \textbf{Stage 1: features and profiles.}\\
